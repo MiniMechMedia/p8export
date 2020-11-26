@@ -11,7 +11,7 @@ develop-time: X:XX:XX
 trijam-link: {SUBMISSIONLINK}
 game-name: XXXXXXXX
 # Leave blank to use game-name
-game-slug: 
+game-slug: test-game
 tagline: XXXXXXXX
 description: |
   hello there
