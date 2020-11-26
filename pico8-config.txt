@@ -1,0 +1,20 @@
+https://github.com/ajur/pico-8-carts/blob/master/pico8.txt
+
+-export index.html
+TODO can it save as .p8.png?
+-export -f foo.html
+	* foo_html
+		* index.html
+		* foo.js
+	* (good for butler) - nah
+
+-gif_scale 3
+* So it will have the same scale as screenshots (-screenshot_scale)
+
+-desktop $path
+* Can choose where to save screenshots/gifs
+
+-p $param
+* Cart can access this with stat(6)
+* Use case -p debug
+
