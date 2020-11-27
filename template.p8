@@ -22,7 +22,29 @@ controls: |
 --]]
 
 
+function vec2(x, y)
+
+end
+
+dirs = {
+	left = 0,
+	right = 1,
+	up = 2,
+	down = 3, 
+	z = 4,
+	x = 5
+}
+
+col = {
+	black = 0,
+	darkblue = 1,
+
+}
+
 function _init()
+	gs = {
+
+	}
 end
 
 function _update()
