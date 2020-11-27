@@ -4,6 +4,8 @@ import os
 import shutil
 import pathlib
 import glob
+import base64
+from PIL import Image
 # TODO support going through the entire directory
 # This is the path to a given .p8 file
 # inputLocation = sys.argv[1]
@@ -58,11 +60,12 @@ def compile(inputPath):
 	gamedir = f'{outputLocation}/carts/{gameslug}'
 	resetGameDir(gamedir)
 
+	# TODO detect if file has no label image
 	finalP8Path = writeP8file(gamedir, gameslug, finalContents)
 
 	writeReadme(gamedir)
 
-	exportHtml(finalP8Path)
+	exportArtifacts(finalP8Path, gameslug)
 
 	exportGameplayPng(finalP8Path)
 
@@ -74,15 +77,72 @@ def compile(inputPath):
 
 	# with open
 
+# https://pico-8.fandom.com/wiki/Palette
+colmap = {}
+for i, row in enumerate('''
+0, 0, 0
+29, 43, 83
+126, 37, 83
+0, 135, 81
+171, 82, 54
+95, 87, 79
+194, 195, 199
+255, 241, 232
+255, 0, 77
+255, 163, 0
+255, 236, 39
+0, 228, 54
+41, 173, 255
+131, 118, 156
+255, 119, 168
+255, 204, 170
+'''.strip().split('\n')):
+	colmap[hex(i)] = eval(f'({row})')
+
+
+
 def exportGameplayPng(finalP8Path):
-	gamedir, cartName = os.path.split(finalP8Path)
-	screenshotDir = f'{gamedir}/screenshots'
-	pathlib.Path(screenshotDir).mkdir()
-	with open(screenshotDir + '/x.png', 'wb'):
-		pass
+	# print(htmlFilePath)
+	# with open(htmlFilePath, 'r') as htmlFile:
+	# 	contents = htmlFile.read()
+
+	with open(finalP8Path, 'r') as p8File:
+		contents = p8File.read()
+
+	pixels = []
+
+	for row in contents.split('__label__')[1].split():
+		if not all(c in '0123456789abcdef' for c in row):
+			break
+		pixelRow = [colmap[f'0x{c}'] for c in row]
+		pixels.append(pixelRow)
+
+	# TODO scale up to 3x
+	newimg = Image.new('RGBA', (128, 128))
+	newimg.putdata(sum(pixels, start = []))
+	newimg.save('mytest.png')
+	# hexImage = (contents.split('__label__')[1]
+	# 	)
+
+	# base64ImageData = (contents.split('.p8_start_button')[1]
+	# 	.split('data:image/png;base64,')[1]
+	# 	.split('"')[0]
+	# )
+
+	# decoded = base64.b64decode(base64ImageData)
+
+	# gamedir, cartName = os.path.split(finalP8Path)
+	# screenshotDir = f'{gamedir}/screenshots'
+	# print(f'creating {screenshotDir}')
+	# pathlib.Path(screenshotDir).mkdir()
+
+	# # .p8_start_button
+	# with open(f'{screenshotDir}/cover.png', 'wb') as screenshotFile:
+	# 	screenshotFile.write(decoded)
 
 
-def exportHtml(finalP8Path):
+# Returns the location of the html file
+def exportArtifacts(finalP8Path, gameslug):
 	gamedir, cartName = os.path.split(finalP8Path)
 	cartName += '.png'
 
@@ -95,13 +155,18 @@ def exportHtml(finalP8Path):
 	exportLoc = f'{gamedir}/export'
 	print('creating export dir')
 	pathlib.Path(exportLoc).mkdir()
+	htmlLoc = f'{exportLoc}/{gameslug}_html'
+	pathlib.Path(htmlLoc).mkdir()
 	print('export dir complete')
 
 	print('copying files')
-	shutil.move('index.html', exportLoc)
-	shutil.move('index.js', exportLoc)
+	shutil.move(f'index.html', htmlLoc)
+	shutil.move('index.js', htmlLoc)
 	shutil.move(cartName, exportLoc)
 	print('copying files complete')
+	# print (exportLoc)
+	# exit()
+	# return f'{htmlLoc}/index.html'
 
 		
 
