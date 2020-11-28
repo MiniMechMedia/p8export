@@ -5,13 +5,13 @@ __lua__
 --{AUTHORINFO} 
 
 --[[
-trijam-number: XX
-trijam-theme: XX
-develop-time: X:XX:XX
-trijam-link: {SUBMISSIONLINK}
-game-name: XXXXXXXX
+game_name: A Cool Game Name
+trijam_number: XX
+trijam_theme: XX
+develop_time: X:XX:XX
+trijam_link: {SUBMISSIONLINK}
 # Leave blank to use game-name
-game-slug: test-game
+game_slug: test-game
 tagline: XXXXXXXX
 description: |
   hello there
@@ -19,6 +19,8 @@ description: |
 controls: |
   * Arrow Keys - stuff
   * X - start new game
+img_alt: XXXX
+extras: ''
 --]]
 
 
@@ -48,6 +50,9 @@ function _init()
 end
 
 function _update()
+	if btnp(dirs.x) then
+		poke(0xffff, 1)
+	end
 end
 
 function _draw()
