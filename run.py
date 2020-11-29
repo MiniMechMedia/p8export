@@ -12,7 +12,11 @@ from slugify import slugify
 # inputLocation = sys.argv[1]
 
 # TODO
-# HTML stuff...
+# HTML stuff - instead of markdown for some stuff...
+# Ability to update only, and not have it blow away the folder
+# 	- Argparser (but later)
+# Have pico8 start in the repo? Not by default, but make it easy
+# Make an editpico8config alias
 
 # Make the final .p8 still have all the metadata, so it can be the source of truth for maintenance
 # Keep the top two lines generic though. Need to create intermediary for the export
@@ -54,8 +58,9 @@ def resetGameDir(gamedir):
 	print('new dir complete')
 
 
-def writeP8file(config, gamedir, gameslug, frontMatter, backMatter):
-	finalContents = frontMatter + backMatter
+def writeP8file(config, gamedir, gameslug):
+	# finalContents = frontMatter + backMatter
+	finalContents = config.original_contents
 	# Can't use `format` because of the curlies
 	finalContents = (finalContents
 		.replace('{GAMENAME}',config.game_name.lower())
@@ -74,13 +79,49 @@ def writeReadme(config):
 	with open(f'{config.game_dir}/README.md', 'w') as outFile:
 		outFile.write(rendered)
 
+def updateRootReadme(config):
+	with open(config.root_readme_path, 'r') as inFile:
+		contents = inFile.read()
+
+	gameContent = f'''\
+## [{config.game_name}](carts/{config.game_slug})
+<a href="carts/{config.game_slug}">
+	<img alt="Cover image for {config.game_name} - {config.img_alt}"
+		src="carts/{config.game_slug}/screenshots/cover.png"
+		>
+</a>'''
+
+	gameSectionStart = '<!--BEGIN GAMES-->'
+	sectionStart = f'<!--BEGIN {config.game_slug}-->'
+	sectionEnd = f'<!--END {config.game_slug}-->'
+	if sectionStart in contents:
+		front, rest = contents.split(sectionStart)
+		_, back = rest.split(sectionEnd)
+		front = front.rstrip()
+		back = back.lstrip()
+	else:
+		front, back = contents.split(gameSectionStart)
+		front += gameSectionStart
+	
+	finalContents = f'''\
+{front}
+{sectionStart}
+{gameContent}
+{sectionEnd}
+{back}'''
+	
+	with open(config.root_readme_path, 'w') as outFile:
+		outFile.write(finalContents)
+
 
 class Config:
-	def __init__(self, yamlDict):
+	def __init__(self, yamlDict, **supplemental):
 		self.source = yamlDict
 		self.source['itch_name'] = itch_name
 		self.source['studio'] = studio
 		self.source['game_slug'] = self.source['game_slug'] or slugify(self.source['game_name'])
+		# self.source['original_p8file_loc'] = inputPath
+		self.source.update(supplemental)
 
 	def __getattr__(self, key):
 		return self.source[key]
@@ -93,6 +134,16 @@ class Config:
 	@property
 	def game_dir(self):
 		return f'{outputLocation}/carts/{self.game_slug}'
+
+	@property
+	def repo_root(self):
+		return f'{outputLocation}'
+
+	@property
+	def root_readme_path(self):
+		return f'{self.repo_root}/README.md'
+	
+	
 	
 
 def compile(inputPath):
@@ -103,7 +154,7 @@ def compile(inputPath):
 	yamlContent, backMatter = temp.split('--]]')
 	parsed = yaml.safe_load(yamlContent)
 
-	config = Config(parsed)
+	config = Config(parsed, original_p8file_loc=inputFile, original_contents=contents)
 	config.validate()
 
 	# TODO deprecate these variables
@@ -117,15 +168,19 @@ def compile(inputPath):
 	resetGameDir(gamedir)
 
 	# TODO detect if file has no label image
-	finalP8Path = writeP8file(config, gamedir, gameslug, frontMatter, backMatter)
+	finalP8Path = writeP8file(config, gamedir, gameslug)
 
 	writeReadme(config)
+
+	updateRootReadme(config)
 
 	htmlLoc = exportArtifacts(finalP8Path, gameslug)
 
 	exportGameplayPng(gamedir, finalP8Path)
 
-	upload(htmlLoc, gameslug, config)
+	# TODO command line arg to suppress upload
+	if False:
+		upload(htmlLoc, gameslug, config)
 
 	# print('deleting existing .p8')
 	# destPath = f'{outputLocation}/carts/{gameslug}'
