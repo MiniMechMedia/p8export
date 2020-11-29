@@ -6,18 +6,40 @@ import pathlib
 import glob
 import base64
 from PIL import Image
+from slugify import slugify
 # TODO support going through the entire directory
 # This is the path to a given .p8 file
 # inputLocation = sys.argv[1]
 
+# TODO
+# HTML stuff...
+
+# Make the final .p8 still have all the metadata, so it can be the source of truth for maintenance
+# Keep the top two lines generic though. Need to create intermediary for the export
+
 # Config section
 studio = 'Caterpillar Games'
-itchName = 'caterpillargames'
+itch_name = 'caterpillargames'
 outputLocation = "/Users/nathandunn/Projects/pico8-games"
 pico8Location = '/Applications/PICO-8.app/Contents/MacOS/pico8'
 
 # gameslug = 'test-game'
+readmeTempalte = '''\
+# {game_name}
+{description}
+{extras}
+[![{img_alt}](screenshots/cover.png)](https://{itch_name}.itch.io/{game_slug})
 
+Play it now on [itch.io](https://{itch_name}.itch.io/{game_slug})
+
+## Controls
+{controls}
+
+## About
+Created for [TriJam #{trijam_number}](https://itch.io/jam/trijam-{trijam_number}/entries)
+Theme: {trijam_theme}
+Development Time: {develop_time}
+'''
 
 def resetGameDir(gamedir):
 	print('removing existing')
@@ -32,7 +54,14 @@ def resetGameDir(gamedir):
 	print('new dir complete')
 
 
-def writeP8file(gamedir, gameslug, finalContents):
+def writeP8file(config, gamedir, gameslug, frontMatter, backMatter):
+	finalContents = frontMatter + backMatter
+	# Can't use `format` because of the curlies
+	finalContents = (finalContents
+		.replace('{GAMENAME}',config.game_name.lower())
+		.replace('{AUTHORINFO}', f'by {config.studio.lower()}')
+	)
+
 	finalP8Path = f'{gamedir}/{gameslug}.p8'
 	print('writing p8 result')
 	with open(finalP8Path, 'w') as outFile:
@@ -40,10 +69,31 @@ def writeP8file(gamedir, gameslug, finalContents):
 	print('finished writing p8 result')
 	return finalP8Path
 
-def writeReadme(gamedir):
-	with open(f'{gamedir}/README.md', 'w') as outFile:
-		outFile.write('test')
+def writeReadme(config):
+	rendered = readmeTempalte.format(**config.source)
+	with open(f'{config.game_dir}/README.md', 'w') as outFile:
+		outFile.write(rendered)
 
+
+class Config:
+	def __init__(self, yamlDict):
+		self.source = yamlDict
+		self.source['itch_name'] = itch_name
+		self.source['studio'] = studio
+		self.source['game_slug'] = self.source['game_slug'] or slugify(self.source['game_name'])
+
+	def __getattr__(self, key):
+		return self.source[key]
+
+	def validate(self):
+		# 31 is max characters that can fit on a cartridge without getting cut off
+		if len(self.game_name) > 31:
+			raise Exception(f'Game name "{self.game_name}" is too long')
+
+	@property
+	def game_dir(self):
+		return f'{outputLocation}/carts/{self.game_slug}'
+	
 
 def compile(inputPath):
 	with open(inputPath, 'r') as inputFile:
@@ -52,22 +102,30 @@ def compile(inputPath):
 	frontMatter, temp = contents.split('--[[')
 	yamlContent, backMatter = temp.split('--]]')
 	parsed = yaml.safe_load(yamlContent)
-	gameslug = parsed['game-slug']
-	print(parsed)
-	finalContents = contents
+
+	config = Config(parsed)
+	config.validate()
+
+	# TODO deprecate these variables
+	gameslug = config.game_slug
+	# print(parsed)
+	# exit()
+	# finalContents = contents
 	# TODO parse out label image
 
 	gamedir = f'{outputLocation}/carts/{gameslug}'
 	resetGameDir(gamedir)
 
 	# TODO detect if file has no label image
-	finalP8Path = writeP8file(gamedir, gameslug, finalContents)
+	finalP8Path = writeP8file(config, gamedir, gameslug, frontMatter, backMatter)
 
-	writeReadme(gamedir)
+	writeReadme(config)
 
-	exportArtifacts(finalP8Path, gameslug)
+	htmlLoc = exportArtifacts(finalP8Path, gameslug)
 
-	exportGameplayPng(finalP8Path)
+	exportGameplayPng(gamedir, finalP8Path)
+
+	upload(htmlLoc, gameslug, config)
 
 	# print('deleting existing .p8')
 	# destPath = f'{outputLocation}/carts/{gameslug}'
@@ -101,7 +159,7 @@ for i, row in enumerate('''
 
 
 
-def exportGameplayPng(finalP8Path):
+def exportGameplayPng(gamedir, finalP8Path):
 	# print(htmlFilePath)
 	# with open(htmlFilePath, 'r') as htmlFile:
 	# 	contents = htmlFile.read()
@@ -111,16 +169,31 @@ def exportGameplayPng(finalP8Path):
 
 	pixels = []
 
+	scale = 3
+
 	for row in contents.split('__label__')[1].split():
 		if not all(c in '0123456789abcdef' for c in row):
 			break
-		pixelRow = [colmap[f'0x{c}'] for c in row]
-		pixels.append(pixelRow)
+		# Also break if we get an empty line in there
+		if not row:
+			break
+		# pixelRow = [*(scale * [colmap[f'0x{c}']]) for c in row]
+		pixelRow = []
+		for c in row:
+			color = colmap['0x' + c]
+			for _ in range(scale):
+				pixelRow.append(color)
+
+		for _ in range(scale):
+			pixels.append(pixelRow)
 
 	# TODO scale up to 3x
-	newimg = Image.new('RGBA', (128, 128))
+	newimg = Image.new('RGB', (scale*128, scale*128))
 	newimg.putdata(sum(pixels, start = []))
-	newimg.save('mytest.png')
+	screenshotDir = f'{gamedir}/screenshots'
+	pathlib.Path(screenshotDir).mkdir()
+	newimg.save(f'{gamedir}/screenshots/cover.png')
+	# newimg.save(f'mytest.png')
 	# hexImage = (contents.split('__label__')[1]
 	# 	)
 
@@ -146,7 +219,6 @@ def exportArtifacts(finalP8Path, gameslug):
 	gamedir, cartName = os.path.split(finalP8Path)
 	cartName += '.png'
 
-
 	print('Exporting')
 	os.system(f'{pico8Location} -export index.html {finalP8Path}')
 	os.system(f'{pico8Location} -export {cartName} {finalP8Path}')
@@ -167,11 +239,17 @@ def exportArtifacts(finalP8Path, gameslug):
 	# print (exportLoc)
 	# exit()
 	# return f'{htmlLoc}/index.html'
+	return htmlLoc
 
 		
 
-def upload(inputPath):
-	os.command(f'butler')
+def upload(htmlLoc, gameslug, config):
+	cmd = (f'butler push --if-changed {htmlLoc} {config.itch_name}/{gameslug}:web')
+	print('invoking butler')
+	print(cmd)
+	os.system(cmd)
+	print('butler push success')
 
-compile('template.p8')
+# compile('template.p8')
+compile(sys.argv[1])
 # exportHtml('./template.p8')
