@@ -15,8 +15,6 @@ import glob
 # inputLocation = sys.argv[1]
 
 # TODO
-# HTML stuff - instead of markdown for some stuff...
-# Ability to update only, and not have it blow away the folder
 # 	- Argparser (but later)
 # Have pico8 start in the repo? Not by default, but make it easy
 # Make an editpico8config alias
@@ -384,7 +382,7 @@ def exportArtifacts(finalP8Path, gameslug, config):
 		
 
 def upload(htmlLoc, gameslug, config):
-	cmd = (f'butler push --if-changed {htmlLoc} {config.itch_name}/{gameslug}:web')
+	cmd = (f'butler push --if-changed {htmlLoc} {config.itch_name}/{gameslug}:web --userversion {config.version}')
 	print('invoking butler')
 	print(cmd)
 	# os.system(cmd)
