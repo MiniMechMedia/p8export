@@ -5,8 +5,11 @@ import shutil
 import pathlib
 import glob
 import base64
+import markdown
 from PIL import Image
 from slugify import slugify
+import glob
+
 # TODO support going through the entire directory
 # This is the path to a given .p8 file
 # inputLocation = sys.argv[1]
@@ -27,43 +30,89 @@ itch_name = 'caterpillargames'
 outputLocation = "/Users/nathandunn/Projects/pico8-games"
 pico8Location = '/Applications/PICO-8.app/Contents/MacOS/pico8'
 
-# gameslug = 'test-game'
-readmeTempalte = '''\
-# {game_name}
-{description}
-{extras}
-[![{img_alt}](screenshots/cover.png)](https://{itch_name}.itch.io/{game_slug})
+rootReadmeTemplate = '''\
+## [{game_name}](carts/{game_slug})
+[![Cover image for {game_name} - {img_alt}](carts/{game_slug}/screenshots/cover.png)](carts/{game_slug})
+'''
 
-Play it now on [itch.io](https://{itch_name}.itch.io/{game_slug})
+acknowledgementsTemplate = '''\
+## Acknowledgements
+{acknowledgements}
+'''
 
+todoTemplate = '''\
+## TODO
+{todo}
+'''
+
+shared = '''\
 ## Controls
 {controls}
 
 ## About
 Created for [TriJam #{trijam_number}](https://itch.io/jam/trijam-{trijam_number}/entries)
+
 Theme: {trijam_theme}
+
 Development Time: {develop_time}
+
+{acknowledgements}
 '''
+
+submissionTemplate = '''\
+{tagline}
+
+<!-- BREAK -->
+
+{description}
+
+''' + shared
+
+# gameslug = 'test-game'
+readmeTemplate = '''\
+# {game_name}
+{description}
+[![{img_alt}](screenshots/cover.png)](https://{itch_name}.itch.io/{game_slug})
+
+Play it now on [itch.io](https://{itch_name}.itch.io/{game_slug})
+
+''' + shared + '{todo}'
 
 def resetGameDir(gamedir):
 	print('removing existing')
 	try:
-		shutil.rmtree(gamedir)
+		# shutil.rmtree(gamedir)
+		for p8 in glob.glob(f'{gamedir}/*.p8'):
+			os.remove(p8)
+		print('removed p8')
+		shutil.rmtree(f'{gamedir}/export')
+		print('removed export')
+		os.remove(f'{gamedir}/README.md')
+		print('removed README')
+		os.remove(f'{gamedir}/screenshots/cover.png')
+		print('removed cover')
+
 	except FileNotFoundError:
 		print('did not exist')
 	print('remove existing complete')
 
 	print('creating new dir')
-	pathlib.Path(gamedir).mkdir()
-	print('new dir complete')
+	try:
+		pathlib.Path(gamedir).mkdir()
+	except FileExistsError:
+		print('new dir existed')
+	else:
+		print('new dir complete')
 
 
 def writeP8file(config, gamedir, gameslug):
-	# finalContents = frontMatter + backMatter
-	finalContents = config.original_contents
+	frontMatter, backMatter, _ = parseContents(config.original_contents)
+	finalContents = frontMatter + backMatter
+	# finalContents = config.original_contents
+
 	# Can't use `format` because of the curlies
 	finalContents = (finalContents
-		.replace('{GAMENAME}',config.game_name.lower())
+		.replace('{GAMENAME}',config.game_name_for_cart)
 		.replace('{AUTHORINFO}', f'by {config.studio.lower()}')
 	)
 
@@ -74,22 +123,28 @@ def writeP8file(config, gamedir, gameslug):
 	print('finished writing p8 result')
 	return finalP8Path
 
-def writeReadme(config):
-	rendered = readmeTempalte.format(**config.source)
+def writeText(config):
+	rendered = readmeTemplate.format(**config.source)
 	with open(f'{config.game_dir}/README.md', 'w') as outFile:
 		outFile.write(rendered)
+
+	with open(f'{config.export_dir}/submission.html', 'w') as file:
+		rendered = markdown.markdown(submissionTemplate.format(**config.source))
+		file.write(rendered)
+
+
+
 
 def updateRootReadme(config):
 	with open(config.root_readme_path, 'r') as inFile:
 		contents = inFile.read()
 
-	gameContent = f'''\
-## [{config.game_name}](carts/{config.game_slug})
-<a href="carts/{config.game_slug}">
-	<img alt="Cover image for {config.game_name} - {config.img_alt}"
-		src="carts/{config.game_slug}/screenshots/cover.png"
-		>
-</a>'''
+	gameContent = rootReadmeTemplate.format(**config.source)
+# <a href="carts/{config.game_slug}">
+# 	<img alt="Cover image for {config.game_name} - {config.img_alt}"
+# 		src="carts/{config.game_slug}/screenshots/cover.png"
+# 		>
+# </a>'''
 
 	gameSectionStart = '<!--BEGIN GAMES-->'
 	sectionStart = f'<!--BEGIN {config.game_slug}-->'
@@ -123,6 +178,15 @@ class Config:
 		# self.source['original_p8file_loc'] = inputPath
 		self.source.update(supplemental)
 
+		self.testSelf('acknowledgements', acknowledgementsTemplate)
+		self.testSelf('todo', todoTemplate)
+		# if self.source['acknowledgements']:
+			# self.source['acknowledgements'] = acknowledgementsTemplate.format(acknowledgements = self.source['acknowledgements'])
+
+	def testSelf(self, key, template):
+		if self.source[key]:
+			self.source[key] = template.format(**self.source)
+
 	def __getattr__(self, key):
 		return self.source[key]
 
@@ -132,8 +196,17 @@ class Config:
 			raise Exception(f'Game name "{self.game_name}" is too long')
 
 	@property
+	def game_name_for_cart(self):
+		return self.game_name.lower().ljust(31) + 'v' + self.source['version']
+	
+	@property
 	def game_dir(self):
 		return f'{outputLocation}/carts/{self.game_slug}'
+
+	@property
+	def export_dir(self):
+		return f'{self.game_dir}/export'
+	
 
 	@property
 	def repo_root(self):
@@ -144,15 +217,19 @@ class Config:
 		return f'{self.repo_root}/README.md'
 	
 	
-	
+def parseContents(contents):
+
+	frontMatter, temp = contents.split('--[[')
+	yamlContent, backMatter = temp.split('--]]')
+	parsed = yaml.safe_load(yamlContent)
+
+	return frontMatter, backMatter, parsed
 
 def compile(inputPath):
 	with open(inputPath, 'r') as inputFile:
 		contents = inputFile.read()
 
-	frontMatter, temp = contents.split('--[[')
-	yamlContent, backMatter = temp.split('--]]')
-	parsed = yaml.safe_load(yamlContent)
+	_, _, parsed = parseContents(contents)
 
 	config = Config(parsed, original_p8file_loc=inputFile, original_contents=contents)
 	config.validate()
@@ -164,17 +241,19 @@ def compile(inputPath):
 	# finalContents = contents
 	# TODO parse out label image
 
-	gamedir = f'{outputLocation}/carts/{gameslug}'
+	gamedir = config.game_dir
 	resetGameDir(gamedir)
 
 	# TODO detect if file has no label image
 	finalP8Path = writeP8file(config, gamedir, gameslug)
 
-	writeReadme(config)
-
 	updateRootReadme(config)
 
-	htmlLoc = exportArtifacts(finalP8Path, gameslug)
+	htmlLoc = exportArtifacts(finalP8Path, gameslug, config)
+
+	writeText(config)
+
+	# exportSubmissionText(config)
 
 	exportGameplayPng(gamedir, finalP8Path)
 
@@ -246,7 +325,11 @@ def exportGameplayPng(gamedir, finalP8Path):
 	newimg = Image.new('RGB', (scale*128, scale*128))
 	newimg.putdata(sum(pixels, start = []))
 	screenshotDir = f'{gamedir}/screenshots'
-	pathlib.Path(screenshotDir).mkdir()
+	try:
+		pathlib.Path(screenshotDir).mkdir()
+	except FileExistsError:
+		pass
+
 	newimg.save(f'{gamedir}/screenshots/cover.png')
 	# newimg.save(f'mytest.png')
 	# hexImage = (contents.split('__label__')[1]
@@ -268,9 +351,8 @@ def exportGameplayPng(gamedir, finalP8Path):
 	# with open(f'{screenshotDir}/cover.png', 'wb') as screenshotFile:
 	# 	screenshotFile.write(decoded)
 
-
 # Returns the location of the html file
-def exportArtifacts(finalP8Path, gameslug):
+def exportArtifacts(finalP8Path, gameslug, config):
 	gamedir, cartName = os.path.split(finalP8Path)
 	cartName += '.png'
 
@@ -279,7 +361,7 @@ def exportArtifacts(finalP8Path, gameslug):
 	os.system(f'{pico8Location} -export {cartName} {finalP8Path}')
 	print('Export complete')
 
-	exportLoc = f'{gamedir}/export'
+	exportLoc = config.export_dir
 	print('creating export dir')
 	pathlib.Path(exportLoc).mkdir()
 	htmlLoc = f'{exportLoc}/{gameslug}_html'
@@ -291,6 +373,9 @@ def exportArtifacts(finalP8Path, gameslug):
 	shutil.move('index.js', htmlLoc)
 	shutil.move(cartName, exportLoc)
 	print('copying files complete')
+
+
+
 	# print (exportLoc)
 	# exit()
 	# return f'{htmlLoc}/index.html'
@@ -302,7 +387,7 @@ def upload(htmlLoc, gameslug, config):
 	cmd = (f'butler push --if-changed {htmlLoc} {config.itch_name}/{gameslug}:web')
 	print('invoking butler')
 	print(cmd)
-	os.system(cmd)
+	# os.system(cmd)
 	print('butler push success')
 
 # compile('template.p8')

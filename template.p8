@@ -8,10 +8,10 @@ __lua__
 game_name: A Cool Game Name
 trijam_number: XX
 trijam_theme: XX
-develop_time: X:XX:XX
+develop_time: Xh XXm XXs
 trijam_link: {SUBMISSIONLINK}
 # Leave blank to use game-name
-game_slug: test-game
+game_slug: 
 tagline: XXXXXXXX
 description: |
   hello there
@@ -20,7 +20,11 @@ controls: |
   * Arrow Keys - stuff
   * X - start new game
 img_alt: XXXX
-extras: ''
+acknowledgements: 'asdf'
+todo: |
+  [X] Something
+  [ ] Something else
+version: 0.1.0
 --]]
 
 

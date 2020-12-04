@@ -1,16 +1,19 @@
-* Create a PNG from the __label__ section
-* Export index.html
-* Upload export to itch
-* Generate polished pico8-games README.md, etc.
+* hidden version number					X
+* Include todo section in text			X
+
+* Create a PNG from the __label__ section	X
+* Export index.html							X
+* Upload export to itch						X
+* Generate polished pico8-games README.md, etc.		X
 * YAML front matter
 	* Game name 		X
-	* Description
-	* Controls
+	* Description		X
+	* Controls			X
 	* Trijam number 	X
 	* Trijam theme		X
 	* Dev time			X
 	* creator (leave blank to use global config...) 	X
 * Global Config
-	* itch user name
-* Case folding as necessary
+	* itch user name	X
+* Case folding as necessary		X
 * Upload to splore / lexaloffle?
