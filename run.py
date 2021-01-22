@@ -43,19 +43,26 @@ todoTemplate = '''\
 {todo}
 '''
 
+hintTemplate = '''\
+## Hints
+{hints}
+'''
+
 shared = '''\
 ## Controls
 {controls}
 
+{hints}
+
 ## About
-Created for [TriJam #{trijam_number}](https://itch.io/jam/trijam-{trijam_number}/entries)
-
-Theme: {trijam_theme}
-
-Development Time: {develop_time}
+Created for [TriJam #{trijam_number}](https://itch.io/jam/trijam-{trijam_number}/entries)  
+Theme: {trijam_theme}  
+Development Time: {develop_time}  
+Source Code: On [GitHub](https://github.com/CaterpillarGames/pico8-games/tree/master/carts/{game_slug})
 
 {acknowledgements}
 '''
+# <!-- TOOD figure out {{aboutextras}} -->
 
 submissionTemplate = '''\
 {tagline}
@@ -178,6 +185,7 @@ class Config:
 
 		self.testSelf('acknowledgements', acknowledgementsTemplate)
 		self.testSelf('todo', todoTemplate)
+		self.testSelf('hints', hintTemplate)
 		# if self.source['acknowledgements']:
 			# self.source['acknowledgements'] = acknowledgementsTemplate.format(acknowledgements = self.source['acknowledgements'])
 
@@ -192,6 +200,9 @@ class Config:
 		# 31 is max characters that can fit on a cartridge without getting cut off
 		if len(self.game_name) > 31:
 			raise Exception(f'Game name "{self.game_name}" is too long')
+
+		if any('XX' in val for val in self.source.values() if type(val) is str):
+			raise Exception('Templated content')
 
 	@property
 	def game_name_for_cart(self):
@@ -256,7 +267,7 @@ def compile(inputPath):
 	exportGameplayPng(gamedir, finalP8Path)
 
 	# TODO command line arg to suppress upload
-	if False:
+	if True:
 		upload(htmlLoc, gameslug, config)
 
 	# print('deleting existing .p8')
@@ -383,6 +394,7 @@ def exportArtifacts(finalP8Path, gameslug, config):
 
 def upload(htmlLoc, gameslug, config):
 	cmd = (f'butler push --if-changed {htmlLoc} {config.itch_name}/{gameslug}:web --userversion {config.version}')
+	# cmd = (f'butler push {htmlLoc} {config.itch_name}/{gameslug}:web --userversion {config.version}')
 	print('invoking butler')
 	print(cmd)
 	# os.system(cmd)
