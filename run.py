@@ -9,6 +9,7 @@ import markdown
 from PIL import Image
 from slugify import slugify
 import glob
+from datetime import datetime, timedelta
 
 # TODO support going through the entire directory
 # This is the path to a given .p8 file
@@ -174,6 +175,20 @@ def updateRootReadme(config):
 		outFile.write(finalContents)
 
 
+def calcDevelopTime(time_left_str):
+	s1 = time_left_str
+	# print(time_left_str)
+	# raise	Exception()
+	s2 = '3:00:00'
+	fwkDev = timedelta(seconds = 3*60 + 51)  #'0:03:51'
+	FMT = '%H:%M:%S'
+	tdelta = datetime.strptime(s2, FMT) - datetime.strptime(s1, FMT) - fwkDev
+	# Seriously, python?
+	hours = tdelta.seconds // 3600
+	minutes = (tdelta.seconds // 60)%60
+	seconds = tdelta.seconds % 60
+	return f'{hours}h {minutes}m {seconds}s'
+
 class Config:
 	def __init__(self, yamlDict, **supplemental):
 		self.source = yamlDict
@@ -186,6 +201,9 @@ class Config:
 		self.testSelf('acknowledgements', acknowledgementsTemplate)
 		self.testSelf('todo', todoTemplate)
 		self.testSelf('hints', hintTemplate)
+
+		if not self.source['develop_time']:
+			self.source['develop_time'] = calcDevelopTime(self.source['time_left'])
 		# if self.source['acknowledgements']:
 			# self.source['acknowledgements'] = acknowledgementsTemplate.format(acknowledgements = self.source['acknowledgements'])
 
