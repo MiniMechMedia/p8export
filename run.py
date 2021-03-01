@@ -182,7 +182,7 @@ def calcDevelopTime(time_left_str):
 	s2 = '3:00:00'
 	fwkDev = timedelta(seconds = 3*60 + 51)  #'0:03:51'
 	FMT = '%H:%M:%S'
-	tdelta = datetime.strptime(s2, FMT) - datetime.strptime(s1, FMT) - fwkDev
+	tdelta = datetime.strptime(s2, FMT) - datetime.strptime(s1, FMT) + fwkDev
 	# Seriously, python?
 	hours = tdelta.seconds // 3600
 	minutes = (tdelta.seconds // 60)%60
