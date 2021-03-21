@@ -58,6 +58,7 @@ shared = '''\
 ## About
 Created for [TriJam #{trijam_number}](https://itch.io/jam/trijam-{trijam_number}/entries)  
 Theme: {trijam_theme}  
+{about_extra}
 Development Time: {develop_time}  
 Source Code: On [GitHub](https://github.com/CaterpillarGames/pico8-games/tree/master/carts/{game_slug})
 
@@ -181,6 +182,7 @@ def calcDevelopTime(time_left_str):
 	# raise	Exception()
 	s2 = '3:00:00'
 	fwkDev = timedelta(seconds = 3*60 + 51)  #'0:03:51'
+	fwkDev += timedelta(seconds = 3*60 + 13)
 	FMT = '%H:%M:%S'
 	tdelta = datetime.strptime(s2, FMT) - datetime.strptime(s1, FMT) + fwkDev
 	# Seriously, python?
