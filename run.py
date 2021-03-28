@@ -58,8 +58,7 @@ shared = '''\
 ## About
 Created for [TriJam #{trijam_number}](https://itch.io/jam/trijam-{trijam_number}/entries)  
 Theme: {trijam_theme}  
-{about_extra}
-Development Time: {develop_time}  
+{about_extra}Development Time: {develop_time}  
 Source Code: On [GitHub](https://github.com/CaterpillarGames/pico8-games/tree/master/carts/{game_slug})
 
 {acknowledgements}
@@ -360,6 +359,16 @@ def exportGameplayPng(gamedir, finalP8Path):
 		pass
 
 	newimg.save(f'{gamedir}/screenshots/cover.png')
+
+	sideBars = 32
+	newimg2 = Image.new('RGB', (scale*(128 + sideBars), scale*128))
+	newpixelArray = []
+	for row in pixels:
+		row = [(0,0,0)] * (sideBars//2) * scale + row + [(0,0,0)] * (sideBars//2) * scale
+		newpixelArray.append(row)
+	newimg2.putdata(sum(newpixelArray, start = []))
+	newimg2.save(f'{gamedir}/screenshots/itch-cover.png')
+
 	# newimg.save(f'mytest.png')
 	# hexImage = (contents.split('__label__')[1]
 	# 	)
