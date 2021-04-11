@@ -409,6 +409,8 @@ def exportArtifacts(finalP8Path, gameslug, config):
 	print('copying files')
 	shutil.move(f'index.html', htmlLoc)
 	shutil.move('index.js', htmlLoc)
+	# assert False
+	shutil.make_archive(htmlLoc, 'zip', htmlLoc)
 	shutil.move(cartName, exportLoc)
 	print('copying files complete')
 
