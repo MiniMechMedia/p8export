@@ -184,6 +184,7 @@ def calcDevelopTime(time_left_str):
 	fwkDev = timedelta(seconds = 3*60 + 51)  #'0:03:51'
 	fwkDev += timedelta(seconds = 3*60 + 13)
 	fwkDev += timedelta(seconds = 3*60 + 19)
+	fwkDev += timedelta(seconds = 2*60 + 28)
 	FMT = '%H:%M:%S'
 	tdelta = datetime.strptime(s2, FMT) - datetime.strptime(s1, FMT) + fwkDev
 	# Seriously, python?
