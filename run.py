@@ -320,8 +320,27 @@ for i, row in enumerate('''
 255, 119, 168
 255, 204, 170
 '''.strip().split('\n')):
-	colmap[hex(i)] = eval(f'({row})')
+	colmap[hex(i)[2]] = eval(f'({row})')
 
+for key, val in {
+	'g': (41,24,20),
+	'h': (17,29,53),
+	'i': (66,33,54),
+	'j': (18,83,89),
+	'k': (116,47,41),
+	'l': (73,51,59),
+	'm': (162,136,121),
+	'n': (243,239,125),
+	'o': (190,18,80),
+	'p': (255, 108, 36),
+	'q': (168, 231, 46),
+	'r': (0,181,67),
+	's': (6,90,181),
+	't': (117,70,101),
+	'u': (255,110,89),
+	'v': (255,157,129)
+}.items():
+	colmap[key] = val
 
 
 def exportGameplayPng(gamedir, finalP8Path):
@@ -337,15 +356,15 @@ def exportGameplayPng(gamedir, finalP8Path):
 	scale = 3
 
 	for row in contents.split('__label__')[1].split():
-		if not all(c in '0123456789abcdef' for c in row):
-			break
+		# if not all(c in '0123456789abcdef' for c in row):
+		# 	break
 		# Also break if we get an empty line in there
 		if not row:
 			break
 		# pixelRow = [*(scale * [colmap[f'0x{c}']]) for c in row]
 		pixelRow = []
 		for c in row:
-			color = colmap['0x' + c]
+			color = colmap[c]
 			for _ in range(scale):
 				pixelRow.append(color)
 
