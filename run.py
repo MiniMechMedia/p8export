@@ -359,7 +359,7 @@ def exportGameplayPng(gamedir, finalP8Path):
 		# if not all(c in '0123456789abcdef' for c in row):
 		# 	break
 		# Also break if we get an empty line in there
-		if not row:
+		if not row or '__' in row:
 			break
 		# pixelRow = [*(scale * [colmap[f'0x{c}']]) for c in row]
 		pixelRow = []
