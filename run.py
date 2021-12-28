@@ -56,9 +56,11 @@ shared = '''\
 {hints}
 
 ## About
+<!--BEGIN TRIJAM-->
 Created for [TriJam #{trijam_number}](https://itch.io/jam/trijam-{trijam_number}/entries)  
 Theme: {trijam_theme}  
 Development Time: {develop_time}  
+<!--END TRIJAM-->
 {about_extra}
 Source Code: On [GitHub](https://github.com/CaterpillarGames/pico8-games/tree/master/carts/{game_slug})
 
@@ -132,11 +134,28 @@ def writeP8file(config, gamedir, gameslug):
 
 def writeText(config):
 	rendered = readmeTemplate.format(**config.source)
+	# raise Exception({**config.source})
+	# if config.source['trijam_number'] == 'NULL':
+
+	if config.source['trijam_number'] is None:
+		# raise Exception('==='*10 + '\n' +rendered.split('<!--BEGIN TRIJAM-->')[0])
+		# raise Exception('==='*10 + '\n' + rendered.split('<!--END TRIJAM-->')[1])
+		# raise Exception('')
+		rendered = rendered.split('<!--BEGIN TRIJAM-->')[0] + rendered.split('<!--END TRIJAM-->')[1]
+
+	# raise Exception('==='*10 + '\n' + rendered)
+
+	# rendered = rendered.replace('')
 	with open(f'{config.game_dir}/README.md', 'w') as outFile:
 		outFile.write(rendered)
 
 	with open(f'{config.export_dir}/submission.html', 'w') as file:
-		rendered = markdown.markdown(submissionTemplate.format(**config.source))
+		subTemplate = submissionTemplate.format(**config.source)
+
+		if config.source['trijam_number'] is None:
+			subTemplate = subTemplate.split('<!--BEGIN TRIJAM-->')[0] + subTemplate.split('<!--END TRIJAM-->')[1]
+			
+		rendered = markdown.markdown(subTemplate)
 		file.write(rendered)
 
 
@@ -454,5 +473,5 @@ def upload(htmlLoc, gameslug, config):
 	print('butler push success')
 
 # compile('template.p8')
-compile(sys.argv[1])
+compile(sys.argv[1] if len(sys.argv) > 1 else 'template.p8')
 # exportHtml('./template.p8')
