@@ -247,7 +247,9 @@ class Config:
 
 	@property
 	def game_name_for_cart(self):
-		return self.game_name.lower().ljust(31) + 'v' + self.source['version']
+		if self.source['version']:
+			return self.game_name.lower().ljust(31) + 'v' + self.source['version']
+		return self.game_name.lower().strip()
 	
 	@property
 	def game_dir(self):

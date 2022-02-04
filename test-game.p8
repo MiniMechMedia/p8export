@@ -9,7 +9,7 @@ game_name: A Cool Game Name
 trijam_number: XX
 trijam_theme: XX
 develop_time: Xh XXm XXs
-trijam_link: {SUBMISSIONLINK}
+img_alt: XXXX
 # Leave blank to use game-name
 game_slug: 
 tagline: XXXXXXXX
@@ -19,7 +19,7 @@ description: |
 controls: |
   * Arrow Keys - stuff
   * X - start new game
-img_alt: XXXX
+hints: ''
 acknowledgements: 'asdf'
 todo: |
   [X] Something

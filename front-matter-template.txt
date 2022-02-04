@@ -1,0 +1,21 @@
+--{GAMENAME}
+--{AUTHORINFO} 
+
+--[[
+game_name: XXXXX
+# Leave blank to use game-name
+game_slug: 
+trijam_number: XX
+trijam_theme: XX
+tagline: XXXXXXXX
+develop_time: Xh XXm XXs
+description: |
+  XXXX
+controls: |
+  * XXXX
+hints: ''
+acknowledgements: ''
+todo: ''
+version: 0.1.0
+img_alt: XXXX
+--]]

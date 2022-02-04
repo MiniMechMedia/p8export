@@ -1,3 +1,19 @@
+
+
+
+
+* Add some metadata about game inputs
+	- 2 player (hamster slam)
+	- mouse (dragon drop off)
+	- 1 player, but uses 2 player controls (snoman simulator)
+	- And so that can be exported to a gamelist format https://pastebin.com/pgecGdiU
+
+* Make sure we overwrite the p8.png
+
+* Add a warning when there is no label image
+
+* Fix making a diff by regenerating game
+
 * hidden version number					X
 * Include todo section in text			X
 
