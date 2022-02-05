@@ -220,6 +220,8 @@ class Config:
 		self.source['game_slug'] = self.source['game_slug'] or slugify(self.source['game_name'])
 		# self.source['original_p8file_loc'] = inputPath
 		self.source.update(supplemental)
+		if 'about_extra' not in self.source:
+			self.source['about_extra'] = ''
 
 		self.testSelf('acknowledgements', acknowledgementsTemplate)
 		self.testSelf('todo', todoTemplate)
@@ -227,6 +229,7 @@ class Config:
 
 		if not self.source['develop_time']:
 			self.source['develop_time'] = calcDevelopTime(self.source['time_left'])
+
 		# if self.source['acknowledgements']:
 			# self.source['acknowledgements'] = acknowledgementsTemplate.format(acknowledgements = self.source['acknowledgements'])
 
