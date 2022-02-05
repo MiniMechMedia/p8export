@@ -277,9 +277,15 @@ def parseContents(contents):
 
 	return frontMatter, backMatter, parsed
 
+def validateContents(contents):
+	if '__label__' not in contents:
+		raise Exception('Capture label image first')
+
 def compile(inputPath):
 	with open(inputPath, 'r') as inputFile:
 		contents = inputFile.read()
+
+	validateContents(contents)
 
 	_, _, parsed = parseContents(contents)
 
