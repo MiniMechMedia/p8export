@@ -158,6 +158,16 @@ def writeText(config):
 		rendered = markdown.markdown(subTemplate)
 		file.write(rendered)
 
+	with open(f'{config.export_dir}/game.xml', 'w') as file:
+		# TODO template
+		gameXml = f'''
+		<game>
+			<path>./{config.game_slug}.p8.png</path>
+			<name>{config.game_name}</name>
+			<image>./{config.game_slug}.p8.png</image>
+			<desc>Description: {config.description} Controls: {config.controls}</desc>
+		</game>
+		'''
 
 
 
@@ -317,6 +327,8 @@ def compile(inputPath):
 	# exportSubmissionText(config)
 
 	exportGameplayPng(gamedir, finalP8Path)
+
+	# exportGameListXml(config, gamedir)	
 
 	# TODO command line arg to suppress upload
 	if True:

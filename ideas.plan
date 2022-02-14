@@ -1,5 +1,41 @@
+Version 2.0
+
+Pain Points
+* Switching back and forth between /raw and /carts is a pain
+* Special rules for when you want to edit just the github export for example
+* Pain to amend commits in github published version
+* No way to regenerate in bulk
+* Metadata is too Trijam Specific
+* Have to gather up a bunch of files and then stitch them together for emulationstation
+	- But don't want to have a compilation target that duplicates the cartridges
+	- But want to have the cartridges still in separate folders so there is no contamination
+* Controls can be platform dependent (ok, not really much of a pain yet)
+
+Solutions
+* Have the original .p8 file be the one that you work on. End split between raw and else
+	- Also makes it easy so you don't have to map game -> trijam number to figure out where your shit is
+	- Implies you keep metadata in there
+* Do development on a branch and squash merge it
+* Don't push until you publish the game on itch?
+* Concept of CompilationTarget
+	- Cover image + Itch cover image
+	- .png.p8
+	- HTML export + Zip
+	- EmulationStation game xml file
+	- Screenshot compilation target? More a part of metadata
+		- Yeah, you might want to include it in the github readme, itch, etc.	
+* When ready to publish, rename file and containing folder
+	- Any way to remove this duplication?
+* Have "strongly" typed array of game jam submission objects
+* Want to create an emulation station "distributable"
+	- git pull and then reboot ES
+* Have the controls section be formatted data like p1up, p1down, p1arrows, etc.
 
 
+For the immediate, I'll settle for an xml generator
+
+
+* Add meta-variable for character count. Possibly others
 
 
 * Add some metadata about game inputs
