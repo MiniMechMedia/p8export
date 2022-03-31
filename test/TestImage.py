@@ -1,6 +1,6 @@
 from BaseTest import BaseTest
 from src.ParsedContents import Pico8FileParser, ParsedLabelImage
-from FileRegistry import TestFileEnum
+from FileRegistry import TestFileEnum, TempFileEnum
 from src.ImagesCompilationTarget import ImagesCompilationTarget
 
 
@@ -12,8 +12,13 @@ class TestImage(BaseTest):
                 01234567
                 89abcdef
                 """.strip()
-            )
+            ),
+            outputPath=self.getTempFilePath(TempFileEnum.LABEL_IMAGE_TEMP_FILE),
         )
+
+        actual: bytes = self.getTempFileBytes(TempFileEnum.LABEL_IMAGE_TEMP_FILE)
+        expected: bytes = self.getTestFileBytes(TestFileEnum.LABEL_IMAGE_TEST_FILE)
+        self.assertEqual(actual, expected)
 
     def test_missing_label_throws(self):
         self.assertRaises(

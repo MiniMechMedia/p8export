@@ -2,16 +2,17 @@ from src.CompilationTarget import CompilationTarget
 from src.ParsedContents import ParsedLabelImage, ParsedContents
 from PIL import Image
 from typing import Final
+import pathlib
 
 
 class ImagesCompilationTarget(CompilationTarget):
-    SCALE: Final[int] = 1  # TODO
+    SCALE: Final[int] = 3
 
     def compile(self, data: ParsedContents):
         raise NotImplemented
 
     @staticmethod
-    def writeLabelImage(parsedImage: ParsedLabelImage):
+    def writeLabelImage(parsedImage: ParsedLabelImage, outputPath: pathlib.Path):
         img: Image = Image.new(
             "RGB",
             (
@@ -21,12 +22,17 @@ class ImagesCompilationTarget(CompilationTarget):
         )
         pixels: list[tuple[int]] = []
         for row in parsedImage.data:
-            for index in row:
-                pixels.append(ImagesCompilationTarget.convertToPico8Palette(index))
+            for i in range(ImagesCompilationTarget.SCALE):
+                for index in row:
+                    for j in range(ImagesCompilationTarget.SCALE):
+                        pixels.append(
+                            ImagesCompilationTarget.convertToPico8Palette(index)
+                        )
 
+        # noinspection PyTypeChecker
         img.putdata(pixels)
 
-        img.save("test.png")
+        img.save(outputPath)
 
     # https://pico-8.fandom.com/wiki/Palette
     @staticmethod
