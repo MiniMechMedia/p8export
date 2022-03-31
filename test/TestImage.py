@@ -4,6 +4,14 @@ from FileRegistry import TestFileEnum
 
 
 class TestImage(BaseTest):
+    def test_missing_label_throws(self):
+        self.assertRaises(
+            Exception,
+            lambda: Pico8FileParser.parseRawLabelImage(
+                self.getTestFileContents(TestFileEnum.LABEL_MISSING_TEST_FILE)
+            ),
+        )
+
     def test_can_parse_text_image(self) -> None:
         actual: str = Pico8FileParser.parseRawLabelImage(
             self.getTestFileContents(TestFileEnum.COVER_IMAGE_TEST_FILE)
