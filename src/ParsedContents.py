@@ -4,10 +4,6 @@ import typing
 
 
 class Pico8FileParser:
-    # def __init__(self):
-    #     pass
-    # self.rawContents = None
-
     @staticmethod
     def parse(filepath: pathlib.Path) -> "ParsedContents":
         return ParsedContents(filepath)
@@ -30,6 +26,15 @@ class Pico8FileParser:
             raise Exception("could not parse to a dict")
         return ret
 
+    @staticmethod
+    def parseRawLabelImage(rawContents) -> str:
+        if "__label__" not in rawContents:
+            raise Exception("Capture label image first")
+
+        rawLabelImage: str = rawContents.split("__label__")[1]
+        rawLabelImage = rawLabelImage.split("__")[0]
+        return rawLabelImage.strip()
+
 
 class ParsedContents:
     def __init__(self, filePath: pathlib.Path):
@@ -38,6 +43,7 @@ class ParsedContents:
             rawFileContents=self.rawContents
         )
         self.parsedYaml = Pico8FileParser.parseYamlFromRawYaml(self.rawYaml)
+        self.rawLabelImage = Pico8FileParser.parseRawLabelImage(self.rawContents)
 
     def getRawYaml(self) -> str:
         return self.rawYaml
