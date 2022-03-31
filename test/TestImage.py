@@ -1,6 +1,6 @@
-import unittest
+from BaseTest import BaseTest
 
 
-class TestImage(unittest.TestCase):
+class TestImage(BaseTest):
     def test_works(self) -> None:
         self.assertTrue(True)
