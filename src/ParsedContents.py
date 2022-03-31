@@ -27,13 +27,25 @@ class Pico8FileParser:
         return ret
 
     @staticmethod
-    def parseRawLabelImage(rawContents) -> str:
+    def parseRawLabelImage(rawContents: str) -> str:
         if "__label__" not in rawContents:
             raise Exception("Capture label image first")
 
         rawLabelImage: str = rawContents.split("__label__")[1]
         rawLabelImage = rawLabelImage.split("__")[0]
         return rawLabelImage.strip()
+
+    @staticmethod
+    def parseImageLabel(rawLabelImage: str) -> list[list[int]]:
+        ret: list[list[int]] = []
+        for row in rawLabelImage.split():
+            rowList: list[int] = []
+            for pixel in row.upper():
+                pico8ColorIndex: int = "0123456789ABCDEFGHIJKLMNOPQRSTUV".index(pixel)
+                rowList.append(pico8ColorIndex)
+
+            ret.append(rowList)
+        return ret
 
 
 class ParsedContents:
