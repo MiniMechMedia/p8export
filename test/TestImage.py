@@ -1,9 +1,20 @@
 from BaseTest import BaseTest
-from src.ParsedContents import Pico8FileParser
+from src.ParsedContents import Pico8FileParser, ParsedLabelImage
 from FileRegistry import TestFileEnum
+from src.ImagesCompilationTarget import ImagesCompilationTarget
 
 
 class TestImage(BaseTest):
+    def test_writing_image_file(self):
+        ImagesCompilationTarget.writeLabelImage(
+            Pico8FileParser.parseImageLabel(
+                """
+                01234567
+                89abcdef
+                """.strip()
+            )
+        )
+
     def test_missing_label_throws(self):
         self.assertRaises(
             Exception,
@@ -13,24 +24,24 @@ class TestImage(BaseTest):
         )
 
     def test_can_parse_int_image(self):
-        actual: list[list[int]] = Pico8FileParser.parseImageLabel(
+        actual: ParsedLabelImage = Pico8FileParser.parseImageLabel(
             """
-01234567
-89abcdef
-        """.strip()
+            01234567
+            89abcdef
+            """.strip()
         )
         expected: list[list[int]] = [
             [0, 1, 2, 3, 4, 5, 6, 7],
             [8, 9, 10, 11, 12, 13, 14, 15],
         ]
 
-        self.assertEqual(actual, expected)
+        self.assertEqual(actual.data, expected)
 
     def test_can_parse_extended_palette_image(self):
-        actual: list[list[int]] = Pico8FileParser.parseImageLabel(
+        actual: ParsedLabelImage = Pico8FileParser.parseImageLabel(
             """
-    ghijklmn
-    opqrstuv
+            ghijklmn
+            opqrstuv
             """.strip()
         )
         expected: list[list[int]] = [
@@ -38,7 +49,7 @@ class TestImage(BaseTest):
             [24, 25, 26, 27, 28, 29, 30, 31],
         ]
 
-        self.assertEqual(actual, expected)
+        self.assertEqual(actual.data, expected)
 
     def test_can_parse_text_image(self) -> None:
         actual: str = Pico8FileParser.parseRawLabelImage(

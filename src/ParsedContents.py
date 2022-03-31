@@ -3,6 +3,24 @@ import yaml
 import typing
 
 
+class ParsedLabelImage:
+    def __init__(self, data: list[list[int]]):
+        self.data = data
+
+    def __getitem__(self, xy) -> int:
+        x: int = xy[0]
+        y: int = xy[1]
+        return self.data[y][x]
+
+    @property
+    def width(self) -> int:
+        return len(self.data[0])
+
+    @property
+    def height(self) -> int:
+        return len(self.data)
+
+
 class Pico8FileParser:
     @staticmethod
     def parse(filepath: pathlib.Path) -> "ParsedContents":
@@ -36,7 +54,7 @@ class Pico8FileParser:
         return rawLabelImage.strip()
 
     @staticmethod
-    def parseImageLabel(rawLabelImage: str) -> list[list[int]]:
+    def parseImageLabel(rawLabelImage: str) -> ParsedLabelImage:
         ret: list[list[int]] = []
         for row in rawLabelImage.split():
             rowList: list[int] = []
@@ -45,7 +63,7 @@ class Pico8FileParser:
                 rowList.append(pico8ColorIndex)
 
             ret.append(rowList)
-        return ret
+        return ParsedLabelImage(ret)
 
 
 class ParsedContents:
