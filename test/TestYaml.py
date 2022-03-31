@@ -23,3 +23,12 @@ game_name: XXXXX
 game_slug:
         """.strip(),
         )
+
+    def test_can_parse_structured_yaml(self):
+        rawYaml: str = Pico8FileParser.parseRawYamlFromFileContents(
+            self.getTestFileContents(TestFileEnum.YAML_TEST_FILE)
+        )
+
+        parsedYaml: dict = Pico8FileParser.parseYamlFromRawYaml(rawYaml)
+
+        self.assertEqual(parsedYaml, {"game_name": "XXXXX", "game_slug": None})

@@ -1,5 +1,6 @@
 import pathlib
 import yaml
+import typing
 
 
 class Pico8FileParser:
@@ -23,8 +24,11 @@ class Pico8FileParser:
         return rawYaml.strip()
 
     @staticmethod
-    def parseYamlFromRawYaml(rawYaml: str) -> None:
-        return yaml.safe_load(rawYaml)
+    def parseYamlFromRawYaml(rawYaml: str) -> dict:
+        ret: typing.Any = yaml.safe_load(rawYaml)
+        if type(ret) is not dict:
+            raise Exception("could not parse to a dict")
+        return ret
 
 
 class ParsedContents:
