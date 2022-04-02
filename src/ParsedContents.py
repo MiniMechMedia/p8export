@@ -20,6 +20,11 @@ class ParsedLabelImage:
     def height(self) -> int:
         return len(self.data)
 
+    # def padData(self, hori):
+    #     ret: list[list[int]] = []
+    #     for row in self.data:
+    #         ret.append(row)
+
 
 class Pico8FileParser:
     @staticmethod

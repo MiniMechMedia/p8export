@@ -7,27 +7,53 @@ import pathlib
 
 class ImagesCompilationTarget(CompilationTarget):
     SCALE: Final[int] = 3
+    SIDEBAR_WIDTH: Final[int] = 16
 
     def compile(self, data: ParsedContents):
-        raise NotImplemented
+        pass
+        # self.writeLabelImage()
 
-    @staticmethod
-    def writeLabelImage(parsedImage: ParsedLabelImage, outputPath: pathlib.Path):
+    @classmethod
+    def writeCoverImage(
+        cls, parsedImage: ParsedLabelImage, outputPath: pathlib.Path
+    ) -> None:
+        width = cls.SCALE * (parsedImage.width + cls.SIDEBAR_WIDTH)
+        height = cls.SCALE * parsedImage.height
+        img: Image = Image.new("RGB", (width, height))
+        pixels: list[tuple[int, int, int]] = []
+        for row in parsedImage.data:
+
+            for i in range(cls.SCALE):
+                for _ in range(cls.SIDEBAR_WIDTH // 2 * cls.SCALE):
+                    pixels.append((0, 0, 0))
+                for index in row:
+                    for j in range(cls.SCALE):
+                        pixels.append(cls.convertToPico8Palette(index))
+                for _ in range(cls.SIDEBAR_WIDTH // 2 * cls.SCALE):
+                    pixels.append((0, 0, 0))
+
+        # noinspection PyTypeChecker
+        img.putdata(pixels)
+
+        img.save(outputPath)
+
+    @classmethod
+    def writeLabelImage(
+        cls, parsedImage: ParsedLabelImage, outputPath: pathlib.Path
+    ) -> None:
         img: Image = Image.new(
             "RGB",
             (
-                ImagesCompilationTarget.SCALE * parsedImage.width,
-                ImagesCompilationTarget.SCALE * parsedImage.height,
+                cls.SCALE * parsedImage.width,
+                cls.SCALE * parsedImage.height,
             ),
         )
-        pixels: list[tuple[int]] = []
+        pixels: list[tuple[int, int, int]] = []
         for row in parsedImage.data:
-            for i in range(ImagesCompilationTarget.SCALE):
+            for i in range(cls.SCALE):
                 for index in row:
-                    for j in range(ImagesCompilationTarget.SCALE):
-                        pixels.append(
-                            ImagesCompilationTarget.convertToPico8Palette(index)
-                        )
+                    for j in range(cls.SCALE):
+                        pixels.append(cls.convertToPico8Palette(index))
 
         # noinspection PyTypeChecker
         img.putdata(pixels)
@@ -36,7 +62,7 @@ class ImagesCompilationTarget(CompilationTarget):
 
     # https://pico-8.fandom.com/wiki/Palette
     @staticmethod
-    def convertToPico8Palette(index: int) -> tuple[int]:
+    def convertToPico8Palette(index: int) -> tuple[int, int, int]:
         return [
             (0, 0, 0),
             (29, 43, 83),
@@ -71,7 +97,3 @@ class ImagesCompilationTarget(CompilationTarget):
             (255, 110, 89),
             (255, 157, 129),
         ][index]
-
-    @staticmethod
-    def writeCoverImage(parsedImage: ParsedLabelImage):
-        pass

@@ -20,6 +20,21 @@ class TestImage(BaseTest):
         expected: bytes = self.getTestFileBytes(TestFileEnum.LABEL_IMAGE_TEST_FILE)
         self.assertEqual(actual, expected)
 
+    def test_writing_cover_file(self):
+        ImagesCompilationTarget.writeCoverImage(
+            Pico8FileParser.parseImageLabel(
+                """
+                01234567
+                89abcdef
+                """.strip()
+            ),
+            outputPath=self.getTempFilePath(TempFileEnum.ITCH_COVER_IMAGE_TEMP_FILE),
+        )
+
+        actual: bytes = self.getTempFileBytes(TempFileEnum.ITCH_COVER_IMAGE_TEMP_FILE)
+        expected: bytes = self.getTestFileBytes(TestFileEnum.ITCH_COVER_IMAGE_TEST_FILE)
+        self.assertEqual(actual, expected)
+
     def test_missing_label_throws(self):
         self.assertRaises(
             Exception,
