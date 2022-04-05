@@ -9,16 +9,29 @@ __lua__
 game_name: xxxxx
 # leave blank to use game-name
 game_slug:
-trijam_number: xx
-trijam_theme: xx
+jam_info:
+  - jam_name: TriJam
+    jam_number: null
+    jam_url: null
+    jam_theme: theme1, theme2, theme3
+    trijam_cookieseaten: 0      # Test
+  - jam_name: MiniJam
+    jam_number: null
+    jam_url: null
+    jam_theme: blah
+    minijam_limitation: You are the bad guy
 tagline: xxxxxxxx
 time_left: 'x:xx:xx'
 develop_time: null
 description: |
   This is a multi-line
   description of the game
-controls: |
-  * xxxx
+controls:
+  - key: ARROW
+    desc: move player
+  - key: X
+    desc: activate object
+
 hints: ''
 acknowledgements: ''
 to_do: []

@@ -1,8 +1,8 @@
 import pathlib
 import yaml
 import typing
-from .ParsedContents import ParsedContents, ParsedLabelImage, MetaData
-from dacite import from_dict
+from .ParsedContents import ParsedContents, ParsedLabelImage, MetaData, ControlEnum
+from dacite import from_dict, Config
 
 
 class Pico8FileParser:
@@ -51,7 +51,9 @@ class Pico8FileParser:
 
     @staticmethod
     def parseMetadata(rawMetadata: dict) -> MetaData:
-        return from_dict(data_class=MetaData, data=rawMetadata)
+        return from_dict(
+            data_class=MetaData, data=rawMetadata, config=Config(cast=[ControlEnum])
+        )
         # return MetaData(
         #     **rawMetadata
         #     # description=rawMetadata["description"],

@@ -4,6 +4,7 @@ import typing
 from dataclasses import dataclass
 from typing import Optional
 from datetime import timedelta
+from enum import Enum
 
 
 class ParsedLabelImage:
@@ -29,23 +30,35 @@ class ParsedLabelImage:
     #         ret.append(row)
 
 
+# TODO do something with auto() to avoid repetition
+# https://stackoverflow.com/a/44785241
+class ControlEnum(Enum):
+    ARROW = "ARROW"
+    X = "X"
+
+
 @dataclass
 class MetaData:
     @dataclass
     class JamInfo:
-        pass
+        # def __init__(self, dict[str, str]):
+        jam_name: str
+        jam_number: Optional[int]
+        jam_theme: str
+        jam_url: Optional[str]
 
     @dataclass
     class Control:
-        key: str
+        key: ControlEnum
+        desc: str
 
     description: str
     tagline: str
     game_name: str
     game_slug: Optional[str]
-    # jam_info: list[JamInfo]
+    jam_info: list[JamInfo]
     develop_time: Optional[timedelta]
-    # controls: list[Control]
+    controls: list[Control]  # list[dict[str, str]]  # list[Control]
     # hints: list[str] or str
     acknowledgements: str
     to_do: list[str]
