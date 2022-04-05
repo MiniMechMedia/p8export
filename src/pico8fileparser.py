@@ -5,9 +5,9 @@ from .ParsedContents import ParsedContents, ParsedLabelImage
 
 
 class Pico8FileParser:
-    @staticmethod
-    def parse(filepath: pathlib.Path) -> "ParsedContents":
-        return ParsedContents(filepath)
+    # @staticmethod
+    # def parse(filepath: pathlib.Path) -> ParsedContents:
+    #     return ParsedContents(filepath)
 
     @staticmethod
     def parseRawFileContents(filepath: pathlib.Path) -> str:
@@ -49,7 +49,7 @@ class Pico8FileParser:
         return ParsedLabelImage(ret)
 
     @classmethod
-    def parseFileEntirely(
+    def parse(
         cls: typing.Type["Pico8FileParser"], filePath: pathlib.Path
     ) -> ParsedContents:
         ret: ParsedContents = ParsedContents()

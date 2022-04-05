@@ -6,6 +6,6 @@ from src.ParsedContents import ParsedContents
 
 class TestParsing(BaseTest):
     def test_parsing(self):
-        parsed: ParsedContents = Pico8FileParser.parseFileEntirely(
+        parsed: ParsedContents = Pico8FileParser.parse(
             self.getTestFilePath(TestFileEnum.BASIC_GAME_TEMPLATE_FILE)
         )
