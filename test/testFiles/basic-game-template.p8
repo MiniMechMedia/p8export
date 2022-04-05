@@ -15,7 +15,8 @@ tagline: xxxxxxxx
 time_left: 'x:xx:xx'
 develop_time: ''
 description: |
-  xxxx
+  This is a multi-line
+  description of the game
 controls: |
   * xxxx
 hints: ''
