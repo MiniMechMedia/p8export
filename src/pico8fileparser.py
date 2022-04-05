@@ -6,10 +6,6 @@ from dacite import from_dict, Config
 
 
 class Pico8FileParser:
-    # @staticmethod
-    # def parse(filepath: pathlib.Path) -> ParsedContents:
-    #     return ParsedContents(filepath)
-
     @staticmethod
     def parseRawFileContents(filepath: pathlib.Path) -> str:
         with open(filepath) as file:
@@ -55,19 +51,6 @@ class Pico8FileParser:
         return from_dict(
             data_class=MetaData, data=rawMetadata, config=Config(cast=[ControlEnum])
         )
-        # return MetaData(
-        #     **rawMetadata
-        #     # description=rawMetadata["description"],
-        #     # tagline=rawMetadata["tagline"],
-        #     # game_name=rawMetadata["game_name"],
-        #     # game_slug=rawMetadata["game_slug"],
-        # )
-        # def populateMetaData(self) -> MetaData:
-        #     return MetaData(description=self.parsedYaml["description"])
-        #
-        # @property
-        # def metadata(self):
-        #     return self.populateMetaData()
 
     @classmethod
     def parse(
@@ -81,18 +64,3 @@ class Pico8FileParser:
         ret.metadata = cls.parseMetadata(ret.parsedYaml)
 
         return ret
-        # class ParsedContents:
-        #     def __init__(self, filePath: pathlib.Path):
-        #         self.rawContents: str = Pico8FileParser.parseRawFileContents(filePath)
-        #         self.rawYaml: str = Pico8FileParser.parseRawYamlFromFileContents(
-        #             rawFileContents=self.rawContents
-        #         )
-        #         self.parsedYaml = Pico8FileParser.parseYamlFromRawYaml(self.rawYaml)
-        #         self.rawLabelImage = Pico8FileParser.parseRawLabelImage(
-        #             self.rawContents
-        #         )
-        #
-        #     def getRawYaml(self) -> str:
-        #         return self.rawYaml
-
-        pass
