@@ -2,6 +2,7 @@ import pathlib
 import yaml
 import typing
 from .ParsedContents import ParsedContents, ParsedLabelImage, MetaData
+from dacite import from_dict
 
 
 class Pico8FileParser:
@@ -50,13 +51,14 @@ class Pico8FileParser:
 
     @staticmethod
     def parseMetadata(rawMetadata: dict) -> MetaData:
-        return MetaData(
-            **rawMetadata
-            # description=rawMetadata["description"],
-            # tagline=rawMetadata["tagline"],
-            # game_name=rawMetadata["game_name"],
-            # game_slug=rawMetadata["game_slug"],
-        )
+        return from_dict(data_class=MetaData, data=rawMetadata)
+        # return MetaData(
+        #     **rawMetadata
+        #     # description=rawMetadata["description"],
+        #     # tagline=rawMetadata["tagline"],
+        #     # game_name=rawMetadata["game_name"],
+        #     # game_slug=rawMetadata["game_slug"],
+        # )
         # def populateMetaData(self) -> MetaData:
         #     return MetaData(description=self.parsedYaml["description"])
         #

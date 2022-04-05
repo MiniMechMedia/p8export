@@ -13,7 +13,7 @@ trijam_number: xx
 trijam_theme: xx
 tagline: xxxxxxxx
 time_left: 'x:xx:xx'
-develop_time: ''
+develop_time: null
 description: |
   This is a multi-line
   description of the game
@@ -21,7 +21,7 @@ controls: |
   * xxxx
 hints: ''
 acknowledgements: ''
-todo: ''
+to_do: []
 version: 0.1.0
 img_alt: xxxx
 about_extra: ''

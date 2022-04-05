@@ -48,7 +48,7 @@ class MetaData:
     # controls: list[Control]
     # hints: list[str] or str
     acknowledgements: str
-    left_todo: list[str]
+    to_do: list[str]
     version: str  # TODO make a strongly typed object
     about_extra: str
 
