@@ -11,11 +11,16 @@ game_name: xxxxx
 game_slug:
 jam_info:
   - jam_name: TriJam
-    jam_number: null
+    jam_number: -1
     jam_url: null
     jam_theme: theme1, theme2, theme3
     trijam_cookieseaten: 0      # Test
   - jam_name: MiniJam
+    jam_number: null
+    jam_url: null
+    jam_theme: blah
+    minijam_limitation: You are the bad guy
+  - jam_name: Jam3
     jam_number: null
     jam_url: null
     jam_theme: blah

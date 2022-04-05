@@ -51,6 +51,7 @@ class Pico8FileParser:
 
     @staticmethod
     def parseMetadata(rawMetadata: dict) -> MetaData:
+        # TODO be tolerant of old file formats i.e. dict missing entries
         return from_dict(
             data_class=MetaData, data=rawMetadata, config=Config(cast=[ControlEnum])
         )
@@ -77,6 +78,7 @@ class Pico8FileParser:
         ret.rawYaml = cls.parseRawYamlFromFileContents(ret.rawContents)
         ret.parsedYaml = cls.parseYamlFromRawYaml(ret.rawYaml)
         ret.rawLabelImage = cls.parseRawLabelImage(ret.rawContents)
+        ret.metadata = cls.parseMetadata(ret.parsedYaml)
 
         return ret
         # class ParsedContents:

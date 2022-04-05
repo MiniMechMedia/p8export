@@ -78,7 +78,8 @@ class ParsedContents:
         # Do not use this directly. Use self.metadata
         self.parsedYaml: dict = {}
         self.rawLabelImage = None
-        self.metadata: MetaData
+        # noinspection PyTypeChecker
+        self.metadata: MetaData = None
 
     def getRawYaml(self) -> str:
         return self.rawYaml
