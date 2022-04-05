@@ -1,5 +1,6 @@
 from BaseTest import BaseTest
-from src.ParsedContents import Pico8FileParser, ParsedLabelImage
+from src.ParsedContents import ParsedLabelImage
+from src.pico8fileparser import Pico8FileParser
 from FileRegistry import TestFileEnum, TempFileEnum
 from src.ImagesCompilationTarget import ImagesCompilationTarget
 
