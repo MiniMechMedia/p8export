@@ -41,7 +41,9 @@ class ControlEnum(Enum):
 class MetaData:
     @dataclass
     class JamInfo:
-        # def __init__(self, dict[str, str]):
+        # def __init__(self, **kwargs):
+        #     self.__dict__.update(kwargs)
+
         jam_name: str
         jam_number: Optional[int]
         jam_theme: str
