@@ -47,3 +47,30 @@ class Pico8FileParser:
 
             ret.append(rowList)
         return ParsedLabelImage(ret)
+
+    @classmethod
+    def parseFileEntirely(
+        cls: typing.Type["Pico8FileParser"], filePath: pathlib.Path
+    ) -> ParsedContents:
+        ret: ParsedContents = ParsedContents()
+        ret.rawContents = cls.parseRawFileContents(filePath)
+        ret.rawYaml = cls.parseRawYamlFromFileContents(ret.rawContents)
+        ret.parsedYaml = cls.parseYamlFromRawYaml(ret.rawYaml)
+        ret.rawLabelImage = cls.parseRawLabelImage(ret.rawContents)
+
+        return ret
+        # class ParsedContents:
+        #     def __init__(self, filePath: pathlib.Path):
+        #         self.rawContents: str = Pico8FileParser.parseRawFileContents(filePath)
+        #         self.rawYaml: str = Pico8FileParser.parseRawYamlFromFileContents(
+        #             rawFileContents=self.rawContents
+        #         )
+        #         self.parsedYaml = Pico8FileParser.parseYamlFromRawYaml(self.rawYaml)
+        #         self.rawLabelImage = Pico8FileParser.parseRawLabelImage(
+        #             self.rawContents
+        #         )
+        #
+        #     def getRawYaml(self) -> str:
+        #         return self.rawYaml
+
+        pass

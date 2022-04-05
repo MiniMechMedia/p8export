@@ -27,13 +27,18 @@ class ParsedLabelImage:
 
 
 class ParsedContents:
-    def __init__(self, filePath: pathlib.Path):
-        self.rawContents: str = Pico8FileParser.parseRawFileContents(filePath)
-        self.rawYaml: str = Pico8FileParser.parseRawYamlFromFileContents(
-            rawFileContents=self.rawContents
-        )
-        self.parsedYaml = Pico8FileParser.parseYamlFromRawYaml(self.rawYaml)
-        self.rawLabelImage = Pico8FileParser.parseRawLabelImage(self.rawContents)
+    def __init__(self):
+        self.rawContents: str = ""
+        self.rawYaml: str = ""
+        self.parsedYaml: dict = {}
+        self.rawLabelImage = None
+
+        # self.rawContents: str = Pico8FileParser.parseRawFileContents(filePath)
+        # self.rawYaml: str = Pico8FileParser.parseRawYamlFromFileContents(
+        #     rawFileContents=self.rawContents
+        # )
+        # self.parsedYaml = Pico8FileParser.parseYamlFromRawYaml(self.rawYaml)
+        # self.rawLabelImage = Pico8FileParser.parseRawLabelImage(self.rawContents)
 
     def getRawYaml(self) -> str:
         return self.rawYaml

@@ -7,6 +7,7 @@ class TestFileEnum(Enum):
     ITCH_COVER_IMAGE_TEST_FILE = "testFiles/cover.png"
     LABEL_MISSING_TEST_FILE = "testFiles/label-image-missing-test.p8"
     LABEL_IMAGE_TEST_FILE = "testFiles/label.png"
+    BASIC_GAME_TEMPLATE_FILE = "testFiles/basic-game-template.p8"
 
 
 class TempFileEnum(Enum):
