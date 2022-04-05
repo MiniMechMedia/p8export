@@ -20,11 +20,6 @@ jam_info:
     jam_url: null
     jam_theme: blah
     minijam_limitation: You are the bad guy
-  - jam_name: Jam3
-    jam_number: null
-    jam_url: null
-    jam_theme: blah
-    minijam_limitation: You are the bad guy
 tagline: xxxxxxxx
 time_left: 'x:xx:xx'
 develop_time: null

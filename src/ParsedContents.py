@@ -59,7 +59,8 @@ class MetaData:
     game_name: str
     game_slug: Optional[str]
     jam_info: list[JamInfo]
-    develop_time: Optional[timedelta]
+    # TODO ponder making this a timedelta
+    develop_time: Optional[str]
     controls: list[Control]  # list[dict[str, str]]  # list[Control]
     # hints: list[str] or str
     acknowledgements: str
@@ -80,6 +81,15 @@ class ParsedContents:
         self.rawLabelImage = None
         # noinspection PyTypeChecker
         self.metadata: MetaData = None
+        self.sourceCode: str = ""
+
+    @property
+    def sourceCodeP8sciiCharCount(self):
+        return len(self.sourceCode)
+
+    @property
+    def sourceCodeTwitterCharCount(self):
+        raise NotImplemented
 
     def getRawYaml(self) -> str:
         return self.rawYaml
