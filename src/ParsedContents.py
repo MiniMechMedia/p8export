@@ -66,7 +66,7 @@ class Metadata:
     # TODO ponder making this a timedelta
     develop_time: Optional[str]
     controls: list[Control]  # list[dict[str, str]]  # list[Control]
-    # hints: list[str] or str
+    hints: str
     acknowledgements: str
     to_do: list[str]
     version: str  # TODO make a strongly typed object

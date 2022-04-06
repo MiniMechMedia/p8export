@@ -18,6 +18,11 @@ class BaseTest(unittest.TestCase):
     def assertContentsEqual(self, actual: str, expected: TestFileEnum):
         self.assertEqual(actual, self.getTestFileContents(expected))
 
+    def assertFilesEqual(self, actual: TempFileEnum, expected: TestFileEnum):
+        self.assertContentsEqual(
+            actual=self.getTempFileContents(actual), expected=expected
+        )
+
     def getTestFilePath(self, testFileName: TestFileEnum) -> pathlib.Path:
         # return testFileName.filepath
         return pathlib.Path("test/" + testFileName.value)
@@ -35,6 +40,10 @@ class BaseTest(unittest.TestCase):
 
     def getTempFileBytes(self, tempFileName: TempFileEnum) -> bytes:
         with open(self.getTempFilePath(tempFileName), "rb") as file:
+            return file.read()
+
+    def getTempFileContents(self, tempFileName: TempFileEnum) -> str:
+        with open(self.getTempFilePath(tempFileName), "r") as file:
             return file.read()
 
 

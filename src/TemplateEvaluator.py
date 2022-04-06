@@ -30,6 +30,7 @@ class TemplateEvaluator:
         template: TemplateFileEnum,
         outputFile: Path,
     ) -> None:
+
         with open(outputFile, "w") as file:
             file.write(
                 cls.evaluateStringTemplateToString(
@@ -69,4 +70,4 @@ class TemplateEvaluator:
 
     @classmethod
     def controlToDescription(cls, controlEnum: ControlEnum):
-        return {ControlEnum.ARROW: "Arrow Keys", ControlEnum.X: "X"}[controlEnum]
+        return {ControlEnum.ARROW_KEYS: "Arrow Keys", ControlEnum.X: "X"}[controlEnum]

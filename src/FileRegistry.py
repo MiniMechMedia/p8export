@@ -45,7 +45,8 @@ class TestFileEnum(FileEnum):
 class TempFileEnum(FileEnum):
     LABEL_IMAGE_TEMP_FILE = "label.png"
     ITCH_COVER_IMAGE_TEMP_FILE = "cover.png"
+    ITCH_DESCRIPTION_EVALUATED_FILE = "evaluated.md"
 
 
 class TemplateFileEnum(FileEnum):
-    ITCH_DESCRIPTION_MD = "../template/itchDescription.md"
+    ITCH_DESCRIPTION_MD = "template/itchDescription.md"
