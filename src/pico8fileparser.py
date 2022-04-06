@@ -6,26 +6,32 @@ from dacite import from_dict, Config
 
 
 class Pico8FileParser:
-    @staticmethod
-    def parseRawFileContents(filepath: pathlib.Path) -> str:
+    @classmethod
+    def parseRawFileContents(cls, filepath: pathlib.Path) -> str:
         with open(filepath) as file:
             return file.read()
 
-    @staticmethod
-    def parseRawYamlFromFileContents(rawFileContents: str) -> str:
+    @classmethod
+    def parseRawYamlFromFileContents(cls, rawFileContents: str) -> str:
         rawYaml: str = rawFileContents.split("--[[")[1]
         rawYaml = rawYaml.split("--]]")[0]
         return rawYaml.strip()
 
-    @staticmethod
-    def parseYamlFromRawYaml(rawYaml: str) -> dict:
+    @classmethod
+    def parseSourceCodeFromFileContents(cls, rawFileContents: str) -> str:
+        rawSourceCode: str = rawFileContents.split("--]]")[1]
+        rawSourceCode = rawSourceCode.split("__gfx__")[0]
+        return rawSourceCode.strip()
+
+    @classmethod
+    def parseYamlFromRawYaml(cls, rawYaml: str) -> dict:
         ret: typing.Any = yaml.safe_load(rawYaml)
         if type(ret) is not dict:
             raise Exception("could not parse to a dict")
         return ret
 
-    @staticmethod
-    def parseRawLabelImage(rawContents: str) -> str:
+    @classmethod
+    def parseRawLabelImage(cls, rawContents: str) -> str:
         if "__label__" not in rawContents:
             raise Exception("Capture label image first")
 
@@ -33,8 +39,8 @@ class Pico8FileParser:
         rawLabelImage = rawLabelImage.split("__")[0]
         return rawLabelImage.strip()
 
-    @staticmethod
-    def parseImageLabel(rawLabelImage: str) -> ParsedLabelImage:
+    @classmethod
+    def parseImageLabel(cls, rawLabelImage: str) -> ParsedLabelImage:
         ret: list[list[int]] = []
         for row in rawLabelImage.split():
             rowList: list[int] = []
@@ -45,19 +51,18 @@ class Pico8FileParser:
             ret.append(rowList)
         return ParsedLabelImage(ret)
 
-    @staticmethod
-    def parseMetadata(rawMetadata: dict) -> MetaData:
+    @classmethod
+    def parseMetadata(cls, rawMetadata: dict) -> MetaData:
         # TODO be tolerant of old file formats i.e. dict missing entries
         return from_dict(
             data_class=MetaData, data=rawMetadata, config=Config(cast=[ControlEnum])
         )
 
     @classmethod
-    def parse(
-        cls: typing.Type["Pico8FileParser"], filePath: pathlib.Path
-    ) -> ParsedContents:
+    def parse(cls, filePath: pathlib.Path) -> ParsedContents:
         ret: ParsedContents = ParsedContents()
         ret.rawContents = cls.parseRawFileContents(filePath)
+        ret.sourceCode = cls.parseSourceCodeFromFileContents(ret.rawContents)
         ret.rawYaml = cls.parseRawYamlFromFileContents(ret.rawContents)
         ret.parsedYaml = cls.parseYamlFromRawYaml(ret.rawYaml)
         ret.rawLabelImage = cls.parseRawLabelImage(ret.rawContents)

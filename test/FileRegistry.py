@@ -8,6 +8,7 @@ class TestFileEnum(Enum):
     LABEL_MISSING_TEST_FILE = "testFiles/label-image-missing-test.p8"
     LABEL_IMAGE_TEST_FILE = "testFiles/label.png"
     BASIC_GAME_TEMPLATE_FILE = "testFiles/basic-game-template.p8"
+    TWEET_CART_TEMPLATE_FILE = "testFiles/tweet-cart-template.p8"
 
 
 class TempFileEnum(Enum):

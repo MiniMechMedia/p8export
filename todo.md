@@ -1,0 +1,9 @@
+- [ ] Export submission.html
+- [ ] Export .p8
+- [ ] Export .p8.png - suppose I should reuse the .p8 thing from above
+- [ ] Export to itch
+- [ ] Export to git repo (here??)
+- [ ] Handle renames
+- [ ] Create a working directory
+- [ ] Ability to configure pico-8 working directory
+- [X] Populate source code

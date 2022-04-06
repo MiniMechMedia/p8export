@@ -11,7 +11,7 @@ class ParsedLabelImage:
     def __init__(self, data: list[list[int]]):
         self.data = data
 
-    def __getitem__(self, xy) -> int:
+    def __getitem__(self, xy: tuple[int, int]) -> int:
         x: int = xy[0]
         y: int = xy[1]
         return self.data[y][x]
@@ -70,6 +70,11 @@ class MetaData:
 
     def getTemplate(self) -> str:
         raise NotImplemented
+
+
+# # Suitable for
+# class PreparedMetadata:
+#     pass
 
 
 class ParsedContents:

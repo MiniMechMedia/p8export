@@ -9,10 +9,6 @@ class ImagesCompilationTarget(CompilationTarget):
     SCALE: Final[int] = 3
     SIDEBAR_WIDTH: Final[int] = 16
 
-    def compile(self, data: ParsedContents):
-        pass
-        # self.writeLabelImage()
-
     @classmethod
     def writeCoverImage(
         cls, parsedImage: ParsedLabelImage, outputPath: pathlib.Path
