@@ -1,13 +1,42 @@
-from ParsedContents import Metadata, ControlEnum, ParsedContents
+from src.ParsedContents import Metadata, ControlEnum, ParsedContents
 
 # from File
+from src.FileRegistry import TemplateFileEnum
+from pathlib import Path
 
 
 class TemplateEvaluator:
-
     # @classmethod
-    # def evaluateTemplateToString(cls, parsedContents: ParsedContents, ):
-    #
+    # def evaluateTemplateToString(
+    #     cls, parsedContents: ParsedContents, template: TemplateFileEnum
+    # ) -> str:
+    #     strTemplate: str = template.readText()
+    #     return cls.evaluateStringTemplateToString(
+    #         parsedContents=parsedContents, strTemplate=strTemplate
+    #     )
+
+    @classmethod
+    def evaluateStringTemplateToString(
+        cls, parsedContents: ParsedContents, strTemplate: str
+    ):
+        return strTemplate.format(
+            **cls.constructEvaluationDictionary(parsedContents=parsedContents)
+        )
+
+    @classmethod
+    def evaluateTemplateToFile(
+        cls,
+        parsedContents: ParsedContents,
+        template: TemplateFileEnum,
+        outputFile: Path,
+    ) -> None:
+        with open(outputFile, "w") as file:
+            file.write(
+                cls.evaluateStringTemplateToString(
+                    parsedContents=parsedContents, strTemplate=template.readText()
+                )
+            )
+
     @classmethod
     def constructEvaluationDictionary(
         cls, parsedContents: ParsedContents

@@ -111,5 +111,5 @@ class ParsedContents:
     def sourceCodeTwitterCharCount(self):
         raise NotImplemented
 
-    def getRawYaml(self) -> str:
-        return self.rawYaml
+    # def getRawYaml(self) -> str:
+    #     return self.rawYaml

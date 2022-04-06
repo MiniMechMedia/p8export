@@ -1,7 +1,31 @@
 from enum import Enum
+from pathlib import Path
 
 
-class TestFileEnum(Enum):
+class FileEnum(Enum):
+    @property
+    def filepath(self) -> Path:
+        return Path(self.value)
+
+    def readBinary(self) -> bytes:
+        with open(self.value, "rb") as file:
+            return file.read()
+
+    def readText(self) -> str:
+        with open(self.value, "r") as file:
+            return file.read()
+
+    def writeBinary(self, content: bytes) -> None:
+        with open(self.value, "wb") as file:
+            file.write(content)
+
+    def writeText(self, content: str) -> None:
+        with open(self.value, "w") as file:
+            file.write(content)
+
+
+# TODO move this into a separate file in test/
+class TestFileEnum(FileEnum):
     YAML_TEST_FILE = "../test/testFiles/yaml-test.p8"
     COVER_IMAGE_TEST_FILE = "../test/testFiles/label-image-exists-test.p8"
     ITCH_COVER_IMAGE_TEST_FILE = "../test/testFiles/cover.png"
@@ -11,10 +35,10 @@ class TestFileEnum(Enum):
     TWEET_CART_TEMPLATE_FILE = "../test/testFiles/tweet-cart-template.p8"
 
 
-class TempFileEnum(Enum):
+class TempFileEnum(FileEnum):
     LABEL_IMAGE_TEMP_FILE = "label.png"
     ITCH_COVER_IMAGE_TEMP_FILE = "cover.png"
 
 
-class TemplateFileEnum(Enum):
-    Something = ""
+class TemplateFileEnum(FileEnum):
+    ITCH_DESCRIPTION_MD = "../template/itchDescription.md"
