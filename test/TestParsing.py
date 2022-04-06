@@ -1,5 +1,5 @@
 from BaseTest import BaseTest
-from FileRegistry import TestFileEnum
+from src.FileRegistry import TestFileEnum
 from src.pico8fileparser import Pico8FileParser
 from src.ParsedContents import ParsedContents, Metadata, ControlEnum
 

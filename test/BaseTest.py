@@ -1,6 +1,6 @@
 import unittest
 import pathlib
-from FileRegistry import TestFileEnum, TempFileEnum
+from src.FileRegistry import TestFileEnum, TempFileEnum
 import shutil
 import os
 

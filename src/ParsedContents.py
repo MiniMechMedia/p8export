@@ -37,6 +37,10 @@ class ControlEnum(Enum):
     X = "X"
 
 
+def controlDesc(control: ControlEnum):
+    return {ControlEnum.ARROW: "Arrow Keys", ControlEnum.X: "X"}[control]
+
+
 @dataclass
 class Metadata:
     @dataclass

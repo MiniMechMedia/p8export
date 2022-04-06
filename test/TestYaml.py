@@ -1,8 +1,7 @@
 from BaseTest import BaseTest
-from src.ParsedContents import ParsedContents
 from src.pico8fileparser import Pico8FileParser
 
-from FileRegistry import TestFileEnum
+from src.FileRegistry import TestFileEnum
 
 
 class TestYaml(BaseTest):

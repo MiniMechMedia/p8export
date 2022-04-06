@@ -5,6 +5,7 @@ from abc import ABC, abstractmethod
 
 class CompilationTarget(ABC):
     pass
+
     # Does disk/network IO stuff
     # @abstractmethod
     # def compileToIo(self, data: object) -> None:

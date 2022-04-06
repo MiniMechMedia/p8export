@@ -60,7 +60,6 @@ class Pico8FileParser:
 
     @classmethod
     def parse(cls, filePath: pathlib.Path) -> ParsedContents:
-        # ret: ParsedContents = ParsedContents()
         rawContents: str = cls.parseRawFileContents(filePath)
         sourceCode: str = cls.parseSourceCodeFromFileContents(rawContents)
         rawYaml: str = cls.parseRawYamlFromFileContents(rawContents)
