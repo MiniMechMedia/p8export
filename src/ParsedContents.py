@@ -71,22 +71,33 @@ class MetaData:
     def getTemplate(self) -> str:
         raise NotImplemented
 
+        # # Suitable for
+        # class PreparedMetadata:
+        #     pass
+        #
+        # rawContents: str = cls.parseRawFileContents(filePath)
+        # sourceCode: str = cls.parseSourceCodeFromFileContents(rawContents)
+        # rawYaml: str = cls.parseRawYamlFromFileContents(rawContents)
+        # parsedYaml: dict = cls.parseYamlFromRawYaml(rawYaml)
+        # rawLabelImage: str = cls.parseRawLabelImage(rawContents)
+        # metadata: MetaData = cls.parseMetadata(parsedYaml)
 
-# # Suitable for
-# class PreparedMetadata:
-#     pass
 
-
+@dataclass
 class ParsedContents:
-    def __init__(self):
-        self.rawContents: str = ""
-        self.rawYaml: str = ""
-        # Do not use this directly. Use self.metadata
-        self.parsedYaml: dict = {}
-        self.rawLabelImage = None
-        # noinspection PyTypeChecker
-        self.metadata: MetaData = None
-        self.sourceCode: str = ""
+    rawContents: str
+    sourceCode: str
+    rawLabelImage: str
+    metadata: MetaData
+    # def __init__(self, rawContents:):
+    #     self.rawContents: str = ""
+    #     self.rawYaml: str = ""
+    #     # Do not use this directly. Use self.metadata
+    #     self.parsedYaml: dict = {}
+    #     self.rawLabelImage = None
+    #     # noinspection PyTypeChecker
+    #     self.metadata: MetaData = None
+    #     self.sourceCode: str = ""
 
     @property
     def sourceCodeP8sciiCharCount(self):
