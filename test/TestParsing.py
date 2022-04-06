@@ -29,7 +29,7 @@ class TestParsing(BaseTest):
         self.assertEqual(secondJam.jam_number, None)
 
         firstControl: Metadata.Control = parsed.metadata.controls[0]
-        self.assertEqual(firstControl.key, ControlEnum.ARROW)
+        self.assertEqual(firstControl.key, ControlEnum.ARROW_KEYS)
         secondControl: Metadata.Control = parsed.metadata.controls[1]
         self.assertEqual(secondControl.key, ControlEnum.X)
 

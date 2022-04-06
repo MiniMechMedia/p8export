@@ -6,7 +6,7 @@ from src.TemplateEvaluator import TemplateEvaluator
 
 
 class TestTemplating(BaseTest):
-    def test_can_evaluate_description(self):
+    def test_can_evaluate_basic_description(self) -> None:
         parsed: ParsedContents = Pico8FileParser.parse(
             self.getTestFilePath(TestFileEnum.TWEET_CART_TEMPLATE_FILE)
         )
@@ -19,3 +19,5 @@ class TestTemplating(BaseTest):
             actual=evaluated,
             expected=TestFileEnum.TWEET_CART_TEMPLATE_EVALUATED_DESCRIPTION_FILE,
         )
+
+    # def test_can_evaluate_controls(self):

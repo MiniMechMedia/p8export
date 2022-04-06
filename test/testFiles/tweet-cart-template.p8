@@ -26,12 +26,7 @@ develop_time: null
 description: |
   This cart is tweetable at just $charCount$ characters
   $sourceCode$
-controls:
-  - key: ARROW
-    desc: move player
-  - key: X
-    desc: activate object
-
+controls: []
 hints: ''
 acknowledgements: ''
 to_do: []

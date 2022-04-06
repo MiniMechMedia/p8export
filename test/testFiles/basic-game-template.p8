@@ -27,7 +27,7 @@ description: |
   This is a multi-line
   description of the game
 controls:
-  - key: ARROW
+  - key: ARROW_KEYS
     desc: move player
   - key: X
     desc: activate object

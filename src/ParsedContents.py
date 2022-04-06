@@ -33,12 +33,12 @@ class ParsedLabelImage:
 # TODO do something with auto() to avoid repetition
 # https://stackoverflow.com/a/44785241
 class ControlEnum(Enum):
-    ARROW = "ARROW"
+    ARROW_KEYS = "ARROW_KEYS"
     X = "X"
 
 
 def controlDesc(control: ControlEnum):
-    return {ControlEnum.ARROW: "Arrow Keys", ControlEnum.X: "X"}[control]
+    return {ControlEnum.ARROW_KEYS: "Arrow Keys", ControlEnum.X: "X"}[control]
 
 
 @dataclass
