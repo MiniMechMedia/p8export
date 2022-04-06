@@ -33,6 +33,13 @@ class TestFileEnum(FileEnum):
     LABEL_IMAGE_TEST_FILE = "../test/testFiles/label.png"
     BASIC_GAME_TEMPLATE_FILE = "../test/testFiles/basic-game-template.p8"
     TWEET_CART_TEMPLATE_FILE = "../test/testFiles/tweet-cart-template.p8"
+    TWEET_CART_TEMPLATE_EVALUATED_DESCRIPTION_FILE = (
+        "../test/testFiles/tweet-cart-template-evaluated-description.md"
+    )
+
+    @property
+    def value(self):
+        return super().value
 
 
 class TempFileEnum(FileEnum):

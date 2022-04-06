@@ -18,7 +18,7 @@ class TemplateEvaluator:
     @classmethod
     def evaluateStringTemplateToString(
         cls, parsedContents: ParsedContents, strTemplate: str
-    ):
+    ) -> str:
         return strTemplate.format(
             **cls.constructEvaluationDictionary(parsedContents=parsedContents)
         )
@@ -52,7 +52,7 @@ class TemplateEvaluator:
     def constructDescription(cls, parsedContents: ParsedContents):
         template: str = parsedContents.metadata.description
         template = template.replace(
-            "$charCount$", parsedContents.sourceCodeP8sciiCharCount
+            "$charCount$", str(parsedContents.sourceCodeP8sciiCharCount)
         )
         template = template.replace(
             "$sourceCode$", f"<pre><code>{parsedContents.sourceCode}</code></pre>"

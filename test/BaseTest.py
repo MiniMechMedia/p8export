@@ -15,7 +15,11 @@ class BaseTest(unittest.TestCase):
 
         os.makedirs("tmp/")
 
+    def assertContentsEqual(self, actual: str, expected: TestFileEnum):
+        self.assertEqual(actual, self.getTestFileContents(expected))
+
     def getTestFilePath(self, testFileName: TestFileEnum) -> pathlib.Path:
+        # return testFileName.filepath
         return pathlib.Path("test/" + testFileName.value)
 
     def getTempFilePath(self, tempFileName: TempFileEnum) -> pathlib.Path:
