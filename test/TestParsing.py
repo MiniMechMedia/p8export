@@ -1,7 +1,7 @@
 from BaseTest import BaseTest
 from FileRegistry import TestFileEnum
 from src.pico8fileparser import Pico8FileParser
-from src.ParsedContents import ParsedContents, MetaData, ControlEnum
+from src.ParsedContents import ParsedContents, Metadata, ControlEnum
 
 
 class TestParsing(BaseTest):
@@ -20,17 +20,17 @@ class TestParsing(BaseTest):
         # metadata: MetaData = Pico8FileParser.parseMetadata(parsedYaml)
         parsed: ParsedContents = self.parseFile(TestFileEnum.BASIC_GAME_TEMPLATE_FILE)
 
-        firstJam: MetaData.JamInfo = parsed.metadata.jam_info[0]
+        firstJam: Metadata.JamInfo = parsed.metadata.jam_info[0]
         self.assertEqual(firstJam.jam_name, "TriJam")
         self.assertEqual(firstJam.jam_number, -1)
 
-        secondJam: MetaData.JamInfo = parsed.metadata.jam_info[1]
+        secondJam: Metadata.JamInfo = parsed.metadata.jam_info[1]
         self.assertEqual(secondJam.jam_name, "MiniJam")
         self.assertEqual(secondJam.jam_number, None)
 
-        firstControl: MetaData.Control = parsed.metadata.controls[0]
+        firstControl: Metadata.Control = parsed.metadata.controls[0]
         self.assertEqual(firstControl.key, ControlEnum.ARROW)
-        secondControl: MetaData.Control = parsed.metadata.controls[1]
+        secondControl: Metadata.Control = parsed.metadata.controls[1]
         self.assertEqual(secondControl.key, ControlEnum.X)
 
     def test_parsing_sourcecode(self):

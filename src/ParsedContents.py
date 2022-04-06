@@ -38,7 +38,7 @@ class ControlEnum(Enum):
 
 
 @dataclass
-class MetaData:
+class Metadata:
     @dataclass
     class JamInfo:
         # def __init__(self, **kwargs):
@@ -88,7 +88,7 @@ class ParsedContents:
     rawContents: str
     sourceCode: str
     rawLabelImage: str
-    metadata: MetaData
+    metadata: Metadata
     # def __init__(self, rawContents:):
     #     self.rawContents: str = ""
     #     self.rawYaml: str = ""

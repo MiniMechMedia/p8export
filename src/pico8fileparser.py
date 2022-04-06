@@ -1,7 +1,7 @@
 import pathlib
 import yaml
 import typing
-from .ParsedContents import ParsedContents, ParsedLabelImage, MetaData, ControlEnum
+from .ParsedContents import ParsedContents, ParsedLabelImage, Metadata, ControlEnum
 from dacite import from_dict, Config
 
 
@@ -52,10 +52,10 @@ class Pico8FileParser:
         return ParsedLabelImage(ret)
 
     @classmethod
-    def parseMetadata(cls, rawMetadata: dict) -> MetaData:
+    def parseMetadata(cls, rawMetadata: dict) -> Metadata:
         # TODO be tolerant of old file formats i.e. dict missing entries
         return from_dict(
-            data_class=MetaData, data=rawMetadata, config=Config(cast=[ControlEnum])
+            data_class=Metadata, data=rawMetadata, config=Config(cast=[ControlEnum])
         )
 
     @classmethod
@@ -66,7 +66,7 @@ class Pico8FileParser:
         rawYaml: str = cls.parseRawYamlFromFileContents(rawContents)
         parsedYaml: dict = cls.parseYamlFromRawYaml(rawYaml)
         rawLabelImage: str = cls.parseRawLabelImage(rawContents)
-        metadata: MetaData = cls.parseMetadata(parsedYaml)
+        metadata: Metadata = cls.parseMetadata(parsedYaml)
 
         return ParsedContents(
             rawContents=rawContents,
