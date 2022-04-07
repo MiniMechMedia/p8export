@@ -37,6 +37,9 @@ class TestFileEnum(FileEnum):
         "../test/testFiles/tweet-cart-template-evaluated-description.md"
     )
     ITCH_DESCRIPTION_EVALUATED_FILE = "../test/testFiles/itch-description-evaluated.md"
+    # HTML_EXPORT_TEST_FILE_JS = "index.js"
+    # HTML_EXPORT_TEMP_FILE_HTML = "index.html"
+    # P8_PNG_EXPORT_TEST_FILE = "something.png"
 
     @property
     def value(self):
@@ -47,6 +50,10 @@ class TempFileEnum(FileEnum):
     LABEL_IMAGE_TEMP_FILE = "label.png"
     ITCH_COVER_IMAGE_TEMP_FILE = "cover.png"
     ITCH_DESCRIPTION_EVALUATED_FILE = "itch-description-evaluated-temp.md"
+    HTML_EXPORT_TEMP_FILE_HTML = "index.html"
+    HTML_EXPORT_TEMP_FILE_JS = "index.js"
+    # TODO this is gonna have to change
+    P8_PNG_EXPORT_TEMP_FILE = "xxxxx.p8.png"
 
 
 class TemplateFileEnum(FileEnum):
