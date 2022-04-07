@@ -4,6 +4,8 @@
 - [ ] Export to itch
 - [ ] Export to git repo (here??)
 - [ ] Handle renames
+- [ ] Warn on renames
 - [ ] Create a working directory
 - [ ] Ability to configure pico-8 working directory
 - [X] Populate source code
+- [ ] Export to twitter

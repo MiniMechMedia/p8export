@@ -6,15 +6,6 @@ import os
 
 
 class BaseTest(unittest.TestCase):
-    @classmethod
-    def setUpClass(cls) -> None:
-        try:
-            shutil.rmtree("tmp/")
-        except FileNotFoundError:
-            pass
-
-        os.makedirs("tmp/")
-
     def assertContentsEqual(self, actual: str, expected: TestFileEnum):
         self.assertEqual(actual, self.getTestFileContents(expected))
 

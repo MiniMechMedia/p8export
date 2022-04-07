@@ -54,9 +54,17 @@ class Pico8FileParser:
     @classmethod
     def parseMetadata(cls, rawMetadata: dict) -> Metadata:
         # TODO be tolerant of old file formats i.e. dict missing entries
-        return from_dict(
+        ret: Metadata = from_dict(
             data_class=Metadata, data=rawMetadata, config=Config(cast=[ControlEnum])
         )
+
+        return ret
+
+    # @classmethod
+    # def deriveGameSlug(cls, game_name: str):
+    #     return slugify(game_name)
+    #     # TODO use the package
+    # return str.replace(" ", "_").lower()
 
     @classmethod
     def parse(cls, filePath: pathlib.Path) -> ParsedContents:

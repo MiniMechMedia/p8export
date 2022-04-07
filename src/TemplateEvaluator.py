@@ -47,6 +47,11 @@ class TemplateEvaluator:
             "controls": cls.constructControlDescription(
                 metadata=parsedContents.metadata
             ),
+            "hints": parsedContents.metadata.hints,
+            "jam_info": cls.constructJamInfo(metadata=parsedContents.metadata),
+            "about_extra": parsedContents.metadata.about_extra,
+            "source": cls.constructSourceControlInfo(metadata=parsedContents.metadata),
+            # 'itch_link': cls.constructItchLink(parsedContents=parsedContents)
         }
 
     @classmethod
@@ -64,10 +69,30 @@ class TemplateEvaluator:
     @classmethod
     def constructControlDescription(cls, metadata: Metadata) -> str:
         return "\n".join(
-            f"{cls.controlToDescription(control.key)} - {control.desc}"
+            f"* {cls.controlToDescription(control.key)} - {control.desc}"
             for control in metadata.controls
         )
 
     @classmethod
     def controlToDescription(cls, controlEnum: ControlEnum):
         return {ControlEnum.ARROW_KEYS: "Arrow Keys", ControlEnum.X: "X"}[controlEnum]
+
+    @classmethod
+    def constructJamInfo(cls, metadata: Metadata) -> str:
+        ret: str = ""
+        jam: Metadata.JamInfo
+        isFirst = True
+        for jam in metadata.jam_info:
+            verb = "Created for" if isFirst else "Also submitted to"
+            ret += f"{verb} [{jam.jam_name} {jam.jam_number}]({jam.correctedJamUrl})\n"
+
+            ret += f"Theme: {jam.jam_theme}\n"
+            if jam.jam_name == "TriJam":
+                ret += f"Development Time: {metadata.develop_time}\n"
+            isFirst = False
+
+        return ret
+
+    @classmethod
+    def constructSourceControlInfo(cls, metadata: Metadata) -> str:
+        return "TODO source control info"

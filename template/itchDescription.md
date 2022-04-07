@@ -11,4 +11,4 @@
 
 {about_extra}
 
-{source_code}
+{source}

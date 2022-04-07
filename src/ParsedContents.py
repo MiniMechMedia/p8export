@@ -5,6 +5,7 @@ from dataclasses import dataclass
 from typing import Optional
 from datetime import timedelta
 from enum import Enum
+from slugify import slugify
 
 
 class ParsedLabelImage:
@@ -53,6 +54,19 @@ class Metadata:
         jam_theme: str
         jam_url: Optional[str]
 
+        # TODO seems like this class is getting too smart
+        @property
+        def correctedJamUrl(self) -> str:
+            if self.jam_url:
+                return self.jam_url
+            if self.isTriJam:
+                return f"https://itch.io/jam/trijam-{self.jam_number}/entries"
+            return ""
+
+        @property
+        def isTriJam(self):
+            return self.jam_name == "TriJam"
+
     @dataclass
     class Control:
         key: ControlEnum
@@ -71,6 +85,11 @@ class Metadata:
     to_do: list[str]
     version: str  # TODO make a strongly typed object
     about_extra: str
+
+    @property
+    def correctedGameSlug(self):
+        # TODO this stuff should go in a separate layer
+        return self.game_slug or slugify(self.game_name)
 
     def getTemplate(self) -> str:
         raise NotImplemented
