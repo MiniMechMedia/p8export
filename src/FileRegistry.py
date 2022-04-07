@@ -36,6 +36,7 @@ class TestFileEnum(FileEnum):
     TWEET_CART_TEMPLATE_EVALUATED_DESCRIPTION_FILE = (
         "../test/testFiles/tweet-cart-template-evaluated-description.md"
     )
+    ITCH_DESCRIPTION_EVALUATED_FILE = "../test/testFiles/itch-description-evaluated.md"
 
     @property
     def value(self):
@@ -45,7 +46,7 @@ class TestFileEnum(FileEnum):
 class TempFileEnum(FileEnum):
     LABEL_IMAGE_TEMP_FILE = "label.png"
     ITCH_COVER_IMAGE_TEMP_FILE = "cover.png"
-    ITCH_DESCRIPTION_EVALUATED_FILE = "evaluated.md"
+    ITCH_DESCRIPTION_EVALUATED_FILE = "itch-description-evaluated-temp.md"
 
 
 class TemplateFileEnum(FileEnum):

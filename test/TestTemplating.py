@@ -35,7 +35,7 @@ class TestTemplating(BaseTest):
         self.assertFilesEqual(
             actual=TempFileEnum.ITCH_DESCRIPTION_EVALUATED_FILE,
             # TODO obv
-            expected=TestFileEnum.TWEET_CART_TEMPLATE_FILE,
+            expected=TestFileEnum.ITCH_DESCRIPTION_EVALUATED_FILE,
         )
 
     # def test_can_evaluate_controls(self):
