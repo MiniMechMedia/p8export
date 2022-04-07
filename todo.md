@@ -9,3 +9,4 @@
 - [ ] Ability to configure pico-8 working directory
 - [X] Populate source code
 - [ ] Export to twitter
+- [ ] Get rid of metavariables

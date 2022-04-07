@@ -1,8 +1,14 @@
 import pathlib
 import yaml
 import typing
-from .ParsedContents import ParsedContents, ParsedLabelImage, Metadata, ControlEnum
-from dacite import from_dict, Config
+from .ParsedContents import (
+    ParsedContents,
+    ParsedLabelImage,
+    Metadata,
+    ControlEnum,
+    Config,
+)
+from dacite import from_dict, Config as daciteConfig
 
 
 class Pico8FileParser:
@@ -55,7 +61,9 @@ class Pico8FileParser:
     def parseMetadata(cls, rawMetadata: dict) -> Metadata:
         # TODO be tolerant of old file formats i.e. dict missing entries
         ret: Metadata = from_dict(
-            data_class=Metadata, data=rawMetadata, config=Config(cast=[ControlEnum])
+            data_class=Metadata,
+            data=rawMetadata,
+            config=daciteConfig(cast=[ControlEnum]),
         )
 
         return ret
@@ -67,6 +75,14 @@ class Pico8FileParser:
     # return str.replace(" ", "_").lower()
 
     @classmethod
+    def getConfig(cls) -> Config:
+        return Config(
+            gameAuthor="Caterpillar Games",
+            itchAuthor="caterpillargames",
+            sourceControlRootUrl="https://github.com/CaterpillarGames/pico8-games/tree/master/carts",
+        )
+
+    @classmethod
     def parse(cls, filePath: pathlib.Path) -> ParsedContents:
         rawContents: str = cls.parseRawFileContents(filePath)
         sourceCode: str = cls.parseSourceCodeFromFileContents(rawContents)
@@ -74,10 +90,11 @@ class Pico8FileParser:
         parsedYaml: dict = cls.parseYamlFromRawYaml(rawYaml)
         rawLabelImage: str = cls.parseRawLabelImage(rawContents)
         metadata: Metadata = cls.parseMetadata(parsedYaml)
-
+        config: Config = cls.getConfig()
         return ParsedContents(
             rawContents=rawContents,
             sourceCode=sourceCode,
             rawLabelImage=rawLabelImage,
             metadata=metadata,
+            config=config,
         )

@@ -107,11 +107,19 @@ class Metadata:
 
 
 @dataclass
+class Config:
+    gameAuthor: str
+    itchAuthor: str
+    sourceControlRootUrl: str
+
+
+@dataclass
 class ParsedContents:
     rawContents: str
     sourceCode: str
     rawLabelImage: str
     metadata: Metadata
+    config: Config
     # def __init__(self, rawContents:):
     #     self.rawContents: str = ""
     #     self.rawYaml: str = ""

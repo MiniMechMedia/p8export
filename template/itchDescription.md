@@ -11,4 +11,4 @@
 
 {about_extra}
 
-{source}
+Source code available on [GitHub]({source_code_link})

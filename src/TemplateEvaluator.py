@@ -50,7 +50,9 @@ class TemplateEvaluator:
             "hints": parsedContents.metadata.hints,
             "jam_info": cls.constructJamInfo(metadata=parsedContents.metadata),
             "about_extra": parsedContents.metadata.about_extra,
-            "source": cls.constructSourceControlInfo(metadata=parsedContents.metadata),
+            "source_code_link": cls.constructSourceCodeLink(
+                parsedContents=parsedContents
+            ),
             # 'itch_link': cls.constructItchLink(parsedContents=parsedContents)
         }
 
@@ -83,16 +85,27 @@ class TemplateEvaluator:
         jam: Metadata.JamInfo
         isFirst = True
         for jam in metadata.jam_info:
+            if not isFirst:
+                ret += "\n"
             verb = "Created for" if isFirst else "Also submitted to"
-            ret += f"{verb} [{jam.jam_name} {jam.jam_number}]({jam.correctedJamUrl})\n"
+            jamName = (
+                jam.jam_name
+                if jam.jam_number is None
+                else f"{jam.jam_name} {jam.jam_number}"
+            )
+            ret += f"{verb} [{jamName}]({jam.correctedJamUrl})  \n"
 
-            ret += f"Theme: {jam.jam_theme}\n"
+            ret += f"Theme: {jam.jam_theme}  \n"
             if jam.jam_name == "TriJam":
-                ret += f"Development Time: {metadata.develop_time}\n"
+                ret += f"Development Time: {metadata.develop_time}  \n"
             isFirst = False
 
         return ret
 
     @classmethod
-    def constructSourceControlInfo(cls, metadata: Metadata) -> str:
-        return "TODO source control info"
+    def constructSourceCodeLink(cls, parsedContents: ParsedContents) -> str:
+        baseUrl: str = parsedContents.config.sourceControlRootUrl
+        if not baseUrl.endswith("/"):
+            baseUrl += "/"
+
+        return baseUrl + parsedContents.metadata.correctedGameSlug
