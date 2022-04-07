@@ -14,10 +14,11 @@ class TestPico8Exports(CompilationTargetBaseTest):
         )
         HtmlFileCompilationTarget.compileToHtmlToDirectory(
             parsed,  # self.getTempFilePath(TempFileEnum.LABEL_IMAGE_TEMP_FILE)
-            self.getTempFolderPath(),
+            self.getTempFilePath(TempFileEnum.HTML_EXPORT_TEMP_DIR),
         )
         self.assertFileExists(TempFileEnum.HTML_EXPORT_TEMP_FILE_HTML)
         self.assertFileExists(TempFileEnum.HTML_EXPORT_TEMP_FILE_JS)
+        self.assertFileExists(TempFileEnum.HTML_EXPORT_TEMP_FILE_ZIP)
 
     def test_p8png_export(self):
         parsed: ParsedContents = self.parseTestFile(

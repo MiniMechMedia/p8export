@@ -7,7 +7,6 @@ import subprocess
 class P8PngCompilationTarget(CompilationTarget):
     @classmethod
     def compileToP8PngToDirectory(cls, parsedContents: ParsedContents, outputDir: Path):
-
         args: list[str] = [
             parsedContents.config.pico8ExePath,
             "-export",

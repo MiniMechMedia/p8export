@@ -50,8 +50,10 @@ class TempFileEnum(FileEnum):
     LABEL_IMAGE_TEMP_FILE = "label.png"
     ITCH_COVER_IMAGE_TEMP_FILE = "cover.png"
     ITCH_DESCRIPTION_EVALUATED_FILE = "itch-description-evaluated-temp.md"
-    HTML_EXPORT_TEMP_FILE_HTML = "index.html"
-    HTML_EXPORT_TEMP_FILE_JS = "index.js"
+    HTML_EXPORT_TEMP_DIR = "index/"
+    HTML_EXPORT_TEMP_FILE_HTML = "index/index.html"
+    HTML_EXPORT_TEMP_FILE_JS = "index/index.js"
+    HTML_EXPORT_TEMP_FILE_ZIP = "index.zip"
     # TODO this is gonna have to change
     P8_PNG_EXPORT_TEMP_FILE = "xxxxx.p8.png"
 
