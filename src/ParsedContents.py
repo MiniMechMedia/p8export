@@ -6,6 +6,7 @@ from typing import Optional
 from datetime import timedelta
 from enum import Enum
 from slugify import slugify
+from pathlib import Path
 
 
 class ParsedLabelImage:
@@ -111,10 +112,13 @@ class Config:
     gameAuthor: str
     itchAuthor: str
     sourceControlRootUrl: str
+    pico8ExePath: str
+    pico8WorkingDir: str
 
 
 @dataclass
 class ParsedContents:
+    filePath: Path
     rawContents: str
     sourceCode: str
     rawLabelImage: str

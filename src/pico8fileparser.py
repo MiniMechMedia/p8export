@@ -74,12 +74,14 @@ class Pico8FileParser:
     #     # TODO use the package
     # return str.replace(" ", "_").lower()
 
+    # TODO populate this stuff from a config file? Or cmdline args or something?
     @classmethod
     def getConfig(cls) -> Config:
         return Config(
             gameAuthor="Caterpillar Games",
             itchAuthor="caterpillargames",
             sourceControlRootUrl="https://github.com/CaterpillarGames/pico8-games/tree/master/carts",
+            pico8ExePath=r"C:\Program Files (x86)\PICO-8\pico.exe",
         )
 
     @classmethod
@@ -92,6 +94,7 @@ class Pico8FileParser:
         metadata: Metadata = cls.parseMetadata(parsedYaml)
         config: Config = cls.getConfig()
         return ParsedContents(
+            filePath=filePath,
             rawContents=rawContents,
             sourceCode=sourceCode,
             rawLabelImage=rawLabelImage,
