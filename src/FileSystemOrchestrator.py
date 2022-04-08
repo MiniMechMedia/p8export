@@ -11,16 +11,24 @@ class FileSystemOrchestrator:
         cls, inputP8FilePath: Path, finalP8FileName: str, exportDir: Path
     ) -> Path:
 
-        containingDir: Path = inputP8FilePath / ".."
+        containingDir: Path = inputP8FilePath.parent
 
         if basename(inputP8FilePath) != finalP8FileName:
-            os.rename(inputP8FilePath, finalP8FileName)
+            os.rename(inputP8FilePath, containingDir / finalP8FileName)
 
-        if not samefile(containingDir, exportDir):
-            if exists(exportDir):
+        if exists(exportDir):
+            if not samefile(containingDir, exportDir):
                 raise Exception(
                     "P8export error - Cannot perform a folder rename if folder already exists"
                 )
+        else:
             shutil.move(containingDir, exportDir)
+
+        # if not samefile(containingDir, exportDir):
+        #     if exists(exportDir):
+        #         raise Exception(
+        #             "P8export error - Cannot perform a folder rename if folder already exists"
+        #         )
+        #     shutil.move(containingDir, exportDir)
 
         return exportDir / finalP8FileName

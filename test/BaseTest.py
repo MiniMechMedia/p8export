@@ -3,6 +3,7 @@ import pathlib
 from src.FileRegistry import TestFileEnum, TempFileEnum
 import shutil
 from os.path import exists
+from pathlib import Path
 
 
 class BaseTest(unittest.TestCase):
@@ -21,6 +22,14 @@ class BaseTest(unittest.TestCase):
         self.assertTrue(
             exists(self.getTempFilePath(tempFile)),
             f"File {tempFile.value} ({tempFile}) does not exist",
+        )
+
+    def assertPathExists(self, path: Path):
+        self.assertTrue(exists(path), f"File or folder {path} does not exist")
+
+    def assertPathDoesNotExist(self, path: Path):
+        self.assertFalse(
+            exists(path), f"File or folder {path} does exist but was expected to"
         )
 
     def getTestFilePath(self, testFileName: TestFileEnum) -> pathlib.Path:

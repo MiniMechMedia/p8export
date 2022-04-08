@@ -4,6 +4,7 @@ from os.path import exists
 import os
 import shutil
 from pathlib import Path
+from src.FileRegistry import TempFileEnum, TestFileEnum
 
 
 class TestFileSystemOperations(BaseTest):
@@ -36,4 +37,19 @@ class TestFileSystemOperations(BaseTest):
         pass
 
     def test_can_rename_both_containing_folder_and_p8_file(self):
-        pass
+        originalFolderInner: Path = self.currentTestFolder / "new-game-2"
+        os.makedirs(originalFolderInner, exist_ok=False)
+        copiedFile: Path = originalFolderInner / "somefile.p8"
+        shutil.copy(
+            self.getTestFilePath(TestFileEnum.ORCHESTRATION_TEST_FILE),
+            copiedFile,
+        )
+
+        finalDir: Path = self.currentTestFolder / "super-soldiers"
+        finalP8FileName = "super-soldiers.p8"
+        FileSystemOrchestrator.prepareExportDir(copiedFile, finalP8FileName, finalDir)
+
+        self.assertPathDoesNotExist(copiedFile)
+        self.assertPathDoesNotExist(originalFolderInner)
+        self.assertPathExists(finalDir)
+        self.assertPathExists(finalDir / finalP8FileName)
