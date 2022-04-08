@@ -43,7 +43,7 @@ class TemplateEvaluator:
         cls, parsedContents: ParsedContents
     ) -> dict[str, str]:
         return {
-            "description": cls.constructDescription(parsedContents=parsedContents),
+            "description": parsedContents.metadata.description,
             "controls": cls.constructControlDescription(
                 metadata=parsedContents.metadata
             ),
@@ -53,19 +53,21 @@ class TemplateEvaluator:
             "source_code_link": cls.constructSourceCodeLink(
                 parsedContents=parsedContents
             ),
+            "char_count": parsedContents.sourceCodeP8sciiCharCount,
+            "source_code": parsedContents.sourceCode
             # 'itch_link': cls.constructItchLink(parsedContents=parsedContents)
         }
 
-    @classmethod
-    def constructDescription(cls, parsedContents: ParsedContents):
-        template: str = parsedContents.metadata.description
-        template = template.replace(
-            "$charCount$", str(parsedContents.sourceCodeP8sciiCharCount)
-        )
-        template = template.replace(
-            "$sourceCode$", f"<pre><code>{parsedContents.sourceCode}</code></pre>"
-        )
-        return template
+    # @classmethod
+    # def constructDescription(cls, parsedContents: ParsedContents):
+    #     template: str = parsedContents.metadata.description
+    #     template = template.replace(
+    #         "$charCount$", str(parsedContents.sourceCodeP8sciiCharCount)
+    #     )
+    #     template = template.replace(
+    #         "$sourceCode$", f"<pre><code>{parsedContents.sourceCode}</code></pre>"
+    #     )
+    #     return template
 
     # TODO should maybe provide target like XML, HTML, MD, TXT
     @classmethod

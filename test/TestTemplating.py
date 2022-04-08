@@ -1,3 +1,5 @@
+import unittest
+
 from BaseTest import BaseTest
 from src.FileRegistry import TestFileEnum, TemplateFileEnum, TempFileEnum
 from src.pico8fileparser import Pico8FileParser
@@ -6,6 +8,7 @@ from src.TemplateEvaluator import TemplateEvaluator
 
 
 class TestTemplating(BaseTest):
+    @unittest.skip
     def test_can_evaluate_description(self) -> None:
         parsed: ParsedContents = Pico8FileParser.parse(
             self.getTestFilePath(TestFileEnum.TWEET_CART_TEMPLATE_FILE)
@@ -13,6 +16,20 @@ class TestTemplating(BaseTest):
 
         evaluated: str = TemplateEvaluator.evaluateStringTemplateToString(
             parsedContents=parsed, strTemplate="{description}"
+        )
+
+        self.assertContentsEqual(
+            actual=evaluated,
+            expected=TestFileEnum.TWEET_CART_TEMPLATE_EVALUATED_DESCRIPTION_FILE,
+        )
+
+    def test_can_evaluate_tweet_characteristics(self) -> None:
+        parsed: ParsedContents = Pico8FileParser.parse(
+            self.getTestFilePath(TestFileEnum.TWEET_CART_TEMPLATE_FILE)
+        )
+
+        evaluated: str = TemplateEvaluator.evaluateStringTemplateToString(
+            parsedContents=parsed, strTemplate="{char_count} chars\n\n{source_code}"
         )
 
         self.assertContentsEqual(

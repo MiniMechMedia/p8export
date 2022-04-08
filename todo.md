@@ -10,4 +10,5 @@
 - [X] Populate source code
 - [ ] Export to twitter
 - [ ] Get rid of metavariables
-- [ ] Put ParsedLabelImage in ParsedContents instead of raw label image 
+- [ ] Put ParsedLabelImage in ParsedContents instead of raw label image
+- [ ] Add concept of cart type (game, tweet, tweet-game, etc.)

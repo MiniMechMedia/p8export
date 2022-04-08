@@ -1,5 +1,6 @@
-This cart is tweetable at just 277 characters
-<pre><code>::_::
+277 chars
+
+::_::
 cls()
 srand()
 for i = 1, 100 do
@@ -14,4 +15,4 @@ for i = 1, 1800 do
 	pset(64 + x * cos(p) - y*sin(p), 64 + x * sin(p) + y * cos(p), rnd({7,7,7,7,7,7,7,15,10}))
 end
 flip()
-goto _</code></pre>
+goto _
