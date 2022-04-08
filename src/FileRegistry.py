@@ -38,6 +38,9 @@ class TestFileEnum(FileEnum):
     )
     ITCH_DESCRIPTION_EVALUATED_FILE = "../test/testFiles/itch-description-evaluated.md"
     ORCHESTRATION_TEST_FILE = "../test/testFiles/orchestration-test.p8"
+    BASIC_DESCRIPTION_EVALUATED_FILE = (
+        "../test/testFiles/basic-description-evaluated.md"
+    )
     # HTML_EXPORT_TEST_FILE_JS = "index.js"
     # HTML_EXPORT_TEMP_FILE_HTML = "index.html"
     # P8_PNG_EXPORT_TEST_FILE = "something.png"

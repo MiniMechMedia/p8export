@@ -24,8 +24,7 @@ tagline: xxxxxxxx
 time_left: 'x:xx:xx'
 develop_time: null
 description: |
-  This cart is tweetable at just $charCount$ characters
-  $sourceCode$
+  Galaxy inspired by density wave theory
 controls: []
 hints: ''
 acknowledgements: ''

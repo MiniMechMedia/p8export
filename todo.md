@@ -9,6 +9,6 @@
 - [ ] Ability to configure pico-8 working directory
 - [X] Populate source code
 - [ ] Export to twitter
-- [ ] Get rid of metavariables
+- [X] Get rid of metavariables
 - [ ] Put ParsedLabelImage in ParsedContents instead of raw label image
 - [ ] Add concept of cart type (game, tweet, tweet-game, etc.)
