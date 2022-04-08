@@ -14,6 +14,10 @@ class FileSystemLocations:
     itchCoverPath: Path
     p8FilePath: Path
 
+    @property
+    def htmlExportDir(self) -> Path:
+        return self.exportsSubDir / "html_export"
+
 
 class FileSystemOrchestrator:
     @classmethod

@@ -1,5 +1,5 @@
 # Does the submission.html
-from src.ParsedContents import ParsedContents
+from src.ParsedContents import Config
 from src.CompilationTarget import CompilationTarget
 from pathlib import Path
 import shutil
@@ -12,17 +12,22 @@ import os
 
 
 class HtmlFileCompilationTarget(CompilationTarget):
+    # Results in 3 files:
+    # outputDir / 'index.html'
+    # outputDir / 'index.js'
+    # outputDir / 'index.zip'
+    # TODO I feel like every compilation target should receive Config automatically?
     @classmethod
     def compileToHtmlToDirectory(
-        cls, parsedContents: ParsedContents, outputDir: Path
+        cls, p8filePath: Path, config: Config, outputDir: Path
     ) -> None:
         os.makedirs(outputDir, exist_ok=True)
 
         args: list[str] = [
-            parsedContents.config.pico8ExePath,
+            config.pico8ExePath,
             "-export",
             str(outputDir / "index.html"),
-            str(parsedContents.filePath),
+            str(p8filePath),
         ]
         # subprocess.call(r"C:\Program Files (x86)\PICO-8\pico8.exe")
         subprocess.run(args, check=True)
@@ -30,4 +35,5 @@ class HtmlFileCompilationTarget(CompilationTarget):
         if not exists(outputDir / "index.html") or not exists(outputDir / "index.js"):
             raise Exception("HTML export failed")
 
-        shutil.make_archive(str(outputDir / "index"), "zip", outputDir)
+        shutil.make_archive("index", "zip", outputDir)
+        shutil.move("index.zip", outputDir / "index.zip")

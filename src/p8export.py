@@ -38,7 +38,7 @@ class P8Export:
         )
 
         # TODO remove need to overwrite this
-        parsedContents.filePath = locations.p8FilePath
+        # parsedContents.filePath = locations.p8FilePath
 
         ImagesCompilationTarget.writeCoverImage(
             parsedImage=parsedContents.labelImage, outputPath=locations.itchCoverPath
@@ -47,7 +47,9 @@ class P8Export:
             parsedImage=parsedContents.labelImage, outputPath=locations.coverPath
         )
         HtmlFileCompilationTarget.compileToHtmlToDirectory(
-            parsedContents=parsedContents, outputDir=locations.exportsSubDir
+            p8filePath=locations.p8FilePath,
+            config=parsedContents.config,
+            outputDir=locations.htmlExportDir,
         )
         # FileSystemOrchestrator.prepareSubfolders()
 

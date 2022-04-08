@@ -13,7 +13,8 @@ class TestPico8Exports(CompilationTargetBaseTest):
             TestFileEnum.BASIC_GAME_TEMPLATE_FILE
         )
         HtmlFileCompilationTarget.compileToHtmlToDirectory(
-            parsed,  # self.getTempFilePath(TempFileEnum.LABEL_IMAGE_TEMP_FILE)
+            parsed.filePath,
+            parsed.config,  # self.getTempFilePath(TempFileEnum.LABEL_IMAGE_TEMP_FILE)
             self.getTempFilePath(TempFileEnum.HTML_EXPORT_TEMP_DIR),
         )
         self.assertFileExists(TempFileEnum.HTML_EXPORT_TEMP_FILE_HTML)
