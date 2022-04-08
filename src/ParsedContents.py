@@ -86,6 +86,7 @@ class Metadata:
     to_do: list[str]
     version: str  # TODO make a strongly typed object
     about_extra: str
+    cart_type: str
 
     @property
     def correctedGameSlug(self):

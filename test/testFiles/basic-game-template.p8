@@ -38,6 +38,7 @@ to_do: []
 version: 0.1.0
 img_alt: xxxx
 about_extra: ''
+cart_type: game
 --]]
 
 

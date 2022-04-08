@@ -11,4 +11,5 @@
 - [ ] Export to twitter
 - [X] Get rid of metavariables
 - [ ] Put ParsedLabelImage in ParsedContents instead of raw label image
-- [ ] Add concept of cart type (game, tweet, tweet-game, etc.)
+- [X] Add concept of cart type (game, tweet, tweet-game, etc.)
+- [ ] Have cart type concept respected by compilation targets (i.e. choose the correct template)
