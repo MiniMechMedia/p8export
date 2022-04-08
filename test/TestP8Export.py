@@ -1,12 +1,13 @@
 from src.p8export import P8Export
-from TestFileSystemOperations import TestFileSystemOperations
+
+# from TestFileSystemOperations import TestFileSystemOperations
 from BaseTest import BaseTest, TempFileEnum, TestFileEnum
 import os
 import shutil
 from pathlib import Path
 
 
-class TestP8Export(TestFileSystemOperations):
+class TestP8Export(BaseTest):
     p8exportBaseDir: Path = BaseTest.getTempFolderPath() / "p8export-test"
 
     # super - soldiers
@@ -27,6 +28,13 @@ class TestP8Export(TestFileSystemOperations):
             self.getTestFilePath(TestFileEnum.BASIC_GAME_TEMPLATE_FILE), p8fileStart
         )
         P8Export.export(p8fileStart)
+
+        expectedGameDir = self.currentTestFolder / "mongo-bongo"
+
+        self.assertPathExists(expectedGameDir)
+        self.assertPathExists(expectedGameDir / "images/")
+        self.assertPathExists(expectedGameDir / "export/")
+        self.assertPathExists(expectedGameDir / "mongo-bongo.p8")
 
     def test_optional_dir(self):
         pass

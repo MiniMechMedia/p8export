@@ -6,7 +6,7 @@ __lua__
 
 --[[
 # embed: 750 x 680
-game_name: xxxxx
+game_name: mongo-bongo
 # leave blank to use game-name
 game_slug:
 jam_info:

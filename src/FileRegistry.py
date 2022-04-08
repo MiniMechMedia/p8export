@@ -58,8 +58,7 @@ class TempFileEnum(FileEnum):
     HTML_EXPORT_TEMP_FILE_HTML = "index/index.html"
     HTML_EXPORT_TEMP_FILE_JS = "index/index.js"
     HTML_EXPORT_TEMP_FILE_ZIP = "index.zip"
-    # TODO this is gonna have to change
-    P8_PNG_EXPORT_TEMP_FILE = "xxxxx.p8.png"
+    P8_PNG_EXPORT_TEMP_FILE = "mongo-bongo.p8.png"
     # ORCHESTRATION_TEMP_DIR = 'orch/'
     # ORCHESTRATION_BASIC_FILE
 

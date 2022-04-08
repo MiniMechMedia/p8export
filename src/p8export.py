@@ -1,9 +1,9 @@
 from pathlib import Path
 import sys
-from ParsedContents import ParsedContents
+from src.ParsedContents import ParsedContents
 from os.path import exists
-from pico8fileparser import Pico8FileParser
-from FileSystemOrchestrator import FileSystemOrchestrator, FileSystemLocations
+from src.pico8fileparser import Pico8FileParser
+from src.FileSystemOrchestrator import FileSystemOrchestrator, FileSystemLocations
 from typing import Optional
 
 
@@ -18,6 +18,9 @@ class P8Export:
             raise Exception("invalid target")
 
         parsedContents: ParsedContents = Pico8FileParser.parse(targetFile)
+
+        # TODO validate??
+
         slug: str = parsedContents.metadata.correctedGameSlug
         targetDir: Path = (
             targetExportDir or parsedContents.filePath / ".." / ".." / slug
