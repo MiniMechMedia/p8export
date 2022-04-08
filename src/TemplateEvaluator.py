@@ -1,4 +1,4 @@
-from src.ParsedContents import Metadata, ControlEnum, ParsedContents
+from src.ParsedContents import Metadata, ControlEnum, ParsedContents, CartType
 
 # from File
 from src.FileRegistry import TemplateFileEnum
@@ -14,6 +14,14 @@ class TemplateEvaluator:
     #     return cls.evaluateStringTemplateToString(
     #         parsedContents=parsedContents, strTemplate=strTemplate
     #     )
+
+    @classmethod
+    def chooseTemplate(cls, parsedContents: ParsedContents) -> TemplateFileEnum:
+        return {
+            CartType.GAME: TemplateFileEnum.ITCH_GAME_DESCRIPTION_MD,
+            CartType.UNKNOWN: TemplateFileEnum.ITCH_GAME_DESCRIPTION_MD,
+            CartType.TWEET: TemplateFileEnum.ITCH_TWEET_DESCRIPTION_MD,
+        }[parsedContents.metadata.stronglyTypedCartType]
 
     @classmethod
     def evaluateStringTemplateToString(

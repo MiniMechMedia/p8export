@@ -43,6 +43,12 @@ def controlDesc(control: ControlEnum):
     return {ControlEnum.ARROW_KEYS: "Arrow Keys", ControlEnum.X: "X"}[control]
 
 
+class CartType(Enum):
+    GAME = "game"
+    TWEET = "tweet"
+    UNKNOWN = "unknown"
+
+
 @dataclass
 class Metadata:
     @dataclass
@@ -87,6 +93,13 @@ class Metadata:
     version: str  # TODO make a strongly typed object
     about_extra: str
     cart_type: str
+
+    @property
+    def stronglyTypedCartType(self) -> CartType:
+        try:
+            return CartType(self.cart_type)
+        except ValueError:
+            return CartType.UNKNOWN
 
     @property
     def correctedGameSlug(self):
