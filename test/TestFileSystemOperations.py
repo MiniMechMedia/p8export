@@ -119,8 +119,6 @@ class TestFileSystemOperations(BaseTest):
         self.assertPathExists(finalDir / finalP8FileName)
 
         self.assertTrue(finalDir / finalP8FileName == result)
-        # self.assertPathExists(result)
-        # self.assertTrue(samefile(result, finalDir / finalP8FileName))
 
     def test_handles_initialized_folders(self):
         imagesFolder: Path = self.currentTestFolder / "images"

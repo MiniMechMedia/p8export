@@ -42,7 +42,7 @@ class TestTemplating(BaseTest):
         )
         TemplateEvaluator.evaluateTemplateToFile(
             parsedContents=parsed,
-            template=TemplateFileEnum.ITCH_DESCRIPTION_MD,
+            template=TemplateFileEnum.ITCH_GAME_DESCRIPTION_MD,
             outputFile=self.getTempFilePath(
                 TempFileEnum.ITCH_DESCRIPTION_EVALUATED_FILE
             ),

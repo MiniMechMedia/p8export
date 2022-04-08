@@ -65,4 +65,4 @@ class TempFileEnum(FileEnum):
 
 
 class TemplateFileEnum(FileEnum):
-    ITCH_DESCRIPTION_MD = "template/itchDescription.md"
+    ITCH_GAME_DESCRIPTION_MD = "template/game-cart-itch-description.md"
