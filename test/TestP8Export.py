@@ -33,6 +33,8 @@ class TestP8Export(BaseTest):
 
         self.assertPathExists(expectedGameDir)
         self.assertPathExists(expectedGameDir / "images/")
+        self.assertPathExists(expectedGameDir / "images" / "itch-cover.png")
+        self.assertPathExists(expectedGameDir / "images" / "cover.png")
         self.assertPathExists(expectedGameDir / "export/")
         self.assertPathExists(expectedGameDir / "mongo-bongo.p8")
 

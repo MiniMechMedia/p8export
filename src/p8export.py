@@ -6,6 +6,12 @@ from src.pico8fileparser import Pico8FileParser
 from src.FileSystemOrchestrator import FileSystemOrchestrator, FileSystemLocations
 from typing import Optional
 
+# from src.HtmlFileCompilationTarget import HtmlFileCompilationTarget
+# from src.P8PngCompilationTarget import P8PngCompilationTarget
+from src.ImagesCompilationTarget import ImagesCompilationTarget
+
+# from src.ItchDescriptionCompilationTarget import ItchDescriptionCompilationTarget
+
 
 class P8Export:
     # Be warned: will use the directory the p8 file is currently in as the export dir
@@ -28,6 +34,13 @@ class P8Export:
 
         locations: FileSystemLocations = FileSystemOrchestrator.prepareExportDir(
             parsedContents.filePath, f"{slug}.p8", targetDir
+        )
+
+        ImagesCompilationTarget.writeCoverImage(
+            parsedImage=parsedContents.labelImage, outputPath=locations.itchCoverPath
+        )
+        ImagesCompilationTarget.writeLabelImage(
+            parsedImage=parsedContents.labelImage, outputPath=locations.coverPath
         )
 
         # FileSystemOrchestrator.prepareSubfolders()
