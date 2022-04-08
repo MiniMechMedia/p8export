@@ -10,6 +10,8 @@ class FileSystemLocations:
     exportsBaseDir: Path
     screenshotsDir: Path
     exportsSubDir: Path
+    coverPath: Path
+    itchCoverPath: Path
 
 
 class FileSystemOrchestrator:
@@ -18,8 +20,10 @@ class FileSystemOrchestrator:
         shutil.rmtree(exportsBaseDir / "export", ignore_errors=True)
 
         screenshotsDir: Path = exportsBaseDir / "images"
+        coverPath: Path = screenshotsDir / "cover.png"
+        itchCoverPath: Path = screenshotsDir / "itch-cover.png"
+
         if exists(screenshotsDir):
-            # TODO this needs to coordinate a bit with the screenshots exporter
             try:
                 os.remove(screenshotsDir / "cover.png")
             except OSError:
@@ -43,6 +47,8 @@ class FileSystemOrchestrator:
             exportsBaseDir=exportsBaseDir,
             screenshotsDir=screenshotsDir,
             exportsSubDir=exportsSubDir,
+            coverPath=coverPath,
+            itchCoverPath=itchCoverPath,
         )
 
     # returns the new path of the input p8 file. This will always be exportDir / finalP8FileName
@@ -63,12 +69,5 @@ class FileSystemOrchestrator:
                 )
         else:
             shutil.move(containingDir, exportDir)
-
-        # if not samefile(containingDir, exportDir):
-        #     if exists(exportDir):
-        #         raise Exception(
-        #             "P8export error - Cannot perform a folder rename if folder already exists"
-        #         )
-        #     shutil.move(containingDir, exportDir)
 
         return exportDir / finalP8FileName
