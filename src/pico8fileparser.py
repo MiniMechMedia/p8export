@@ -93,13 +93,14 @@ class Pico8FileParser:
         rawYaml: str = cls.parseRawYamlFromFileContents(rawContents)
         parsedYaml: dict = cls.parseYamlFromRawYaml(rawYaml)
         rawLabelImage: str = cls.parseRawLabelImage(rawContents)
+        parsedLabelImage: ParsedLabelImage = cls.parseImageLabel(rawLabelImage)
         metadata: Metadata = cls.parseMetadata(parsedYaml)
         config: Config = cls.getConfig(metadata)
         return ParsedContents(
             filePath=filePath,
             rawContents=rawContents,
             sourceCode=sourceCode,
-            rawLabelImage=rawLabelImage,
+            labelImage=parsedLabelImage,
             metadata=metadata,
             config=config,
         )

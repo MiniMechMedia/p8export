@@ -10,7 +10,7 @@
 - [X] Populate source code
 - [ ] Export to twitter
 - [X] Get rid of metavariables
-- [ ] Put ParsedLabelImage in ParsedContents instead of raw label image
+- [X] Put ParsedLabelImage in ParsedContents instead of raw label image
 - [X] Add concept of cart type (game, tweet, tweet-game, etc.)
 - [ ] Have cart type concept respected by compilation targets (i.e. choose the correct template)
 - [ ] Implement various subfolders of export

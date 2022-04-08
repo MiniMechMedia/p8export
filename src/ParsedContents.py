@@ -123,7 +123,7 @@ class ParsedContents:
     filePath: Path
     rawContents: str
     sourceCode: str
-    rawLabelImage: str
+    labelImage: ParsedLabelImage
     metadata: Metadata
     config: Config
     # def __init__(self, rawContents:):
