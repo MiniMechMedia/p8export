@@ -16,11 +16,12 @@ class HtmlFileCompilationTarget(CompilationTarget):
     # outputDir / 'index.html'
     # outputDir / 'index.js'
     # outputDir / 'index.zip'
+    # Returns path of index.zip
     # TODO I feel like every compilation target should receive Config automatically?
     @classmethod
     def compileToHtmlToDirectory(
         cls, p8filePath: Path, config: Config, outputDir: Path
-    ) -> None:
+    ) -> Path:
         os.makedirs(outputDir, exist_ok=True)
 
         args: list[str] = [
@@ -37,3 +38,5 @@ class HtmlFileCompilationTarget(CompilationTarget):
 
         shutil.make_archive("index", "zip", outputDir)
         shutil.move("index.zip", outputDir / "index.zip")
+
+        return outputDir / "index.zip"
