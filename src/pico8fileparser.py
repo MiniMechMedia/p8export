@@ -76,13 +76,14 @@ class Pico8FileParser:
 
     # TODO populate this stuff from a config file? Or cmdline args or something?
     @classmethod
-    def getConfig(cls) -> Config:
+    def getConfig(cls, metadata: Metadata) -> Config:
+
         return Config(
             gameAuthor="Caterpillar Games",
             itchAuthor="caterpillargames",
             sourceControlRootUrl="https://github.com/CaterpillarGames/pico8-games/tree/master/carts",
             pico8ExePath=r"C:\Program Files (x86)\PICO-8\pico8.exe",
-            pico8WorkingDir="",
+            exportDir="",
         )
 
     @classmethod

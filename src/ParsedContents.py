@@ -113,7 +113,8 @@ class Config:
     itchAuthor: str
     sourceControlRootUrl: str
     pico8ExePath: str
-    pico8WorkingDir: str
+    # Where to put the exported files...
+    exportDir: str
 
 
 @dataclass
