@@ -10,6 +10,7 @@ from src.HtmlFileCompilationTarget import HtmlFileCompilationTarget
 
 from src.P8PngCompilationTarget import P8PngCompilationTarget
 from src.ImagesCompilationTarget import ImagesCompilationTarget
+from src.ReadmeCompilationTarget import ReadmeCompilationTarget
 
 # from src.ItchDescriptionCompilationTarget import ItchDescriptionCompilationTarget
 
@@ -37,6 +38,14 @@ class P8Export:
             parsedContents.filePath, f"{slug}.p8", targetDir
         )
 
+        parsedContents.coverPath = "images/cover.png"
+        parsedContents.folderRelativePath = (
+            f"carts/{parsedContents.metadata.correctedGameSlug}"
+        )
+        parsedContents.coverPathAbs = (
+            f"{parsedContents.folderRelativePath}/images/cover.png"
+        )
+
         # TODO remove need to overwrite this
         # parsedContents.filePath = locations.p8FilePath
 
@@ -56,6 +65,16 @@ class P8Export:
             p8InputPath=locations.p8FilePath,
             p8PngOutputPath=locations.exportsSubDir
             / (parsedContents.metadata.correctedGameSlug + ".p8.png"),
+        )
+        ReadmeCompilationTarget.createIndividualReadme(
+            parsedContents=parsedContents,
+            readmeOutputPath=locations.exportsBaseDir / "README.md",
+        )
+
+        # TODO don't like inferring the location of the aggregate readme
+        ReadmeCompilationTarget.addToAggregateReadme(
+            parsedContents=parsedContents,
+            readmeOutputPath=targetDir.parent.parent / "README.md",
         )
         # parsedContents=parsedContents,
         #                                              outputDir=locations.exportsSubDir / parsedContents.)

@@ -6,22 +6,22 @@ from pathlib import Path
 
 
 class TemplateEvaluator:
-    # @classmethod
-    # def evaluateTemplateToString(
-    #     cls, parsedContents: ParsedContents, template: TemplateFileEnum
-    # ) -> str:
-    #     strTemplate: str = template.readText()
-    #     return cls.evaluateStringTemplateToString(
-    #         parsedContents=parsedContents, strTemplate=strTemplate
-    #     )
-
     @classmethod
-    def chooseTemplate(cls, parsedContents: ParsedContents) -> TemplateFileEnum:
-        return {
-            CartType.GAME: TemplateFileEnum.ITCH_GAME_DESCRIPTION_MD,
-            CartType.UNKNOWN: TemplateFileEnum.ITCH_GAME_DESCRIPTION_MD,
-            CartType.TWEET: TemplateFileEnum.ITCH_TWEET_DESCRIPTION_MD,
-        }[parsedContents.metadata.stronglyTypedCartType]
+    def evaluateTemplateToString(
+        cls, parsedContents: ParsedContents, template: TemplateFileEnum
+    ) -> str:
+        strTemplate: str = template.readText()
+        return cls.evaluateStringTemplateToString(
+            parsedContents=parsedContents, strTemplate=strTemplate
+        )
+
+    # @classmethod
+    # def chooseTemplate(cls, cartType: CartType) -> TemplateFileEnum:
+    #     return {
+    #         CartType.GAME: TemplateFileEnum.ITCH_GAME_DESCRIPTION_MD,
+    #         CartType.UNKNOWN: TemplateFileEnum.ITCH_GAME_DESCRIPTION_MD,
+    #         CartType.TWEET: TemplateFileEnum.ITCH_TWEET_DESCRIPTION_MD,
+    #     }[parsedContents.metadata.stronglyTypedCartType]
 
     @classmethod
     def evaluateStringTemplateToString(
@@ -62,7 +62,15 @@ class TemplateEvaluator:
                 parsedContents=parsedContents
             ),
             "char_count": parsedContents.sourceCodeP8sciiCharCount,
-            "source_code": parsedContents.sourceCode
+            "source_code": parsedContents.sourceCode,
+            "game_name": parsedContents.metadata.game_name,
+            "itch_link": cls.constructItchLink(parsedContents=parsedContents),
+            "alt_text": parsedContents.metadata.img_alt,
+            "hints": parsedContents.metadata.hints,
+            "tag_line": parsedContents.metadata.tagline,
+            "cover_path": parsedContents.coverPath,
+            "cover_path_abs": parsedContents.coverPathAbs,
+            "folder_relative_path": parsedContents.folderRelativePath
             # 'itch_link': cls.constructItchLink(parsedContents=parsedContents)
         }
 
@@ -119,3 +127,7 @@ class TemplateEvaluator:
             baseUrl += "/"
 
         return baseUrl + parsedContents.metadata.correctedGameSlug
+
+    @classmethod
+    def constructItchLink(cls, parsedContents):
+        return f"https://{parsedContents.config.itchAuthor}.itch.io/{parsedContents.metadata.correctedGameSlug}"

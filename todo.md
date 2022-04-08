@@ -17,3 +17,4 @@
 - [ ] Implement README compilation target
 - [ ] Implement aggregate README compilation target
 - [ ] Deal with the gamename + gameauthor on the p8png
+- [ ] Support rendering markdown to html

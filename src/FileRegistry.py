@@ -66,3 +66,6 @@ class TempFileEnum(FileEnum):
 class TemplateFileEnum(FileEnum):
     ITCH_GAME_DESCRIPTION_MD = "template/game-cart-itch-description.md"
     ITCH_TWEET_DESCRIPTION_MD = "template/tweet-cart-itch-description.md"
+    README_GAME_MD = "template/game-readme.md"
+    README_TWEET_MD = "template/tweet-readme.md"
+    AGGREGATE_README_MD = "template/aggregate-readme.md"

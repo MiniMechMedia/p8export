@@ -36,6 +36,7 @@ class HtmlFileCompilationTarget(CompilationTarget):
         if not exists(outputDir / "index.html") or not exists(outputDir / "index.js"):
             raise Exception("HTML export failed")
 
+        # TODO replace this with a mock that doesn't take so long
         shutil.make_archive("index", "zip", outputDir)
         shutil.move("index.zip", outputDir / "index.zip")
 

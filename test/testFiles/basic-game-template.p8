@@ -6,7 +6,7 @@ __lua__
 
 --[[
 # embed: 750 x 680
-game_name: mongo-bongo
+game_name: Mongo Bongo
 # leave blank to use game-name
 game_slug:
 jam_info:
@@ -20,7 +20,7 @@ jam_info:
     jam_url: null
     jam_theme: blah
     minijam_limitation: You are the bad guy
-tagline: xxxxxxxx
+tagline: Will you choose Mongo or Bongo?
 time_left: 'x:xx:xx'
 develop_time: null
 description: |
@@ -36,7 +36,7 @@ hints: ''
 acknowledgements: ''
 to_do: []
 version: 0.1.0
-img_alt: xxxx
+img_alt: A row of 5 bongos with a cursor selecting the middle one
 about_extra: ''
 cart_type: game
 --]]

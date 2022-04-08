@@ -93,6 +93,7 @@ class Metadata:
     version: str  # TODO make a strongly typed object
     about_extra: str
     cart_type: str
+    img_alt: str
 
     @property
     def stronglyTypedCartType(self) -> CartType:
@@ -139,6 +140,11 @@ class ParsedContents:
     labelImage: ParsedLabelImage
     metadata: Metadata
     config: Config
+
+    # TODO put these as a separate object?
+    coverPath: str = ""
+    coverPathAbs: str = ""
+    folderRelativePath: str = ""
     # def __init__(self, rawContents:):
     #     self.rawContents: str = ""
     #     self.rawYaml: str = ""

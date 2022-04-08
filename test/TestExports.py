@@ -1,3 +1,5 @@
+import unittest
+
 from CompilationTargetBaseTest import CompilationTargetBaseTest
 from src.FileRegistry import TestFileEnum, TemplateFileEnum, TempFileEnum
 from src.pico8fileparser import Pico8FileParser
@@ -7,7 +9,7 @@ from src.HtmlFileCompilationTarget import HtmlFileCompilationTarget
 from src.P8PngCompilationTarget import P8PngCompilationTarget
 
 
-class TestPico8Exports(CompilationTargetBaseTest):
+class TestExports(CompilationTargetBaseTest):
     def test_html_export(self):
         parsed: ParsedContents = self.parseTestFile(
             TestFileEnum.BASIC_GAME_TEMPLATE_FILE
@@ -32,3 +34,7 @@ class TestPico8Exports(CompilationTargetBaseTest):
             / (parsed.metadata.correctedGameSlug + ".p8.png"),
         )
         self.assertFileExists(TempFileEnum.P8_PNG_EXPORT_TEMP_FILE)
+
+    @unittest.skip
+    def test_aggregate_readme_is_idempotent(self):
+        pass
