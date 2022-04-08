@@ -10,3 +10,4 @@
 - [X] Populate source code
 - [ ] Export to twitter
 - [ ] Get rid of metavariables
+- [ ] Put ParsedLabelImage in ParsedContents instead of raw label image 

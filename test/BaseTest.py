@@ -30,7 +30,8 @@ class BaseTest(unittest.TestCase):
     def getTempFilePath(self, tempFileName: TempFileEnum) -> pathlib.Path:
         return pathlib.Path("tmp/" + tempFileName.value)
 
-    def getTempFolderPath(self):
+    @classmethod
+    def getTempFolderPath(cls):
         return pathlib.Path("tmp/")
 
     def getTestFileContents(self, testFileName: TestFileEnum) -> str:

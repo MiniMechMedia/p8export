@@ -1,5 +1,6 @@
 from pathlib import Path
 import sys
+from ParsedContents import ParsedContents
 from os.path import exists
 
 
