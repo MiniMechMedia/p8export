@@ -30,4 +30,4 @@ class HtmlFileCompilationTarget(CompilationTarget):
         if not exists(outputDir / "index.html") or not exists(outputDir / "index.js"):
             raise Exception("HTML export failed")
 
-        shutil.make_archive(str(outputDir), "zip", outputDir)
+        shutil.make_archive(str(outputDir / "index"), "zip", outputDir)

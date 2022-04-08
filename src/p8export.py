@@ -6,7 +6,8 @@ from src.pico8fileparser import Pico8FileParser
 from src.FileSystemOrchestrator import FileSystemOrchestrator, FileSystemLocations
 from typing import Optional
 
-# from src.HtmlFileCompilationTarget import HtmlFileCompilationTarget
+from src.HtmlFileCompilationTarget import HtmlFileCompilationTarget
+
 # from src.P8PngCompilationTarget import P8PngCompilationTarget
 from src.ImagesCompilationTarget import ImagesCompilationTarget
 
@@ -29,12 +30,15 @@ class P8Export:
 
         slug: str = parsedContents.metadata.correctedGameSlug
         targetDir: Path = (
-            targetExportDir or parsedContents.filePath / ".." / ".." / slug
+            targetExportDir or parsedContents.filePath.parent.parent / slug
         )
 
         locations: FileSystemLocations = FileSystemOrchestrator.prepareExportDir(
             parsedContents.filePath, f"{slug}.p8", targetDir
         )
+
+        # TODO remove need to overwrite this
+        parsedContents.filePath = locations.p8FilePath
 
         ImagesCompilationTarget.writeCoverImage(
             parsedImage=parsedContents.labelImage, outputPath=locations.itchCoverPath
@@ -42,7 +46,9 @@ class P8Export:
         ImagesCompilationTarget.writeLabelImage(
             parsedImage=parsedContents.labelImage, outputPath=locations.coverPath
         )
-
+        HtmlFileCompilationTarget.compileToHtmlToDirectory(
+            parsedContents=parsedContents, outputDir=locations.exportsSubDir
+        )
         # FileSystemOrchestrator.prepareSubfolders()
 
 

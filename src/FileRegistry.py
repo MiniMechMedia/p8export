@@ -54,10 +54,10 @@ class TempFileEnum(FileEnum):
     LABEL_IMAGE_TEMP_FILE = "label.png"
     ITCH_COVER_IMAGE_TEMP_FILE = "cover.png"
     ITCH_DESCRIPTION_EVALUATED_FILE = "itch-description-evaluated-temp.md"
-    HTML_EXPORT_TEMP_DIR = "index/"
-    HTML_EXPORT_TEMP_FILE_HTML = "index/index.html"
-    HTML_EXPORT_TEMP_FILE_JS = "index/index.js"
-    HTML_EXPORT_TEMP_FILE_ZIP = "index.zip"
+    HTML_EXPORT_TEMP_DIR = "html_export/"
+    HTML_EXPORT_TEMP_FILE_HTML = "html_export/index.html"
+    HTML_EXPORT_TEMP_FILE_JS = "html_export/index.js"
+    HTML_EXPORT_TEMP_FILE_ZIP = "html_export/index.zip"
     P8_PNG_EXPORT_TEMP_FILE = "mongo-bongo.p8.png"
     # ORCHESTRATION_TEMP_DIR = 'orch/'
     # ORCHESTRATION_BASIC_FILE
