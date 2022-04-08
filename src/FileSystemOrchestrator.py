@@ -12,6 +12,7 @@ class FileSystemLocations:
     exportsSubDir: Path
     coverPath: Path
     itchCoverPath: Path
+    p8FilePath: Path
 
 
 class FileSystemOrchestrator:
@@ -49,13 +50,14 @@ class FileSystemOrchestrator:
             exportsSubDir=exportsSubDir,
             coverPath=coverPath,
             itchCoverPath=itchCoverPath,
+            p8FilePath=Path("."),  # TODO
         )
 
     # returns the new path of the input p8 file. This will always be exportDir / finalP8FileName
     @classmethod
     def prepareExportDir(
         cls, inputP8FilePath: Path, finalP8FileName: str, exportDir: Path
-    ) -> Path:
+    ) -> FileSystemLocations:
 
         containingDir: Path = inputP8FilePath.parent
 
@@ -70,4 +72,7 @@ class FileSystemOrchestrator:
         else:
             shutil.move(containingDir, exportDir)
 
-        return exportDir / finalP8FileName
+        ret: FileSystemLocations = cls.prepareSubfolders(exportsBaseDir=exportDir)
+        ret.p8FilePath = exportDir / finalP8FileName
+        return ret
+        # return exportDir / finalP8FileName

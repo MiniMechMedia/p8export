@@ -1,5 +1,5 @@
 from BaseTest import BaseTest
-from src.FileSystemOrchestrator import FileSystemOrchestrator
+from src.FileSystemOrchestrator import FileSystemOrchestrator, FileSystemLocations
 from os.path import samefile
 import os
 import shutil
@@ -25,12 +25,12 @@ class TestFileSystemOperations(BaseTest):
         originalFile: Path = (
             self.currentTestFolder / "super-soldiers" / "super-soldiers.p8"
         )
-        result: Path = FileSystemOrchestrator.prepareExportDir(
+        result: FileSystemLocations = FileSystemOrchestrator.prepareExportDir(
             originalFile, "super-soldiers.p8", self.currentTestFolder / "super-soldiers"
         )
         # TODO make sure no other folders/files exist... but that's fine
         self.assertPathExists(originalFile)
-        self.assertTrue(originalFile == result)
+        self.assertTrue(originalFile == result.p8FilePath)
 
     def test_can_skip_both(self):
         originalFolderInner: Path = self.currentTestFolder / "super-soldiers"
@@ -43,13 +43,13 @@ class TestFileSystemOperations(BaseTest):
 
         finalDir: Path = self.currentTestFolder / "super-soldiers"
         finalP8FileName = "super-soldiers.p8"
-        result: Path = FileSystemOrchestrator.prepareExportDir(
+        result: FileSystemLocations = FileSystemOrchestrator.prepareExportDir(
             copiedFile, finalP8FileName, finalDir
         )
 
         self.assertPathExists(finalDir)
         self.assertPathExists(finalDir / finalP8FileName)
-        self.assertTrue(finalDir / finalP8FileName == result)
+        self.assertTrue(finalDir / finalP8FileName == result.p8FilePath)
 
     # This will be pretty rare
     def test_can_rename_containing_folder_only(self):
@@ -63,7 +63,7 @@ class TestFileSystemOperations(BaseTest):
 
         finalDir: Path = self.currentTestFolder / "super-soldiers"
         finalP8FileName = "super-soldiers.p8"
-        result: Path = FileSystemOrchestrator.prepareExportDir(
+        result: FileSystemLocations = FileSystemOrchestrator.prepareExportDir(
             copiedFile, finalP8FileName, finalDir
         )
 
@@ -73,7 +73,7 @@ class TestFileSystemOperations(BaseTest):
         self.assertPathExists(finalDir)
         self.assertPathExists(finalDir / finalP8FileName)
 
-        self.assertTrue(finalDir / finalP8FileName == result)
+        self.assertTrue(finalDir / finalP8FileName == result.p8FilePath)
 
     # This will be pretty rare
     def test_can_rename_p8_file_only(self):
@@ -87,7 +87,7 @@ class TestFileSystemOperations(BaseTest):
 
         finalDir: Path = self.currentTestFolder / "super-soldiers"
         finalP8FileName = "super-soldiers.p8"
-        result: Path = FileSystemOrchestrator.prepareExportDir(
+        result: FileSystemLocations = FileSystemOrchestrator.prepareExportDir(
             copiedFile, finalP8FileName, finalDir
         )
 
@@ -96,7 +96,7 @@ class TestFileSystemOperations(BaseTest):
         self.assertPathExists(finalDir)
         self.assertPathExists(finalDir / finalP8FileName)
 
-        self.assertTrue(finalDir / finalP8FileName == result)
+        self.assertTrue(finalDir / finalP8FileName == result.p8FilePath)
 
     def test_can_rename_both_containing_folder_and_p8_file(self):
         originalFolderInner: Path = self.currentTestFolder / "new-game-2"
@@ -109,7 +109,7 @@ class TestFileSystemOperations(BaseTest):
 
         finalDir: Path = self.currentTestFolder / "super-soldiers"
         finalP8FileName = "super-soldiers.p8"
-        result: Path = FileSystemOrchestrator.prepareExportDir(
+        result: FileSystemLocations = FileSystemOrchestrator.prepareExportDir(
             copiedFile, finalP8FileName, finalDir
         )
 
@@ -118,7 +118,7 @@ class TestFileSystemOperations(BaseTest):
         self.assertPathExists(finalDir)
         self.assertPathExists(finalDir / finalP8FileName)
 
-        self.assertTrue(finalDir / finalP8FileName == result)
+        self.assertTrue(finalDir / finalP8FileName == result.p8FilePath)
 
     def test_handles_initialized_folders(self):
         imagesFolder: Path = self.currentTestFolder / "images"
