@@ -26,7 +26,9 @@ class TestPico8Exports(CompilationTargetBaseTest):
             TestFileEnum.BASIC_GAME_TEMPLATE_FILE
         )
         P8PngCompilationTarget.compileToP8PngToDirectory(
-            parsed,
-            self.getTempFolderPath(),  # self.getTempFilePath(TempFileEnum.P8_PNG_EXPORT_TEMP_FILE)
+            config=parsed.config,
+            p8InputPath=parsed.filePath,
+            p8PngOutputPath=self.getTempFolderPath()
+            / (parsed.metadata.correctedGameSlug + ".p8.png"),
         )
         self.assertFileExists(TempFileEnum.P8_PNG_EXPORT_TEMP_FILE)

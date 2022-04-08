@@ -8,7 +8,7 @@ from typing import Optional
 
 from src.HtmlFileCompilationTarget import HtmlFileCompilationTarget
 
-# from src.P8PngCompilationTarget import P8PngCompilationTarget
+from src.P8PngCompilationTarget import P8PngCompilationTarget
 from src.ImagesCompilationTarget import ImagesCompilationTarget
 
 # from src.ItchDescriptionCompilationTarget import ItchDescriptionCompilationTarget
@@ -47,10 +47,18 @@ class P8Export:
             parsedImage=parsedContents.labelImage, outputPath=locations.coverPath
         )
         HtmlFileCompilationTarget.compileToHtmlToDirectory(
-            p8filePath=locations.p8FilePath,
             config=parsedContents.config,
+            p8filePath=locations.p8FilePath,
             outputDir=locations.htmlExportDir,
         )
+        P8PngCompilationTarget.compileToP8PngToDirectory(
+            config=parsedContents.config,
+            p8InputPath=locations.p8FilePath,
+            p8PngOutputPath=locations.exportsSubDir
+            / (parsedContents.metadata.correctedGameSlug + ".p8.png"),
+        )
+        # parsedContents=parsedContents,
+        #                                              outputDir=locations.exportsSubDir / parsedContents.)
         # FileSystemOrchestrator.prepareSubfolders()
 
 

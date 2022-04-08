@@ -40,6 +40,7 @@ class TestP8Export(BaseTest):
         self.assertPathExists(expectedGameDir / "export" / "html_export" / "index.html")
         self.assertPathExists(expectedGameDir / "export" / "html_export" / "index.js")
         self.assertPathExists(expectedGameDir / "export" / "html_export" / "index.zip")
+        self.assertPathExists(expectedGameDir / "export" / "mongo-bongo.p8.png")
 
     def test_optional_dir(self):
         pass

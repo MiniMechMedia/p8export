@@ -1,4 +1,4 @@
-from src.ParsedContents import ParsedContents
+from src.ParsedContents import Config
 from src.CompilationTarget import CompilationTarget
 from pathlib import Path
 import subprocess
@@ -6,12 +6,14 @@ import subprocess
 
 class P8PngCompilationTarget(CompilationTarget):
     @classmethod
-    def compileToP8PngToDirectory(cls, parsedContents: ParsedContents, outputDir: Path):
+    def compileToP8PngToDirectory(
+        cls, config: Config, p8InputPath: Path, p8PngOutputPath: Path
+    ):
         args: list[str] = [
-            parsedContents.config.pico8ExePath,
+            config.pico8ExePath,
             "-export",
-            outputDir / (parsedContents.metadata.correctedGameSlug + ".p8.png"),
-            str(parsedContents.filePath),
+            p8PngOutputPath,
+            p8InputPath,
         ]
         # subprocess.call(r"C:\Program Files (x86)\PICO-8\pico8.exe")
         subprocess.run(args, check=True)
