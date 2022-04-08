@@ -1,6 +1,6 @@
 from BaseTest import BaseTest
 from src.FileSystemOrchestrator import FileSystemOrchestrator
-from os.path import exists
+from os.path import samefile
 import os
 import shutil
 from pathlib import Path
@@ -21,20 +21,82 @@ class TestFileSystemOperations(BaseTest):
         os.makedirs(self.currentTestFolder, exist_ok=False)
 
     def test_is_idempotent(self):
-
-        pass
+        self.test_can_rename_both_containing_folder_and_p8_file()
+        originalFile: Path = (
+            self.currentTestFolder / "super-soldiers" / "super-soldiers.p8"
+        )
+        result: Path = FileSystemOrchestrator.prepareExportDir(
+            originalFile, "super-soldiers.p8", self.currentTestFolder / "super-soldiers"
+        )
+        # TODO make sure no other folders/files exist... but that's fine
+        self.assertPathExists(originalFile)
+        self.assertTrue(originalFile == result)
 
     def test_can_skip_both(self):
+        originalFolderInner: Path = self.currentTestFolder / "super-soldiers"
+        os.makedirs(originalFolderInner, exist_ok=False)
+        copiedFile: Path = originalFolderInner / "super-soldiers.p8"
+        shutil.copy(
+            self.getTestFilePath(TestFileEnum.ORCHESTRATION_TEST_FILE),
+            copiedFile,
+        )
 
-        pass
+        finalDir: Path = self.currentTestFolder / "super-soldiers"
+        finalP8FileName = "super-soldiers.p8"
+        result: Path = FileSystemOrchestrator.prepareExportDir(
+            copiedFile, finalP8FileName, finalDir
+        )
+
+        self.assertPathExists(finalDir)
+        self.assertPathExists(finalDir / finalP8FileName)
+        self.assertTrue(finalDir / finalP8FileName == result)
 
     # This will be pretty rare
     def test_can_rename_containing_folder_only(self):
-        pass
+        originalFolderInner: Path = self.currentTestFolder / "new-game-2"
+        os.makedirs(originalFolderInner, exist_ok=False)
+        copiedFile: Path = originalFolderInner / "super-soldiers.p8"
+        shutil.copy(
+            self.getTestFilePath(TestFileEnum.ORCHESTRATION_TEST_FILE),
+            copiedFile,
+        )
+
+        finalDir: Path = self.currentTestFolder / "super-soldiers"
+        finalP8FileName = "super-soldiers.p8"
+        result: Path = FileSystemOrchestrator.prepareExportDir(
+            copiedFile, finalP8FileName, finalDir
+        )
+
+        self.assertPathDoesNotExist(copiedFile)
+        self.assertPathDoesNotExist(originalFolderInner)
+
+        self.assertPathExists(finalDir)
+        self.assertPathExists(finalDir / finalP8FileName)
+
+        self.assertTrue(finalDir / finalP8FileName == result)
 
     # This will be pretty rare
     def test_can_rename_p8_file_only(self):
-        pass
+        originalFolderInner: Path = self.currentTestFolder / "super-soldiers"
+        os.makedirs(originalFolderInner, exist_ok=False)
+        copiedFile: Path = originalFolderInner / "somefile.p8"
+        shutil.copy(
+            self.getTestFilePath(TestFileEnum.ORCHESTRATION_TEST_FILE),
+            copiedFile,
+        )
+
+        finalDir: Path = self.currentTestFolder / "super-soldiers"
+        finalP8FileName = "super-soldiers.p8"
+        result: Path = FileSystemOrchestrator.prepareExportDir(
+            copiedFile, finalP8FileName, finalDir
+        )
+
+        self.assertPathDoesNotExist(copiedFile)
+
+        self.assertPathExists(finalDir)
+        self.assertPathExists(finalDir / finalP8FileName)
+
+        self.assertTrue(finalDir / finalP8FileName == result)
 
     def test_can_rename_both_containing_folder_and_p8_file(self):
         originalFolderInner: Path = self.currentTestFolder / "new-game-2"
@@ -47,9 +109,15 @@ class TestFileSystemOperations(BaseTest):
 
         finalDir: Path = self.currentTestFolder / "super-soldiers"
         finalP8FileName = "super-soldiers.p8"
-        FileSystemOrchestrator.prepareExportDir(copiedFile, finalP8FileName, finalDir)
+        result: Path = FileSystemOrchestrator.prepareExportDir(
+            copiedFile, finalP8FileName, finalDir
+        )
 
         self.assertPathDoesNotExist(copiedFile)
         self.assertPathDoesNotExist(originalFolderInner)
         self.assertPathExists(finalDir)
         self.assertPathExists(finalDir / finalP8FileName)
+
+        self.assertTrue(finalDir / finalP8FileName == result)
+        # self.assertPathExists(result)
+        # self.assertTrue(samefile(result, finalDir / finalP8FileName))
