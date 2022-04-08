@@ -121,3 +121,37 @@ class TestFileSystemOperations(BaseTest):
         self.assertTrue(finalDir / finalP8FileName == result)
         # self.assertPathExists(result)
         # self.assertTrue(samefile(result, finalDir / finalP8FileName))
+
+    def test_handles_initialized_folders(self):
+        imagesFolder: Path = self.currentTestFolder / "images"
+        exportFolder: Path = self.currentTestFolder / "export"
+        os.makedirs(imagesFolder)
+        os.makedirs(exportFolder)
+        additionalImage: Path = imagesFolder / "someimage.png"
+        existingCover: Path = imagesFolder / "cover.png"
+        existingExportFile: Path = exportFolder / "blah.txt"
+        with open(additionalImage, "w"):
+            pass
+        with open(existingCover, "w"):
+            pass
+        with open(existingExportFile, "w"):
+            pass
+
+        FileSystemOrchestrator.prepareSubfolders(self.currentTestFolder)
+
+        self.assertPathExists(additionalImage)
+        self.assertPathDoesNotExist(existingCover)
+        self.assertPathExists(exportFolder)
+        self.assertPathDoesNotExist(existingExportFile)
+
+    def test_handles_uninitialized_folders(self):
+        imagesFolder: Path = self.currentTestFolder / "images"
+        exportFolder: Path = self.currentTestFolder / "export"
+
+        self.assertPathDoesNotExist(imagesFolder)
+        self.assertPathDoesNotExist(exportFolder)
+
+        FileSystemOrchestrator.prepareSubfolders(self.currentTestFolder)
+
+        self.assertPathExists(exportFolder)
+        self.assertPathExists(exportFolder)
