@@ -9,6 +9,7 @@ from .ParsedContents import (
     Config,
 )
 from dacite import from_dict, Config as daciteConfig
+from decouple import config
 
 
 class Pico8FileParser:
@@ -82,7 +83,8 @@ class Pico8FileParser:
             gameAuthor="Caterpillar Games",
             itchAuthor="caterpillargames",
             sourceControlRootUrl="https://github.com/CaterpillarGames/pico8-games/tree/master/carts",
-            pico8ExePath=r"C:\Program Files (x86)\PICO-8\pico8.exe",
+            # pico8ExePath=r"C:\Program Files (x86)\PICO-8\pico8.exe",
+            pico8ExePath=config('PICO8EXE'),
             exportDir="",
         )
 

@@ -1,3 +1,6 @@
-PyYAML~=6.0
-dacite~=1.6.0
-Pillow~=9.0.1
+dacite==1.6.0
+Pillow==9.0.1
+python-decouple==3.6
+python-slugify==6.1.1
+PyYAML==6.0
+text-unidecode==1.3
