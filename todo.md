@@ -1,11 +1,11 @@
 - [ ] Export submission.html
-- [ ] Export .p8
+- [X] Export .p8
 - [X] Export .p8.png - suppose I should reuse the .p8 thing from above
 - [ ] Export to itch
 - [ ] Export to git repo (here??)
 - [X] Handle renames
-- [ ] Warn on renames - Won't DO
-- [ ] Create a working directory
+- [ ] ~~Warn on renames~~
+- [ ] ~~Create a working directory~~
 - [ ] Ability to configure pico-8 working directory
 - [X] Populate source code
 - [ ] Export to twitter
@@ -13,8 +13,9 @@
 - [X] Put ParsedLabelImage in ParsedContents instead of raw label image
 - [X] Add concept of cart type (game, tweet, tweet-game, etc.)
 - [ ] Have cart type concept respected by compilation targets (i.e. choose the correct template)
-- [ ] Implement various subfolders of export
-- [ ] Implement README compilation target
-- [ ] Implement aggregate README compilation target
-- [ ] Deal with the gamename + gameauthor on the p8png
+- [X] Implement various subfolders of export
+- [X] Implement README compilation target
+- [X] Implement aggregate README compilation target
+- [ ] Deal with the gamename + gameauthor on the p8png (and p8)
 - [ ] Support rendering markdown to html
+- [ ] Add cleanup for when you are renaming a cart
