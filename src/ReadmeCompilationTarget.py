@@ -84,6 +84,6 @@ class ReadmeCompilationTarget(CompilationTarget):
                 f"{preThisGame}{beginTag}{gameSnippet}\n{endTag}{postThisGameExclusive}"
             )
         else:
-            games = f"{beginTag}{gameSnippet}{endTag}{games}"
+            games = f"{beginTag}{gameSnippet}\n{endTag}{games}"
 
         return f"{preamble}{cls.BEGIN_GAMES_TAG}{games}"

@@ -5,7 +5,6 @@ from src.FileRegistry import TestFileEnum
 
 class TestReadme(BaseTest):
     def test_games_tag_not_required(self):
-        return True
         testSlug = "mongo-bongo"
         gameSnippet = "this is a test snippet of Mongo Bongo"
         result: str = ReadmeCompilationTarget.addToAggregateReadmeStr(
@@ -14,10 +13,10 @@ class TestReadme(BaseTest):
 
         self.assertEqual(
             result,
-            f"""{ReadmeCompilationTarget.BEGIN_GAMES_TAG}
-{ReadmeCompilationTarget.beginGameTag(testSlug)}
-{gameSnippet}
-{ReadmeCompilationTarget.endGameTag(testSlug)}
+            f"""<!--BEGIN GAMES-->
+<!--BEGIN mongo-bongo-->
+this is a test snippet of Mongo Bongo
+<!--END mongo-bongo-->
 """,
         )
 
