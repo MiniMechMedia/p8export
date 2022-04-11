@@ -12,10 +12,11 @@
 - [X] Get rid of metavariables
 - [X] Put ParsedLabelImage in ParsedContents instead of raw label image
 - [X] Add concept of cart type (game, tweet, tweet-game, etc.)
-- [ ] Have cart type concept respected by compilation targets (i.e. choose the correct template)
+- [X] Have cart type concept respected by compilation targets (i.e. choose the correct template)
 - [X] Implement various subfolders of export
 - [X] Implement README compilation target
 - [X] Implement aggregate README compilation target
 - [ ] Deal with the gamename + gameauthor on the p8png (and p8)
 - [ ] Support rendering markdown to html
 - [ ] Add cleanup for when you are renaming a cart
+- [ ] Aggregate readme tests

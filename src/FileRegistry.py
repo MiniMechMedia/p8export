@@ -44,6 +44,12 @@ class TestFileEnum(FileEnum):
     # HTML_EXPORT_TEST_FILE_JS = "index.js"
     # HTML_EXPORT_TEMP_FILE_HTML = "index.html"
     # P8_PNG_EXPORT_TEST_FILE = "something.png"
+    AGGREGATE_README_BEFORE_FILE = (
+        "../test/testFiles/readmeTestFiles/readme-for-three-games.md"
+    )
+    AGGREGATE_README_AFTER_UPDATE_FILE = (
+        "../test/testFiles/readmeTestFiles/readme-for-three-games-expected-update.md"
+    )
 
     @property
     def value(self):
@@ -59,6 +65,7 @@ class TempFileEnum(FileEnum):
     HTML_EXPORT_TEMP_FILE_JS = "html_export/index.js"
     HTML_EXPORT_TEMP_FILE_ZIP = "html_export/index.zip"
     P8_PNG_EXPORT_TEMP_FILE = "mongo-bongo.p8.png"
+    AGGREGATE_README_UPDATED_AFTER = "readme-for-three-games-updated.md"
     # ORCHESTRATION_TEMP_DIR = 'orch/'
     # ORCHESTRATION_BASIC_FILE
 

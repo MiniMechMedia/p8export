@@ -6,6 +6,16 @@ from src.FileRegistry import TemplateFileEnum
 
 # TODO rename this since it's gonna be used for game.xml as well as submission.html
 class ReadmeCompilationTarget(CompilationTarget):
+    BEGIN_GAMES_TAG: str = "<!--BEGIN GAMES-->\n"
+
+    @classmethod
+    def beginGameTag(cls, slug: str):
+        return f"<!--BEGIN {slug}-->\n"
+
+    @classmethod
+    def endGameTag(cls, slug: str):
+        return f"<!--END {slug}-->\n"
+
     @classmethod
     def createIndividualReadme(
         cls, parsedContents: ParsedContents, readmeOutputPath: Path
@@ -31,10 +41,8 @@ class ReadmeCompilationTarget(CompilationTarget):
             parsedContents=parsedContents, template=TemplateFileEnum.AGGREGATE_README_MD
         )
 
-        beginGamesTag = "<!--BEGIN GAMES-->"
-
         if not readmeOutputPath.exists():
-            readmeOutputPath.write_text(f"\n{beginGamesTag}\n")
+            readmeOutputPath.write_text(f"\n{cls.BEGIN_GAMES_TAG}\n")
 
         existingReadmeContents: str = readmeOutputPath.read_text()
         newContents: str = cls.addToAggregateReadmeStr(
@@ -49,14 +57,20 @@ class ReadmeCompilationTarget(CompilationTarget):
     def addToAggregateReadmeStr(
         cls, slug: str, existingReadmeContents: str, gameSnippet: str
     ) -> str:
-        beginGamesTag = "<!--BEGIN GAMES-->"
 
         preamble: str
         games: str
-        preamble, games = existingReadmeContents.split(beginGamesTag)
+        splitContents = existingReadmeContents.split(cls.BEGIN_GAMES_TAG, 1)
+        if len(splitContents) == 1:
+            preamble, games = "", existingReadmeContents
+        else:
+            # Should be exactly 2
+            preamble, games = splitContents
 
-        beginTag: str = f"<!--BEGIN {slug}-->"
-        endTag: str = f"<!--END {slug}-->"
+        # beginTag: str = f"<!--BEGIN {slug}-->"
+        # endTag: str = f"<!--END {slug}-->"
+        beginTag: str = cls.beginGameTag(slug)
+        endTag: str = cls.endGameTag(slug)
 
         if beginTag in games:
             preThisGame: str
@@ -66,8 +80,10 @@ class ReadmeCompilationTarget(CompilationTarget):
             preThisGame, postThisGameInclusive = games.split(beginTag)
             _, postThisGameExclusive = postThisGameInclusive.split(endTag)
 
-            games = f"{preThisGame}{beginTag}\n{gameSnippet}\n{endTag}"
+            games = (
+                f"{preThisGame}{beginTag}{gameSnippet}\n{endTag}{postThisGameExclusive}"
+            )
         else:
-            games = f"{beginTag}\n{gameSnippet}\n{endTag}\n{games}"
+            games = f"{beginTag}{gameSnippet}{endTag}{games}"
 
-        return f"{preamble}{beginGamesTag}\n{games}"
+        return f"{preamble}{cls.BEGIN_GAMES_TAG}{games}"
