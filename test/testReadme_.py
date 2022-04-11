@@ -1,6 +1,6 @@
 from BaseTest import BaseTest
 from src.ReadmeCompilationTarget import ReadmeCompilationTarget
-from src.FileRegistry import TestFileEnum
+from src.FileRegistry import TestFileEnum, TempFileEnum
 
 
 class TestReadme(BaseTest):
@@ -21,8 +21,23 @@ this is a test snippet of Mongo Bongo
         )
 
     def test_can_add_game_description(self):
-        # use the same file
-        pass
+        result: str = ReadmeCompilationTarget.addToAggregateReadmeStr(
+            slug="onyx-oryx",
+            existingReadmeContents=self.getTestFileContents(
+                TestFileEnum.AGGREGATE_README_BEFORE_FILE
+            ),
+            gameSnippet="Use your razor sharp horns to dig into the mountain!",
+        )
+
+        with open(
+            self.getTempFilePath(TempFileEnum.AGGREGATE_README_ADDED_AFTER), "w"
+        ) as file:
+            file.write(result)
+
+        self.assertFilesEqual(
+            actual=TempFileEnum.AGGREGATE_README_ADDED_AFTER,
+            expected=TestFileEnum.AGGREGATE_README_AFTER_ADD_FILE,
+        )
 
     def test_can_replace_existing(self):
         result: str = ReadmeCompilationTarget.addToAggregateReadmeStr(
@@ -32,7 +47,6 @@ this is a test snippet of Mongo Bongo
             ),
             gameSnippet="And this is what Mongo Bongo should\nbe now",
         )
-        from src.FileRegistry import TempFileEnum
 
         with open(
             self.getTempFilePath(TempFileEnum.AGGREGATE_README_UPDATED_AFTER), "w"

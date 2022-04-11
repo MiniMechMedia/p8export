@@ -19,4 +19,4 @@
 - [ ] Deal with the gamename + gameauthor on the p8png (and p8)
 - [ ] Support rendering markdown to html
 - [ ] Add cleanup for when you are renaming a cart
-- [ ] Aggregate readme tests
+- [X] Aggregate readme tests
