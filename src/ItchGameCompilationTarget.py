@@ -1,10 +1,20 @@
 # Does the submission.html
-from ParsedContents import ParsedContents
-from CompilationTarget import CompilationTarget
+from src.ParsedContents import ParsedContents
+from src.CompilationTarget import CompilationTarget
 from pathlib import Path
 
+# import selenium
+from selenium.webdriver import Chrome
+from selenium.webdriver.chrome.options import Options
 
-class ItchDescriptionCompilationTarget(CompilationTarget):
+
+class ItchGameCompilationTarget(CompilationTarget):
+    @classmethod
+    def uploadToItch(cls, parsedContents: ParsedContents):
+        # selenium.
+        browser: Chrome = Chrome()
+        browser.get("https://itch.io")
+
     pass
     # @classmethod
     # def compileDescription(cls, data: object) -> str:

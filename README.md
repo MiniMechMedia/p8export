@@ -1,0 +1,3 @@
+# Set Up
+Install chromium web driver (latest stable) and put it in your path (TODO, really?)
+And make sure your installed version of chrome matches...
