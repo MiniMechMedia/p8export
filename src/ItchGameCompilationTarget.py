@@ -111,10 +111,6 @@ class ItchGameCompilationTarget(CompilationTarget):
             checkBox.click()
 
     @classmethod
-    def getGameUrl(cls, slug: str) -> str:
-        return f'https://{config("ITCH_HANDLE")}.itch.io/{slug}'
-
-    @classmethod
     def gameExists(cls, browser, parsedContents: ParsedContents) -> bool:
         browser.get(TemplateEvaluator.constructItchLink(parsedContents=parsedContents))
         try:
