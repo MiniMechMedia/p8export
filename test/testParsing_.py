@@ -10,9 +10,6 @@ class TestParsing(BaseTest):
     #         self.getTestFilePath(TestFileEnum.BASIC_GAME_TEMPLATE_FILE)
     #     )
 
-    def parseFile(self, testFile: TestFileEnum):
-        return Pico8FileParser.parse(self.getTestFilePath(testFile))
-
     def test_parsing_metadata(self):
         # contents: str = self.getTestFileContents(TestFileEnum.BASIC_GAME_TEMPLATE_FILE)
         # rawYaml: str = Pico8FileParser.parseRawYamlFromFileContents(contents)

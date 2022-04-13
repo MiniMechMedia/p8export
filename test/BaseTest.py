@@ -4,6 +4,7 @@ from src.FileRegistry import TestFileEnum, TempFileEnum
 import shutil
 from os.path import exists
 from pathlib import Path
+from src.pico8fileparser import Pico8FileParser
 
 
 class BaseTest(unittest.TestCase):
@@ -58,6 +59,9 @@ class BaseTest(unittest.TestCase):
     def getTempFileContents(self, tempFileName: TempFileEnum) -> str:
         with open(self.getTempFilePath(tempFileName), "r") as file:
             return file.read()
+
+    def parseFile(self, testFile: TestFileEnum):
+        return Pico8FileParser.parse(self.getTestFilePath(testFile))
 
 
 #     tmp file
