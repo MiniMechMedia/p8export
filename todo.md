@@ -17,6 +17,9 @@
 - [X] Implement README compilation target
 - [X] Implement aggregate README compilation target
 - [ ] Deal with the gamename + gameauthor on the p8png (and p8)
-- [ ] Support rendering markdown to html
+- [X] Support rendering markdown to html
 - [ ] Add cleanup for when you are renaming a cart
 - [X] Aggregate readme tests
+- [ ] Add metadata for genre
+- [ ] Populate genre on itch from metadata
+- [ ] Lexaloffle compilation target

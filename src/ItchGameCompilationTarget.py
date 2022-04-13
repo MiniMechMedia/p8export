@@ -2,6 +2,7 @@
 from src.ParsedContents import ParsedContents
 from src.CompilationTarget import CompilationTarget
 from pathlib import Path
+from src.TemplateEvaluator import TemplateEvaluator, TemplateFileEnum
 
 # import selenium
 from selenium.webdriver import Chrome
@@ -21,13 +22,20 @@ class ItchGameCompilationTarget(CompilationTarget):
         with Chrome() as browser:
             cls.login(browser)
             isNewGame: bool = False
-            if not cls.gameExists(browser, parsedContents.metadata.correctedGameSlug):
+            if not cls.gameExists(browser, parsedContents):
                 browser.get("https://itch.io/game/new")
                 isNewGame = True
 
             cls.fillData(browser, parsedContents, isNewGame)
             # TODO figure out what to do at this point
             time.sleep(1000)
+
+    @classmethod
+    def getDescriptionHtml(cls, parsedContents: ParsedContents) -> str:
+        return TemplateEvaluator.evaluateTemplateToString(
+            parsedContents=parsedContents,
+            template=TemplateFileEnum.ITCH_GAME_DESCRIPTION_MD,
+        )
 
     @classmethod
     def pollForSelector(cls, browser: Chrome, selector: str) -> WebElement:
@@ -54,8 +62,6 @@ class ItchGameCompilationTarget(CompilationTarget):
         descriptionTextArea: WebElement = cls.pollForSelector(
             browser=browser, selector=".redactor-box textarea.open"
         )
-        # TODO use the rendered description
-        descriptionTextArea.send_keys(parsedContents.metadata.description)
 
         width: WebElement = cls.pollForSelector(
             browser=browser, selector='[name="embed[width]"]'
@@ -70,6 +76,9 @@ class ItchGameCompilationTarget(CompilationTarget):
 
         cls.configureCheckBoxes(browser=browser)
 
+        descriptionTextArea.send_keys(
+            cls.getDescriptionHtml(parsedContents=parsedContents)
+        )
         # TODO use isNewGame to provide zip. But idk
 
     @classmethod
@@ -106,8 +115,8 @@ class ItchGameCompilationTarget(CompilationTarget):
         return f'https://{config("ITCH_HANDLE")}.itch.io/{slug}'
 
     @classmethod
-    def gameExists(cls, browser, correctedGameSlug) -> bool:
-        browser.get(cls.getGameUrl(correctedGameSlug))
+    def gameExists(cls, browser, parsedContents: ParsedContents) -> bool:
+        browser.get(TemplateEvaluator.constructItchLink(parsedContents=parsedContents))
         try:
             editGameElement: WebElement = browser.find_element(
                 By.CSS_SELECTOR, 'a[href^="https://itch.io/game/edit/"]'
@@ -116,6 +125,13 @@ class ItchGameCompilationTarget(CompilationTarget):
             return True
 
         except NoSuchElementException:
+            try:
+                browser.find_element(By.CSS_SELECTOR, ".not_found_game_page")
+            except NoSuchElementException:
+                raise Exception(
+                    "Unknown situation. Game does not seem to exist but we do not seem to be on the 404 page either"
+                )
+
             return False
 
     @classmethod
