@@ -4,7 +4,7 @@ from BaseTest import BaseTest
 from src.FileRegistry import TestFileEnum, TemplateFileEnum, TempFileEnum
 from src.pico8fileparser import Pico8FileParser
 from src.ParsedContents import ParsedContents
-from src.TemplateEvaluator import TemplateEvaluator
+from src.TemplateEvaluator import TemplateEvaluator, RenderType
 
 
 class TestTemplating(BaseTest):
@@ -14,7 +14,9 @@ class TestTemplating(BaseTest):
         )
 
         evaluated: str = TemplateEvaluator.evaluateStringTemplateToString(
-            parsedContents=parsed, strTemplate="{description}"
+            parsedContents=parsed,
+            strTemplate="{description}",
+            renderType=RenderType.BASIC,
         )
 
         self.assertContentsEqual(
@@ -28,7 +30,9 @@ class TestTemplating(BaseTest):
         )
 
         evaluated: str = TemplateEvaluator.evaluateStringTemplateToString(
-            parsedContents=parsed, strTemplate="{char_count} chars\n\n{source_code}"
+            parsedContents=parsed,
+            strTemplate="{char_count} chars\n\n{source_code}",
+            renderType=RenderType.BASIC,
         )
 
         self.assertContentsEqual(
@@ -50,7 +54,6 @@ class TestTemplating(BaseTest):
 
         self.assertFilesEqual(
             actual=TempFileEnum.ITCH_DESCRIPTION_EVALUATED_FILE,
-            # TODO obv
             expected=TestFileEnum.ITCH_DESCRIPTION_EVALUATED_FILE,
         )
 

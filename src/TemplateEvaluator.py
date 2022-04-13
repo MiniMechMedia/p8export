@@ -3,16 +3,32 @@ from src.ParsedContents import Metadata, ControlEnum, ParsedContents, CartType
 # from File
 from src.FileRegistry import TemplateFileEnum
 from pathlib import Path
+from markdown import markdown
+from enum import Enum, auto
+
+
+class RenderType(Enum):
+    # just a basic string replacement
+    BASIC = auto()
+    HTML = auto()
 
 
 class TemplateEvaluator:
+    @classmethod
+    def getRenderTypeFromTemplate(cls, template: TemplateFileEnum) -> RenderType:
+        if template.value.endswith(".html.md"):
+            return RenderType.HTML
+        return RenderType.BASIC
+
     @classmethod
     def evaluateTemplateToString(
         cls, parsedContents: ParsedContents, template: TemplateFileEnum
     ) -> str:
         strTemplate: str = template.readText()
         return cls.evaluateStringTemplateToString(
-            parsedContents=parsedContents, strTemplate=strTemplate
+            parsedContents=parsedContents,
+            strTemplate=strTemplate,
+            renderType=cls.getRenderTypeFromTemplate(template=template),
         )
 
     # @classmethod
@@ -25,11 +41,16 @@ class TemplateEvaluator:
 
     @classmethod
     def evaluateStringTemplateToString(
-        cls, parsedContents: ParsedContents, strTemplate: str
+        cls, parsedContents: ParsedContents, strTemplate: str, renderType: RenderType
     ) -> str:
-        return strTemplate.format(
+        ret: str = strTemplate.format(
             **cls.constructEvaluationDictionary(parsedContents=parsedContents)
         )
+
+        if renderType == RenderType.HTML:
+            ret = markdown(ret)
+
+        return ret
 
     @classmethod
     def evaluateTemplateToFile(
@@ -42,7 +63,9 @@ class TemplateEvaluator:
         with open(outputFile, "w") as file:
             file.write(
                 cls.evaluateStringTemplateToString(
-                    parsedContents=parsedContents, strTemplate=template.readText()
+                    parsedContents=parsedContents,
+                    strTemplate=template.readText(),
+                    renderType=cls.getRenderTypeFromTemplate(template=template),
                 )
             )
 

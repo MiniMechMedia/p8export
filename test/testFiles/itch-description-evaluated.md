@@ -1,25 +1,15 @@
-
-This is a multi-line
-description of the game
-
-
-## Controls
-* Arrow Keys - move player
-* X - activate object
-
-
-
-## About
-Created for [TriJam -1](https://itch.io/jam/trijam--1/entries)  
-Theme: theme1, theme2, theme3  
-Development Time: None  
-
-Also submitted to [MiniJam]()  
-Theme: blah  
-
-
-
-
-Source code available on [GitHub](https://github.com/CaterpillarGames/pico8-games/tree/master/carts/mongo-bongo)
-
+<p>This is a multi-line
+description of the game</p>
+<h2>Controls</h2>
+<ul>
+<li>Arrow Keys - move player</li>
+<li>X - activate object</li>
+</ul>
+<h2>About</h2>
+<p>Created for <a href="https://itch.io/jam/trijam--1/entries">TriJam -1</a><br />
+Theme: theme1, theme2, theme3<br />
+Development Time: None  </p>
+<p>Also submitted to <a href="">MiniJam</a><br />
+Theme: blah  </p>
+<p>Source code available on <a href="https://github.com/CaterpillarGames/pico8-games/tree/master/carts/mongo-bongo">GitHub</a></p>
 <!--Template: Game, Itch-->
