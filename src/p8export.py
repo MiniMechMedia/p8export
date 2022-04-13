@@ -11,6 +11,7 @@ from src.HtmlFileCompilationTarget import HtmlFileCompilationTarget
 from src.P8PngCompilationTarget import P8PngCompilationTarget
 from src.ImagesCompilationTarget import ImagesCompilationTarget
 from src.ReadmeCompilationTarget import ReadmeCompilationTarget
+from src.ItchGameCompilationTarget import ItchGameCompilationTarget
 
 # from src.ItchDescriptionCompilationTarget import ItchDescriptionCompilationTarget
 
@@ -19,7 +20,12 @@ class P8Export:
     # Be warned: will use the directory the p8 file is currently in as the export dir
 
     @classmethod
-    def export(cls, targetFile: Path, targetExportDir: Optional[Path] = None):
+    def export(
+        cls,
+        targetFile: Path,
+        uploadToItch: bool,
+        targetExportDir: Optional[Path] = None,
+    ):
         if targetExportDir is not None:
             raise NotImplemented("this feature is not yet available")
         if not exists(targetFile):
@@ -76,6 +82,8 @@ class P8Export:
             parsedContents=parsedContents,
             readmeOutputPath=targetDir.parent.parent / "README.md",
         )
+        if uploadToItch:
+            ItchGameCompilationTarget.uploadToItch(parsedContents)
         # parsedContents=parsedContents,
         #                                              outputDir=locations.exportsSubDir / parsedContents.)
         # FileSystemOrchestrator.prepareSubfolders()
@@ -84,4 +92,4 @@ class P8Export:
 if __name__ == "__main__":
     if len(sys.argv) < 2:
         raise Exception("must provide target")
-    P8Export.export(Path(sys.argv[1]))
+    P8Export.export(Path(sys.argv[1]), uploadToItch=True)

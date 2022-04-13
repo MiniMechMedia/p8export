@@ -27,7 +27,7 @@ class TestP8Export(BaseTest):
         shutil.copy(
             self.getTestFilePath(TestFileEnum.BASIC_GAME_TEMPLATE_FILE), p8fileStart
         )
-        P8Export.export(p8fileStart)
+        P8Export.export(p8fileStart, uploadToItch=False)
 
         expectedGameDir = self.currentTestFolder / "mongo-bongo"
 
