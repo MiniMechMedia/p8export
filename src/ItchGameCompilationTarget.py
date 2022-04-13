@@ -20,11 +20,12 @@ class ItchGameCompilationTarget(CompilationTarget):
         browser: Chrome
         with Chrome() as browser:
             cls.login(browser)
-
+            isNewGame: bool = False
             if not cls.gameExists(browser, parsedContents.metadata.correctedGameSlug):
                 browser.get("https://itch.io/game/new")
+                isNewGame = True
 
-            cls.fillData(browser, parsedContents)
+            cls.fillData(browser, parsedContents, isNewGame)
             # TODO figure out what to do at this point
             time.sleep(1000)
 
@@ -40,7 +41,7 @@ class ItchGameCompilationTarget(CompilationTarget):
         raise NoSuchElementException
 
     @classmethod
-    def fillData(cls, browser, parsedContents: ParsedContents):
+    def fillData(cls, browser, parsedContents: ParsedContents, isNewGame: bool):
         tagline: WebElement = cls.pollForSelector(
             browser=browser, selector='[name="game[short_text]"]'
         )
@@ -68,6 +69,8 @@ class ItchGameCompilationTarget(CompilationTarget):
         height.send_keys("680")
 
         cls.configureCheckBoxes(browser=browser)
+
+        # TODO use isNewGame to provide zip. But idk
 
     @classmethod
     def configureCheckBoxes(cls, browser: Chrome):
