@@ -36,7 +36,9 @@ class TestFileEnum(FileEnum):
     TWEET_CART_TEMPLATE_EVALUATED_DESCRIPTION_FILE = (
         "../test/testFiles/tweet-cart-template-evaluated-description.md"
     )
-    ITCH_DESCRIPTION_EVALUATED_FILE = "../test/testFiles/itch-description-evaluated.md"
+    ITCH_DESCRIPTION_EVALUATED_FILE = (
+        "../test/testFiles/itch-description-evaluated.html"
+    )
     ORCHESTRATION_TEST_FILE = "../test/testFiles/orchestration-test.p8"
     BASIC_DESCRIPTION_EVALUATED_FILE = (
         "../test/testFiles/basic-description-evaluated.md"
@@ -62,7 +64,7 @@ class TestFileEnum(FileEnum):
 class TempFileEnum(FileEnum):
     LABEL_IMAGE_TEMP_FILE = "label.png"
     ITCH_COVER_IMAGE_TEMP_FILE = "cover.png"
-    ITCH_DESCRIPTION_EVALUATED_FILE = "itch-description-evaluated-temp.md"
+    ITCH_DESCRIPTION_EVALUATED_FILE = "itch-description-evaluated-temp.html"
     HTML_EXPORT_TEMP_DIR = "html_export/"
     HTML_EXPORT_TEMP_FILE_HTML = "html_export/index.html"
     HTML_EXPORT_TEMP_FILE_JS = "html_export/index.js"
