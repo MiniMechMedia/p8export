@@ -1,7 +1,7 @@
 import pathlib
 import yaml
 import typing
-from .ParsedContents import (
+from src.ParsedContents import (
     ParsedContents,
     ParsedLabelImage,
     Metadata,
