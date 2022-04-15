@@ -12,11 +12,16 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.remote.webelement import WebElement
 from decouple import config
 import time
-
+import subprocess
 
 class ItchGameCompilationTarget(CompilationTarget):
     @classmethod
-    def uploadToItch(cls, parsedContents: ParsedContents):
+    def uploadToItch(cls, parsedContents: ParsedContents, exportFolder: Path):
+        # TODO handle windows
+        result = subprocess.run(['open', str(exportFolder)])
+        if result.returncode != 0:
+            raise Exception('Error - unable to open file location')
+
         # selenium.
         browser: Chrome
         with Chrome() as browser:
@@ -27,8 +32,15 @@ class ItchGameCompilationTarget(CompilationTarget):
                 isNewGame = True
 
             cls.fillData(browser, parsedContents, isNewGame)
-            # TODO figure out what to do at this point
-            time.sleep(1000)
+            # print('ok whenever you are ready')
+            while True:
+                try:
+                    browser.find_element(By.CSS_SELECTOR, 'body')
+                except:
+                    break
+                time.sleep(1)
+            # print('detected browser close')
+
 
     @classmethod
     def getDescriptionHtml(cls, parsedContents: ParsedContents) -> str:

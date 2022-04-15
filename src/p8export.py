@@ -83,7 +83,7 @@ class P8Export:
             readmeOutputPath=targetDir.parent.parent / "README.md",
         )
         if uploadToItch:
-            ItchGameCompilationTarget.uploadToItch(parsedContents)
+            ItchGameCompilationTarget.uploadToItch(parsedContents, locations.exportsBaseDir)
         # parsedContents=parsedContents,
         #                                              outputDir=locations.exportsSubDir / parsedContents.)
         # FileSystemOrchestrator.prepareSubfolders()

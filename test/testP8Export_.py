@@ -42,6 +42,15 @@ class TestP8Export(BaseTest):
         self.assertPathExists(expectedGameDir / "export" / "html_export" / "index.zip")
         self.assertPathExists(expectedGameDir / "export" / "mongo-bongo.p8.png")
         self.assertPathExists(expectedGameDir / "README.md")
+    #
+    # def test_folder_structure(self):
+    #     templateDir: Path = self.currentTestFolder / "game-template"
+    #     os.makedirs(templateDir)
+    #     p8fileStart: Path = templateDir / "new-game.p8"
+    #     shutil.copy(
+    #         self.getTestFilePath(TestFileEnum.BASIC_GAME_TEMPLATE_FILE), p8fileStart
+    #     )
+    #     P8Export.export(p8fileStart, uploadToItch=False)
 
     def test_optional_dir(self):
         pass
