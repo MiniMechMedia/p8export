@@ -6,7 +6,7 @@ import unittest
 from pathlib import Path
 
 # TODO not sure if I really want/need to test this
-# @unittest.skip
+@unittest.skip
 class TestItchUpload(BaseTest):
     def test_can_upload_to_itch(self):
         parsed: ParsedContents = self.parseFile(TestFileEnum.BASIC_GAME_TEMPLATE_FILE)

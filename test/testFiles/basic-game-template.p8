@@ -27,9 +27,9 @@ description: |
   This is a multi-line
   description of the game
 controls:
-  - key: ARROW_KEYS
+  - inputs: [ARROW_KEYS]
     desc: move player
-  - key: X
+  - inputs: [X,Z]
     desc: activate object
 
 hints: ''

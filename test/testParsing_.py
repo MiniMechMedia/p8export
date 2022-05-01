@@ -26,9 +26,9 @@ class TestParsing(BaseTest):
         self.assertEqual(secondJam.jam_number, None)
 
         firstControl: Metadata.Control = parsed.metadata.controls[0]
-        self.assertEqual(firstControl.key, ControlEnum.ARROW_KEYS)
+        self.assertEqual(firstControl.inputs, [ControlEnum.ARROW_KEYS])
         secondControl: Metadata.Control = parsed.metadata.controls[1]
-        self.assertEqual(secondControl.key, ControlEnum.X)
+        self.assertEqual(secondControl.inputs, [ControlEnum.X, ControlEnum.Z])
 
     def test_parsing_sourcecode(self):
         parsed: ParsedContents = self.parseFile(TestFileEnum.TWEET_CART_TEMPLATE_FILE)

@@ -23,3 +23,4 @@
 - [ ] Add metadata for genre
 - [ ] Populate genre on itch from metadata
 - [ ] Lexaloffle compilation target
+- [X] Support multiple controls to do the same action

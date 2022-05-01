@@ -111,14 +111,20 @@ class TemplateEvaluator:
     # TODO should maybe provide target like XML, HTML, MD, TXT
     @classmethod
     def constructControlDescription(cls, metadata: Metadata) -> str:
-        return "\n".join(
-            f"* {cls.controlToDescription(control.key)} - {control.desc}"
-            for control in metadata.controls
-        )
+        ret: str = ''
+        for control in metadata.controls:
+            controlInputs: str = ' / '.join(cls.controlToDescription(inp) for inp in control.inputs)
+            ret += f'* {controlInputs} - {control.desc}\n'
+
+        return ret.removesuffix('\n')
 
     @classmethod
     def controlToDescription(cls, controlEnum: ControlEnum):
-        return {ControlEnum.ARROW_KEYS: "Arrow Keys", ControlEnum.X: "X"}[controlEnum]
+        return {
+            ControlEnum.ARROW_KEYS: "Arrow Keys",
+            ControlEnum.X: "X",
+            ControlEnum.Z: 'Z'
+        }[controlEnum]
 
     @classmethod
     def constructJamInfo(cls, metadata: Metadata) -> str:

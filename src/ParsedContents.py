@@ -37,6 +37,7 @@ class ParsedLabelImage:
 class ControlEnum(Enum):
     ARROW_KEYS = "ARROW_KEYS"
     X = "X"
+    Z = 'Z'
 
 
 def controlDesc(control: ControlEnum):
@@ -76,7 +77,7 @@ class Metadata:
 
     @dataclass
     class Control:
-        key: ControlEnum
+        inputs: list[ControlEnum]
         desc: str
 
     description: str
