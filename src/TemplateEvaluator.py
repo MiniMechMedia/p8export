@@ -123,7 +123,10 @@ class TemplateEvaluator:
         return {
             ControlEnum.ARROW_KEYS: "Arrow Keys",
             ControlEnum.X: "X",
-            ControlEnum.Z: 'Z'
+            ControlEnum.Z: 'Z',
+            ControlEnum.MOUSE: 'Mouse',
+            ControlEnum.LEFT_CLICK: 'Left Click',
+            ControlEnum.RIGHT_CLICK: 'Right Click',
         }[controlEnum]
 
     @classmethod

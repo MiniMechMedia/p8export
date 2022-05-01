@@ -38,10 +38,9 @@ class ControlEnum(Enum):
     ARROW_KEYS = "ARROW_KEYS"
     X = "X"
     Z = 'Z'
-
-
-def controlDesc(control: ControlEnum):
-    return {ControlEnum.ARROW_KEYS: "Arrow Keys", ControlEnum.X: "X"}[control]
+    MOUSE = 'MOUSE'
+    LEFT_CLICK = 'LEFT_CLICK'
+    RIGHT_CLICK = 'RIGHT_CLICK'
 
 
 class CartType(Enum):
