@@ -7,7 +7,7 @@ from src.TemplateEvaluator import TemplateEvaluator, TemplateFileEnum
 # import selenium
 from selenium.webdriver import Chrome
 from selenium.webdriver.common.by import By
-from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import NoSuchElementException, UnexpectedAlertPresentException, NoSuchWindowException
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.remote.webelement import WebElement
 from decouple import config
@@ -32,14 +32,18 @@ class ItchGameCompilationTarget(CompilationTarget):
                 isNewGame = True
 
             cls.fillData(browser, parsedContents, isNewGame)
-            # print('ok whenever you are ready')
+            print('ok whenever you are ready')
             while True:
                 try:
-                    browser.find_element(By.CSS_SELECTOR, 'body')
-                except:
+                    print('selecting body')
+                    x = browser.find_element(By.CSS_SELECTOR, 'body')
+                    y = x
+                except NoSuchWindowException:
                     break
+                except:
+                    pass
                 time.sleep(1)
-            # print('detected browser close')
+            print('detected browser close')
 
 
     @classmethod
@@ -65,15 +69,13 @@ class ItchGameCompilationTarget(CompilationTarget):
         tagline: WebElement = cls.pollForSelector(
             browser=browser, selector='[name="game[short_text]"]'
         )
+        tagline.clear()
         tagline.send_keys(parsedContents.metadata.tagline)
 
-        descriptionHtmlButton: WebElement = cls.pollForSelector(
-            browser=browser, selector='.redactor-toolbar a[aria-label="HTML"]'
+        noPayments: WebElement = cls.pollForSelector(
+            browser=browser, selector='.payment_mode_disable_payments'
         )
-        descriptionHtmlButton.click()
-        descriptionTextArea: WebElement = cls.pollForSelector(
-            browser=browser, selector=".redactor-box textarea.open"
-        )
+        noPayments.click()
 
         width: WebElement = cls.pollForSelector(
             browser=browser, selector='[name="embed[width]"]'
@@ -88,6 +90,14 @@ class ItchGameCompilationTarget(CompilationTarget):
 
         cls.configureCheckBoxes(browser=browser)
 
+        descriptionHtmlButton: WebElement = cls.pollForSelector(
+            browser=browser, selector='.redactor-toolbar a[aria-label="HTML"]'
+        )
+        descriptionHtmlButton.click()
+        descriptionTextArea: WebElement = cls.pollForSelector(
+            browser=browser, selector=".redactor-box textarea.open"
+        )
+        descriptionTextArea.clear()
         descriptionTextArea.send_keys(
             cls.getDescriptionHtml(parsedContents=parsedContents)
         )
