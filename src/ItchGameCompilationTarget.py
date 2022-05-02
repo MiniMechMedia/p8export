@@ -32,18 +32,19 @@ class ItchGameCompilationTarget(CompilationTarget):
                 isNewGame = True
 
             cls.fillData(browser, parsedContents, isNewGame)
-            print('ok whenever you are ready')
-            while True:
-                try:
-                    print('selecting body')
-                    x = browser.find_element(By.CSS_SELECTOR, 'body')
-                    y = x
-                except NoSuchWindowException:
-                    break
-                except:
-                    pass
-                time.sleep(1)
-            print('detected browser close')
+            # print('ok whenever you are ready')
+            input('press enter after you close the browser')
+            # while True:
+            #     try:
+            #         print('selecting body')
+            #         x = browser.find_element(By.CSS_SELECTOR, 'body')
+            #         y = x
+            #     except NoSuchWindowException:
+            #         break
+            #     except:
+            #         pass
+            #     time.sleep(1)
+            # print('detected browser close')
 
 
     @classmethod
@@ -66,17 +67,17 @@ class ItchGameCompilationTarget(CompilationTarget):
 
     @classmethod
     def fillData(cls, browser, parsedContents: ParsedContents, isNewGame: bool):
-        title: WebElement = cls.pollForSelector(
-            browser=browser, selector='[name="game[title]"]'
-        )
-        title.clear()
-        title.send_keys(parsedContents.metadata.game_name)
-
         slug: WebElement = cls.pollForSelector(
             browser=browser, selector='[name="game[slug]"]'
         )
         slug.clear()
         slug.send_keys(parsedContents.metadata.correctedGameSlug)
+
+        title: WebElement = cls.pollForSelector(
+            browser=browser, selector='[name="game[title]"]'
+        )
+        title.clear()
+        title.send_keys(parsedContents.metadata.game_name)
 
         tagline: WebElement = cls.pollForSelector(
             browser=browser, selector='[name="game[short_text]"]'
