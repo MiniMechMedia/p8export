@@ -78,7 +78,7 @@ class TemplateEvaluator:
             "controls": cls.constructControlDescription(
                 metadata=parsedContents.metadata
             ),
-            "hints": parsedContents.metadata.hints,
+            "hints": '' if not parsedContents.metadata.hints else f'## Hints\n{parsedContents.metadata.hints}',
             "jam_info": cls.constructJamInfo(metadata=parsedContents.metadata),
             "about_extra": parsedContents.metadata.about_extra,
             "source_code_link": cls.constructSourceCodeLink(
@@ -148,6 +148,8 @@ class TemplateEvaluator:
             ret += f"Theme: {jam.jam_theme}  \n"
             if jam.jam_name == "TriJam":
                 ret += f"Development Time: {metadata.develop_time}  \n"
+            elif jam.jam_name == 'MiniJam':
+                ret += f'Limitation: {jam.minijam_limitation}  \n'
             isFirst = False
 
         return ret
