@@ -66,6 +66,18 @@ class ItchGameCompilationTarget(CompilationTarget):
 
     @classmethod
     def fillData(cls, browser, parsedContents: ParsedContents, isNewGame: bool):
+        title: WebElement = cls.pollForSelector(
+            browser=browser, selector='[name="game[title]"]'
+        )
+        title.clear()
+        title.send_keys(parsedContents.metadata.game_name)
+
+        slug: WebElement = cls.pollForSelector(
+            browser=browser, selector='[name="game[slug]"]'
+        )
+        slug.clear()
+        slug.send_keys(parsedContents.metadata.correctedGameSlug)
+
         tagline: WebElement = cls.pollForSelector(
             browser=browser, selector='[name="game[short_text]"]'
         )
@@ -77,18 +89,22 @@ class ItchGameCompilationTarget(CompilationTarget):
         )
         noPayments.click()
 
-        width: WebElement = cls.pollForSelector(
-            browser=browser, selector='[name="embed[width]"]'
-        )
-        width.clear()
-        width.send_keys("750")
-        height: WebElement = cls.pollForSelector(
-            browser=browser, selector='[name="embed[height]"]'
-        )
-        height.clear()
-        height.send_keys("680")
+        # TODO make these better
+        try:
+            width: WebElement = cls.pollForSelector(
+                browser=browser, selector='[name="embed[width]"]'
+            )
+            width.clear()
+            width.send_keys("750")
+            height: WebElement = cls.pollForSelector(
+                browser=browser, selector='[name="embed[height]"]'
+            )
+            height.clear()
+            height.send_keys("680")
 
-        cls.configureCheckBoxes(browser=browser)
+            cls.configureCheckBoxes(browser=browser)
+        except:
+            pass
 
         descriptionHtmlButton: WebElement = cls.pollForSelector(
             browser=browser, selector='.redactor-toolbar a[aria-label="HTML"]'
