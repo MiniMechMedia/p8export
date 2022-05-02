@@ -89,7 +89,6 @@ class TemplateEvaluator:
             "game_name": parsedContents.metadata.game_name,
             "itch_link": cls.constructItchLink(parsedContents=parsedContents),
             "alt_text": parsedContents.metadata.img_alt,
-            "hints": parsedContents.metadata.hints,
             "tag_line": parsedContents.metadata.tagline,
             "cover_path": parsedContents.coverPath,
             "cover_path_abs": parsedContents.coverPathAbs,
