@@ -12,6 +12,7 @@ from src.P8PngCompilationTarget import P8PngCompilationTarget
 from src.ImagesCompilationTarget import ImagesCompilationTarget
 from src.ReadmeCompilationTarget import ReadmeCompilationTarget
 from src.ItchGameCompilationTarget import ItchGameCompilationTarget
+from src.XmlCompilationTarget import XmlCompilationTarget
 
 # from src.ItchDescriptionCompilationTarget import ItchDescriptionCompilationTarget
 
@@ -66,12 +67,12 @@ class P8Export:
             p8filePath=locations.p8FilePath,
             outputDir=locations.htmlExportDir,
         )
-        P8PngCompilationTarget.compileToP8PngToDirectory(
-            config=parsedContents.config,
-            p8InputPath=locations.p8FilePath,
-            p8PngOutputPath=locations.exportsSubDir
-            / (parsedContents.metadata.correctedGameSlug + ".p8.png"),
-        )
+        # P8PngCompilationTarget.compileToP8PngToDirectory(
+        #     config=parsedContents.config,
+        #     p8InputPath=locations.p8FilePath,
+        #     p8PngOutputPath=locations.exportsSubDir
+        #     / (parsedContents.metadata.correctedGameSlug + ".p8.png"),
+        # )
         ReadmeCompilationTarget.createIndividualReadme(
             parsedContents=parsedContents,
             readmeOutputPath=locations.exportsBaseDir / "README.md",
@@ -82,6 +83,10 @@ class P8Export:
             parsedContents=parsedContents,
             readmeOutputPath=targetDir.parent.parent / "README.md",
         )
+
+        XmlCompilationTarget.compileToXml(xmlDestination=locations.exportsSubDir / 'game.xml',
+                                 metadata=parsedContents.metadata)
+
         if uploadToItch:
             ItchGameCompilationTarget.uploadToItch(parsedContents, locations.exportsBaseDir)
         # parsedContents=parsedContents,
@@ -92,4 +97,8 @@ class P8Export:
 if __name__ == "__main__":
     if len(sys.argv) < 2:
         raise Exception("must provide target")
-    P8Export.export(Path(sys.argv[1]), uploadToItch=True)
+    # TODO arg parsing
+    uploadToItch = True
+    if len(sys.argv) > 2 and sys.argv[2] == "--no-itch":
+        uploadToItch = False
+    P8Export.export(Path(sys.argv[1]), uploadToItch=uploadToItch)
