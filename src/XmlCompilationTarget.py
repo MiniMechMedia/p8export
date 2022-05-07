@@ -13,7 +13,7 @@ class XmlCompilationTarget(CompilationTarget):
         with open(xmlDestination, 'w') as file:
             file.write(f'''
                 <game>
-                    <path>./{metadata.correctedGameSlug}</path>
+                    <path>./{metadata.correctedGameSlug}.p8.png</path>
                     <name>{metadata.game_name}</name>
                     <image>./{metadata.correctedGameSlug}.p8.png</image>
                     <desc>
