@@ -24,7 +24,7 @@ class ItchGameCompilationTarget(CompilationTarget):
 
         # selenium.
         browser: Chrome
-        with Chrome() as browser:
+        with Chrome(executable_path=config('CHROMEEXE')) as browser:
             cls.login(browser)
             isNewGame: bool = False
             if not cls.gameExists(browser, parsedContents):
