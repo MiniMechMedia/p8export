@@ -25,3 +25,6 @@
 - [ ] Lexaloffle compilation target
 - [X] Support multiple controls to do the same action
 - [ ] Auto-select the "Kind of project" field in itch
+- [ ] Add in-band metadata like __instructions__ and __controls__
+- [ ] Consume __instructions__ and __controls__ in pico8 template file
+- [ ] Pico8EduUrlCompilationTarget for automatically doing save @url
