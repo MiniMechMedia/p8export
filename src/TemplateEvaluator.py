@@ -5,7 +5,7 @@ from src.FileRegistry import TemplateFileEnum
 from pathlib import Path
 from markdown import markdown
 from enum import Enum, auto
-
+import jinja2
 
 class RenderType(Enum):
     # just a basic string replacement
@@ -24,6 +24,16 @@ class TemplateEvaluator:
     def evaluateTemplateToString(
         cls, parsedContents: ParsedContents, template: TemplateFileEnum
     ) -> str:
+        root = Path(__file__) / '..' / '..'
+        templateLoader = jinja2.FileSystemLoader(searchpath=root.resolve())
+        templateEnv = jinja2.Environment(loader=templateLoader)
+        TEMPLATE_FILE = str(template.filepath)
+        template = templateEnv.get_template(TEMPLATE_FILE)
+        # templateVars = {"title": "Test Example",
+        #                 "description": "A simple inquiry of function."}
+        return template.render(cls.constructEvaluationDictionary(parsedContents=parsedContents))
+
+        # raise NotImplemented
         strTemplate: str = template.readText()
         return cls.evaluateStringTemplateToString(
             parsedContents=parsedContents,
