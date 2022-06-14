@@ -28,11 +28,11 @@ class TemplateEvaluator:
         templateLoader = jinja2.FileSystemLoader(searchpath=root.resolve())
         templateEnv = jinja2.Environment(loader=templateLoader)
         TEMPLATE_FILE = str(template.filepath)
-        template = templateEnv.get_template(TEMPLATE_FILE)
+        jinjaTemplate = templateEnv.get_template(TEMPLATE_FILE)
         # templateVars = {"title": "Test Example",
         #                 "description": "A simple inquiry of function."}
-        return template.render(cls.constructEvaluationDictionary(parsedContents=parsedContents))
-
+        # return template.render(cls.constructEvaluationDictionary(parsedContents=parsedContents))
+        return jinjaTemplate.render({"title":'blah'})
         # raise NotImplemented
         strTemplate: str = template.readText()
         return cls.evaluateStringTemplateToString(
@@ -53,6 +53,30 @@ class TemplateEvaluator:
     def evaluateStringTemplateToString(
         cls, parsedContents: ParsedContents, strTemplate: str, renderType: RenderType
     ) -> str:
+        root = (Path(__file__) / '..' / '..').resolve() / 'template'
+        print('checkhere',root)
+        templateFileName = "asdfasdfasdf.temp"
+        temporaryTemplateFile = root / templateFileName
+        with open(temporaryTemplateFile, 'w') as file:
+            file.write(strTemplate)
+
+        templateLoader = jinja2.FileSystemLoader(searchpath=root.resolve())
+        templateEnv = jinja2.Environment(loader=templateLoader)
+        jinjaTemplate = templateEnv.get_template(templateFileName)
+
+        return jinjaTemplate.render(cls.constructEvaluationDictionary(parsedContents=parsedContents))
+        '''
+                templateLoader = jinja2.FileSystemLoader(searchpath=root.resolve())
+        templateEnv = jinja2.Environment(loader=templateLoader)
+        TEMPLATE_FILE = str(template.filepath)
+        jinjaTemplate = templateEnv.get_template(TEMPLATE_FILE)
+        # templateVars = {"title": "Test Example",
+        #                 "description": "A simple inquiry of function."}
+        # return template.render(cls.constructEvaluationDictionary(parsedContents=parsedContents))
+        return jinjaTemplate.render({"title":'blah'})
+        '''
+
+
         ret: str = strTemplate.format(
             **cls.constructEvaluationDictionary(parsedContents=parsedContents)
         )
