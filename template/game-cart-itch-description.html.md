@@ -1,16 +1,16 @@
 
-{description}
+{{description}}
 
 ## Controls
-{controls}
+{{controls}}
 
-{hints}
+{{hints}}
 
 ## About
-{jam_info}
+{{jam_info}}
 
-{about_extra}
+{{about_extra}}
 
-Source code available on [GitHub]({source_code_link})
+Source code available on [GitHub]({{source_code_link}})
 
 <!--Template: Game, Itch-->

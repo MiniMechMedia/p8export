@@ -64,7 +64,7 @@ class TemplateEvaluator:
         templateEnv = jinja2.Environment(loader=templateLoader)
         jinjaTemplate = templateEnv.get_template(templateFileName)
 
-        return jinjaTemplate.render(cls.constructEvaluationDictionary(parsedContents=parsedContents))
+        ret: str = jinjaTemplate.render(cls.constructEvaluationDictionary(parsedContents=parsedContents))
         '''
                 templateLoader = jinja2.FileSystemLoader(searchpath=root.resolve())
         templateEnv = jinja2.Environment(loader=templateLoader)
@@ -77,9 +77,9 @@ class TemplateEvaluator:
         '''
 
 
-        ret: str = strTemplate.format(
-            **cls.constructEvaluationDictionary(parsedContents=parsedContents)
-        )
+        # ret: str = strTemplate.format(
+        #     **cls.constructEvaluationDictionary(parsedContents=parsedContents)
+        # )
 
         if renderType == RenderType.HTML:
             ret = markdown(ret)

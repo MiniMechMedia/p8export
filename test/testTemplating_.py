@@ -15,7 +15,7 @@ class TestTemplating(BaseTest):
 
         evaluated: str = TemplateEvaluator.evaluateStringTemplateToString(
             parsedContents=parsed,
-            strTemplate="{description}",
+            strTemplate="{{description}}",
             renderType=RenderType.BASIC,
         )
 
@@ -31,7 +31,7 @@ class TestTemplating(BaseTest):
 
         evaluated: str = TemplateEvaluator.evaluateStringTemplateToString(
             parsedContents=parsed,
-            strTemplate="{char_count} chars\n\n{source_code}",
+            strTemplate="{{char_count}} chars\n\n{{source_code}}",
             renderType=RenderType.BASIC,
         )
 
