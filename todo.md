@@ -28,4 +28,5 @@
 - [ ] Add in-band metadata like __instructions__ and __controls__
 - [ ] Consume __instructions__ and __controls__ in pico8 template file
 - [ ] Pico8EduUrlCompilationTarget for automatically doing save @url
-- [ ] Jinja templating
+- [X] Jinja templating
+- [ ] Add tests for each template

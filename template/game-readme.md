@@ -1,20 +1,20 @@
-# {game_name}
-{description}
+# {{game_name}}
+{{description}}
 
-[![{alt_text}]({cover_path})]({itch_link})
+[![{{alt_text}}]({{cover_path}})]({{itch_link}})
 
-Play it now on [itch.io]({itch_link})
+Play it now on [itch.io]({{itch_link}})
 
-{controls}
+{{controls}}
 
-{hints}
+{{hints}}
 
 # About
-{jam_info}
+{{jam_info}}
 
-{about_extra}
+{{about_extra}}
 
-Source code available on [GitHub]({source_code_link})
+Source code available on [GitHub]({{source_code_link}})
 
 <!--TODO ponder metadata-->
 

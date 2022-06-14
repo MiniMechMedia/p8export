@@ -1,20 +1,20 @@
 
-{description}
+{{description}}
 
-This cart is tweetable at just {char_count} characters.
+This cart is tweetable at just {{char_count}} characters.
 
-<pre><code>{source_code}</code></pre>
+<pre><code>{{source_code}}</code></pre>
 
 ## Controls
-{controls}
+{{controls}}
 
 {hints}
 
 ## About
-{jam_info}
+{{jam_info}}
 
-{about_extra}
+{{about_extra}}
 
-Source code available on [GitHub]({source_code_link})
+Source code available on [GitHub]({{source_code_link}})
 
 <!--Template: Tweet, Itch-->
