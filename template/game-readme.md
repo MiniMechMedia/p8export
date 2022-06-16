@@ -5,6 +5,7 @@
 
 Play it now on [itch.io]({{itch_link}})
 
+## Controls
 {{controls}}
 
 {{hints}}
