@@ -5,8 +5,10 @@
 
 Play it now on [itch.io]({{itch_link}})
 
+{% if controls %}
 ## Controls
 {{controls}}
+{% endif %}
 
 {{hints}}
 

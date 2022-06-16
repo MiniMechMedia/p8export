@@ -1,8 +1,10 @@
 
 {{description}}
 
+{% if controls %}
 ## Controls
 {{controls}}
+{% endif %}
 
 {{hints}}
 
