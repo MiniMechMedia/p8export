@@ -23,7 +23,7 @@ class TestExports(CompilationTargetBaseTest):
         self.assertFileExists(TempFileEnum.HTML_EXPORT_TEMP_FILE_JS)
         self.assertFileExists(TempFileEnum.HTML_EXPORT_TEMP_FILE_ZIP)
 
-    @unittest.skip("TODO fix this")
+    # @unittest.skip("TODO fix this")
     def test_p8png_export(self):
         parsed: ParsedContents = self.parseTestFile(
             TestFileEnum.BASIC_GAME_TEMPLATE_FILE

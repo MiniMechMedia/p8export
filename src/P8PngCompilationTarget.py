@@ -11,7 +11,7 @@ class P8PngCompilationTarget(CompilationTarget):
     ):
         args: list[str] = [
             config.pico8ExePath,
-            str(p8InputPath.absolute()),
+            str(p8InputPath.absolute().resolve()),
             "-export",
             str(p8PngOutputPath.absolute()),
         ]

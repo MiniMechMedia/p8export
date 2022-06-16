@@ -16,5 +16,5 @@ Play it now on [itch.io]({{itch_link}})
 
 Source code available on [GitHub]({{source_code_link}})
 
-<!--TODO ponder metadata-->
+<!--TODO ponder metadata TEST-->
 

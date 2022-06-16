@@ -4,37 +4,6 @@ __lua__
 --{gamename}
 --{authorinfo}
 
---[[
-# embed: 750 x 680
-game_name: xxxxx
-# leave blank to use game-name
-game_slug:
-jam_info:
-  - jam_name: TriJam
-    jam_number: -1
-    jam_url: null
-    jam_theme: theme1, theme2, theme3
-    trijam_cookieseaten: 0      # Test
-  - jam_name: MiniJam
-    jam_number: null
-    jam_url: null
-    jam_theme: blah
-    minijam_limitation: You are the bad guy
-tagline: xxxxxxxx
-time_left: 'x:xx:xx'
-develop_time: null
-description: |
-  Galaxy inspired by density wave theory
-controls: []
-hints: ''
-acknowledgements: ''
-to_do: []
-version: 0.1.0
-img_alt: xxxx
-about_extra: ''
-cart_type: tweet
---]]
-
 ::_::
 cls()
 srand()
@@ -189,3 +158,34 @@ __label__
 82228222828282228888822282888222888888888888888888888888888888888888888888888888888888888888888882228288822282228882822288822288
 88888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888
 
+
+__meta:cart_info_start__
+# embed: 750 x 680
+game_name: xxxxx
+# leave blank to use game-name
+game_slug:
+jam_info:
+  - jam_name: TriJam
+    jam_number: -1
+    jam_url: null
+    jam_theme: theme1, theme2, theme3
+    trijam_cookieseaten: 0      # Test
+  - jam_name: MiniJam
+    jam_number: null
+    jam_url: null
+    jam_theme: blah
+    minijam_limitation: You are the bad guy
+tagline: xxxxxxxx
+time_left: 'x:xx:xx'
+develop_time: null
+description: |
+  Galaxy inspired by density wave theory
+controls: []
+hints: ''
+acknowledgements: ''
+to_do: []
+version: 0.1.0
+img_alt: xxxx
+about_extra: ''
+cart_type: tweet
+__meta:cart_info_end__

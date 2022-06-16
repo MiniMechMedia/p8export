@@ -4,42 +4,6 @@ __lua__
 --{gamename}
 --{authorinfo}
 
---[[
-# embed: 750 x 680
-game_name: Mongo Bongo
-# leave blank to use game-name
-game_slug:
-jam_info:
-  - jam_name: TriJam
-    jam_number: -1
-    jam_url: null
-    jam_theme: theme1, theme2, theme3
-    trijam_cookieseaten: 0      # Test
-  - jam_name: MiniJam
-    jam_number: null
-    jam_url: null
-    jam_theme: blah
-    minijam_limitation: You are the bad guy
-tagline: Will you choose Mongo or Bongo?
-time_left: 'x:xx:xx'
-develop_time: null
-description: |
-  This is a multi-line
-  description of the game
-controls:
-  - inputs: [ARROW_KEYS]
-    desc: move player
-  - inputs: [X,Z]
-    desc: activate object
-
-hints: ''
-acknowledgements: ''
-to_do: []
-version: 0.1.0
-img_alt: A row of 5 bongos with a cursor selecting the middle one
-about_extra: ''
-cart_type: game
---]]
 
 
 __gfx__
@@ -179,3 +143,39 @@ __label__
 82228222828282228888822282888222888888888888888888888888888888888888888888888888888888888888888882228288822282228882822288822288
 88888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888
 
+__meta:cart_info_start__
+# embed: 750 x 680
+game_name: Mongo Bongo
+# leave blank to use game-name
+game_slug:
+jam_info:
+  - jam_name: TriJam
+    jam_number: -1
+    jam_url: null
+    jam_theme: theme1, theme2, theme3
+    trijam_cookieseaten: 0      # Test
+  - jam_name: MiniJam
+    jam_number: null
+    jam_url: null
+    jam_theme: blah
+    minijam_limitation: You are the bad guy
+tagline: Will you choose Mongo or Bongo?
+time_left: 'x:xx:xx'
+develop_time: null
+description: |
+  This is a multi-line
+  description of the game
+controls:
+  - inputs: [ARROW_KEYS]
+    desc: move player
+  - inputs: [X,Z]
+    desc: activate object
+
+hints: ''
+acknowledgements: ''
+to_do: []
+version: 0.1.0
+img_alt: A row of 5 bongos with a cursor selecting the middle one
+about_extra: ''
+cart_type: game
+__meta:cart_info_end__

@@ -20,14 +20,22 @@ class Pico8FileParser:
 
     @classmethod
     def parseRawYamlFromFileContents(cls, rawFileContents: str) -> str:
-        rawYaml: str = rawFileContents.split("--[[")[1]
-        rawYaml = rawYaml.split("--]]")[0]
+        if "__meta:cart_info_start__" not in rawFileContents:
+            raise Exception("Need __meta:cart_info_start__. Is this an old format?")
+        rawYaml: str = rawFileContents.split("__meta:cart_info_start__")[1]
+        rawYaml = rawYaml.split("__meta:cart_info_end__")[0]
         return rawYaml.strip()
 
     @classmethod
     def parseSourceCodeFromFileContents(cls, rawFileContents: str) -> str:
-        rawSourceCode: str = rawFileContents.split("--]]")[1]
+        rawSourceCode: str = rawFileContents.split("__lua__")[1]
         rawSourceCode = rawSourceCode.split("__gfx__")[0]
+        rawSourceCode = rawSourceCode.strip()
+        lines = rawSourceCode.split('\n')
+        for i in range(2):
+            if lines[0].startswith('--'):
+                lines.pop(0)
+        rawSourceCode = '\n'.join(lines)
         return rawSourceCode.strip()
 
     @classmethod
