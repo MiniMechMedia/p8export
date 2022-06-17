@@ -10,7 +10,10 @@ Play it now on [itch.io]({{itch_link}})
 {{controls}}
 {% endif %}
 
+{% if hints %}
+## Hints
 {{hints}}
+{% endif %}
 
 # About
 {{jam_info}}

@@ -33,6 +33,8 @@ class TestFileEnum(FileEnum):
     LABEL_IMAGE_TEST_FILE = "../test/testFiles/label.png"
     BASIC_GAME_TEMPLATE_FILE = "../test/testFiles/basic-game-template.p8"
     TWEET_CART_TEMPLATE_FILE = "../test/testFiles/tweet-cart-template.p8"
+    ITCH_DESCRIPTION_TWEET_CART_TEMPLATE_EVALUATED_FILE = '../test/testFiles/itch-description-tweet-cart-evaluated.md'
+    README_TWEET_CART_TEMPLATE_EVALUATED_FILE = '../test/testFiles/tweet-cart-readme-evaluated.md'
     TWEET_CART_TEMPLATE_EVALUATED_DESCRIPTION_FILE = (
         "../test/testFiles/tweet-cart-template-evaluated-description.md"
     )
@@ -65,6 +67,8 @@ class TempFileEnum(FileEnum):
     LABEL_IMAGE_TEMP_FILE = "label.png"
     ITCH_COVER_IMAGE_TEMP_FILE = "cover.png"
     ITCH_DESCRIPTION_EVALUATED_FILE = "itch-description-evaluated-temp.html"
+    TWEET_CART_ITCH_DESCRIPTION_EVALUATED_FILE = 'tweet-cart-itch-description-evaluated.html'
+    TWEET_CART_README_EVALUATED_FILE = 'tweet-cart-readme-evaluated.md'
     HTML_EXPORT_TEMP_DIR = "html_export/"
     HTML_EXPORT_TEMP_FILE_HTML = "html_export/index.html"
     HTML_EXPORT_TEMP_FILE_JS = "html_export/index.js"
@@ -79,6 +83,7 @@ class TempFileEnum(FileEnum):
 class TemplateFileEnum(FileEnum):
     ITCH_GAME_DESCRIPTION_MD = "template/game-cart-itch-description.html.md"
     ITCH_TWEET_DESCRIPTION_MD = "template/tweet-cart-itch-description.html.md"
+    README_TWEET_MD = 'template/tweet-readme.md'
     README_GAME_MD = "template/game-readme.md"
-    README_TWEET_MD = "template/tweet-readme.md"
+    # README_TWEET_MD = "template/tweet-readme.md"
     AGGREGATE_README_MD = "template/aggregate-readme.md"

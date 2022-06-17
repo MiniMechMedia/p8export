@@ -96,6 +96,7 @@ class Metadata:
     about_extra: str
     cart_type: str
     img_alt: str
+    pico_url: Optional[str]
 
     @property
     def stronglyTypedCartType(self) -> CartType:

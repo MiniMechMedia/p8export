@@ -112,7 +112,7 @@ class TemplateEvaluator:
             "controls": cls.constructControlDescription(
                 metadata=parsedContents.metadata
             ),
-            "hints": '' if not parsedContents.metadata.hints else f'## Hints\n{parsedContents.metadata.hints}',
+            "hints": parsedContents.metadata.hints,
             "jam_info": cls.constructJamInfo(metadata=parsedContents.metadata),
             "about_extra": parsedContents.metadata.about_extra,
             "source_code_link": cls.constructSourceCodeLink(
@@ -126,7 +126,8 @@ class TemplateEvaluator:
             "tag_line": parsedContents.metadata.tagline,
             "cover_path": parsedContents.coverPath,
             "cover_path_abs": parsedContents.coverPathAbs,
-            "folder_relative_path": parsedContents.folderRelativePath
+            "folder_relative_path": parsedContents.folderRelativePath,
+            "pico_url": parsedContents.metadata.pico_url,
             # 'itch_link': cls.constructItchLink(parsedContents=parsedContents)
         }
 

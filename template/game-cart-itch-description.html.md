@@ -6,7 +6,10 @@
 {{controls}}
 {% endif %}
 
+{% if hints %}
+## Hints
 {{hints}}
+{% endif %}
 
 ## About
 {{jam_info}}
