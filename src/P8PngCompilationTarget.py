@@ -15,6 +15,7 @@ class P8PngCompilationTarget(CompilationTarget):
             "-export",
             str(p8PngOutputPath.absolute()),
         ]
+        argsconcat = ' '.join(args)
         # print(' '.join(args))
         # subprocess.call(r"C:\Program Files (x86)\PICO-8\pico8.exe")
         subprocess.run(args, check=True)

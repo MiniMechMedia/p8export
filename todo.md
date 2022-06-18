@@ -16,7 +16,7 @@
 - [X] Implement various subfolders of export
 - [X] Implement README compilation target
 - [X] Implement aggregate README compilation target
-- [ ] Deal with the gamename + gameauthor on the p8png (and p8)
+- [X] Deal with the gamename + gameauthor on the p8png (and p8)
 - [X] Support rendering markdown to html
 - [X] Add cleanup for when you are renaming a cart
 - [X] Aggregate readme tests
