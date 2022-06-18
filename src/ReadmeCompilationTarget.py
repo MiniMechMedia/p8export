@@ -38,7 +38,7 @@ class ReadmeCompilationTarget(CompilationTarget):
         cls, parsedContents: ParsedContents, readmeOutputPath: Path
     ) -> None:
         snippet: str = TemplateEvaluator.evaluateTemplateToString(
-            parsedContents=parsedContents, template=TemplateFileEnum.AGGREGATE_GITHUB_README
+            parsedContents=parsedContents, template=TemplateFileEnum.AGGREGATE_GITHUB_README_TEMPLATE
         )
 
         if not readmeOutputPath.exists():

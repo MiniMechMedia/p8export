@@ -109,4 +109,4 @@ class TemplateFileEnum(FileEnum):
     GAME_GITHUB_README_TEMPLATE = "template/game-github-readme-template.md"
     TWEET_GITHUB_README_TEMPLATE = 'template/tweet-github-readme-template.md'
     # README_TWEET_MD = "template/tweet-readme.md"
-    AGGREGATE_GITHUB_README = "template/aggregate-readme.md"
+    AGGREGATE_GITHUB_README_TEMPLATE = "template/aggregate-github-readme-template.md"
