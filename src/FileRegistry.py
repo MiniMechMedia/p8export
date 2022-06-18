@@ -39,23 +39,15 @@ class TestFileEnum(FileEnum):
     LABEL_MISSING_TEST_FILE = "../test/testFiles/label-image-missing-test.p8"
     LABEL_IMAGE_TEST_FILE = "../test/testFiles/label.png"
 
-    # TODO rename
     GAME_CART_TEST_FILE = "../test/testFiles/game-cart-test-file.p8"
     TWEET_CART_TEST_FILE = "../test/testFiles/tweet-cart-test-file.p8"
 
-
-
-    # try to deprecate from here
-    # TWEET_STRING_TEMPLATE_EXPECTED = '../test/testFiles/itch-description-tweet-cart-evaluated.md'
     TWEET_STRING_TEMPLATE_EXPECTED = (
         "../test/expectedRender/tweet-string-template-expected.md"
     )
     GAME_STRING_TEMPLATE_EXPECTED = (
         "../test/expectedRender/game-string-template-expected.md"
     )
-    # to here
-
-    # The contents don't have the title???
     GAME_ITCH_DESCRIPTION_EXPECTED = (
         "../test/expectedRender/game-itch-description-expected.html"
     )
