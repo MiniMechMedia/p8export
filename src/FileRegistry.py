@@ -55,9 +55,9 @@ class TestFileEnum(FileEnum):
 
     # The contents don't have the title???
     GAME_ITCH_DESCRIPTION_EXPECTED = (
-        "../test/testFiles/game-itch-description-expected.html"
+        "../test/expectedRender/game-itch-description-expected.html"
     )
-    TWEET_GITHUB_README_EXPECTED = '../test/testFiles/tweet-github-readme-expected.md'
+    TWEET_GITHUB_README_EXPECTED = '../test/expectedRender/tweet-github-readme-expected.md'
 
 
 
