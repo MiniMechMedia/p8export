@@ -37,7 +37,7 @@ class TestTemplating(BaseTest):
 
         self.assertContentsEqual(
             actual=evaluated,
-            expected=TestFileEnum.TWEET_CART_TEMPLATE_EVALUATED_DESCRIPTION_FILE,
+            expected=TestFileEnum.STRING_TEMPLATE_SOMETHING_EXPECTED,
         )
 
     def test_can_evaluate_tweet_description(self) -> None:
@@ -47,8 +47,8 @@ class TestTemplating(BaseTest):
         # print('hereiam', TempFileEnum.TWEET_CART_ITCH_DESCRIPTION_EVALUATED_FILE.filepath.absolute())
         evaluated: str = TemplateEvaluator.evaluateTemplateToFile(
             parsedContents=parsed,
-            template=TemplateFileEnum.README_TWEET_MD,
-            outputFile=self.getTempFilePath(TempFileEnum.TWEET_CART_README_EVALUATED_FILE)
+            template=TemplateFileEnum.TWEET_GITHUB_README,
+            outputFile=self.getTempFilePath(TempFileEnum.TWEET_GITHUB_README_ACTUAL)
         )
         # evaluated: str = TemplateEvaluator.evaluateStringTemplateToString(
         #     parsedContents=parsed,
@@ -56,8 +56,8 @@ class TestTemplating(BaseTest):
         #     renderType=RenderType.BASIC,
         # )
         self.assertFilesEqual(
-            actual=TempFileEnum.TWEET_CART_README_EVALUATED_FILE,
-            expected=TestFileEnum.README_TWEET_CART_TEMPLATE_EVALUATED_FILE
+            actual=TempFileEnum.TWEET_GITHUB_README_ACTUAL,
+            expected=TestFileEnum.TWEET_GITHUB_README_EXPECTED
         )
         # self.assertContentsEqual(
         #     actual=evaluated,
@@ -70,15 +70,15 @@ class TestTemplating(BaseTest):
         )
         TemplateEvaluator.evaluateTemplateToFile(
             parsedContents=parsed,
-            template=TemplateFileEnum.ITCH_GAME_DESCRIPTION_MD,
+            template=TemplateFileEnum.GAME_ITCH_DESCRIPTION,
             outputFile=self.getTempFilePath(
-                TempFileEnum.ITCH_DESCRIPTION_EVALUATED_FILE
+                TempFileEnum.GAME_ITCH_DESCRIPTION_ACTUAL
             ),
         )
 
         self.assertFilesEqual(
-            actual=TempFileEnum.ITCH_DESCRIPTION_EVALUATED_FILE,
-            expected=TestFileEnum.ITCH_DESCRIPTION_EVALUATED_FILE,
+            actual=TempFileEnum.GAME_ITCH_DESCRIPTION_ACTUAL,
+            expected=TestFileEnum.GAME_ITCH_DESCRIPTION_EXPECTED,
         )
 
     # TODO needs more test around html and stuff??

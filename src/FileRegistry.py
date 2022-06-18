@@ -23,6 +23,13 @@ class FileEnum(Enum):
         with open(self.value, "w") as file:
             file.write(content)
 
+    # GAME_ITCH_DESCRIPTION = "template/game-cart-itch-description.html.md"
+    # TWEET_ITCH_DESCRIPTION = "template/tweet-cart-itch-description.html.md"
+    # GAME_GITHUB_README = "template/game-readme.md"
+    # TWEET_GITHUB_README = 'template/tweet-readme.md'
+    # # README_TWEET_MD = "template/tweet-readme.md"
+    # AGGREGATE_GITHUB_README = "template/aggregate-readme.md"
+
 
 # TODO move this into a separate file in test/
 class TestFileEnum(FileEnum):
@@ -33,18 +40,29 @@ class TestFileEnum(FileEnum):
     LABEL_IMAGE_TEST_FILE = "../test/testFiles/label.png"
     BASIC_GAME_TEMPLATE_FILE = "../test/testFiles/basic-game-template.p8"
     TWEET_CART_TEMPLATE_FILE = "../test/testFiles/tweet-cart-template.p8"
-    ITCH_DESCRIPTION_TWEET_CART_TEMPLATE_EVALUATED_FILE = '../test/testFiles/itch-description-tweet-cart-evaluated.md'
-    README_TWEET_CART_TEMPLATE_EVALUATED_FILE = '../test/testFiles/tweet-cart-readme-evaluated.md'
-    TWEET_CART_TEMPLATE_EVALUATED_DESCRIPTION_FILE = (
+
+
+
+    # try to deprecate from here
+    STRING_TEMPLATE_SOMETHING_EXPECTED_2 = '../test/testFiles/itch-description-tweet-cart-evaluated.md'
+    STRING_TEMPLATE_SOMETHING_EXPECTED = (
         "../test/testFiles/tweet-cart-template-evaluated-description.md"
     )
-    ITCH_DESCRIPTION_EVALUATED_FILE = (
-        "../test/testFiles/itch-description-evaluated.html"
-    )
-    ORCHESTRATION_TEST_FILE = "../test/testFiles/orchestration-test.p8"
     BASIC_DESCRIPTION_EVALUATED_FILE = (
         "../test/testFiles/basic-description-evaluated.md"
     )
+    # to here
+
+    # The contents don't have the title???
+    GAME_ITCH_DESCRIPTION_EXPECTED = (
+        "../test/testFiles/itch-description-evaluated.html"
+    )
+    TWEET_GITHUB_README_EXPECTED = '../test/testFiles/tweet-cart-readme-evaluated.md'
+
+
+
+    ORCHESTRATION_TEST_FILE = "../test/testFiles/orchestration-test.p8"
+
     # HTML_EXPORT_TEST_FILE_JS = "index.js"
     # HTML_EXPORT_TEMP_FILE_HTML = "index.html"
     # P8_PNG_EXPORT_TEST_FILE = "something.png"
@@ -66,9 +84,6 @@ class TestFileEnum(FileEnum):
 class TempFileEnum(FileEnum):
     LABEL_IMAGE_TEMP_FILE = "label.png"
     ITCH_COVER_IMAGE_TEMP_FILE = "cover.png"
-    ITCH_DESCRIPTION_EVALUATED_FILE = "itch-description-evaluated-temp.html"
-    TWEET_CART_ITCH_DESCRIPTION_EVALUATED_FILE = 'tweet-cart-itch-description-evaluated.html'
-    TWEET_CART_README_EVALUATED_FILE = 'tweet-cart-readme-evaluated.md'
     HTML_EXPORT_TEMP_DIR = "html_export/"
     HTML_EXPORT_TEMP_FILE_HTML = "html_export/index.html"
     HTML_EXPORT_TEMP_FILE_JS = "html_export/index.js"
@@ -76,14 +91,19 @@ class TempFileEnum(FileEnum):
     P8_PNG_EXPORT_TEMP_FILE = "mongo-bongo.p8.png"
     AGGREGATE_README_UPDATED_AFTER = "readme-for-three-games-updated.md"
     AGGREGATE_README_ADDED_AFTER = "readme-for-three-games-added.md"
+
+    GAME_ITCH_DESCRIPTION_ACTUAL = "itch-description-evaluated-temp.html"
+    TWEET_ITCH_DESCRIPTION_ACTUAL = 'tweet-cart-itch-description-evaluated.html'
+    # TODO add a game version of readme
+    TWEET_GITHUB_README_ACTUAL = 'tweet-cart-readme-evaluated.md'
     # ORCHESTRATION_TEMP_DIR = 'orch/'
     # ORCHESTRATION_BASIC_FILE
 
 
 class TemplateFileEnum(FileEnum):
-    ITCH_GAME_DESCRIPTION_MD = "template/game-cart-itch-description.html.md"
-    ITCH_TWEET_DESCRIPTION_MD = "template/tweet-cart-itch-description.html.md"
-    README_TWEET_MD = 'template/tweet-readme.md'
-    README_GAME_MD = "template/game-readme.md"
+    GAME_ITCH_DESCRIPTION = "template/game-cart-itch-description.html.md"
+    TWEET_ITCH_DESCRIPTION = "template/tweet-cart-itch-description.html.md"
+    GAME_GITHUB_README = "template/game-readme.md"
+    TWEET_GITHUB_README = 'template/tweet-readme.md'
     # README_TWEET_MD = "template/tweet-readme.md"
-    AGGREGATE_README_MD = "template/aggregate-readme.md"
+    AGGREGATE_GITHUB_README = "template/aggregate-readme.md"

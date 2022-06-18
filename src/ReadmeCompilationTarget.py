@@ -23,9 +23,9 @@ class ReadmeCompilationTarget(CompilationTarget):
         # templateFile: TemplateFileEnum = TemplateEvaluator.chooseTemplate(parsedContents=parsedContents)
         templateFile: TemplateFileEnum
         if parsedContents.metadata.stronglyTypedCartType == CartType.TWEET:
-            templateFile = TemplateFileEnum.README_GAME_MD
+            templateFile = TemplateFileEnum.GAME_GITHUB_README
         else:
-            templateFile = TemplateFileEnum.README_GAME_MD
+            templateFile = TemplateFileEnum.GAME_GITHUB_README
 
         TemplateEvaluator.evaluateTemplateToFile(
             parsedContents=parsedContents,
@@ -38,7 +38,7 @@ class ReadmeCompilationTarget(CompilationTarget):
         cls, parsedContents: ParsedContents, readmeOutputPath: Path
     ) -> None:
         snippet: str = TemplateEvaluator.evaluateTemplateToString(
-            parsedContents=parsedContents, template=TemplateFileEnum.AGGREGATE_README_MD
+            parsedContents=parsedContents, template=TemplateFileEnum.AGGREGATE_GITHUB_README
         )
 
         if not readmeOutputPath.exists():
