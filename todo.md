@@ -31,5 +31,5 @@
 - [X] Jinja templating
 - [X] Use metadata header
 - [ ] Convert others to use metadata header
-- [ ] Add tests for each template
-- [ ] Add guard for acknowledgements
+- [X] Add tests for each template
+- [X] Add guard for acknowledgements

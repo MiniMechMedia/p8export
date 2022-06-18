@@ -172,7 +172,9 @@ controls:
     desc: activate object
 
 hints: ''
-acknowledgements: ''
+acknowledgements: |
+  Music is modified version of [Gruber](https://www.lexaloffle.com/bbs/?uid=11292)'s [Pico-8 Tunes Vol. 1](https://www.lexaloffle.com/bbs/?tid=29008), Track 11 - Puzzles.
+  Licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 to_do: []
 version: 0.1.0
 img_alt: A row of 5 bongos with a cursor selecting the middle one

@@ -108,6 +108,7 @@ class TemplateEvaluator:
         cls, parsedContents: ParsedContents
     ) -> dict[str, str]:
         return {
+            "acknowledgements": parsedContents.metadata.acknowledgements,
             "description": parsedContents.metadata.description,
             "controls": cls.constructControlDescription(
                 metadata=parsedContents.metadata

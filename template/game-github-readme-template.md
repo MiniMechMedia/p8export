@@ -18,6 +18,11 @@ Play it now on [itch.io]({{itch_link}})
 # About
 {{jam_info}}
 
+{% if acknowledgements %}
+## Acknowledgements
+{{acknowledgements}}
+{% endif %}
+
 {{about_extra}}
 
 Source code available on [GitHub]({{source_code_link}})

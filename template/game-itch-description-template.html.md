@@ -18,4 +18,9 @@
 
 Source code available on [GitHub]({{source_code_link}})
 
+{% if acknowledgements %}
+## Acknowledgements
+{{acknowledgements}}
+{% endif %}
+
 <!--Template: Game, Itch-->
