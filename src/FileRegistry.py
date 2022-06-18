@@ -101,9 +101,9 @@ class TempFileEnum(FileEnum):
 
 
 class TemplateFileEnum(FileEnum):
-    GAME_ITCH_DESCRIPTION_TEMPLATE = "template/game-cart-itch-description.html.md"
-    TWEET_ITCH_DESCRIPTION_TEMPLATE = "template/tweet-cart-itch-description.html.md"
-    GAME_GITHUB_README_TEMPLATE = "template/game-readme.md"
-    TWEET_GITHUB_README_TEMPLATE = 'template/tweet-readme.md'
+    GAME_ITCH_DESCRIPTION_TEMPLATE = "template/game-itch-description-template.html.md"
+    TWEET_ITCH_DESCRIPTION_TEMPLATE = "template/tweet-itch-description-template.html.md"
+    GAME_GITHUB_README_TEMPLATE = "template/game-github-readme-template.md"
+    TWEET_GITHUB_README_TEMPLATE = 'template/tweet-github-readme-template.md'
     # README_TWEET_MD = "template/tweet-readme.md"
     AGGREGATE_GITHUB_README = "template/aggregate-readme.md"
