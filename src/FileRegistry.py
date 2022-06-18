@@ -92,10 +92,10 @@ class TempFileEnum(FileEnum):
     AGGREGATE_README_UPDATED_AFTER = "readme-for-three-games-updated.md"
     AGGREGATE_README_ADDED_AFTER = "readme-for-three-games-added.md"
 
-    GAME_ITCH_DESCRIPTION_ACTUAL = "itch-description-evaluated-temp.html"
-    TWEET_ITCH_DESCRIPTION_ACTUAL = 'tweet-cart-itch-description-evaluated.html'
+    GAME_ITCH_DESCRIPTION_ACTUAL = "game-itch-description-actual.html"
+    TWEET_ITCH_DESCRIPTION_ACTUAL = 'tweet-itch-description-actual.html'
     # TODO add a game version of readme
-    TWEET_GITHUB_README_ACTUAL = 'tweet-cart-readme-evaluated.md'
+    TWEET_GITHUB_README_ACTUAL = 'tweet-github-readme-actual.md'
     # ORCHESTRATION_TEMP_DIR = 'orch/'
     # ORCHESTRATION_BASIC_FILE
 
