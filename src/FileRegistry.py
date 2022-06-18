@@ -40,18 +40,18 @@ class TestFileEnum(FileEnum):
     LABEL_IMAGE_TEST_FILE = "../test/testFiles/label.png"
 
     # TODO rename
-    BASIC_GAME_TEMPLATE_FILE = "../test/testFiles/basic-game-template.p8"
-    TWEET_CART_TEMPLATE_FILE = "../test/testFiles/tweet-cart-template.p8"
+    GAME_CART_TEST_FILE = "../test/testFiles/game-cart-test-file.p8"
+    TWEET_CART_TEST_FILE = "../test/testFiles/tweet-cart-test-file.p8"
 
 
 
     # try to deprecate from here
-    STRING_TEMPLATE_SOMETHING_EXPECTED_2 = '../test/testFiles/itch-description-tweet-cart-evaluated.md'
-    STRING_TEMPLATE_SOMETHING_EXPECTED = (
-        "../test/testFiles/tweet-cart-template-evaluated-description.md"
+    # TWEET_STRING_TEMPLATE_EXPECTED = '../test/testFiles/itch-description-tweet-cart-evaluated.md'
+    TWEET_STRING_TEMPLATE_EXPECTED = (
+        "../test/expectedRender/tweet-string-template-expected.md"
     )
-    BASIC_DESCRIPTION_EVALUATED_FILE = (
-        "../test/testFiles/basic-description-evaluated.md"
+    GAME_STRING_TEMPLATE_EXPECTED = (
+        "../test/expectedRender/game-string-template-expected.md"
     )
     # to here
 
@@ -92,7 +92,7 @@ class TempFileEnum(FileEnum):
     HTML_EXPORT_TEMP_FILE_JS = "html_export/index.js"
     HTML_EXPORT_TEMP_FILE_ZIP = "html_export/index.zip"
     P8_PNG_EXPORT_TEMP_FILE = "mongo-bongo.p8.png"
-    
+
     AGGREGATE_GITHUB_README_UPDATED_ACTUAL = "aggregate-github-readme-updated-actual.md"
     AGGREGATE_GITHUB_README_ADDED_ACTUAL = "aggregate-github-readme-added-actual.md"
 

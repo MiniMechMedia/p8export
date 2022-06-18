@@ -12,7 +12,7 @@ from src.P8PngCompilationTarget import P8PngCompilationTarget
 class TestExports(CompilationTargetBaseTest):
     def test_html_export(self):
         parsed: ParsedContents = self.parseTestFile(
-            TestFileEnum.BASIC_GAME_TEMPLATE_FILE
+            TestFileEnum.GAME_CART_TEST_FILE
         )
         HtmlFileCompilationTarget.compileToHtmlToDirectory(
             parsed.filePath,
@@ -26,7 +26,7 @@ class TestExports(CompilationTargetBaseTest):
     @unittest.skip("TODO fix this")
     def test_p8png_export(self):
         parsed: ParsedContents = self.parseTestFile(
-            TestFileEnum.BASIC_GAME_TEMPLATE_FILE
+            TestFileEnum.GAME_CART_TEST_FILE
         )
         P8PngCompilationTarget.compileToP8PngToDirectory(
             config=parsed.config,

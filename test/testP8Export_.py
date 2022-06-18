@@ -25,7 +25,7 @@ class TestP8Export(BaseTest):
         os.makedirs(templateDir)
         p8fileStart: Path = templateDir / "new-game.p8"
         shutil.copy(
-            self.getTestFilePath(TestFileEnum.BASIC_GAME_TEMPLATE_FILE), p8fileStart
+            self.getTestFilePath(TestFileEnum.GAME_CART_TEST_FILE), p8fileStart
         )
         P8Export.export(p8fileStart, uploadToItch=False)
 

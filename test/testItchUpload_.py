@@ -9,6 +9,6 @@ from pathlib import Path
 @unittest.skip
 class TestItchUpload(BaseTest):
     def test_can_upload_to_itch(self):
-        parsed: ParsedContents = self.parseFile(TestFileEnum.BASIC_GAME_TEMPLATE_FILE)
+        parsed: ParsedContents = self.parseFile(TestFileEnum.GAME_CART_TEST_FILE)
         parsed.metadata.game_slug = "test-game"  # TODO
         ItchGameCompilationTarget.uploadToItch(parsed, Path('tmp/html_export'))

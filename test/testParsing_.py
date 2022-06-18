@@ -15,7 +15,7 @@ class TestParsing(BaseTest):
         # rawYaml: str = Pico8FileParser.parseRawYamlFromFileContents(contents)
         # parsedYaml: dict = Pico8FileParser.parseYamlFromRawYaml(rawYaml)
         # metadata: MetaData = Pico8FileParser.parseMetadata(parsedYaml)
-        parsed: ParsedContents = self.parseFile(TestFileEnum.BASIC_GAME_TEMPLATE_FILE)
+        parsed: ParsedContents = self.parseFile(TestFileEnum.GAME_CART_TEST_FILE)
 
         firstJam: Metadata.JamInfo = parsed.metadata.jam_info[0]
         self.assertEqual(firstJam.jam_name, "TriJam")
@@ -31,6 +31,6 @@ class TestParsing(BaseTest):
         self.assertEqual(secondControl.inputs, [ControlEnum.X, ControlEnum.Z])
 
     def test_parsing_sourcecode(self):
-        parsed: ParsedContents = self.parseFile(TestFileEnum.TWEET_CART_TEMPLATE_FILE)
+        parsed: ParsedContents = self.parseFile(TestFileEnum.TWEET_CART_TEST_FILE)
 
         self.assertEqual(parsed.sourceCodeP8sciiCharCount, 277)
