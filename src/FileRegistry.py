@@ -92,8 +92,9 @@ class TempFileEnum(FileEnum):
     HTML_EXPORT_TEMP_FILE_JS = "html_export/index.js"
     HTML_EXPORT_TEMP_FILE_ZIP = "html_export/index.zip"
     P8_PNG_EXPORT_TEMP_FILE = "mongo-bongo.p8.png"
-    AGGREGATE_README_UPDATED_AFTER = "readme-for-three-games-updated.md"
-    AGGREGATE_README_ADDED_AFTER = "readme-for-three-games-added.md"
+    
+    AGGREGATE_GITHUB_README_UPDATED_ACTUAL = "aggregate-github-readme-updated-actual.md"
+    AGGREGATE_GITHUB_README_ADDED_ACTUAL = "aggregate-github-readme-added-actual.md"
 
     GAME_ITCH_DESCRIPTION_ACTUAL = "game-itch-description-actual.html"
     TWEET_ITCH_DESCRIPTION_ACTUAL = 'tweet-itch-description-actual.html'

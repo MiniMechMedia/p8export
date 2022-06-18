@@ -30,12 +30,12 @@ this is a test snippet of Mongo Bongo
         )
 
         with open(
-            self.getTempFilePath(TempFileEnum.AGGREGATE_README_ADDED_AFTER), "w"
+            self.getTempFilePath(TempFileEnum.AGGREGATE_GITHUB_README_ADDED_ACTUAL), "w"
         ) as file:
             file.write(result)
 
         self.assertFilesEqual(
-            actual=TempFileEnum.AGGREGATE_README_ADDED_AFTER,
+            actual=TempFileEnum.AGGREGATE_GITHUB_README_ADDED_ACTUAL,
             expected=TestFileEnum.AGGREGATE_README_AFTER_ADD_FILE,
         )
 
@@ -49,12 +49,12 @@ this is a test snippet of Mongo Bongo
         )
 
         with open(
-            self.getTempFilePath(TempFileEnum.AGGREGATE_README_UPDATED_AFTER), "w"
+            self.getTempFilePath(TempFileEnum.AGGREGATE_GITHUB_README_UPDATED_ACTUAL), "w"
         ) as file:
             file.write(result)
 
         self.assertFilesEqual(
-            actual=TempFileEnum.AGGREGATE_README_UPDATED_AFTER,
+            actual=TempFileEnum.AGGREGATE_GITHUB_README_UPDATED_ACTUAL,
             expected=TestFileEnum.AGGREGATE_README_AFTER_UPDATE_FILE,
         )
         # self.assertContentsEqual(
