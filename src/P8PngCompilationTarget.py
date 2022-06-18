@@ -13,11 +13,12 @@ class P8PngCompilationTarget(CompilationTarget):
             config.pico8ExePath,
             str(p8InputPath.absolute().resolve()),
             "-export",
-            str(p8PngOutputPath.absolute()),
+            # str(p8PngOutputPath.absolute()),
+            str(p8PngOutputPath.name)
         ]
         argsconcat = ' '.join(args)
         # print(' '.join(args))
         # subprocess.call(r"C:\Program Files (x86)\PICO-8\pico8.exe")
-        subprocess.run(args, check=True)
+        subprocess.run(args, cwd=p8PngOutputPath.parent, check=True)
         if not p8PngOutputPath.exists():
             raise Exception("PICO-8 png export failed")

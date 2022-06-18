@@ -23,7 +23,6 @@ class TestExports(CompilationTargetBaseTest):
         self.assertFileExists(TempFileEnum.HTML_EXPORT_TEMP_FILE_JS)
         self.assertFileExists(TempFileEnum.HTML_EXPORT_TEMP_FILE_ZIP)
 
-    # @unittest.skip("TODO fix this")
     def test_p8png_export(self):
         parsed: ParsedContents = self.parseTestFile(
             TestFileEnum.GAME_CART_TEST_FILE
@@ -36,6 +35,6 @@ class TestExports(CompilationTargetBaseTest):
         )
         self.assertFileExists(TempFileEnum.P8_PNG_EXPORT_TEMP_FILE)
 
-    @unittest.skip
-    def test_aggregate_readme_is_idempotent(self):
-        pass
+    # @unittest.skip
+    # def test_aggregate_readme_is_idempotent(self):
+    #     pass
