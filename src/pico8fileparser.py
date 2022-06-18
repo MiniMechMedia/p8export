@@ -88,8 +88,8 @@ class Pico8FileParser:
     def getConfig(cls, metadata: Metadata) -> Config:
 
         return Config(
-            gameAuthor="Caterpillar Games",
-            itchAuthor="caterpillargames",
+            gameAuthor=config('GAME_AUTHOR'),
+            itchAuthor=config('ITCH_USERNAME').lower(),
             sourceControlRootUrl="https://github.com/CaterpillarGames/pico8-games/tree/master/carts",
             # pico8ExePath=r"C:\Program Files (x86)\PICO-8\pico8.exe",
             pico8ExePath=config('PICO8EXE'),

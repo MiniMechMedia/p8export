@@ -47,7 +47,7 @@ class P8Export:
         )
 
         # finalP8FileName
-        P8FileTransformerCompilationTarget.transformP8File(p8FilePath=locations.p8FilePath)
+        P8FileTransformerCompilationTarget.transformP8File(p8FilePath=locations.p8FilePath, parsed=parsedContents)
 
         parsedContents.coverPath = "images/cover.png"
         parsedContents.folderRelativePath = (

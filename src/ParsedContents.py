@@ -110,6 +110,10 @@ class Metadata:
         # TODO this stuff should go in a separate layer
         return self.game_slug or slugify(self.game_name)
 
+    @property
+    def p8FileGameName(self):
+        return f'{self.game_name.lower().ljust(31)}v{self.version}'
+
     def getTemplate(self) -> str:
         raise NotImplemented
 

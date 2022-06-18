@@ -1,7 +1,7 @@
 pico-8 cartridge // http://www.pico-8.com
 version 35
 __lua__
---mongo bongo         v0.1
+--mongo bongo                    v0.1.0
 --caterpillar games
 
 
