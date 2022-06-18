@@ -51,7 +51,7 @@ class ItchGameCompilationTarget(CompilationTarget):
     def getDescriptionHtml(cls, parsedContents: ParsedContents) -> str:
         return TemplateEvaluator.evaluateTemplateToString(
             parsedContents=parsedContents,
-            template=TemplateFileEnum.GAME_ITCH_DESCRIPTION,
+            template=TemplateFileEnum.GAME_ITCH_DESCRIPTION_TEMPLATE,
         )
 
     @classmethod

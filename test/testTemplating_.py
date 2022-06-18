@@ -47,7 +47,7 @@ class TestTemplating(BaseTest):
         # print('hereiam', TempFileEnum.TWEET_CART_ITCH_DESCRIPTION_EVALUATED_FILE.filepath.absolute())
         evaluated: str = TemplateEvaluator.evaluateTemplateToFile(
             parsedContents=parsed,
-            template=TemplateFileEnum.TWEET_GITHUB_README,
+            template=TemplateFileEnum.TWEET_GITHUB_README_TEMPLATE,
             outputFile=self.getTempFilePath(TempFileEnum.TWEET_GITHUB_README_ACTUAL)
         )
         # evaluated: str = TemplateEvaluator.evaluateStringTemplateToString(
@@ -70,7 +70,7 @@ class TestTemplating(BaseTest):
         )
         TemplateEvaluator.evaluateTemplateToFile(
             parsedContents=parsed,
-            template=TemplateFileEnum.GAME_ITCH_DESCRIPTION,
+            template=TemplateFileEnum.GAME_ITCH_DESCRIPTION_TEMPLATE,
             outputFile=self.getTempFilePath(
                 TempFileEnum.GAME_ITCH_DESCRIPTION_ACTUAL
             ),
