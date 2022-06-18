@@ -29,4 +29,7 @@
 - [ ] Consume __instructions__ and __controls__ in pico8 template file
 - [ ] Pico8EduUrlCompilationTarget for automatically doing save @url
 - [X] Jinja templating
+- [X] Use metadata header
+- [ ] Convert others to use metadata header
 - [ ] Add tests for each template
+- [ ] Add guard for acknowledgements

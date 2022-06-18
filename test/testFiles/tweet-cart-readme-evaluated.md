@@ -1,4 +1,4 @@
-
+# Galaxy Tweet
 Galaxy inspired by density wave theory
 
 
@@ -39,6 +39,6 @@ Limitation: You are the bad guy
 
 
 
-Source code available on [GitHub](https://github.com/CaterpillarGames/pico8-games/tree/master/carts/xxxxx)
+Source code available on [GitHub](https://github.com/CaterpillarGames/pico8-games/tree/master/carts/galaxy-tweet)
 
 <!--Template: Tweet, Itch-->

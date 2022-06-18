@@ -1,4 +1,4 @@
-
+# {{game_name}}
 {{description}}
 
 This cart is tweetable at just {{char_count}} characters.
