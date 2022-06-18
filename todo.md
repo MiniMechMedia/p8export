@@ -18,7 +18,7 @@
 - [X] Implement aggregate README compilation target
 - [ ] Deal with the gamename + gameauthor on the p8png (and p8)
 - [X] Support rendering markdown to html
-- [ ] Add cleanup for when you are renaming a cart
+- [X] Add cleanup for when you are renaming a cart
 - [X] Aggregate readme tests
 - [ ] Add metadata for genre
 - [ ] Populate genre on itch from metadata
@@ -30,6 +30,7 @@
 - [ ] Pico8EduUrlCompilationTarget for automatically doing save @url
 - [X] Jinja templating
 - [X] Use metadata header
-- [ ] Convert others to use metadata header
+- [ ] Convert all games to use metadata header
+- [ ] Option to process all
 - [X] Add tests for each template
 - [X] Add guard for acknowledgements

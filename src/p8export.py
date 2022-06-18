@@ -13,6 +13,7 @@ from src.ImagesCompilationTarget import ImagesCompilationTarget
 from src.ReadmeCompilationTarget import ReadmeCompilationTarget
 from src.ItchGameCompilationTarget import ItchGameCompilationTarget
 from src.XmlCompilationTarget import XmlCompilationTarget
+from src.P8FileTransformerCompilationTarget import P8FileTransformerCompilationTarget
 
 # from src.ItchDescriptionCompilationTarget import ItchDescriptionCompilationTarget
 
@@ -26,7 +27,7 @@ class P8Export:
         targetFile: Path,
         uploadToItch: bool,
         targetExportDir: Optional[Path] = None,
-    ):
+    ) -> None:
         if targetExportDir is not None:
             raise NotImplemented("this feature is not yet available")
         if not exists(targetFile):
@@ -44,6 +45,9 @@ class P8Export:
         locations: FileSystemLocations = FileSystemOrchestrator.prepareExportDir(
             parsedContents.filePath, f"{slug}.p8", targetDir
         )
+
+        # finalP8FileName
+        P8FileTransformerCompilationTarget.transformP8File(p8FilePath=locations.p8FilePath)
 
         parsedContents.coverPath = "images/cover.png"
         parsedContents.folderRelativePath = (

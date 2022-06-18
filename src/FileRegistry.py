@@ -71,6 +71,8 @@ class TestFileEnum(FileEnum):
         "../test/testFiles/readmeTestFiles/readme-for-three-games-expected-added.md"
     )
 
+    GAME_CART_TEST_FILE_TRANSFORMED_EXPECTED = '../test/expectedTransformation/game-cart-test-file-transformed-expected.p8'
+
     @property
     def value(self):
         return super().value
@@ -94,6 +96,8 @@ class TempFileEnum(FileEnum):
     TWEET_GITHUB_README_ACTUAL = 'tweet-github-readme-actual.md'
     # ORCHESTRATION_TEMP_DIR = 'orch/'
     # ORCHESTRATION_BASIC_FILE
+
+    GAME_CART_TEST_FILE_TRANSFORMED_COPY_LOCATION = 'game-cart-test-file-transformed-copy-location.p8'
 
 
 class TemplateFileEnum(FileEnum):
