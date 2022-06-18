@@ -24,6 +24,12 @@ class TestTemplating(BaseTest):
             expected=TestFileEnum.GAME_STRING_TEMPLATE_EXPECTED,
         )
 
+    # TODO add test for choosing correct template
+    # def test_can_choose_template(self) -> None:
+    #     parsed: ParsedContents = Pico8FileParser.parse(
+    #         self.getTestFilePath(TestFileEnum.TWEET_CART_TEST_FILE)
+    #     )
+
     def test_can_evaluate_tweet_characteristics(self) -> None:
         parsed: ParsedContents = Pico8FileParser.parse(
             self.getTestFilePath(TestFileEnum.TWEET_CART_TEST_FILE)

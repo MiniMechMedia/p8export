@@ -1,5 +1,5 @@
 # Does the submission.html
-from src.ParsedContents import ParsedContents
+from src.ParsedContents import ParsedContents, CartType
 from src.CompilationTarget import CompilationTarget
 from pathlib import Path
 from src.TemplateEvaluator import TemplateEvaluator, TemplateFileEnum
@@ -48,10 +48,13 @@ class ItchGameCompilationTarget(CompilationTarget):
 
 
     @classmethod
-    def getDescriptionHtml(cls, parsedContents: ParsedContents) -> str:
+    def getItchDescription(cls, parsedContents: ParsedContents) -> str:
+        template: TemplateFileEnum = TemplateEvaluator.getItchTemplate(
+            cartType=parsedContents.metadata.stronglyTypedCartType
+        )
         return TemplateEvaluator.evaluateTemplateToString(
             parsedContents=parsedContents,
-            template=TemplateFileEnum.GAME_ITCH_DESCRIPTION_TEMPLATE,
+            template=template,
         )
 
     @classmethod
@@ -116,7 +119,7 @@ class ItchGameCompilationTarget(CompilationTarget):
         )
         descriptionTextArea.clear()
         descriptionTextArea.send_keys(
-            cls.getDescriptionHtml(parsedContents=parsedContents)
+            cls.getItchDescription(parsedContents=parsedContents)
         )
         # TODO use isNewGame to provide zip. But idk
 

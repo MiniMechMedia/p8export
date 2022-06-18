@@ -98,6 +98,7 @@ class Metadata:
     img_alt: str
     pico_url: Optional[str]
 
+    # TODO map automatically
     @property
     def stronglyTypedCartType(self) -> CartType:
         try:

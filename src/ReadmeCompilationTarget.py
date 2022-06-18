@@ -20,12 +20,14 @@ class ReadmeCompilationTarget(CompilationTarget):
     def createIndividualReadme(
         cls, parsedContents: ParsedContents, readmeOutputPath: Path
     ) -> None:
-        # templateFile: TemplateFileEnum = TemplateEvaluator.chooseTemplate(parsedContents=parsedContents)
-        templateFile: TemplateFileEnum
-        if parsedContents.metadata.stronglyTypedCartType == CartType.TWEET:
-            templateFile = TemplateFileEnum.GAME_GITHUB_README_TEMPLATE
-        else:
-            templateFile = TemplateFileEnum.GAME_GITHUB_README_TEMPLATE
+        templateFile: TemplateFileEnum = TemplateEvaluator.getReadmeTemplate(
+            cartType=parsedContents.metadata.stronglyTypedCartType
+        )
+        # templateFile: TemplateFileEnum
+        # if parsedContents.metadata.stronglyTypedCartType == CartType.TWEET:
+        #     templateFile = TemplateFileEnum.GAME_GITHUB_README_TEMPLATE
+        # else:
+        #     templateFile = TemplateFileEnum.GAME_GITHUB_README_TEMPLATE
 
         TemplateEvaluator.evaluateTemplateToFile(
             parsedContents=parsedContents,

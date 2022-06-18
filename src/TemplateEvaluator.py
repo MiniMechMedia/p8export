@@ -21,6 +21,18 @@ class TemplateEvaluator:
         return RenderType.BASIC
 
     @classmethod
+    def getItchTemplate(cls, cartType: CartType):
+        return (TemplateFileEnum.TWEET_ITCH_DESCRIPTION_TEMPLATE
+                if cartType == CartType.TWEET else
+                TemplateFileEnum.GAME_ITCH_DESCRIPTION_TEMPLATE)
+
+    @classmethod
+    def getReadmeTemplate(cls, cartType: CartType):
+        return (TemplateFileEnum.TWEET_GITHUB_README_TEMPLATE
+                if cartType == CartType.TWEET else
+                TemplateFileEnum.GAME_GITHUB_README_TEMPLATE)
+
+    @classmethod
     def evaluateTemplateToString(
         cls, parsedContents: ParsedContents, template: TemplateFileEnum
     ) -> str:
