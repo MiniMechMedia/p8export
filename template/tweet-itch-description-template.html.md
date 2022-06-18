@@ -1,1 +1,1 @@
-{% extends tweet-readme.md %}
+{% extends "tweet-github-readme-template.md" %}

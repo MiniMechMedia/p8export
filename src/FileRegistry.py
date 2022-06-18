@@ -38,6 +38,8 @@ class TestFileEnum(FileEnum):
     ITCH_COVER_IMAGE_TEST_FILE = "../test/testFiles/cover.png"
     LABEL_MISSING_TEST_FILE = "../test/testFiles/label-image-missing-test.p8"
     LABEL_IMAGE_TEST_FILE = "../test/testFiles/label.png"
+
+    # TODO rename
     BASIC_GAME_TEMPLATE_FILE = "../test/testFiles/basic-game-template.p8"
     TWEET_CART_TEMPLATE_FILE = "../test/testFiles/tweet-cart-template.p8"
 
@@ -58,8 +60,9 @@ class TestFileEnum(FileEnum):
         "../test/expectedRender/game-itch-description-expected.html"
     )
     TWEET_GITHUB_README_EXPECTED = '../test/expectedRender/tweet-github-readme-expected.md'
+    GAME_GITHUB_README_EXPECTED = '../test/expectedRender/game-github-readme-expected.md'
 
-
+    TWEET_ITCH_DESCRIPTION_EXPECTED = '../test/expectedRender/tweet-itch-description-expected.html'
 
     ORCHESTRATION_TEST_FILE = "../test/testFiles/orchestration-test.p8"
 
@@ -94,7 +97,7 @@ class TempFileEnum(FileEnum):
 
     GAME_ITCH_DESCRIPTION_ACTUAL = "game-itch-description-actual.html"
     TWEET_ITCH_DESCRIPTION_ACTUAL = 'tweet-itch-description-actual.html'
-    # TODO add a game version of readme
+    GAME_GITHUB_README_ACTUAL = 'game-github-readme-actual.md'
     TWEET_GITHUB_README_ACTUAL = 'tweet-github-readme-actual.md'
     # ORCHESTRATION_TEMP_DIR = 'orch/'
     # ORCHESTRATION_BASIC_FILE

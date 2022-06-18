@@ -81,6 +81,62 @@ class TestTemplating(BaseTest):
             expected=TestFileEnum.GAME_ITCH_DESCRIPTION_EXPECTED,
         )
 
+    def assertCartRendersAsExpected(self,
+                                    cartFile: TestFileEnum,
+                                    templateFile: TemplateFileEnum,
+                                    tempFile: TempFileEnum,
+                                    expectedFile: TestFileEnum) -> None:
+        parsed: ParsedContents = Pico8FileParser.parse(self.getTestFilePath(cartFile))
+        TemplateEvaluator.evaluateTemplateToFile(
+            parsedContents=parsed,
+            template=templateFile,
+            outputFile = self.getTempFilePath(tempFile)
+        )
+
+        self.assertFilesEqual(
+            actual=tempFile,
+            expected=expectedFile
+        )
+
+    def test_descriptions(self):
+        with self.subTest("game itch description"):
+            self.assertCartRendersAsExpected(
+                cartFile=TestFileEnum.BASIC_GAME_TEMPLATE_FILE,
+                templateFile=TemplateFileEnum.GAME_ITCH_DESCRIPTION_TEMPLATE,
+                tempFile=TempFileEnum.GAME_ITCH_DESCRIPTION_ACTUAL,
+                expectedFile=TestFileEnum.GAME_ITCH_DESCRIPTION_EXPECTED
+            )
+
+        with self.subTest("game github description"):
+            self.assertCartRendersAsExpected(
+                cartFile=TestFileEnum.BASIC_GAME_TEMPLATE_FILE,
+                templateFile=TemplateFileEnum.GAME_GITHUB_README_TEMPLATE,
+                tempFile=TempFileEnum.GAME_GITHUB_README_ACTUAL,
+                expectedFile=TestFileEnum.GAME_GITHUB_README_EXPECTED
+            )
+
+        # TODO add missing test
+        with self.subTest("tweet itch description"):
+            try:
+                self.assertCartRendersAsExpected(
+                    cartFile=TestFileEnum.TWEET_CART_TEMPLATE_FILE,
+                    templateFile=TemplateFileEnum.TWEET_ITCH_DESCRIPTION_TEMPLATE,
+                    tempFile=TempFileEnum.TWEET_ITCH_DESCRIPTION_ACTUAL,
+                    expectedFile=TestFileEnum.TWEET_ITCH_DESCRIPTION_EXPECTED
+                )
+            except:
+                exit()
+
+
+
+        with self.subTest("tweet github description"):
+            self.assertCartRendersAsExpected(
+                cartFile=TestFileEnum.TWEET_CART_TEMPLATE_FILE,
+                templateFile=TemplateFileEnum.TWEET_GITHUB_README_TEMPLATE,
+                tempFile=TempFileEnum.TWEET_ITCH_DESCRIPTION_ACTUAL,
+                expectedFile=TestFileEnum.TWEET_GITHUB_README_EXPECTED
+            )
+
     # TODO needs more test around html and stuff??
 
     # def test_can_evaluate_controls(self):
