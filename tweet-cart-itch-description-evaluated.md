@@ -26,4 +26,3 @@ Development Time: None  </p>
 Theme: blah<br />
 Limitation: You are the bad guy  </p>
 <p>Source code available on <a href="https://github.com/CaterpillarGames/pico8-games/tree/master/carts/xxxxx">GitHub</a></p>
-<!--Template: Tweet, Itch-->

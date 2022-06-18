@@ -22,5 +22,3 @@ Source code available on [GitHub]({{source_code_link}})
 ## Acknowledgements
 {{acknowledgements}}
 {% endif %}
-
-<!--Template: Game, Itch-->

@@ -23,5 +23,3 @@ Remix it on [pico-8-edu.com]({{pico_url}})
 {{about_extra}}
 
 Source code available on [GitHub]({{source_code_link}})
-
-<!--Template: Tweet, Itch-->

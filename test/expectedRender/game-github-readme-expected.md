@@ -25,6 +25,8 @@ Theme: blah
 Limitation: You are the bad guy  
 
 
+Source code available on [GitHub](https://github.com/CaterpillarGames/pico8-games/tree/master/carts/mongo-bongo)
+
 
 ## Acknowledgements
 Music is modified version of [Gruber](https://www.lexaloffle.com/bbs/?uid=11292)'s [Pico-8 Tunes Vol. 1](https://www.lexaloffle.com/bbs/?tid=29008), Track 11 - Puzzles.
@@ -32,8 +34,3 @@ Licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4
 
 
 
-
-
-Source code available on [GitHub](https://github.com/CaterpillarGames/pico8-games/tree/master/carts/mongo-bongo)
-
-<!--TODO ponder metadata TEST-->

@@ -66,7 +66,7 @@ class TestTemplating(BaseTest):
                 expectedFile=TestFileEnum.GAME_ITCH_DESCRIPTION_EXPECTED
             )
 
-        with self.subTest("game github description"):
+        with self.subTest("game github readme"):
             self.assertCartRendersAsExpected(
                 cartFile=TestFileEnum.GAME_CART_TEST_FILE,
                 templateFile=TemplateFileEnum.GAME_GITHUB_README_TEMPLATE,
@@ -83,13 +83,26 @@ class TestTemplating(BaseTest):
                 expectedFile=TestFileEnum.TWEET_ITCH_DESCRIPTION_EXPECTED
             )
 
-        with self.subTest("tweet github description"):
+        with self.subTest("tweet github readme"):
             self.assertCartRendersAsExpected(
                 cartFile=TestFileEnum.TWEET_CART_TEST_FILE,
                 templateFile=TemplateFileEnum.TWEET_GITHUB_README_TEMPLATE,
-                tempFile=TempFileEnum.TWEET_ITCH_DESCRIPTION_ACTUAL,
+                tempFile=TempFileEnum.TWEET_GITHUB_README_ACTUAL,
                 expectedFile=TestFileEnum.TWEET_GITHUB_README_EXPECTED
             )
+
+        if False:
+            self.forceUpdateFiles()
+
+    def forceUpdateFiles(self):
+        for temp, test in [
+            (TempFileEnum.GAME_GITHUB_README_ACTUAL, TestFileEnum.GAME_GITHUB_README_EXPECTED),
+            (TempFileEnum.GAME_ITCH_DESCRIPTION_ACTUAL, TestFileEnum.GAME_ITCH_DESCRIPTION_EXPECTED),
+            (TempFileEnum.TWEET_GITHUB_README_ACTUAL, TestFileEnum.TWEET_GITHUB_README_EXPECTED),
+            (TempFileEnum.TWEET_ITCH_DESCRIPTION_ACTUAL, TestFileEnum.TWEET_ITCH_DESCRIPTION_EXPECTED)
+        ]:
+            rendered = self.getTempFilePath(temp).read_text()
+            self.getTestFilePath(test).write_text(rendered)
 
     # TODO needs more test around html and stuff??
 
