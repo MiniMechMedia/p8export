@@ -24,30 +24,12 @@ class TemplateEvaluator:
     def evaluateTemplateToString(
         cls, parsedContents: ParsedContents, template: TemplateFileEnum
     ) -> str:
-        root = Path(__file__) / '..' / '..'
-        templateLoader = jinja2.FileSystemLoader(searchpath=root.resolve())
-        templateEnv = jinja2.Environment(loader=templateLoader)
-        TEMPLATE_FILE = str(template.filepath)
-        jinjaTemplate = templateEnv.get_template(TEMPLATE_FILE)
-        # templateVars = {"title": "Test Example",
-        #                 "description": "A simple inquiry of function."}
-        # return template.render(cls.constructEvaluationDictionary(parsedContents=parsedContents))
-        return jinjaTemplate.render({"title":'blah'})
-        # raise NotImplemented
         strTemplate: str = template.readText()
         return cls.evaluateStringTemplateToString(
             parsedContents=parsedContents,
             strTemplate=strTemplate,
             renderType=cls.getRenderTypeFromTemplate(template=template),
         )
-
-    # @classmethod
-    # def chooseTemplate(cls, cartType: CartType) -> TemplateFileEnum:
-    #     return {
-    #         CartType.GAME: TemplateFileEnum.ITCH_GAME_DESCRIPTION_MD,
-    #         CartType.UNKNOWN: TemplateFileEnum.ITCH_GAME_DESCRIPTION_MD,
-    #         CartType.TWEET: TemplateFileEnum.ITCH_TWEET_DESCRIPTION_MD,
-    #     }[parsedContents.metadata.stronglyTypedCartType]
 
     @classmethod
     def evaluateStringTemplateToString(
