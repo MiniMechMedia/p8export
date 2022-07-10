@@ -34,3 +34,7 @@
 - [ ] Option to process all
 - [X] Add tests for each template
 - [X] Add guard for acknowledgements
+- [ ] Number of players metadata
+- [ ] Add test for acknowledgements
+- [ ] Add test for no __gfx__ (but can assume __label__)
+- [ ] Refactor templates so they all use the same About, Controls, etc.

@@ -1,9 +1,15 @@
 # {{game_name}}
 {{description}}
 
-This cart is tweetable at just {{char_count}} characters.
+[![{{alt_text}}]({{cover_path}})]({{itch_link}})
 
-Remix it on [pico-8-edu.com]({{pico_url}})
+{% if pico_url %}
+Play it now on [itch.io]({{itch_link}}) or remix it on [pico-8-edu.com]({{pico_url}})
+{% else %}
+Play it now on [itch.io]({{itch_link}})
+{% endif %}
+
+This cart is tweetable at just {{char_count}} characters.
 
 <pre><code>{{source_code}}</code></pre>
 
@@ -23,3 +29,8 @@ Remix it on [pico-8-edu.com]({{pico_url}})
 {{about_extra}}
 
 Source code available on [GitHub]({{source_code_link}})
+
+{% if acknowledgements %}
+## Acknowledgements
+{{acknowledgements}}
+{% endif %}

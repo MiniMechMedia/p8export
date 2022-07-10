@@ -101,6 +101,8 @@ class TemplateEvaluator:
     def constructEvaluationDictionary(
         cls, parsedContents: ParsedContents
     ) -> dict[str, str]:
+        # print('here is the dict')
+        # print(parsedContents.metadata.acknowledgements)
         return {
             "acknowledgements": parsedContents.metadata.acknowledgements,
             "description": parsedContents.metadata.description,

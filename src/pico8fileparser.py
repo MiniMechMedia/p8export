@@ -29,7 +29,11 @@ class Pico8FileParser:
     @classmethod
     def parseSourceCodeFromFileContents(cls, rawFileContents: str) -> str:
         rawSourceCode: str = rawFileContents.split("__lua__")[1]
+
+        # One of these will be first...
         rawSourceCode = rawSourceCode.split("__gfx__")[0]
+        rawSourceCode = rawSourceCode.split("__label__")[0]
+
         rawSourceCode = rawSourceCode.strip()
         lines = rawSourceCode.split('\n')
         for i in range(2):

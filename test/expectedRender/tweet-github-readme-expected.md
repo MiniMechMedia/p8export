@@ -2,9 +2,13 @@
 Galaxy inspired by density wave theory
 
 
-This cart is tweetable at just 277 characters.
+[![xxxx]()](https://caterpillargames.itch.io/galaxy-tweet)
 
-Remix it on [pico-8-edu.com](https://www.pico-8-edu.com/?c=Y2xzKDcp&g=w-w-w-w1HQHw-w2Xw-w3Xw-w2HQH)
+
+Play it now on [itch.io](https://caterpillargames.itch.io/galaxy-tweet) or remix it on [pico-8-edu.com](https://www.pico-8-edu.com/?c=Y2xzKDcp&g=w-w-w-w1HQHw-w2Xw-w3Xw-w2HQH)
+
+
+This cart is tweetable at just 277 characters.
 
 <pre><code>::_::
 cls()
@@ -40,3 +44,4 @@ Limitation: You are the bad guy
 
 
 Source code available on [GitHub](https://github.com/CaterpillarGames/pico8-games/tree/master/carts/galaxy-tweet)
+
