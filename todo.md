@@ -38,3 +38,4 @@
 - [ ] Add test for acknowledgements
 - [ ] Add test for no __gfx__ (but can assume __label__)
 - [ ] Refactor templates so they all use the same About, Controls, etc.
+- [X] Make a note that you can update the template test files with forceUpdateFiles()
