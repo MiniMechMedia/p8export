@@ -5,6 +5,7 @@ from os.path import exists
 from src.pico8fileparser import Pico8FileParser
 from src.FileSystemOrchestrator import FileSystemOrchestrator, FileSystemLocations
 from typing import Optional
+import glob
 
 from src.HtmlFileCompilationTarget import HtmlFileCompilationTarget
 
@@ -22,6 +23,29 @@ class P8Export:
     # Be warned: will use the directory the p8 file is currently in as the export dir
 
     @classmethod
+    def exportDirectory(cls,
+          globPattern: str,
+                        uploadToItch: bool) -> int:
+        if not globPattern.endswith('.p8'):
+            raise Exception('must target .p8 files')
+        allFiles = glob.glob(globPattern)
+
+        if not allFiles:
+            raise Exception("No files found")
+
+        allRoots = [Path(absPath).resolve().parent for absPath in allFiles]
+        if len(allRoots) != len(set(allRoots)):
+            # TODO might want to support this?
+            raise Exception("Multiple files found in same folder")
+
+        # print(f"Processing {len(allFiles)} files")
+        for file in allFiles:
+            cls.export(targetFile=Path(file), uploadToItch=uploadToItch)
+
+        return len(allFiles)
+
+    # TODO return the resulting files
+    @classmethod
     def export(
         cls,
         targetFile: Path,
@@ -30,6 +54,8 @@ class P8Export:
     ) -> None:
         if targetExportDir is not None:
             raise NotImplemented("this feature is not yet available")
+        if not str(targetFile).endswith('.p8'):
+            raise Exception("Must target .p8 file")
         if not exists(targetFile):
             raise Exception("invalid target")
 
@@ -105,4 +131,8 @@ if __name__ == "__main__":
     uploadToItch = True
     if len(sys.argv) > 2 and sys.argv[2] == "--no-itch":
         uploadToItch = False
-    P8Export.export(Path(sys.argv[1]), uploadToItch=uploadToItch)
+    target: str = sys.argv[1]
+    if '*' in target:
+        P8Export.exportDirectory(target, uploadToItch=uploadToItch)
+    else:
+        P8Export.export(Path(target), uploadToItch=uploadToItch)
