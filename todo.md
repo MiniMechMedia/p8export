@@ -54,3 +54,7 @@
 - [ ] Add instructional image to cool cat cafe
 - [ ] Make cool cat cafe 2 player
 - [ ] Fix deal with shark shoot
+- [ ] Convert controls to Flags and create a recognized group as left/right
+- [ ] Fix the controls description in minigame mania (maybe a new construct)
+- [ ] Improvements for grow big
+- [ ] If theme is empty don't show it

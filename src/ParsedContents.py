@@ -40,8 +40,15 @@ class ControlEnum(Enum):
     RIGHT_ARROW_KEY = "RIGHT_ARROW_KEY"
     UP_ARROW_KEY = "UP_ARROW_KEY"
     DOWN_ARROW_KEY = "DOWN_ARROW_KEY"
+    ESDF = "ESDF"
     X = "X"
     Z = 'Z'
+    P = 'P'
+    S = 'S'
+    E = 'E'
+    D = 'D'
+    F = 'F'
+    A = 'A'
     MOUSE = 'MOUSE'
     LEFT_CLICK = 'LEFT_CLICK'
     RIGHT_CLICK = 'RIGHT_CLICK'
@@ -97,10 +104,10 @@ class Metadata:
     acknowledgements: str
     to_do: list[str]
     version: str  # TODO make a strongly typed object
-    about_extra: str
     cart_type: str
     img_alt: str
     pico_url: Optional[str]
+    about_extra: str = ''
 
     # TODO map automatically
     @property

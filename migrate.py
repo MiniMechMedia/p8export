@@ -1,4 +1,5 @@
 import sys
+import os
 
 target = sys.argv[1]
 try:
@@ -6,9 +7,13 @@ try:
 except:
 	other = 'template.p8'
 try:
-	target = f'/Users/nathandunn/Projects/pico8-games/raw/{int(target)}/{other}'
+	target = f'/Users/nathandunn/Projects/pico8-games/raw/{(target)}/{other}'
 except:
 	pass
+
+if not os.path.exists(target):
+	print(f"{target} does not exist. Try")
+	os.system(f"ls {target.rsplit('/',1)[0]}")
 
 with open(target) as file:
 	contents = file.read()
@@ -18,11 +23,14 @@ metadata = 'cart_type: game\n' + metadata
 metadata = metadata.replace("todo: ''", "to_do: []")
 
 name = None
+maybeslug = None
 for line in metadata.split('\n'):
 	if line.startswith('game_name'):
 		name = line.split('game_name: ')[1].strip()
+	if line.startswith('game_slug'):
+		maybeslug = line.split('game_slug: ')[1].strip()
 
-slug = name.lower().replace(' ', '-')
+slug = maybeslug or name.lower().replace(' ', '-').replace('.','').replace("'",'').replace('é','e')
 
 copy = metadata
 metadata = ''
@@ -75,3 +83,7 @@ with open(newfile, 'w') as file:
 
 with open('/Users/nathandunn/Projects/p8export3/p8export-fresh/tmp/info.txt', 'w') as file:
 	file.write(newfile + '\n')
+
+print("Migrated ", newfile)
+
+# os.system()
