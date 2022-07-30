@@ -61,6 +61,7 @@ class TestP8Export(BaseTest):
         with self.assertRaisesRegex(Exception, 'Multiple files found in same folder'):
             P8Export.exportDirectory(globPattern=pattern, uploadToItch=False)
 
+    # Note: A partial export will still happen, which isn't ideal
     def test_cannot_export_multiple_games_with_same_name(self):
         nestedFolder1: Path = self.currentTestFolder / 'nested1'
         nestedFolder2: Path = self.currentTestFolder / 'nested2'
@@ -93,23 +94,27 @@ class TestP8Export(BaseTest):
 
 
     def test_can_export_multiple_games(self):
-        nestedFolder1: Path = self.currentTestFolder / 'nested1'
-        nestedFolder2: Path = self.currentTestFolder / 'nested2'
+        # self.currentTestFolder /= 'containing-folder'
+        cartsFolder: Path = self.currentTestFolder / 'carts'
+        nestedFolder1: Path = cartsFolder / 'nested1'
+        nestedFolder2: Path = cartsFolder / 'nested2'
         os.makedirs(nestedFolder1, exist_ok=False)
         os.makedirs(nestedFolder2, exist_ok=False)
 
-        with open(self.currentTestFolder / 'README.md', 'w'):
-            pass
+        # with open(self.currentTestFolder / 'README.md', 'w'):
+        #     pass
 
-        pattern: str = str(self.currentTestFolder / '*' / '*.p8')
+        pattern: str = str(cartsFolder / '*' / '*.p8')
         self._copyWithChange(nestedFolder1 / 'game1.p8', 'Awesome Saucem')
         self._copyWithChange(nestedFolder2 / 'game2.p8', 'Doggo Froggo')
 
         count: int = P8Export.exportDirectory(globPattern=pattern, uploadToItch=False)
         self.assertEqual(count, 2)
 
-        self.assertExportsAreAsExpected(self.currentTestFolder, 'awesome-saucem')
-        self.assertExportsAreAsExpected(self.currentTestFolder, 'doggo-froggo')
+        self.assertExportsAreAsExpected(cartsFolder, 'awesome-saucem')
+        self.assertExportsAreAsExpected(cartsFolder, 'doggo-froggo')
+        self.assertFileExists(TempFileEnum.MULTIPLE_EXPORT_README)
+
 
     def assertExportsAreAsExpected(self, containingFolder: Path, gameSlug: str):
         expectedGameDir: Path = containingFolder / gameSlug

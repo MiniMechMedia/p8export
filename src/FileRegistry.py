@@ -99,6 +99,7 @@ class TempFileEnum(FileEnum):
 
     GAME_CART_TEST_FILE_TRANSFORMED_COPY_LOCATION = 'game-cart-test-file-transformed-copy-location.p8'
 
+    MULTIPLE_EXPORT_README = 'p8export-test/test_can_export_multiple_games/README.md'
 
 class TemplateFileEnum(FileEnum):
     GAME_ITCH_DESCRIPTION_TEMPLATE = "template/game-itch-description-template.html.md"
