@@ -39,3 +39,11 @@
 - [ ] Add test for no __gfx__ (but can assume __label__)
 - [ ] Refactor templates so they all use the same About, Controls, etc.
 - [X] Make a note that you can update the template test files with forceUpdateFiles()
+- [ ] Migrate all games over to new metadata
+- [ ] Migrate picoquarium
+- [ ] Add export all option
+- [ ] Add player info metadata to game.xml
+- [ ] Make single script on picade to consolidate all
+- [ ] Make game.xml template
+- [ ] Add Mouse/Keyboard/Touch screen metadata (i.e. this game requires a mouse on picade)
+- 
