@@ -6,12 +6,28 @@ from pathlib import Path
 from markdown import markdown
 from enum import Enum, auto
 import jinja2
+import string
 
 class RenderType(Enum):
     # just a basic string replacement
     BASIC = auto()
     HTML = auto()
 
+filters = {}
+
+def registerFilter(func):
+    filters[func.__name__] = func
+
+@registerFilter
+def htmlSafeSource(content):
+    ret = []
+    for c in content:
+        if c in string.printable:
+            ret.append(c)
+        else:
+            ret.append(f'&#{ord(c)};')
+
+    return ''.join(ret)
 
 class TemplateEvaluator:
     @classmethod
@@ -56,6 +72,9 @@ class TemplateEvaluator:
 
         templateLoader = jinja2.FileSystemLoader(searchpath=root.resolve())
         templateEnv = jinja2.Environment(loader=templateLoader)
+        # templateEnv.filters['htmlSafeSource'] = htmlSafeSource
+        for key, val in filters.items():
+            templateEnv.filters[key] = val
         jinjaTemplate = templateEnv.get_template(templateFileName)
 
         ret: str = jinjaTemplate.render(cls.constructEvaluationDictionary(parsedContents=parsedContents))
@@ -187,11 +206,17 @@ class TemplateEvaluator:
             )
             ret += f"{verb} [{jamName}]({jam.correctedJamUrl})  \n"
 
-            ret += f"Theme: {jam.jam_theme}  \n"
+            if jam.jam_theme:
+                ret += f"Theme: {jam.jam_theme}  \n"
+
             if jam.jam_name == "TriJam":
                 ret += f"Development Time: {metadata.develop_time}  \n"
             elif jam.jam_name == 'MiniJam':
                 ret += f'Limitation: {jam.minijam_limitation}  \n'
+
+            if jam.jam_extra:
+                ret += jam.jam_extra
+
             isFirst = False
 
         return ret

@@ -61,13 +61,13 @@ class P8Export:
             raise Exception('must target .p8 files')
         allFiles = glob.glob(globPattern)
 
-        # DEBUGG!!!
-        with open('/Users/nathandunn/Projects/p8export3/p8export-fresh/tmp/info.txt') as file:
-            targetFile = file.read().strip()
-        for file in allFiles[:]:
-            if file != targetFile:
-                allFiles.remove(file)
-        # DEBUGG!!!
+        # # DEBUGG!!!
+        # with open('/Users/nathandunn/Projects/p8export3/p8export-fresh/tmp/info.txt') as file:
+        #     targetFile = file.read().strip()
+        # for file in allFiles[:]:
+        #     if file != targetFile:
+        #         allFiles.remove(file)
+        # # DEBUGG!!!
 
         if not allFiles:
             raise Exception("No files found")

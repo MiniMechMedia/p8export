@@ -49,12 +49,27 @@
 - [ ] Use ArgParser
 - [ ] Rebrand CPG (test twitter handle)
 - [ ] Fix broken image in kaiju companions
-- [ ] Structure jam info
+- [ ] Structure jam info (?)
 - [ ] Add instructional image to cool cat cafe
 - [ ] Make cool cat cafe 2 player
 - [ ] Fix deal with shark shoot
 - [ ] Convert controls to Flags and create a recognized group as left/right
 - [ ] Fix the controls description in minigame mania (maybe a new construct)
-- [ ] Improvements for grow big
+- [X] Improvements for grow big
 - [ ] If theme is empty don't show it
 - [ ] Reupload all cover images
+- [ ] Add music to shuriken
+- [ ] Make music less duplicative
+- [ ] Fix lack of .p8.png files
+- [ ] Fix broken link in health inspectre
+- [X] Fix bug in unsigned hero
+- [X] Add music to unsigned hero
+- [ ] 2 player unsigned hero?
+- [ ] Fix link in kaiju
+- [ ] Add acknowledgements for fetch quest
+- [ ] Autumn wind music to Drifting Keep?
+- [ ] Utility to add new metadata field
+- [ ] Find a better song for tile isle (tropical)
+- [X] Add html entity escaping
+- [ ] Fix bug where jam_extra doesn't get markdowned correctly
+- [ ] Add tests for html entity filter

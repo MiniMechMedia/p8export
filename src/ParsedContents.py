@@ -73,6 +73,7 @@ class Metadata:
         jam_url: Optional[str]
         # TODO would prefer some general data schema like data-*
         minijam_limitation: Optional[str]
+        jam_extra: Optional[str]
 
         # TODO seems like this class is getting too smart
         @property
