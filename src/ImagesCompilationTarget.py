@@ -7,7 +7,7 @@ import pathlib
 
 class ImagesCompilationTarget(CompilationTarget):
     SCALE: Final[int] = 3
-    SIDEBAR_WIDTH: Final[int] = 16
+    SIDEBAR_WIDTH: Final[int] = 34
 
     @classmethod
     def writeCoverImage(

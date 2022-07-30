@@ -27,26 +27,25 @@
 - [ ] Auto-select the "Kind of project" field in itch
 - [ ] Add in-band metadata like __instructions__ and __controls__
 - [ ] Consume __instructions__ and __controls__ in pico8 template file
-- [ ] Pico8EduUrlCompilationTarget for automatically doing save @url
+- [ ] Pico8EduUrlCompilationTarget for automatically doing save @url (might be blocked)
 - [X] Jinja templating
 - [X] Use metadata header
-- [ ] Convert all games to use metadata header
-- [ ] Option to process all
+- [X] Option to process all
 - [X] Add tests for each template
 - [X] Add guard for acknowledgements
-- [ ] Number of players metadata
 - [ ] Add test for acknowledgements
 - [ ] Add test for no __gfx__ (but can assume __label__)
 - [ ] Refactor templates so they all use the same About, Controls, etc.
 - [X] Make a note that you can update the template test files with forceUpdateFiles()
-- [ ] Migrate all games over to new metadata
-- [ ] Migrate picoquarium
+- [X] Migrate all games over to new metadata
+- [X] Migrate picoquarium
 - [ ] Add export all option
+- [ ] Number of players metadata
 - [ ] Add player info metadata to game.xml
 - [ ] Make single script on picade to consolidate all
 - [ ] Make game.xml template
 - [ ] Add Mouse/Keyboard/Touch screen metadata (i.e. this game requires a mouse on picade)
-- [ ] Add test for export all
+- [X] Add test for export all
 - [ ] Use ArgParser
 - [ ] Rebrand CPG (test twitter handle)
 - [ ] Fix broken image in kaiju companions
@@ -58,3 +57,4 @@
 - [ ] Fix the controls description in minigame mania (maybe a new construct)
 - [ ] Improvements for grow big
 - [ ] If theme is empty don't show it
+- [ ] Reupload all cover images
