@@ -60,7 +60,6 @@
 - [ ] Reupload all cover images
 - [ ] Add music to shuriken
 - [ ] Make music less duplicative
-- [ ] Fix lack of .p8.png files
 - [ ] Fix broken link in health inspectre
 - [X] Fix bug in unsigned hero
 - [X] Add music to unsigned hero
@@ -73,3 +72,4 @@
 - [X] Add html entity escaping
 - [ ] Fix bug where jam_extra doesn't get markdowned correctly
 - [ ] Add tests for html entity filter
+- [ ] Fix lack of .p8.png files

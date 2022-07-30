@@ -142,12 +142,12 @@ class P8Export:
             p8filePath=locations.p8FilePath,
             outputDir=locations.htmlExportDir,
         )
-        # P8PngCompilationTarget.compileToP8PngToDirectory(
-        #     config=parsedContents.config,
-        #     p8InputPath=locations.p8FilePath,
-        #     p8PngOutputPath=locations.exportsSubDir
-        #     / (parsedContents.metadata.correctedGameSlug + ".p8.png"),
-        # )
+        P8PngCompilationTarget.compileToP8PngToDirectory(
+            config=parsedContents.config,
+            p8InputPath=locations.p8FilePath,
+            p8PngOutputPath=locations.exportsSubDir
+            / (parsedContents.metadata.correctedGameSlug + ".p8.png"),
+        )
         ReadmeCompilationTarget.createIndividualReadme(
             parsedContents=parsedContents,
             readmeOutputPath=locations.exportsBaseDir / "README.md",
