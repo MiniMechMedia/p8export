@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from pathlib import Path
 import sys
 from src.ParsedContents import ParsedContents
@@ -17,7 +18,31 @@ from src.XmlCompilationTarget import XmlCompilationTarget
 from src.P8FileTransformerCompilationTarget import P8FileTransformerCompilationTarget
 
 # from src.ItchDescriptionCompilationTarget import ItchDescriptionCompilationTarget
+@dataclass
+class ExportResults:
+    resultMap: dict[str, str]
 
+    SUCCESSINDICATOR = 'success'
+
+    @property
+    def isError(self):
+        return self.errorCount > 0
+
+    @property
+    def formattedResults(self):
+        summary = '\n'.join(f'{game}: {result}' for game, result in self.resultMap.items())
+        return f"Errors encountered:\n{summary}"
+
+    @property
+    def errorCount(self):
+        return len(self.resultMap) - self.successCount
+
+    @property
+    def successCount(self):
+        return len([result for result in self.resultMap.values() if result == self.SUCCESSINDICATOR])
+
+    def __len__(self):
+        return len(self.resultMap)
 
 class P8Export:
     # Be warned: will use the directory the p8 file is currently in as the export dir
@@ -25,7 +50,7 @@ class P8Export:
     @classmethod
     def exportDirectory(cls,
           globPattern: str,
-                        uploadToItch: bool) -> int:
+                        uploadToItch: bool) -> ExportResults:
         if not globPattern.endswith('.p8'):
             raise Exception('must target .p8 files')
         allFiles = glob.glob(globPattern)
@@ -38,11 +63,16 @@ class P8Export:
             # TODO might want to support this?
             raise Exception("Multiple files found in same folder")
 
-        # print(f"Processing {len(allFiles)} files")
+        resultMap: dict[str, str] = {}
         for file in allFiles:
-            cls.export(targetFile=Path(file), uploadToItch=uploadToItch)
+            try:
+                cls.export(targetFile=Path(file), uploadToItch=uploadToItch)
+            except Exception as e:
+                resultMap[file] = str(e)
+            else:
+                resultMap[file] = ExportResults.SUCCESSINDICATOR
 
-        return len(allFiles)
+        return ExportResults(resultMap)
 
     # TODO return the resulting files
     @classmethod
@@ -133,6 +163,8 @@ if __name__ == "__main__":
         uploadToItch = False
     target: str = sys.argv[1]
     if '*' in target:
-        P8Export.exportDirectory(target, uploadToItch=uploadToItch)
+        results = P8Export.exportDirectory(target, uploadToItch=uploadToItch)
+        if results.isError:
+            raise Exception(results.formattedResults)
     else:
         P8Export.export(Path(target), uploadToItch=uploadToItch)

@@ -78,8 +78,10 @@ class TestP8Export(BaseTest):
             nestedFolder2 / 'game2.p8'
         )
 
-        with self.assertRaisesRegex(Exception, 'P8export error - Cannot perform a folder rename if folder already exists'):
-            P8Export.exportDirectory(globPattern=pattern, uploadToItch=False)
+        # with self.assertRaisesRegex(Exception, 'P8export error - Cannot perform a folder rename if folder already exists'):
+        results = P8Export.exportDirectory(globPattern=pattern, uploadToItch=False)
+        self.assertTrue(results.isError)
+        self.assertTrue('P8export error - Cannot perform a folder rename if folder already exists' in results.formattedResults)
 
     def _copyWithChange(self, targetPath: Path, newGameName: str):
         shutil.copy(
@@ -108,13 +110,16 @@ class TestP8Export(BaseTest):
         self._copyWithChange(nestedFolder1 / 'game1.p8', 'Awesome Saucem')
         self._copyWithChange(nestedFolder2 / 'game2.p8', 'Doggo Froggo')
 
-        count: int = P8Export.exportDirectory(globPattern=pattern, uploadToItch=False)
-        self.assertEqual(count, 2)
+        results: dict[str,str] = P8Export.exportDirectory(globPattern=pattern, uploadToItch=False)
+        self.assertEqual(len(results), 2)
 
         self.assertExportsAreAsExpected(cartsFolder, 'awesome-saucem')
         self.assertExportsAreAsExpected(cartsFolder, 'doggo-froggo')
         self.assertFileExists(TempFileEnum.MULTIPLE_EXPORT_README)
 
+
+    # def test_can_handle_errors_in_export_all(self):
+    #     raise NotImplemented
 
     def assertExportsAreAsExpected(self, containingFolder: Path, gameSlug: str):
         expectedGameDir: Path = containingFolder / gameSlug
