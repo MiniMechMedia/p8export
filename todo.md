@@ -49,3 +49,8 @@
 - [ ] Add test for export all
 - [ ] Use ArgParser
 - [ ] Rebrand CPG (test twitter handle)
+- [ ] Fix broken image in kaiju companions
+- [ ] Structure jam info
+- [ ] Add instructional image to cool cat cafe
+- [ ] Make cool cat cafe 2 player
+- [ ] Fix deal with shark shoot

@@ -36,6 +36,10 @@ class ParsedLabelImage:
 # https://stackoverflow.com/a/44785241
 class ControlEnum(Enum):
     ARROW_KEYS = "ARROW_KEYS"
+    LEFT_ARROW_KEY = "LEFT_ARROW_KEY"
+    RIGHT_ARROW_KEY = "RIGHT_ARROW_KEY"
+    UP_ARROW_KEY = "UP_ARROW_KEY"
+    DOWN_ARROW_KEY = "DOWN_ARROW_KEY"
     X = "X"
     Z = 'Z'
     MOUSE = 'MOUSE'

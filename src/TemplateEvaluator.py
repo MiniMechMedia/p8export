@@ -153,6 +153,10 @@ class TemplateEvaluator:
     def controlToDescription(cls, controlEnum: ControlEnum):
         return {
             ControlEnum.ARROW_KEYS: "Arrow Keys",
+            ControlEnum.LEFT_ARROW_KEY: "Left Arrow Key",
+            ControlEnum.RIGHT_ARROW_KEY: "Right Arrow Key",
+            ControlEnum.UP_ARROW_KEY: "Up Arrow Key",
+            ControlEnum.DOWN_ARROW_KEY: "Down Arrow Key",
             ControlEnum.X: "X",
             ControlEnum.Z: 'Z',
             ControlEnum.MOUSE: 'Mouse',
