@@ -16,8 +16,9 @@ class XmlCompilationTarget(CompilationTarget):
                     <path>./{metadata.correctedGameSlug}.p8.png</path>
                     <name>{metadata.game_name}</name>
                     <image>./{metadata.correctedGameSlug}.p8.png</image>
+                    <players>{metadata.numberPlayersDesc}</players>
                     <desc>
-                        Description: {escape(metadata.description)}
+                        Description: {escape(metadata.tagline)}
                         Controls: {escape(controlDesc)}
                     </desc>
                 </game>

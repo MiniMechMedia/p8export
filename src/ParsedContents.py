@@ -108,6 +108,8 @@ class Metadata:
     cart_type: str
     img_alt: str
     pico_url: Optional[str]
+    number_players: list[int]
+    # TODO should this be optional?
     about_extra: str = ''
 
     # TODO map automatically
@@ -122,6 +124,15 @@ class Metadata:
     def correctedGameSlug(self):
         # TODO this stuff should go in a separate layer
         return self.game_slug or slugify(self.game_name)
+
+    @property
+    def numberPlayersDesc(self):
+        _min = min(self.number_players)
+        _max = max(self.number_players)
+        if _min == _max:
+            return str(_min)
+
+        return f'{_min}-{_max}'
 
     @property
     def p8FileGameName(self):

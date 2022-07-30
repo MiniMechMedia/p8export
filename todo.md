@@ -39,12 +39,12 @@
 - [X] Make a note that you can update the template test files with forceUpdateFiles()
 - [X] Migrate all games over to new metadata
 - [X] Migrate picoquarium
-- [ ] Add export all option
-- [ ] Number of players metadata
-- [ ] Add player info metadata to game.xml
+- [X] Number of players metadata
+- [X] Add player info metadata to game.xml
 - [ ] Make single script on picade to consolidate all
-- [ ] Make game.xml template
+- [ ] Refactor game.xml template
 - [ ] Add Mouse/Keyboard/Touch screen metadata (i.e. this game requires a mouse on picade)
+- [X] Add export all option
 - [X] Add test for export all
 - [ ] Use ArgParser
 - [ ] Rebrand CPG (test twitter handle)
@@ -56,8 +56,8 @@
 - [ ] Convert controls to Flags and create a recognized group as left/right
 - [ ] Fix the controls description in minigame mania (maybe a new construct)
 - [X] Improvements for grow big
-- [ ] If theme is empty don't show it
-- [ ] Reupload all cover images
+- [X] If theme is empty don't show it
+- [~] Reupload all cover images
 - [ ] Add music to shuriken
 - [ ] Make music less duplicative
 - [ ] Fix broken link in health inspectre
@@ -67,9 +67,12 @@
 - [ ] Fix link in kaiju
 - [ ] Add acknowledgements for fetch quest
 - [ ] Autumn wind music to Drifting Keep?
-- [ ] Utility to add new metadata field
+- [X] Utility to add new metadata field
 - [ ] Find a better song for tile isle (tropical)
 - [X] Add html entity escaping
 - [ ] Fix bug where jam_extra doesn't get markdowned correctly
 - [ ] Add tests for html entity filter
-- [ ] Fix lack of .p8.png files
+- [X] Fix lack of .p8.png files
+- [ ] Add tests for min-max
+- [ ] Support up to 4 players for hamster slam
+- [ ] Add metadata for left behinds

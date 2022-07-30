@@ -64,7 +64,7 @@ class TemplateEvaluator:
         cls, parsedContents: ParsedContents, strTemplate: str, renderType: RenderType
     ) -> str:
         root = (Path(__file__) / '..' / '..').resolve() / 'template'
-        print('checkhere',root)
+        # print('checkhere',root)
         templateFileName = "asdfasdfasdf.temp"
         temporaryTemplateFile = root / templateFileName
         with open(temporaryTemplateFile, 'w') as file:
@@ -144,6 +144,7 @@ class TemplateEvaluator:
             "cover_path_abs": parsedContents.coverPathAbs,
             "folder_relative_path": parsedContents.folderRelativePath,
             "pico_url": parsedContents.metadata.pico_url,
+            "number_players": parsedContents.metadata.numberPlayersDesc
             # 'itch_link': cls.constructItchLink(parsedContents=parsedContents)
         }
 
