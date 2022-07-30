@@ -30,8 +30,13 @@ class ExportResults:
 
     @property
     def formattedResults(self):
-        summary = '\n'.join(f'{game}: {result}' for game, result in self.resultMap.items())
-        return f"Errors encountered:\n{summary}"
+        summary = ''
+        for path, result in self.resultMap.items():
+            slug = path.split('/')[-1].split('.')[0].ljust(40)
+            summary += f'{slug}: {result}\n'
+
+        # summary = '\n'.join(f'{game}: {result}' for game, result in self.resultMap.items())
+        return f"Errors encountered ({self.errorCount} out of {len(self)}):\n{summary}\nErrors encountered ({self.errorCount} out of {len(self)})"
 
     @property
     def errorCount(self):

@@ -1,4 +1,4 @@
-from src.p8export import P8Export
+from src.p8export import P8Export, ExportResults
 
 # from TestFileSystemOperations import TestFileSystemOperations
 from BaseTest import BaseTest, TempFileEnum, TestFileEnum
@@ -110,8 +110,9 @@ class TestP8Export(BaseTest):
         self._copyWithChange(nestedFolder1 / 'game1.p8', 'Awesome Saucem')
         self._copyWithChange(nestedFolder2 / 'game2.p8', 'Doggo Froggo')
 
-        results: dict[str,str] = P8Export.exportDirectory(globPattern=pattern, uploadToItch=False)
+        results: ExportResults = P8Export.exportDirectory(globPattern=pattern, uploadToItch=False)
         self.assertEqual(len(results), 2)
+        self.assertFalse(results.isError)
 
         self.assertExportsAreAsExpected(cartsFolder, 'awesome-saucem')
         self.assertExportsAreAsExpected(cartsFolder, 'doggo-froggo')
