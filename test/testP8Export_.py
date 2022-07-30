@@ -61,7 +61,7 @@ class TestP8Export(BaseTest):
         with self.assertRaisesRegex(Exception, 'Multiple files found in same folder'):
             P8Export.exportDirectory(globPattern=pattern, uploadToItch=False)
 
-    def test_export_all_finds_all_files(self):
+    def test_cannot_export_multiple_games_with_same_name(self):
         nestedFolder1: Path = self.currentTestFolder / 'nested1'
         nestedFolder2: Path = self.currentTestFolder / 'nested2'
         os.makedirs(nestedFolder1, exist_ok=False)
@@ -77,8 +77,51 @@ class TestP8Export(BaseTest):
             nestedFolder2 / 'game2.p8'
         )
 
+        with self.assertRaisesRegex(Exception, 'P8export error - Cannot perform a folder rename if folder already exists'):
+            P8Export.exportDirectory(globPattern=pattern, uploadToItch=False)
+
+    def _copyWithChange(self, targetPath: Path, newGameName: str):
+        shutil.copy(
+            self.getTestFilePath(TestFileEnum.GAME_CART_TEST_FILE),
+            targetPath
+        )
+        with open(targetPath) as file:
+            contents = file.read()
+            contents = contents.replace("Mongo Bongo", newGameName)
+        with open(targetPath, 'w') as file:
+            file.write(contents)
+
+
+    def test_can_export_multiple_games(self):
+        nestedFolder1: Path = self.currentTestFolder / 'nested1'
+        nestedFolder2: Path = self.currentTestFolder / 'nested2'
+        os.makedirs(nestedFolder1, exist_ok=False)
+        os.makedirs(nestedFolder2, exist_ok=False)
+
+        with open(self.currentTestFolder / 'README.md', 'w'):
+            pass
+
+        pattern: str = str(self.currentTestFolder / '*' / '*.p8')
+        self._copyWithChange(nestedFolder1 / 'game1.p8', 'Awesome Saucem')
+        self._copyWithChange(nestedFolder2 / 'game2.p8', 'Doggo Froggo')
+
         count: int = P8Export.exportDirectory(globPattern=pattern, uploadToItch=False)
-        self.assertEquals(count, 2)
+        self.assertEqual(count, 2)
+
+        self.assertExportsAreAsExpected(self.currentTestFolder, 'awesome-saucem')
+        self.assertExportsAreAsExpected(self.currentTestFolder, 'doggo-froggo')
+
+    def assertExportsAreAsExpected(self, containingFolder: Path, gameSlug: str):
+        expectedGameDir: Path = containingFolder / gameSlug
+        self.assertPathExists(expectedGameDir)
+        self.assertPathExists(expectedGameDir / "images/")
+        self.assertPathExists(expectedGameDir / "images" / "itch-cover.png")
+        self.assertPathExists(expectedGameDir / "images" / "cover.png")
+        self.assertPathExists(expectedGameDir / "export/")
+        self.assertPathExists(expectedGameDir / f"{gameSlug}.p8")
+        self.assertPathExists(expectedGameDir / "export" / "html_export" / "index.html")
+        self.assertPathExists(expectedGameDir / "export" / "html_export" / "index.js")
+        self.assertPathExists(expectedGameDir / "export" / "html_export" / "index.zip")
 
     def test_folder_structure(self):
         templateDir: Path = self.currentTestFolder / "game-template"
@@ -89,31 +132,12 @@ class TestP8Export(BaseTest):
         )
         P8Export.export(p8fileStart, uploadToItch=False)
 
-        expectedGameDir = self.currentTestFolder / "mongo-bongo"
-
-        self.assertPathExists(expectedGameDir)
-        self.assertPathExists(expectedGameDir / "images/")
-        self.assertPathExists(expectedGameDir / "images" / "itch-cover.png")
-        self.assertPathExists(expectedGameDir / "images" / "cover.png")
-        self.assertPathExists(expectedGameDir / "export/")
-        self.assertPathExists(expectedGameDir / "mongo-bongo.p8")
-        self.assertPathExists(expectedGameDir / "export" / "html_export" / "index.html")
-        self.assertPathExists(expectedGameDir / "export" / "html_export" / "index.js")
-        self.assertPathExists(expectedGameDir / "export" / "html_export" / "index.zip")
+        self.assertExportsAreAsExpected(self.currentTestFolder, 'mongo-bongo')
 
         # TODO fix this
         # self.assertPathExists(expectedGameDir / "export" / "mongo-bongo.p8.png")
 
-        self.assertPathExists(expectedGameDir / "README.md")
-    #
-    # def test_folder_structure(self):
-    #     templateDir: Path = self.currentTestFolder / "game-template"
-    #     os.makedirs(templateDir)
-    #     p8fileStart: Path = templateDir / "new-game.p8"
-    #     shutil.copy(
-    #         self.getTestFilePath(TestFileEnum.BASIC_GAME_TEMPLATE_FILE), p8fileStart
-    #     )
-    #     P8Export.export(p8fileStart, uploadToItch=False)
+        self.assertPathExists(self.currentTestFolder / 'mongo-bongo' / "README.md")
 
     def test_optional_dir(self):
         pass

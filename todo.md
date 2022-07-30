@@ -48,3 +48,4 @@
 - [ ] Add Mouse/Keyboard/Touch screen metadata (i.e. this game requires a mouse on picade)
 - [ ] Add test for export all
 - [ ] Use ArgParser
+- [ ] Rebrand CPG (test twitter handle)
