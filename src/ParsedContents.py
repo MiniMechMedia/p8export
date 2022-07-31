@@ -49,6 +49,8 @@ class ControlEnum(Enum):
     D = 'D'
     F = 'F'
     A = 'A'
+    Q = 'Q'
+    TAB = 'TAB'
     MOUSE = 'MOUSE'
     LEFT_CLICK = 'LEFT_CLICK'
     RIGHT_CLICK = 'RIGHT_CLICK'
@@ -136,7 +138,8 @@ class Metadata:
 
     @property
     def p8FileGameName(self):
-        return f'{self.game_name.lower().ljust(31)}v{self.version}'
+        game_name = self.game_name.lower().replace('é','e')
+        return f'{game_name.ljust(31)}v{self.version}'
 
     def getTemplate(self) -> str:
         raise NotImplemented

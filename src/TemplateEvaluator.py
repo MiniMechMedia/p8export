@@ -186,6 +186,8 @@ class TemplateEvaluator:
             ControlEnum.D: 'D',
             ControlEnum.F: 'F',
             ControlEnum.A: 'A',
+            ControlEnum.Q: 'Q',
+            ControlEnum.TAB: 'Tab',
             ControlEnum.MOUSE: 'Mouse',
             ControlEnum.LEFT_CLICK: 'Left Click',
             ControlEnum.RIGHT_CLICK: 'Right Click',

@@ -8,7 +8,6 @@
 - [ ] ~~Create a working directory~~
 - [ ] Ability to configure pico-8 working directory
 - [X] Populate source code
-- [ ] Export to twitter
 - [X] Get rid of metavariables
 - [X] Put ParsedLabelImage in ParsedContents instead of raw label image
 - [X] Add concept of cart type (game, tweet, tweet-game, etc.)
@@ -23,11 +22,12 @@
 - [ ] Add metadata for genre
 - [ ] Populate genre on itch from metadata
 - [ ] Lexaloffle compilation target
+- [ ] Export to twitter
 - [X] Support multiple controls to do the same action
 - [ ] Auto-select the "Kind of project" field in itch
 - [ ] Add in-band metadata like __instructions__ and __controls__
 - [ ] Consume __instructions__ and __controls__ in pico8 template file
-- [ ] Pico8EduUrlCompilationTarget for automatically doing save @url (might be blocked)
+- [W] Pico8EduUrlCompilationTarget for automatically doing save @url (might be blocked)
 - [X] Jinja templating
 - [X] Use metadata header
 - [X] Option to process all
@@ -41,30 +41,30 @@
 - [X] Migrate picoquarium
 - [X] Number of players metadata
 - [X] Add player info metadata to game.xml
-- [ ] Make single script on picade to consolidate all
-- [ ] Refactor game.xml template
+- [X] Make single script on picade to consolidate all
+- [ ] Refactor game.xml template to use jinja and escape formatters
 - [ ] Add Mouse/Keyboard/Touch screen metadata (i.e. this game requires a mouse on picade)
 - [X] Add export all option
 - [X] Add test for export all
 - [ ] Use ArgParser
-- [ ] Rebrand CPG (test twitter handle)
+- [ ] Rebrand caterpillergames (test twitter handle)
 - [ ] Fix broken image in kaiju companions
 - [ ] Structure jam info (?)
-- [ ] Add instructional image to cool cat cafe
-- [ ] Make cool cat cafe 2 player
-- [ ] Fix deal with shark shoot
+- [X] Add instructional image to cool cat cafe
+- [X] Make cool cat cafe 2 player
+- [X] Fix deal with shark shoot
 - [ ] Convert controls to Flags and create a recognized group as left/right
 - [ ] Fix the controls description in minigame mania (maybe a new construct)
 - [X] Improvements for grow big
 - [X] If theme is empty don't show it
 - [~] Reupload all cover images
 - [ ] Add music to shuriken
-- [ ] Make music less duplicative
-- [ ] Fix broken link in health inspectre
+- [ ] Make music less duplicative (??)
+- [X] Fix broken link in health inspectre
 - [X] Fix bug in unsigned hero
 - [X] Add music to unsigned hero
 - [ ] 2 player unsigned hero?
-- [ ] Fix link in kaiju
+- [X] Fix link in kaiju
 - [ ] Add acknowledgements for fetch quest
 - [ ] Autumn wind music to Drifting Keep?
 - [X] Utility to add new metadata field
@@ -76,3 +76,7 @@
 - [ ] Add tests for min-max
 - [ ] Support up to 4 players for hamster slam
 - [ ] Add metadata for left behinds
+- [ ] Support keyboard for all games that support mouse
+- [X] Migrate all metadata
+- [X] Remove need for raw/
+- [ ] Fix duplicating slug

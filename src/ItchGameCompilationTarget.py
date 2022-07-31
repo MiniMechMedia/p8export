@@ -3,6 +3,7 @@ from src.ParsedContents import ParsedContents, CartType
 from src.CompilationTarget import CompilationTarget
 from pathlib import Path
 from src.TemplateEvaluator import TemplateEvaluator, TemplateFileEnum
+from selenium.webdriver.common.keys import Keys
 
 # import selenium
 from selenium.webdriver import Chrome
@@ -73,7 +74,9 @@ class ItchGameCompilationTarget(CompilationTarget):
         slug: WebElement = cls.pollForSelector(
             browser=browser, selector='[name="game[slug]"]'
         )
-        slug.clear()
+        # slug.clear()
+        slug.send_keys(Keys.CONTROL + 'a')
+        slug.send_keys(Keys.DELETE)
         slug.send_keys(parsedContents.metadata.correctedGameSlug)
 
         title: WebElement = cls.pollForSelector(
