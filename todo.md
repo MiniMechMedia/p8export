@@ -48,7 +48,7 @@
 - [X] Add test for export all
 - [ ] Use ArgParser
 - [ ] Rebrand caterpillergames (test twitter handle)
-- [ ] Fix broken image in kaiju companions
+- [X] Fix broken image in kaiju companions
 - [ ] Structure jam info (?)
 - [X] Add instructional image to cool cat cafe
 - [X] Make cool cat cafe 2 player
@@ -65,7 +65,7 @@
 - [X] Add music to unsigned hero
 - [ ] 2 player unsigned hero?
 - [X] Fix link in kaiju
-- [ ] Add acknowledgements for fetch quest
+- [X] Add acknowledgements for fetch quest
 - [ ] Autumn wind music to Drifting Keep?
 - [X] Utility to add new metadata field
 - [ ] Find a better song for tile isle (tropical)
@@ -80,3 +80,6 @@
 - [X] Migrate all metadata
 - [X] Remove need for raw/
 - [ ] Fix duplicating slug
+- [ ] Populate pico8_url by using the decompressor library to get compressed png image
+	- https://github.com/rvaccarim/p8png_decoder
+	- https://robertovaccari.com/blog/2021_01_03_stegano_pico8/
