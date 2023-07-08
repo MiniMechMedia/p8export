@@ -207,7 +207,8 @@ class TemplateEvaluator:
                 if jam.jam_number is None
                 else f"{jam.jam_name} {jam.jam_number}"
             )
-            ret += f"{verb} [{jamName}]({jam.correctedJamUrl})  \n"
+            formattedJamInfo = jamName if not jam.correctedJamUrl else f'[{jamName}]({jam.correctedJamUrl})'
+            ret += f"{verb} {formattedJamInfo}  \n"
 
             if jam.jam_theme:
                 ret += f"Theme: {jam.jam_theme}  \n"
