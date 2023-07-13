@@ -41,6 +41,7 @@ class TestFileEnum(FileEnum):
 
     GAME_CART_TEST_FILE = "../test/testFiles/game-cart-test-file.p8"
     TWEET_CART_TEST_FILE = "../test/testFiles/tweet-cart-test-file.p8"
+    TWEET_CART_ANNOTATED_TEST_FILE = "../test/testFiles/tweet-cart-annotated-test-file.p8"
 
     TWEET_STRING_TEMPLATE_EXPECTED = (
         "../test/expectedRender/tweet-string-template-expected.md"

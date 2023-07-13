@@ -1,0 +1,13 @@
+# Does the submission.html
+from src.ParsedContents import Config
+from src.CompilationTarget import CompilationTarget
+from pathlib import Path
+import shutil
+
+# import os
+import subprocess
+import tempfile
+from os.path import exists
+import os
+
+class TweetCartCompilationTarget(CompilationTarget):

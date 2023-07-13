@@ -2,6 +2,7 @@ from BaseTest import BaseTest
 from src.FileRegistry import TestFileEnum
 from src.pico8fileparser import Pico8FileParser
 from src.ParsedContents import ParsedContents, Metadata, ControlEnum
+from textwrap import dedent
 
 
 class TestParsing(BaseTest):
@@ -34,3 +35,46 @@ class TestParsing(BaseTest):
         parsed: ParsedContents = self.parseFile(TestFileEnum.TWEET_CART_TEST_FILE)
 
         self.assertEqual(parsed.sourceCodeP8sciiCharCount, 277)
+
+    def test_minifying_sourcecode_comments(self):
+        # parsed: ParsedContents = self.parseFile(TestFileEnum.TWEET_CART_ANNOTATED_TEST_FILE)
+        unminified = dedent('''\
+        if(4>2)--[[
+        ]]print('hello')--[[
+        ]]print('ok')
+        ''')
+        minified_expected = dedent('''\
+        if(4>2)print('hello')print('ok')
+        ''')
+        minified_actual = Pico8FileParser.minifySourceCode(unminified)
+        self.assertEqual(minified_expected, minified_actual)
+
+    def test_minifying_sourcecode_variables(self):
+        # Ok so there are 2 ways to do it
+        # One is you convert the vars to their readable form
+        unminified = dedent('''\
+        rnd_=rnd
+        xpos_,ypos_=cos(ang_),sin(ang_)
+        randval_g=rnd_()
+        ''')
+
+        # xpos_
+        # ypos_
+        # v_vx
+        # w_vy
+        # _xpos
+        # _vy
+        # w_vy
+        # xpos_
+        # vy_w
+        # randval_g
+
+
+        minified_expected = dedent('''\
+        r=rnd
+        x,y=cos(a),sin(a)
+        g=r()
+        ''')
+
+        minified_actual = Pico8FileParser.minifySourceCode(unminified)
+        self.assertEqual(minified_expected, minified_actual)

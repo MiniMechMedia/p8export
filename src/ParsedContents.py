@@ -171,6 +171,7 @@ class ParsedContents:
     filePath: Path
     rawContents: str
     sourceCode: str
+    minifiedSourceCode: str
     labelImage: ParsedLabelImage
     metadata: Metadata
     config: Config
@@ -191,6 +192,7 @@ class ParsedContents:
 
     @property
     def sourceCodeP8sciiCharCount(self):
+        # TODO fix this
         return len(self.sourceCode)
 
     @property

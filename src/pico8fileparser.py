@@ -10,7 +10,7 @@ from src.ParsedContents import (
 )
 from dacite import from_dict, Config as daciteConfig
 from decouple import config
-
+import re
 
 class Pico8FileParser:
     @classmethod
@@ -41,6 +41,15 @@ class Pico8FileParser:
                 lines.pop(0)
         rawSourceCode = '\n'.join(lines)
         return rawSourceCode.strip()
+
+    @classmethod
+    def minifySourceCode(cls, sourceCode: str) -> str:
+        strippedComments = re.sub(r'--\[\[[\s\S]\]\]', '', sourceCode)
+        # The ang_ form
+        shortenedVariables = re.sub(r'([a-zA-Z])\w+_\b', r'\1', strippedComments)
+        # The vy_w form
+        shortenedVariables = re.sub(r'[a-zA-Z]\w+_([a-zA-Z])\b', r'\1', shortenedVariables)
+        return shortenedVariables
 
     @classmethod
     def parseYamlFromRawYaml(cls, rawYaml: str) -> dict:
@@ -104,6 +113,7 @@ class Pico8FileParser:
     def parse(cls, filePath: pathlib.Path) -> ParsedContents:
         rawContents: str = cls.parseRawFileContents(filePath)
         sourceCode: str = cls.parseSourceCodeFromFileContents(rawContents)
+        minifiedSourceCode: str = cls.minifySourceCode(sourceCode)
         rawYaml: str = cls.parseRawYamlFromFileContents(rawContents)
         parsedYaml: dict = cls.parseYamlFromRawYaml(rawYaml)
         rawLabelImage: str = cls.parseRawLabelImage(rawContents)
@@ -114,6 +124,7 @@ class Pico8FileParser:
             filePath=filePath,
             rawContents=rawContents,
             sourceCode=sourceCode,
+            minifiedSourceCode=minifiedSourceCode,
             labelImage=parsedLabelImage,
             metadata=metadata,
             config=config,
