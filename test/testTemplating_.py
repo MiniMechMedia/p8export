@@ -105,10 +105,17 @@ class TestTemplating(BaseTest):
             (TempFileEnum.GAME_GITHUB_README_ACTUAL, TestFileEnum.GAME_GITHUB_README_EXPECTED),
             (TempFileEnum.GAME_ITCH_DESCRIPTION_ACTUAL, TestFileEnum.GAME_ITCH_DESCRIPTION_EXPECTED),
             (TempFileEnum.TWEET_GITHUB_README_ACTUAL, TestFileEnum.TWEET_GITHUB_README_EXPECTED),
-            (TempFileEnum.TWEET_ITCH_DESCRIPTION_ACTUAL, TestFileEnum.TWEET_ITCH_DESCRIPTION_EXPECTED)
+            (TempFileEnum.TWEET_ITCH_DESCRIPTION_ACTUAL, TestFileEnum.TWEET_ITCH_DESCRIPTION_EXPECTED),
+            (TempFileEnum.GAME_CART_TEST_FILE_TRANSFORMED_COPY_LOCATION, TestFileEnum.GAME_CART_TEST_FILE_TRANSFORMED_EXPECTED),
         ]:
             rendered = self.getTempFilePath(temp).read_text()
             self.getTestFilePath(test).write_text(rendered)
+
+        for temp, test in [
+            (TempFileEnum.ITCH_COVER_IMAGE_TEMP_FILE, TestFileEnum.ITCH_COVER_IMAGE_TEST_FILE),
+        ]:
+            rendered = self.getTempFilePath(temp).read_bytes()
+            self.getTestFilePath(test).write_bytes(rendered)
 
     # TODO needs more test around html and stuff??
 

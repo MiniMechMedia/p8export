@@ -2,7 +2,7 @@ pico-8 cartridge // http://www.pico-8.com
 version 35
 __lua__
 --mongo bongo                    v0.1.0
---caterpillar games
+--mini mech media
 
 
 
@@ -180,4 +180,5 @@ version: 0.1.0
 img_alt: A row of 5 bongos with a cursor selecting the middle one
 about_extra: ''
 cart_type: game
+number_players: [1]
 __meta:cart_info_end__

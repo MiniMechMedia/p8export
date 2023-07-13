@@ -2,10 +2,10 @@
 Galaxy inspired by density wave theory
 
 
-[![xxxx]()](https://caterpillargames.itch.io/galaxy-tweet)
+[![xxxx]()](https://minimechmedia.itch.io/galaxy-tweet)
 
 
-Play it now on [itch.io](https://caterpillargames.itch.io/galaxy-tweet) or remix it on [pico-8-edu.com](https://www.pico-8-edu.com/?c=Y2xzKDcp&g=w-w-w-w1HQHw-w2Xw-w3Xw-w2HQH)
+Play it now on [itch.io](https://minimechmedia.itch.io/galaxy-tweet) or remix it on [pico-8-edu.com](https://www.pico-8-edu.com/?c=Y2xzKDcp&g=w-w-w-w1HQHw-w2Xw-w3Xw-w2HQH)
 
 
 This cart is tweetable at just 277 characters.
@@ -36,7 +36,7 @@ Created for [TriJam -1](https://itch.io/jam/trijam--1/entries)
 Theme: theme1, theme2, theme3  
 Development Time: None  
 
-Also submitted to [MiniJam]()  
+Also submitted to MiniJam  
 Theme: blah  
 Limitation: You are the bad guy  
 
