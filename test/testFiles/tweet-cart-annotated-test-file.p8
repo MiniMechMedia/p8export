@@ -4,21 +4,39 @@ __lua__
 --{gamename}
 --{authorinfo}
 
-::_::
-cls()
-srand()
-for i = 1, 100 do
-	pset(rnd(128),rnd(128),7)
-end
-for i = 1, 1800 do
-	r=rnd(50)
-	p=r/30
-	a=rnd() - t()/(2+r*r/50)
-	x = r*cos(a)
-	y = r *1.3 * sin(a)
-	pset(64 + x * cos(p) - y*sin(p), 64 + x * sin(p) + y * cos(p), rnd({7,7,7,7,7,7,7,15,10}))
-end
-flip()
+c={}--
+i=0--
+-- We use this value a lot, so this will save us some chars
+k128_=128--
+f=fillp--
+::_::--
+if(i%k128_<1)--[[
+]]flip()--[[
+]]cls()--[[
+]]i=0
+f(░)line(i,9,i,70,5)f()line(i,k128_,i,k128_-@i,15)
+c[i]=c[i]or{--
+    xpos_=-k,--
+ypos_=0,--
+vx_=0,--
+vy_w=0,--
+r=rnd,oldenv_=_ENV--
+}
+--
+_ENV=c[i]--
+pset(x,y,15)--
+w+=.1--
+g=r(8)--
+x+=v
+ypos_+=vy_w
+if(y>128)--[[
+]]poke(x,@x+1)--[[
+]]xpos_,ypos_,vx_,vy_w=60+g,g/5,0,0
+if(ypos_>9and ypos_<70and g<2)--[[
+]]v=cos(g)/2--[[
+]]w=sin(g)/2
+_ENV=oldenv_
+i+=1--
 goto _
 
 __gfx__

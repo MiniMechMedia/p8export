@@ -4,7 +4,7 @@ from src.pico8fileparser import Pico8FileParser
 from src.ParsedContents import ParsedContents, Metadata, ControlEnum
 from textwrap import dedent
 
-
+class TestMe: pass
 class TestParsing(BaseTest):
     # def test_parsing(self):
     #     parsed: ParsedContents = Pico8FileParser.parse(
@@ -49,6 +49,30 @@ class TestParsing(BaseTest):
         minified_actual = Pico8FileParser.minifySourceCode(unminified)
         self.assertEqual(minified_expected, minified_actual)
 
+    def test_stripping_newlines(self):
+        unminified = dedent(r'''
+        i=0--
+        c={}--
+        k=128--
+        '''.removeprefix('\n'))
+        minified_expected = 'i=0c={}k=128'
+        minified_actual = Pico8FileParser.minifySourceCode(unminified)
+        self.assertEqual(minified_expected, minified_actual)
+
+    def test_stripping_comments(self):
+        unminified = dedent(r'''
+        -- set i to 0
+        i=0
+        -- set c to empty collection
+        -- this will be used for particles
+        c={}--
+        k=128
+        --somestuff
+        '''.removeprefix('\n'))
+        minified_expected = 'i=0\nc={}k=128\n'
+        minified_actual = Pico8FileParser.minifySourceCode(unminified)
+        self.assertEqual(minified_expected, minified_actual)
+
     def test_minifying_sourcecode_variables(self):
         # Ok so there are 2 ways to do it
         # One is you convert the vars to their readable form
@@ -78,3 +102,21 @@ class TestParsing(BaseTest):
 
         minified_actual = Pico8FileParser.minifySourceCode(unminified)
         self.assertEqual(minified_expected, minified_actual)
+
+    def test_tweet_cart_minify_total(self):
+        parsed: ParsedContents = self.parseFile(TestFileEnum.TWEET_CART_ANNOTATED_TEST_FILE)
+        expected_minified = dedent('''\
+        c={}i=0k=128f=fillp::_::if(i%k<1)flip()cls()i=0
+        f(░)line(i,9,i,70,5)f()line(i,k,i,k-@i,15)
+        c[i]=c[i]or{x=-k,y=0,v=0,w=0,r=rnd,o=_ENV}
+        _ENV=c[i]pset(x,y,15)w+=.1g=r(8)x+=v
+        y+=w
+        if(y>128)poke(x,@x+1)x,y,v,w=60+g,g/5,0,0
+        if(y>9and y<70and g<2)v=cos(g)/2w=sin(g)/2
+        _ENV=o
+        i+=1goto _
+        ''').strip()
+        # raise Exception(TestMe.__module__)
+        # raise Exception(str(len(expected_minified)) + '\n' + expected_minified)
+        self.assertEqual(len(parsed.minifiedSourceCode), len(expected_minified))
+        self.assertEqual(parsed.minifiedSourceCode, expected_minified)

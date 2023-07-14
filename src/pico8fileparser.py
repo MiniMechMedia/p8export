@@ -44,12 +44,18 @@ class Pico8FileParser:
 
     @classmethod
     def minifySourceCode(cls, sourceCode: str) -> str:
-        strippedComments = re.sub(r'--\[\[[\s\S]\]\]', '', sourceCode)
+        minified = sourceCode
+        # minified = minified.replace('--\n', '')
+        minified = re.sub(r'--\[\[[\s\S]\]\]', '', minified)
+        minified = re.sub(r'^\s+', '', minified, flags=re.MULTILINE)
+        minified = re.sub('--.*\n', '', minified)
+        # stash=minified
+        # raise  Exception(stash + '\n\n' + minified)
         # The ang_ form
-        shortenedVariables = re.sub(r'([a-zA-Z])\w+_\b', r'\1', strippedComments)
+        minified = re.sub(r'([a-zA-Z])\w+_\b', r'\1', minified)
         # The vy_w form
-        shortenedVariables = re.sub(r'[a-zA-Z]\w+_([a-zA-Z])\b', r'\1', shortenedVariables)
-        return shortenedVariables
+        minified = re.sub(r'[a-zA-Z]\w+_([a-zA-Z])\b', r'\1', minified)
+        return minified
 
     @classmethod
     def parseYamlFromRawYaml(cls, rawYaml: str) -> dict:
