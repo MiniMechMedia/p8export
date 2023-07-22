@@ -4,7 +4,7 @@ from src.pico8fileparser import Pico8FileParser
 from src.ParsedContents import ParsedContents, Metadata, ControlEnum
 from textwrap import dedent
 
-class TestMe: pass
+# class TestMe: pass
 class TestParsing(BaseTest):
     # def test_parsing(self):
     #     parsed: ParsedContents = Pico8FileParser.parse(
@@ -166,13 +166,13 @@ class TestParsing(BaseTest):
     def test_clarifying_conditionals(self):
         unclarified = dedent('''\
         if(4>2)--[[then
-        ]]print('ok')
+            ]]print('ok')
         --end
         ''')
 
         clarified_expected = dedent('''\
         if(4>2)then
-        print('ok')
+            print('ok')
         end
         ''')
         clarified_actual = Pico8FileParser.clarifySourceCode(unclarified)

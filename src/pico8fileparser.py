@@ -48,10 +48,15 @@ class Pico8FileParser:
         # The comment breaks can just go away
         clarified = re.sub(r'--\n', '\n', clarified)
 
-        clarified = re.sub(r'^--end$', 'end', clarified)
-        clarified = re.sub(r'--\[\[then$','then--[[')
+        clarified = re.sub(r'^--end$', 'end', clarified, flags=re.MULTILINE)
+
+        # raise Exception(clarified)
+        clarified = re.sub(r'--\[\[then$','then--[[', clarified, flags=re.MULTILINE)
+        # clarified = re.sub(r'--\[\[then$','wtf', clarified, flags=re.MULTILINE)
+        # raise Exception(clarified)
+
         # no need for (empty) multiline comments
-        clarified = re.sub(r'--\[\[([\s\n]+)\]\]', r'\1')
+        clarified = re.sub(r'--\[\[([\s\n]+)\]\]', r'\1', clarified)
 
         # The ang_ form
         clarified = re.sub(r'([a-zA-Z]\w+)_\b', r'\1', clarified)
