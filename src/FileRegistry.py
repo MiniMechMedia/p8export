@@ -1,6 +1,8 @@
 from enum import Enum
 from pathlib import Path
 
+root = Path(__file__).parent.parent
+# raise Exception(root)
 
 class FileEnum(Enum):
     @property
@@ -12,6 +14,8 @@ class FileEnum(Enum):
             return file.read()
 
     def readText(self) -> str:
+        # import pathlib
+        # raise Exception(pathlib.Path(self.value).absolute())
         with open(self.value, "r") as file:
             return file.read()
 
