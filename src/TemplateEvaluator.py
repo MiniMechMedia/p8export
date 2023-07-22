@@ -8,15 +8,19 @@ from enum import Enum, auto
 import jinja2
 import string
 
+
 class RenderType(Enum):
     # just a basic string replacement
     BASIC = auto()
     HTML = auto()
 
+
 filters = {}
+
 
 def registerFilter(func):
     filters[func.__name__] = func
+
 
 @registerFilter
 def htmlSafeSource(content):
@@ -25,9 +29,10 @@ def htmlSafeSource(content):
         if c in string.printable:
             ret.append(c)
         else:
-            ret.append(f'&#{ord(c)};')
+            ret.append(f"&#{ord(c)};")
 
-    return ''.join(ret)
+    return "".join(ret)
+
 
 class TemplateEvaluator:
     @classmethod
@@ -38,15 +43,19 @@ class TemplateEvaluator:
 
     @classmethod
     def getItchTemplate(cls, cartType: CartType):
-        return (TemplateFileEnum.TWEET_ITCH_DESCRIPTION_TEMPLATE
-                if cartType == CartType.TWEET else
-                TemplateFileEnum.GAME_ITCH_DESCRIPTION_TEMPLATE)
+        return (
+            TemplateFileEnum.TWEET_ITCH_DESCRIPTION_TEMPLATE
+            if cartType == CartType.TWEET
+            else TemplateFileEnum.GAME_ITCH_DESCRIPTION_TEMPLATE
+        )
 
     @classmethod
     def getReadmeTemplate(cls, cartType: CartType):
-        return (TemplateFileEnum.TWEET_GITHUB_README_TEMPLATE
-                if cartType == CartType.TWEET else
-                TemplateFileEnum.GAME_GITHUB_README_TEMPLATE)
+        return (
+            TemplateFileEnum.TWEET_GITHUB_README_TEMPLATE
+            if cartType == CartType.TWEET
+            else TemplateFileEnum.GAME_GITHUB_README_TEMPLATE
+        )
 
     @classmethod
     def evaluateTemplateToString(
@@ -63,11 +72,11 @@ class TemplateEvaluator:
     def evaluateStringTemplateToString(
         cls, parsedContents: ParsedContents, strTemplate: str, renderType: RenderType
     ) -> str:
-        root = (Path(__file__) / '..' / '..').resolve() / 'template'
+        root = (Path(__file__) / ".." / "..").resolve() / "template"
         # print('checkhere',root)
         templateFileName = "asdfasdfasdf.temp"
         temporaryTemplateFile = root / templateFileName
-        with open(temporaryTemplateFile, 'w') as file:
+        with open(temporaryTemplateFile, "w") as file:
             file.write(strTemplate)
 
         templateLoader = jinja2.FileSystemLoader(searchpath=root.resolve())
@@ -77,8 +86,10 @@ class TemplateEvaluator:
             templateEnv.filters[key] = val
         jinjaTemplate = templateEnv.get_template(templateFileName)
 
-        ret: str = jinjaTemplate.render(cls.constructEvaluationDictionary(parsedContents=parsedContents))
-        '''
+        ret: str = jinjaTemplate.render(
+            cls.constructEvaluationDictionary(parsedContents=parsedContents)
+        )
+        """
                 templateLoader = jinja2.FileSystemLoader(searchpath=root.resolve())
         templateEnv = jinja2.Environment(loader=templateLoader)
         TEMPLATE_FILE = str(template.filepath)
@@ -87,8 +98,7 @@ class TemplateEvaluator:
         #                 "description": "A simple inquiry of function."}
         # return template.render(cls.constructEvaluationDictionary(parsedContents=parsedContents))
         return jinjaTemplate.render({"title":'blah'})
-        '''
-
+        """
 
         # ret: str = strTemplate.format(
         #     **cls.constructEvaluationDictionary(parsedContents=parsedContents)
@@ -106,7 +116,6 @@ class TemplateEvaluator:
         template: TemplateFileEnum,
         outputFile: Path,
     ) -> None:
-
         with open(outputFile, "w") as file:
             file.write(
                 cls.evaluateStringTemplateToString(
@@ -162,12 +171,14 @@ class TemplateEvaluator:
     # TODO should maybe provide target like XML, HTML, MD, TXT
     @classmethod
     def constructControlDescription(cls, metadata: Metadata) -> str:
-        ret: str = ''
+        ret: str = ""
         for control in metadata.controls:
-            controlInputs: str = ' / '.join(cls.controlToDescription(inp) for inp in control.inputs)
-            ret += f'* {controlInputs} - {control.desc}\n'
+            controlInputs: str = " / ".join(
+                cls.controlToDescription(inp) for inp in control.inputs
+            )
+            ret += f"* {controlInputs} - {control.desc}\n"
 
-        return ret.removesuffix('\n')
+        return ret.removesuffix("\n")
 
     @classmethod
     def controlToDescription(cls, controlEnum: ControlEnum):
@@ -179,18 +190,18 @@ class TemplateEvaluator:
             ControlEnum.DOWN_ARROW_KEY: "Down Arrow Key",
             ControlEnum.ESDF: "ESDF",
             ControlEnum.X: "X",
-            ControlEnum.Z: 'Z',
-            ControlEnum.P: 'P',
-            ControlEnum.S: 'S',
-            ControlEnum.E: 'E',
-            ControlEnum.D: 'D',
-            ControlEnum.F: 'F',
-            ControlEnum.A: 'A',
-            ControlEnum.Q: 'Q',
-            ControlEnum.TAB: 'Tab',
-            ControlEnum.MOUSE: 'Mouse',
-            ControlEnum.LEFT_CLICK: 'Left Click',
-            ControlEnum.RIGHT_CLICK: 'Right Click',
+            ControlEnum.Z: "Z",
+            ControlEnum.P: "P",
+            ControlEnum.S: "S",
+            ControlEnum.E: "E",
+            ControlEnum.D: "D",
+            ControlEnum.F: "F",
+            ControlEnum.A: "A",
+            ControlEnum.Q: "Q",
+            ControlEnum.TAB: "Tab",
+            ControlEnum.MOUSE: "Mouse",
+            ControlEnum.LEFT_CLICK: "Left Click",
+            ControlEnum.RIGHT_CLICK: "Right Click",
         }[controlEnum]
 
     @classmethod
@@ -207,7 +218,11 @@ class TemplateEvaluator:
                 if jam.jam_number is None
                 else f"{jam.jam_name} {jam.jam_number}"
             )
-            formattedJamInfo = jamName if not jam.correctedJamUrl else f'[{jamName}]({jam.correctedJamUrl})'
+            formattedJamInfo = (
+                jamName
+                if not jam.correctedJamUrl
+                else f"[{jamName}]({jam.correctedJamUrl})"
+            )
             ret += f"{verb} {formattedJamInfo}  \n"
 
             if jam.jam_theme:
@@ -215,8 +230,8 @@ class TemplateEvaluator:
 
             if jam.jam_name == "TriJam":
                 ret += f"Development Time: {metadata.develop_time}  \n"
-            elif jam.jam_name == 'MiniJam':
-                ret += f'Limitation: {jam.minijam_limitation}  \n'
+            elif jam.jam_name == "MiniJam":
+                ret += f"Limitation: {jam.minijam_limitation}  \n"
 
             if jam.jam_extra:
                 ret += jam.jam_extra

@@ -5,7 +5,6 @@ import tempfile
 
 
 class CompilationTarget(ABC):
-
     pass
 
     # Does disk/network IO stuff

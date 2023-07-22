@@ -12,6 +12,7 @@ from dacite import from_dict, Config as daciteConfig
 from decouple import config
 import re
 
+
 class Pico8FileParser:
     @classmethod
     def parseRawFileContents(cls, filepath: pathlib.Path) -> str:
@@ -35,50 +36,50 @@ class Pico8FileParser:
         rawSourceCode = rawSourceCode.split("__label__")[0]
 
         rawSourceCode = rawSourceCode.strip()
-        lines = rawSourceCode.split('\n')
+        lines = rawSourceCode.split("\n")
         for i in range(2):
-            if lines[0].startswith('--'):
+            if lines[0].startswith("--"):
                 lines.pop(0)
-        rawSourceCode = '\n'.join(lines)
+        rawSourceCode = "\n".join(lines)
         return rawSourceCode.strip()
 
     @classmethod
     def clarifySourceCode(cls, sourceCode: str) -> str:
         clarified = sourceCode
         # The comment breaks can just go away
-        clarified = re.sub(r'--\n', '\n', clarified)
+        clarified = re.sub(r"--\n", "\n", clarified)
 
-        clarified = re.sub(r'^--end$', 'end', clarified, flags=re.MULTILINE)
+        clarified = re.sub(r"^--end$", "end", clarified, flags=re.MULTILINE)
 
         # raise Exception(clarified)
-        clarified = re.sub(r'--\[\[then$','then--[[', clarified, flags=re.MULTILINE)
+        clarified = re.sub(r"--\[\[then$", "then--[[", clarified, flags=re.MULTILINE)
         # clarified = re.sub(r'--\[\[then$','wtf', clarified, flags=re.MULTILINE)
         # raise Exception(clarified)
 
         # no need for (empty) multiline comments
-        clarified = re.sub(r'--\[\[([\s\n]+)\]\]', r'\1', clarified)
+        clarified = re.sub(r"--\[\[([\s\n]+)\]\]", r"\1", clarified)
 
         # The ang_ form
-        clarified = re.sub(r'([a-zA-Z]\w+)_\b', r'\1', clarified)
+        clarified = re.sub(r"([a-zA-Z]\w+)_\b", r"\1", clarified)
         # The vy_w form
-        clarified = re.sub(r'([a-zA-Z]\w+)_[a-zA-Z]\b', r'\1', clarified)
+        clarified = re.sub(r"([a-zA-Z]\w+)_[a-zA-Z]\b", r"\1", clarified)
         return clarified
 
     @classmethod
     def minifySourceCode(cls, sourceCode: str) -> str:
         minified = sourceCode
         # minified = minified.replace('--\n', '')
-        minified = re.sub(r'--\[\[[\s\S]\]\]', '', minified)
-        minified = re.sub(r'^\s+', '', minified, flags=re.MULTILINE)
-        minified = re.sub('--.*\n', '', minified)
+        minified = re.sub(r"--\[\[[\s\S]\]\]", "", minified)
+        minified = re.sub(r"^\s+", "", minified, flags=re.MULTILINE)
+        minified = re.sub("--.*\n", "", minified)
         # For the --end hack. Don't like this
-        minified = re.sub(r'^--end$', '\n', minified)
+        minified = re.sub(r"^--end$", "\n", minified)
         # stash=minified
         # raise  Exception(stash + '\n\n' + minified)
         # The ang_ form
-        minified = re.sub(r'([a-zA-Z])\w+_\b', r'\1', minified)
+        minified = re.sub(r"([a-zA-Z])\w+_\b", r"\1", minified)
         # The vy_w form
-        minified = re.sub(r'[a-zA-Z]\w+_([a-zA-Z])\b', r'\1', minified)
+        minified = re.sub(r"[a-zA-Z]\w+_([a-zA-Z])\b", r"\1", minified)
         return minified
 
     @classmethod
@@ -129,13 +130,12 @@ class Pico8FileParser:
     # TODO populate this stuff from a config file? Or cmdline args or something?
     @classmethod
     def getConfig(cls, metadata: Metadata) -> Config:
-
         return Config(
-            gameAuthor=config('GAME_AUTHOR'),
-            itchAuthor=config('ITCH_USERNAME').lower(),
+            gameAuthor=config("GAME_AUTHOR"),
+            itchAuthor=config("ITCH_USERNAME").lower(),
             sourceControlRootUrl="https://github.com/CaterpillarGames/pico8-games/tree/master/carts",
             # pico8ExePath=r"C:\Program Files (x86)\PICO-8\pico8.exe",
-            pico8ExePath=config('PICO8EXE'),
+            pico8ExePath=config("PICO8EXE"),
             exportDir="",
         )
 

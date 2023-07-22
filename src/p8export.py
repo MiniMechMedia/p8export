@@ -18,12 +18,13 @@ from src.ItchGameCompilationTarget import ItchGameCompilationTarget
 from src.XmlCompilationTarget import XmlCompilationTarget
 from src.P8FileTransformerCompilationTarget import P8FileTransformerCompilationTarget
 
+
 # from src.ItchDescriptionCompilationTarget import ItchDescriptionCompilationTarget
 @dataclass
 class ExportResults:
     resultMap: dict[str, str]
 
-    SUCCESSINDICATOR = 'success'
+    SUCCESSINDICATOR = "success"
 
     @property
     def isError(self):
@@ -31,10 +32,10 @@ class ExportResults:
 
     @property
     def formattedResults(self):
-        summary = ''
+        summary = ""
         for path, result in self.resultMap.items():
-            slug = path.split('/')[-1].split('.')[0].ljust(40)
-            summary += f'{slug}: {result}\n'
+            slug = path.split("/")[-1].split(".")[0].ljust(40)
+            summary += f"{slug}: {result}\n"
 
         # summary = '\n'.join(f'{game}: {result}' for game, result in self.resultMap.items())
         return f"Errors encountered ({self.errorCount} out of {len(self)}):\n{summary}\nErrors encountered ({self.errorCount} out of {len(self)})"
@@ -45,20 +46,25 @@ class ExportResults:
 
     @property
     def successCount(self):
-        return len([result for result in self.resultMap.values() if result == self.SUCCESSINDICATOR])
+        return len(
+            [
+                result
+                for result in self.resultMap.values()
+                if result == self.SUCCESSINDICATOR
+            ]
+        )
 
     def __len__(self):
         return len(self.resultMap)
+
 
 class P8Export:
     # Be warned: will use the directory the p8 file is currently in as the export dir
 
     @classmethod
-    def exportDirectory(cls,
-          globPattern: str,
-                        uploadToItch: bool) -> ExportResults:
-        if not globPattern.endswith('.p8'):
-            raise Exception('must target .p8 files')
+    def exportDirectory(cls, globPattern: str, uploadToItch: bool) -> ExportResults:
+        if not globPattern.endswith(".p8"):
+            raise Exception("must target .p8 files")
         allFiles = glob.glob(globPattern)
 
         # # DEBUGG!!!
@@ -99,7 +105,7 @@ class P8Export:
     ) -> None:
         if targetExportDir is not None:
             raise NotImplemented("this feature is not yet available")
-        if not str(targetFile).endswith('.p8'):
+        if not str(targetFile).endswith(".p8"):
             raise Exception("Must target .p8 file")
         if not exists(targetFile):
             raise Exception("invalid target")
@@ -118,7 +124,9 @@ class P8Export:
         )
 
         # finalP8FileName
-        P8FileTransformerCompilationTarget.transformP8File(p8FilePath=locations.p8FilePath, parsed=parsedContents)
+        P8FileTransformerCompilationTarget.transformP8File(
+            p8FilePath=locations.p8FilePath, parsed=parsedContents
+        )
 
         parsedContents.coverPath = "images/cover.png"
         parsedContents.folderRelativePath = (
@@ -159,11 +167,15 @@ class P8Export:
             readmeOutputPath=targetDir.parent.parent / "README.md",
         )
 
-        XmlCompilationTarget.compileToXml(xmlDestination=locations.exportsSubDir / 'game.xml',
-                                 metadata=parsedContents.metadata)
+        XmlCompilationTarget.compileToXml(
+            xmlDestination=locations.exportsSubDir / "game.xml",
+            metadata=parsedContents.metadata,
+        )
 
         if uploadToItch:
-            ItchGameCompilationTarget.uploadToItch(parsedContents, locations.exportsBaseDir)
+            ItchGameCompilationTarget.uploadToItch(
+                parsedContents, locations.exportsBaseDir
+            )
         # parsedContents=parsedContents,
         #                                              outputDir=locations.exportsSubDir / parsedContents.)
         # FileSystemOrchestrator.prepareSubfolders()
@@ -177,7 +189,7 @@ if __name__ == "__main__":
     if len(sys.argv) > 2 and sys.argv[2] == "--no-itch":
         uploadToItch = False
     target: str = sys.argv[1]
-    if '*' in target:
+    if "*" in target:
         results = P8Export.exportDirectory(target, uploadToItch=uploadToItch)
         if results.isError:
             raise Exception(results.formattedResults)

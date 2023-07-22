@@ -62,7 +62,6 @@ class FileSystemOrchestrator:
     def prepareExportDir(
         cls, inputP8FilePath: Path, finalP8FileName: str, exportDir: Path
     ) -> FileSystemLocations:
-
         containingDir: Path = inputP8FilePath.parent
 
         if basename(inputP8FilePath) != finalP8FileName:

@@ -42,18 +42,18 @@ class ControlEnum(Enum):
     DOWN_ARROW_KEY = "DOWN_ARROW_KEY"
     ESDF = "ESDF"
     X = "X"
-    Z = 'Z'
-    P = 'P'
-    S = 'S'
-    E = 'E'
-    D = 'D'
-    F = 'F'
-    A = 'A'
-    Q = 'Q'
-    TAB = 'TAB'
-    MOUSE = 'MOUSE'
-    LEFT_CLICK = 'LEFT_CLICK'
-    RIGHT_CLICK = 'RIGHT_CLICK'
+    Z = "Z"
+    P = "P"
+    S = "S"
+    E = "E"
+    D = "D"
+    F = "F"
+    A = "A"
+    Q = "Q"
+    TAB = "TAB"
+    MOUSE = "MOUSE"
+    LEFT_CLICK = "LEFT_CLICK"
+    RIGHT_CLICK = "RIGHT_CLICK"
 
 
 class CartType(Enum):
@@ -112,7 +112,7 @@ class Metadata:
     pico_url: Optional[str]
     number_players: list[int]
     # TODO should this be optional?
-    about_extra: str = ''
+    about_extra: str = ""
 
     # TODO map automatically
     @property
@@ -134,12 +134,12 @@ class Metadata:
         if _min == _max:
             return str(_min)
 
-        return f'{_min}-{_max}'
+        return f"{_min}-{_max}"
 
     @property
     def p8FileGameName(self):
-        game_name = self.game_name.lower().replace('é','e')
-        return f'{game_name.ljust(31)}v{self.version}'
+        game_name = self.game_name.lower().replace("é", "e")
+        return f"{game_name.ljust(31)}v{self.version}"
 
     def getTemplate(self) -> str:
         raise NotImplemented

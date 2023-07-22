@@ -46,22 +46,21 @@ class TestTemplating(BaseTest):
             expected=TestFileEnum.TWEET_STRING_TEMPLATE_EXPECTED,
         )
 
-    def assertCartRendersAsExpected(self,
-                                    cartFile: TestFileEnum,
-                                    templateFile: TemplateFileEnum,
-                                    tempFile: TempFileEnum,
-                                    expectedFile: TestFileEnum) -> None:
+    def assertCartRendersAsExpected(
+        self,
+        cartFile: TestFileEnum,
+        templateFile: TemplateFileEnum,
+        tempFile: TempFileEnum,
+        expectedFile: TestFileEnum,
+    ) -> None:
         parsed: ParsedContents = Pico8FileParser.parse(self.getTestFilePath(cartFile))
         TemplateEvaluator.evaluateTemplateToFile(
             parsedContents=parsed,
             template=templateFile,
-            outputFile = self.getTempFilePath(tempFile)
+            outputFile=self.getTempFilePath(tempFile),
         )
 
-        self.assertFilesEqual(
-            actual=tempFile,
-            expected=expectedFile
-        )
+        self.assertFilesEqual(actual=tempFile, expected=expectedFile)
 
     def test_descriptions(self):
         with self.subTest("game itch description"):
@@ -69,7 +68,7 @@ class TestTemplating(BaseTest):
                 cartFile=TestFileEnum.GAME_CART_TEST_FILE,
                 templateFile=TemplateFileEnum.GAME_ITCH_DESCRIPTION_TEMPLATE,
                 tempFile=TempFileEnum.GAME_ITCH_DESCRIPTION_ACTUAL,
-                expectedFile=TestFileEnum.GAME_ITCH_DESCRIPTION_EXPECTED
+                expectedFile=TestFileEnum.GAME_ITCH_DESCRIPTION_EXPECTED,
             )
 
         with self.subTest("game github readme"):
@@ -77,7 +76,7 @@ class TestTemplating(BaseTest):
                 cartFile=TestFileEnum.GAME_CART_TEST_FILE,
                 templateFile=TemplateFileEnum.GAME_GITHUB_README_TEMPLATE,
                 tempFile=TempFileEnum.GAME_GITHUB_README_ACTUAL,
-                expectedFile=TestFileEnum.GAME_GITHUB_README_EXPECTED
+                expectedFile=TestFileEnum.GAME_GITHUB_README_EXPECTED,
             )
 
         # TODO add missing test
@@ -86,7 +85,7 @@ class TestTemplating(BaseTest):
                 cartFile=TestFileEnum.TWEET_CART_TEST_FILE,
                 templateFile=TemplateFileEnum.TWEET_ITCH_DESCRIPTION_TEMPLATE,
                 tempFile=TempFileEnum.TWEET_ITCH_DESCRIPTION_ACTUAL,
-                expectedFile=TestFileEnum.TWEET_ITCH_DESCRIPTION_EXPECTED
+                expectedFile=TestFileEnum.TWEET_ITCH_DESCRIPTION_EXPECTED,
             )
 
         with self.subTest("tweet github readme"):
@@ -94,7 +93,7 @@ class TestTemplating(BaseTest):
                 cartFile=TestFileEnum.TWEET_CART_TEST_FILE,
                 templateFile=TemplateFileEnum.TWEET_GITHUB_README_TEMPLATE,
                 tempFile=TempFileEnum.TWEET_GITHUB_README_ACTUAL,
-                expectedFile=TestFileEnum.TWEET_GITHUB_README_EXPECTED
+                expectedFile=TestFileEnum.TWEET_GITHUB_README_EXPECTED,
             )
 
         if False:
@@ -102,17 +101,35 @@ class TestTemplating(BaseTest):
 
     def forceUpdateFiles(self):
         for temp, test in [
-            (TempFileEnum.GAME_GITHUB_README_ACTUAL, TestFileEnum.GAME_GITHUB_README_EXPECTED),
-            (TempFileEnum.GAME_ITCH_DESCRIPTION_ACTUAL, TestFileEnum.GAME_ITCH_DESCRIPTION_EXPECTED),
-            (TempFileEnum.TWEET_GITHUB_README_ACTUAL, TestFileEnum.TWEET_GITHUB_README_EXPECTED),
-            (TempFileEnum.TWEET_ITCH_DESCRIPTION_ACTUAL, TestFileEnum.TWEET_ITCH_DESCRIPTION_EXPECTED),
-            (TempFileEnum.GAME_CART_TEST_FILE_TRANSFORMED_COPY_LOCATION, TestFileEnum.GAME_CART_TEST_FILE_TRANSFORMED_EXPECTED),
+            (
+                TempFileEnum.GAME_GITHUB_README_ACTUAL,
+                TestFileEnum.GAME_GITHUB_README_EXPECTED,
+            ),
+            (
+                TempFileEnum.GAME_ITCH_DESCRIPTION_ACTUAL,
+                TestFileEnum.GAME_ITCH_DESCRIPTION_EXPECTED,
+            ),
+            (
+                TempFileEnum.TWEET_GITHUB_README_ACTUAL,
+                TestFileEnum.TWEET_GITHUB_README_EXPECTED,
+            ),
+            (
+                TempFileEnum.TWEET_ITCH_DESCRIPTION_ACTUAL,
+                TestFileEnum.TWEET_ITCH_DESCRIPTION_EXPECTED,
+            ),
+            (
+                TempFileEnum.GAME_CART_TEST_FILE_TRANSFORMED_COPY_LOCATION,
+                TestFileEnum.GAME_CART_TEST_FILE_TRANSFORMED_EXPECTED,
+            ),
         ]:
             rendered = self.getTempFilePath(temp).read_text()
             self.getTestFilePath(test).write_text(rendered)
 
         for temp, test in [
-            (TempFileEnum.ITCH_COVER_IMAGE_TEMP_FILE, TestFileEnum.ITCH_COVER_IMAGE_TEST_FILE),
+            (
+                TempFileEnum.ITCH_COVER_IMAGE_TEMP_FILE,
+                TestFileEnum.ITCH_COVER_IMAGE_TEST_FILE,
+            ),
         ]:
             rendered = self.getTempFilePath(temp).read_bytes()
             self.getTestFilePath(test).write_bytes(rendered)

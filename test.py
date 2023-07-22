@@ -14,11 +14,12 @@ os.makedirs("tmp/")
 
 loader = unittest.TestLoader()
 
-suite = loader.discover("test",
-                        pattern='testParsing_.' + pattern
-        # pattern='testParsing_.*'
-        #                 pattern='*' + pattern + '*'
-                        )
+suite = loader.discover(
+    "test",
+    pattern="testParsing_." + pattern
+    # pattern='testParsing_.*'
+    #                 pattern='*' + pattern + '*'
+)
 
 runner = unittest.TextTestRunner()
 runner.run(suite)

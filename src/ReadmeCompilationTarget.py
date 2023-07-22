@@ -4,6 +4,7 @@ from pathlib import Path
 from src.TemplateEvaluator import TemplateEvaluator
 from src.FileRegistry import TemplateFileEnum
 
+
 # TODO rename this since it's gonna be used for game.xml as well as submission.html
 class ReadmeCompilationTarget(CompilationTarget):
     BEGIN_GAMES_TAG: str = "<!--BEGIN GAMES-->\n"
@@ -40,7 +41,8 @@ class ReadmeCompilationTarget(CompilationTarget):
         cls, parsedContents: ParsedContents, readmeOutputPath: Path
     ) -> None:
         snippet: str = TemplateEvaluator.evaluateTemplateToString(
-            parsedContents=parsedContents, template=TemplateFileEnum.AGGREGATE_GITHUB_README_TEMPLATE
+            parsedContents=parsedContents,
+            template=TemplateFileEnum.AGGREGATE_GITHUB_README_TEMPLATE,
         )
 
         if not readmeOutputPath.exists():
@@ -59,7 +61,6 @@ class ReadmeCompilationTarget(CompilationTarget):
     def addToAggregateReadmeStr(
         cls, slug: str, existingReadmeContents: str, gameSnippet: str
     ) -> str:
-
         preamble: str
         games: str
         splitContents = existingReadmeContents.split(cls.BEGIN_GAMES_TAG, 1)

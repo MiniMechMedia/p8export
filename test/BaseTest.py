@@ -8,12 +8,14 @@ from src.pico8fileparser import Pico8FileParser
 
 
 class BaseTest(unittest.TestCase):
-    def assertContentsEqual(self, actual: str, expected: TestFileEnum, msg:str = None):
-        self.assertEqual(actual, self.getTestFileContents(expected),msg)
+    def assertContentsEqual(self, actual: str, expected: TestFileEnum, msg: str = None):
+        self.assertEqual(actual, self.getTestFileContents(expected), msg)
 
     def assertFilesEqual(self, actual: TempFileEnum, expected: TestFileEnum):
         self.assertContentsEqual(
-            actual=self.getTempFileContents(actual), expected=expected, msg=f'{actual.value}, {expected.value}'
+            actual=self.getTempFileContents(actual),
+            expected=expected,
+            msg=f"{actual.value}, {expected.value}",
         )
 
     # For the PICO-8 exports, no point in checking that the contents of the file

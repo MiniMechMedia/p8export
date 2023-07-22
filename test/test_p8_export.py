@@ -26,98 +26,98 @@ class TestP8Export(BaseTest):
             P8Export.exportDirectory(globPattern=pattern, uploadToItch=False)
 
     def test_export_all_cannot_handle_multiple_in_root_folder(self):
-        pattern: str = str(self.currentTestFolder / '*.p8')
+        pattern: str = str(self.currentTestFolder / "*.p8")
         shutil.copy(
             self.getTestFilePath(TestFileEnum.GAME_CART_TEST_FILE),
-            self.currentTestFolder / 'game1.p8'
+            self.currentTestFolder / "game1.p8",
         )
         shutil.copy(
             self.getTestFilePath(TestFileEnum.GAME_CART_TEST_FILE),
-            self.currentTestFolder / 'game2.p8'
+            self.currentTestFolder / "game2.p8",
         )
-        with self.assertRaisesRegex(Exception, 'Multiple files found in same folder'):
+        with self.assertRaisesRegex(Exception, "Multiple files found in same folder"):
             P8Export.exportDirectory(globPattern=pattern, uploadToItch=False)
 
     def test_export_all_cannot_handle_multiple_in_nested_folder(self):
-        nestedFolder1: Path = self.currentTestFolder / 'nested1'
-        nestedFolder2: Path = self.currentTestFolder / 'nested2'
+        nestedFolder1: Path = self.currentTestFolder / "nested1"
+        nestedFolder2: Path = self.currentTestFolder / "nested2"
         os.makedirs(nestedFolder1, exist_ok=False)
         os.makedirs(nestedFolder2, exist_ok=False)
 
-        pattern: str = str(self.currentTestFolder / '*' / '*.p8')
+        pattern: str = str(self.currentTestFolder / "*" / "*.p8")
         shutil.copy(
             self.getTestFilePath(TestFileEnum.GAME_CART_TEST_FILE),
-            nestedFolder1 / 'game1.p8'
+            nestedFolder1 / "game1.p8",
         )
         shutil.copy(
             self.getTestFilePath(TestFileEnum.GAME_CART_TEST_FILE),
-            nestedFolder2 / 'game2.p8'
+            nestedFolder2 / "game2.p8",
         )
         shutil.copy(
             self.getTestFilePath(TestFileEnum.GAME_CART_TEST_FILE),
-            nestedFolder2 / 'game3.p8'
+            nestedFolder2 / "game3.p8",
         )
 
-        with self.assertRaisesRegex(Exception, 'Multiple files found in same folder'):
+        with self.assertRaisesRegex(Exception, "Multiple files found in same folder"):
             P8Export.exportDirectory(globPattern=pattern, uploadToItch=False)
 
     # Note: A partial export will still happen, which isn't ideal
     def test_cannot_export_multiple_games_with_same_name(self):
-        nestedFolder1: Path = self.currentTestFolder / 'nested1'
-        nestedFolder2: Path = self.currentTestFolder / 'nested2'
+        nestedFolder1: Path = self.currentTestFolder / "nested1"
+        nestedFolder2: Path = self.currentTestFolder / "nested2"
         os.makedirs(nestedFolder1, exist_ok=False)
         os.makedirs(nestedFolder2, exist_ok=False)
 
-        pattern: str = str(self.currentTestFolder / '*' / '*.p8')
+        pattern: str = str(self.currentTestFolder / "*" / "*.p8")
         shutil.copy(
             self.getTestFilePath(TestFileEnum.GAME_CART_TEST_FILE),
-            nestedFolder1 / 'game1.p8'
+            nestedFolder1 / "game1.p8",
         )
         shutil.copy(
             self.getTestFilePath(TestFileEnum.GAME_CART_TEST_FILE),
-            nestedFolder2 / 'game2.p8'
+            nestedFolder2 / "game2.p8",
         )
 
         # with self.assertRaisesRegex(Exception, 'P8export error - Cannot perform a folder rename if folder already exists'):
         results = P8Export.exportDirectory(globPattern=pattern, uploadToItch=False)
         self.assertTrue(results.isError)
-        self.assertTrue('P8export error - Cannot perform a folder rename if folder already exists' in results.formattedResults)
+        self.assertTrue(
+            "P8export error - Cannot perform a folder rename if folder already exists"
+            in results.formattedResults
+        )
 
     def _copyWithChange(self, targetPath: Path, newGameName: str):
-        shutil.copy(
-            self.getTestFilePath(TestFileEnum.GAME_CART_TEST_FILE),
-            targetPath
-        )
+        shutil.copy(self.getTestFilePath(TestFileEnum.GAME_CART_TEST_FILE), targetPath)
         with open(targetPath) as file:
             contents = file.read()
             contents = contents.replace("Mongo Bongo", newGameName)
-        with open(targetPath, 'w') as file:
+        with open(targetPath, "w") as file:
             file.write(contents)
-
 
     def test_can_export_multiple_games(self):
         # self.currentTestFolder /= 'containing-folder'
-        cartsFolder: Path = self.currentTestFolder / 'carts'
-        nestedFolder1: Path = cartsFolder / 'nested1'
-        nestedFolder2: Path = cartsFolder / 'nested2'
+        cartsFolder: Path = self.currentTestFolder / "carts"
+        nestedFolder1: Path = cartsFolder / "nested1"
+        nestedFolder2: Path = cartsFolder / "nested2"
         os.makedirs(nestedFolder1, exist_ok=False)
         os.makedirs(nestedFolder2, exist_ok=False)
 
         # with open(self.currentTestFolder / 'README.md', 'w'):
         #     pass
 
-        pattern: str = str(cartsFolder / '*' / '*.p8')
-        self._copyWithChange(nestedFolder1 / 'game1.p8', 'Awesome Saucem')
-        self._copyWithChange(nestedFolder2 / 'game2.p8', 'Doggo Froggo')
+        pattern: str = str(cartsFolder / "*" / "*.p8")
+        self._copyWithChange(nestedFolder1 / "game1.p8", "Awesome Saucem")
+        self._copyWithChange(nestedFolder2 / "game2.p8", "Doggo Froggo")
 
-        results: ExportResults = P8Export.exportDirectory(globPattern=pattern, uploadToItch=False)
+        results: ExportResults = P8Export.exportDirectory(
+            globPattern=pattern, uploadToItch=False
+        )
         self.assertEqual(len(results), 2)
         self.assertFalse(results.isError)
 
-        self.assertExportsAreAsExpected(cartsFolder, 'awesome-saucem')
-        self.assertExportsAreAsExpected(cartsFolder, 'doggo-froggo')
+        self.assertExportsAreAsExpected(cartsFolder, "awesome-saucem")
+        self.assertExportsAreAsExpected(cartsFolder, "doggo-froggo")
         self.assertFileExists(TempFileEnum.MULTIPLE_EXPORT_README)
-
 
     # def test_can_handle_errors_in_export_all(self):
     #     raise NotImplemented
@@ -138,17 +138,15 @@ class TestP8Export(BaseTest):
         templateDir: Path = self.currentTestFolder / "game-template"
         os.makedirs(templateDir)
         p8fileStart: Path = templateDir / "new-game.p8"
-        shutil.copy(
-            self.getTestFilePath(TestFileEnum.GAME_CART_TEST_FILE), p8fileStart
-        )
+        shutil.copy(self.getTestFilePath(TestFileEnum.GAME_CART_TEST_FILE), p8fileStart)
         P8Export.export(p8fileStart, uploadToItch=False)
 
-        self.assertExportsAreAsExpected(self.currentTestFolder, 'mongo-bongo')
+        self.assertExportsAreAsExpected(self.currentTestFolder, "mongo-bongo")
 
         # TODO fix this
         # self.assertPathExists(expectedGameDir / "export" / "mongo-bongo.p8.png")
 
-        self.assertPathExists(self.currentTestFolder / 'mongo-bongo' / "README.md")
+        self.assertPathExists(self.currentTestFolder / "mongo-bongo" / "README.md")
 
     def test_optional_dir(self):
         pass

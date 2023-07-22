@@ -11,9 +11,7 @@ from src.P8PngCompilationTarget import P8PngCompilationTarget
 
 class TestExports(CompilationTargetBaseTest):
     def test_html_export(self):
-        parsed: ParsedContents = self.parseTestFile(
-            TestFileEnum.GAME_CART_TEST_FILE
-        )
+        parsed: ParsedContents = self.parseTestFile(TestFileEnum.GAME_CART_TEST_FILE)
         HtmlFileCompilationTarget.compileToHtmlToDirectory(
             parsed.filePath,
             parsed.config,  # self.getTempFilePath(TempFileEnum.LABEL_IMAGE_TEMP_FILE)
@@ -24,9 +22,7 @@ class TestExports(CompilationTargetBaseTest):
         self.assertFileExists(TempFileEnum.HTML_EXPORT_TEMP_FILE_ZIP)
 
     def test_p8png_export(self):
-        parsed: ParsedContents = self.parseTestFile(
-            TestFileEnum.GAME_CART_TEST_FILE
-        )
+        parsed: ParsedContents = self.parseTestFile(TestFileEnum.GAME_CART_TEST_FILE)
         P8PngCompilationTarget.compileToP8PngToDirectory(
             config=parsed.config,
             p8InputPath=parsed.filePath,

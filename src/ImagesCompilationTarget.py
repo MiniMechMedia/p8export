@@ -18,7 +18,6 @@ class ImagesCompilationTarget(CompilationTarget):
         img: Image = Image.new("RGB", (width, height))
         pixels: list[tuple[int, int, int]] = []
         for row in parsedImage.data:
-
             for i in range(cls.SCALE):
                 for _ in range(cls.SIDEBAR_WIDTH // 2 * cls.SCALE):
                     pixels.append((0, 0, 0))

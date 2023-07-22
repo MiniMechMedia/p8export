@@ -49,7 +49,8 @@ this is a test snippet of Mongo Bongo
         )
 
         with open(
-            self.getTempFilePath(TempFileEnum.AGGREGATE_GITHUB_README_UPDATED_ACTUAL), "w"
+            self.getTempFilePath(TempFileEnum.AGGREGATE_GITHUB_README_UPDATED_ACTUAL),
+            "w",
         ) as file:
             file.write(result)
 

@@ -8,24 +8,29 @@ from selenium.webdriver.common.keys import Keys
 # import selenium
 from selenium.webdriver import Chrome
 from selenium.webdriver.common.by import By
-from selenium.common.exceptions import NoSuchElementException, UnexpectedAlertPresentException, NoSuchWindowException
+from selenium.common.exceptions import (
+    NoSuchElementException,
+    UnexpectedAlertPresentException,
+    NoSuchWindowException,
+)
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.remote.webelement import WebElement
 from decouple import config
 import time
 import subprocess
 
+
 class ItchGameCompilationTarget(CompilationTarget):
     @classmethod
     def uploadToItch(cls, parsedContents: ParsedContents, exportFolder: Path):
         # TODO handle windows
-        result = subprocess.run(['open', str(exportFolder)])
+        result = subprocess.run(["open", str(exportFolder)])
         if result.returncode != 0:
-            raise Exception('Error - unable to open file location')
+            raise Exception("Error - unable to open file location")
 
         # selenium.
         browser: Chrome
-        with Chrome(executable_path=config('CHROMEEXE')) as browser:
+        with Chrome(executable_path=config("CHROMEEXE")) as browser:
             cls.login(browser)
             isNewGame: bool = False
             if not cls.gameExists(browser, parsedContents):
@@ -34,7 +39,7 @@ class ItchGameCompilationTarget(CompilationTarget):
 
             cls.fillData(browser, parsedContents, isNewGame)
             # print('ok whenever you are ready')
-            input('press enter after you close the browser')
+            input("press enter after you close the browser")
             # while True:
             #     try:
             #         print('selecting body')
@@ -46,7 +51,6 @@ class ItchGameCompilationTarget(CompilationTarget):
             #         pass
             #     time.sleep(1)
             # print('detected browser close')
-
 
     @classmethod
     def getItchDescription(cls, parsedContents: ParsedContents) -> str:
@@ -75,7 +79,7 @@ class ItchGameCompilationTarget(CompilationTarget):
             browser=browser, selector='[name="game[slug]"]'
         )
         # slug.clear()
-        slug.send_keys(Keys.CONTROL + 'a')
+        slug.send_keys(Keys.CONTROL + "a")
         slug.send_keys(Keys.DELETE)
         slug.send_keys(parsedContents.metadata.correctedGameSlug)
 
@@ -92,7 +96,7 @@ class ItchGameCompilationTarget(CompilationTarget):
         tagline.send_keys(parsedContents.metadata.tagline)
 
         noPayments: WebElement = cls.pollForSelector(
-            browser=browser, selector='.payment_mode_disable_payments'
+            browser=browser, selector=".payment_mode_disable_payments"
         )
         noPayments.click()
 
