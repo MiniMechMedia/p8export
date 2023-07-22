@@ -35,7 +35,9 @@ class BaseTest(unittest.TestCase):
 
     def getTestFilePath(self, testFileName: TestFileEnum) -> pathlib.Path:
         # return testFileName.filepath
-        return pathlib.Path("test/" + testFileName.value)
+        ret = pathlib.Path(testFileName.value)
+        # raise Exception(ret.absolute())
+        return ret
 
     def getTempFilePath(self, tempFileName: TempFileEnum) -> pathlib.Path:
         return pathlib.Path("tmp/" + tempFileName.value)
