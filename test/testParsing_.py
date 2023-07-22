@@ -36,6 +36,8 @@ class TestParsing(BaseTest):
 
         self.assertEqual(parsed.sourceCodeP8sciiCharCount, 277)
 
+
+
     def test_minifying_sourcecode_comments(self):
         # parsed: ParsedContents = self.parseFile(TestFileEnum.TWEET_CART_ANNOTATED_TEST_FILE)
         unminified = dedent('''\
@@ -117,6 +119,61 @@ class TestParsing(BaseTest):
         i+=1goto _
         ''').strip()
         # raise Exception(TestMe.__module__)
-        # raise Exception(str(len(expected_minified)) + '\n' + expected_minified)
+        raise Exception(str(len(parsed.minifiedSourceCode)) + '\n' + parsed.minifiedSourceCode)
         self.assertEqual(len(parsed.minifiedSourceCode), len(expected_minified))
         self.assertEqual(parsed.minifiedSourceCode, expected_minified)
+
+    def test_tweet_cart_clarified_variables(self):
+        parsed: ParsedContents = self.parseFile(TestFileEnum.TWEET_CART_ANNOTATED_TEST_FILE)
+        unclarified = dedent('''\
+        r=rnd
+        xpos_,ypos_=cos(ang_),sin(ang_)
+        randval_g=r()
+        ''')
+
+        clarified_expected = dedent('''\
+        r=rnd
+        xpos,ypos=cos(ang),sin(ang)
+        randval=r()
+        ''')
+
+        clarified_actual = Pico8FileParser.clarifySourceCode(clarified_expected)
+        self.assertEqual(clarified_actual, clarified_expected)
+
+    def test_clarify_stripping_newline_comments(self):
+        unclarified = dedent('''\
+        -- set i to 0
+        i=0
+        -- set c to empty collection
+        -- this will be used for particles
+        c={}--
+        k=128
+        --somestuff
+        ''')
+        clarified_expected = dedent('''\
+        -- set i to 0
+        i=0
+        -- set c to empty collection
+        -- this will be used for particles
+        c={}
+        k=128
+        --somestuff
+        ''')
+
+        clarified_actual = Pico8FileParser.clarifySourceCode(unclarified)
+        self.assertEqual(clarified_expected, clarified_actual)
+
+    def test_clarifying_conditionals(self):
+        unclarified = dedent('''\
+        if(4>2)--[[then
+        ]]print('ok')
+        --end
+        ''')
+
+        clarified_expected = dedent('''\
+        if(4>2)then
+        print('ok')
+        end
+        ''')
+        clarified_actual = Pico8FileParser.clarifySourceCode(unclarified)
+        self.assertEqual(clarified_expected, clarified_actual)

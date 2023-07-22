@@ -43,12 +43,31 @@ class Pico8FileParser:
         return rawSourceCode.strip()
 
     @classmethod
+    def clarifySourceCode(cls, sourceCode: str) -> str:
+        clarified = sourceCode
+        # The comment breaks can just go away
+        clarified = re.sub(r'--\n', '\n', clarified)
+
+        clarified = re.sub(r'^--end$', 'end', clarified)
+        clarified = re.sub(r'--\[\[then$','then--[[')
+        # no need for (empty) multiline comments
+        clarified = re.sub(r'--\[\[([\s\n]+)\]\]', r'\1')
+
+        # The ang_ form
+        clarified = re.sub(r'([a-zA-Z]\w+)_\b', r'\1', clarified)
+        # The vy_w form
+        clarified = re.sub(r'([a-zA-Z]\w+)_[a-zA-Z]\b', r'\1', clarified)
+        return clarified
+
+    @classmethod
     def minifySourceCode(cls, sourceCode: str) -> str:
         minified = sourceCode
         # minified = minified.replace('--\n', '')
         minified = re.sub(r'--\[\[[\s\S]\]\]', '', minified)
         minified = re.sub(r'^\s+', '', minified, flags=re.MULTILINE)
         minified = re.sub('--.*\n', '', minified)
+        # For the --end hack. Don't like this
+        minified = re.sub(r'^--end$', '\n', minified)
         # stash=minified
         # raise  Exception(stash + '\n\n' + minified)
         # The ang_ form

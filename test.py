@@ -1,5 +1,8 @@
 import unittest
 import shutil, os
+import sys
+
+pattern = sys.argv[1]
 
 
 try:
@@ -12,8 +15,9 @@ os.makedirs("tmp/")
 loader = unittest.TestLoader()
 
 suite = loader.discover("test",
-                        # pattern='*.testParsing_.*'
-        pattern='testParsing_.*'
+                        pattern='testParsing_.' + pattern
+        # pattern='testParsing_.*'
+        #                 pattern='*' + pattern + '*'
                         )
 
 runner = unittest.TextTestRunner()
