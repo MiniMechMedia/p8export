@@ -1,4 +1,4 @@
-from BaseTest import BaseTest
+from test.BaseTest import BaseTest
 from src.FileSystemOrchestrator import FileSystemOrchestrator, FileSystemLocations
 from os.path import samefile
 import os

@@ -1,5 +1,5 @@
 from src.ItchGameCompilationTarget import ItchGameCompilationTarget
-from BaseTest import BaseTest
+from test.BaseTest import BaseTest
 from src.FileRegistry import TestFileEnum
 from src.ParsedContents import ParsedContents
 import unittest

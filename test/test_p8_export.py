@@ -1,7 +1,7 @@
 from src.p8export import P8Export, ExportResults
 
 # from TestFileSystemOperations import TestFileSystemOperations
-from BaseTest import BaseTest, TempFileEnum, TestFileEnum
+from test.BaseTest import BaseTest, TempFileEnum, TestFileEnum
 import os
 import shutil
 from pathlib import Path

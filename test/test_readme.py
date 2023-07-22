@@ -1,4 +1,4 @@
-from BaseTest import BaseTest
+from test.BaseTest import BaseTest
 from src.ReadmeCompilationTarget import ReadmeCompilationTarget
 from src.FileRegistry import TestFileEnum, TempFileEnum
 

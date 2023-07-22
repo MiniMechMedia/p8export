@@ -1,4 +1,4 @@
-from BaseTest import BaseTest
+from test.BaseTest import BaseTest
 from src.ParsedContents import ParsedLabelImage
 from src.pico8fileparser import Pico8FileParser
 from src.FileRegistry import TestFileEnum, TempFileEnum

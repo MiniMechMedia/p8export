@@ -1,4 +1,4 @@
-from BaseTest import BaseTest
+from test.BaseTest import BaseTest
 from src.FileRegistry import TestFileEnum, TempFileEnum
 from pathlib import Path
 from src.pico8fileparser import Pico8FileParser
