@@ -37,7 +37,7 @@ class FileEnum(Enum):
 
 # TODO move this into a separate file in test/
 class TestFileEnum(FileEnum):
-    YAML_TEST_FILE = "../test/testFiles/yaml-test.p8"
+    YAML_TEST_FILE = root / "test/testFiles/yaml-test.p8"
     COVER_IMAGE_TEST_FILE = "../test/testFiles/label-image-exists-test.p8"
     ITCH_COVER_IMAGE_TEST_FILE = "../test/testFiles/cover.png"
     LABEL_MISSING_TEST_FILE = "../test/testFiles/label-image-missing-test.p8"
@@ -56,12 +56,12 @@ class TestFileEnum(FileEnum):
     GAME_ITCH_DESCRIPTION_EXPECTED = (
         "../test/expectedRender/game-itch-description-expected.html"
     )
-    TWEET_GITHUB_README_EXPECTED = '../test/expectedRender/tweet-github-readme-expected.md'
-    GAME_GITHUB_README_EXPECTED = '../test/expectedRender/game-github-readme-expected.md'
+    TWEET_GITHUB_README_EXPECTED = root / 'test/expectedRender/tweet-github-readme-expected.md'
+    GAME_GITHUB_README_EXPECTED = root / 'test/expectedRender/game-github-readme-expected.md'
 
-    TWEET_ITCH_DESCRIPTION_EXPECTED = '../test/expectedRender/tweet-itch-description-expected.html'
+    TWEET_ITCH_DESCRIPTION_EXPECTED = root / 'test/expectedRender/tweet-itch-description-expected.html'
 
-    ORCHESTRATION_TEST_FILE = "../test/testFiles/orchestration-test.p8"
+    ORCHESTRATION_TEST_FILE = root / "test/testFiles/orchestration-test.p8"
 
     # HTML_EXPORT_TEST_FILE_JS = "index.js"
     # HTML_EXPORT_TEMP_FILE_HTML = "index.html"
@@ -110,6 +110,6 @@ class TemplateFileEnum(FileEnum):
     GAME_ITCH_DESCRIPTION_TEMPLATE = "../template/game-itch-description-template.html.md"
     TWEET_ITCH_DESCRIPTION_TEMPLATE = "../template/tweet-itch-description-template.html.md"
     GAME_GITHUB_README_TEMPLATE = "../template/game-github-readme-template.md"
-    TWEET_GITHUB_README_TEMPLATE = '../template/tweet-github-readme-template.md'
+    TWEET_GITHUB_README_TEMPLATE = root / 'template/tweet-github-readme-template.md'
     # README_TWEET_MD = "template/tweet-readme.md"
-    AGGREGATE_GITHUB_README_TEMPLATE = "../template/aggregate-github-readme-template.md"
+    AGGREGATE_GITHUB_README_TEMPLATE = root / "template/aggregate-github-readme-template.md"

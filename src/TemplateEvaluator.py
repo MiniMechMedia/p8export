@@ -32,7 +32,7 @@ def htmlSafeSource(content):
 class TemplateEvaluator:
     @classmethod
     def getRenderTypeFromTemplate(cls, template: TemplateFileEnum) -> RenderType:
-        if template.value.endswith(".html.md"):
+        if str(template.value).endswith(".html.md"):
             return RenderType.HTML
         return RenderType.BASIC
 
