@@ -39,25 +39,25 @@ class FileEnum(Enum):
 # TODO move this into a separate file in test/
 class TestFileEnum(FileEnum):
     YAML_TEST_FILE = root / "test/testFiles/yaml-test.p8"
-    COVER_IMAGE_TEST_FILE = "../test/testFiles/label-image-exists-test.p8"
-    ITCH_COVER_IMAGE_TEST_FILE = "../test/testFiles/cover.png"
-    LABEL_MISSING_TEST_FILE = "../test/testFiles/label-image-missing-test.p8"
-    LABEL_IMAGE_TEST_FILE = "../test/testFiles/label.png"
+    COVER_IMAGE_TEST_FILE = root / "test/testFiles/label-image-exists-test.p8"
+    ITCH_COVER_IMAGE_TEST_FILE = root / "test/testFiles/cover.png"
+    LABEL_MISSING_TEST_FILE = root / "test/testFiles/label-image-missing-test.p8"
+    LABEL_IMAGE_TEST_FILE = root / "test/testFiles/label.png"
 
-    GAME_CART_TEST_FILE = "../test/testFiles/game-cart-test-file.p8"
-    TWEET_CART_TEST_FILE = "../test/testFiles/tweet-cart-test-file.p8"
+    GAME_CART_TEST_FILE = root / "test/testFiles/game-cart-test-file.p8"
+    TWEET_CART_TEST_FILE = root / "test/testFiles/tweet-cart-test-file.p8"
     TWEET_CART_ANNOTATED_TEST_FILE = (
-        "../test/testFiles/tweet-cart-annotated-test-file.p8"
+        root / "test/testFiles/tweet-cart-annotated-test-file.p8"
     )
 
     TWEET_STRING_TEMPLATE_EXPECTED = (
-        "../test/expectedRender/tweet-string-template-expected.md"
+        root / "test/expectedRender/tweet-string-template-expected.md"
     )
     GAME_STRING_TEMPLATE_EXPECTED = (
-        "../test/expectedRender/game-string-template-expected.md"
+        root / "test/expectedRender/game-string-template-expected.md"
     )
     GAME_ITCH_DESCRIPTION_EXPECTED = (
-        "../test/expectedRender/game-itch-description-expected.html"
+        root / "test/expectedRender/game-itch-description-expected.html"
     )
     TWEET_GITHUB_README_EXPECTED = (
         root / "test/expectedRender/tweet-github-readme-expected.md"
@@ -76,17 +76,17 @@ class TestFileEnum(FileEnum):
     # HTML_EXPORT_TEMP_FILE_HTML = "index.html"
     # P8_PNG_EXPORT_TEST_FILE = "something.png"
     AGGREGATE_README_BEFORE_FILE = (
-        "../test/testFiles/readmeTestFiles/readme-for-three-games.md"
+        root / "test/testFiles/readmeTestFiles/readme-for-three-games.md"
     )
     AGGREGATE_README_AFTER_UPDATE_FILE = (
-        "../test/testFiles/readmeTestFiles/readme-for-three-games-expected-update.md"
+        root / "test/testFiles/readmeTestFiles/readme-for-three-games-expected-update.md"
     )
     AGGREGATE_README_AFTER_ADD_FILE = (
-        "../test/testFiles/readmeTestFiles/readme-for-three-games-expected-added.md"
+        root / "test/testFiles/readmeTestFiles/readme-for-three-games-expected-added.md"
     )
 
     GAME_CART_TEST_FILE_TRANSFORMED_EXPECTED = (
-        "../test/expectedTransformation/game-cart-test-file-transformed-expected.p8"
+        root / "test/expectedTransformation/game-cart-test-file-transformed-expected.p8"
     )
 
     @property
@@ -122,12 +122,12 @@ class TempFileEnum(FileEnum):
 
 class TemplateFileEnum(FileEnum):
     GAME_ITCH_DESCRIPTION_TEMPLATE = (
-        "../template/game-itch-description-template.html.md"
+        root / "template/game-itch-description-template.html.md"
     )
     TWEET_ITCH_DESCRIPTION_TEMPLATE = (
-        "../template/tweet-itch-description-template.html.md"
+        root / "template/tweet-itch-description-template.html.md"
     )
-    GAME_GITHUB_README_TEMPLATE = "../template/game-github-readme-template.md"
+    GAME_GITHUB_README_TEMPLATE = root / "template/game-github-readme-template.md"
     TWEET_GITHUB_README_TEMPLATE = root / "template/tweet-github-readme-template.md"
     # README_TWEET_MD = "template/tweet-readme.md"
     AGGREGATE_GITHUB_README_TEMPLATE = (
