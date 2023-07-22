@@ -1,6 +1,6 @@
 import unittest
 
-from CompilationTargetBaseTest import CompilationTargetBaseTest
+from test.CompilationTargetBaseTest import CompilationTargetBaseTest
 from src.FileRegistry import TestFileEnum, TemplateFileEnum, TempFileEnum
 from src.pico8fileparser import Pico8FileParser
 from src.ParsedContents import ParsedContents
