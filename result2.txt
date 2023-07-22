@@ -1,0 +1,41 @@
+c={}
+i=0
+-- We use this value a lot, so this will save us some chars
+k128=128
+f=fillp
+::_::
+if(i%k128<1)then
+    flip()
+    cls()
+i=0
+end
+f(░)
+line(i,9,i,70,5)
+f()
+line(i,k128,i,k128-@i,15)
+c[i]=c[i]or{
+    xpos=-k128,
+    ypos=0,
+    vx=0,
+    vy=0,
+    r=rnd,
+    oldenv=_ENV
+}
+
+_ENV=c[i]
+pset(xpos,ypos,15)
+vy+=.1
+g=r(8)
+xpos+=vx
+ypos+=vy
+if(ypos>128)then
+    poke(xpos,@xpos+1)
+    xpos,ypos,vx,vy=60+g,g/5,0,0
+end
+if(ypos>9and ypos<70and g<2)then
+    vx=cos(g)/2
+    vy=sin(g)/2
+end
+_ENV=oldenv
+i+=1
+goto _

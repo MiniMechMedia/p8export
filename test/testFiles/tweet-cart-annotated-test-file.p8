@@ -11,31 +11,37 @@ k128_=128--
 f=fillp--
 ::_::--
 if(i%k128_<1)--[[then
-]]flip()--[[
-]]cls()--[[
+    ]]flip()--[[
+    ]]cls()--[[
 ]]i=0
 --end
-f(░)line(i,9,i,70,5)f()line(i,k128_,i,k128_-@i,15)
+f(░)--
+line(i,9,i,70,5)--
+f()--
+line(i,k128_,i,k128_-@i,15)
 c[i]=c[i]or{--
-    xpos_=-k,--
-ypos_=0,--
-vx_=0,--
-vy_w=0,--
-r=rnd,oldenv_=_ENV--
+    xpos_=-k128_,--
+    ypos_=0,--
+    vx_=0,--
+    vy_w=0,--
+    r=rnd,--
+    oldenv_=_ENV--
 }
 --
 _ENV=c[i]--
-pset(x,y,15)--
-w+=.1--
+pset(xpos_,ypos_,15)--
+vy_w+=.1--
 g=r(8)--
-x+=v
+xpos_+=vx_
 ypos_+=vy_w
-if(y>128)--[[
-]]poke(x,@x+1)--[[
-]]xpos_,ypos_,vx_,vy_w=60+g,g/5,0,0
-if(ypos_>9and ypos_<70and g<2)--[[
-]]v=cos(g)/2--[[
-]]w=sin(g)/2
+if(ypos_>128)--[[then
+    ]]poke(xpos_,@xpos_+1)--[[
+    ]]xpos_,ypos_,vx_,vy_w=60+g,g/5,0,0
+--end
+if(ypos_>9and ypos_<70and g<2)--[[then
+    ]]vx_=cos(g)/2--[[
+    ]]vy_w=sin(g)/2
+--end
 _ENV=oldenv_
 i+=1--
 goto _

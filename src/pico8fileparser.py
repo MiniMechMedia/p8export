@@ -58,7 +58,7 @@ class Pico8FileParser:
 
         # no need for (empty) multiline comments
         clarified = re.sub(r"--\[\[([\s\n]+)\]\]", r"\1", clarified)
-
+        # raise Exception(clarified)
         # The ang_ form
         clarified = re.sub(r"([a-zA-Z]\w+)_\b", r"\1", clarified)
         # The vy_w form
@@ -69,7 +69,8 @@ class Pico8FileParser:
     def minifySourceCode(cls, sourceCode: str) -> str:
         minified = sourceCode
         # minified = minified.replace('--\n', '')
-        minified = re.sub(r"--\[\[[\s\S]\]\]", "", minified)
+        minified = re.sub(r'--\[\[then$', '--[[', minified, flags=re.MULTILINE)
+        minified = re.sub(r"--\[\[[\s\S]*?\]\]", "", minified)
         minified = re.sub(r"^\s+", "", minified, flags=re.MULTILINE)
         minified = re.sub("--.*\n", "", minified)
         # For the --end hack. Don't like this
@@ -144,6 +145,7 @@ class Pico8FileParser:
         rawContents: str = cls.parseRawFileContents(filePath)
         sourceCode: str = cls.parseSourceCodeFromFileContents(rawContents)
         minifiedSourceCode: str = cls.minifySourceCode(sourceCode)
+        clarifiedSourceCode: str = cls.clarifySourceCode(sourceCode)
         rawYaml: str = cls.parseRawYamlFromFileContents(rawContents)
         parsedYaml: dict = cls.parseYamlFromRawYaml(rawYaml)
         rawLabelImage: str = cls.parseRawLabelImage(rawContents)
@@ -155,6 +157,7 @@ class Pico8FileParser:
             rawContents=rawContents,
             sourceCode=sourceCode,
             minifiedSourceCode=minifiedSourceCode,
+            clarifiedSourceCode=clarifiedSourceCode,
             labelImage=parsedLabelImage,
             metadata=metadata,
             config=config,

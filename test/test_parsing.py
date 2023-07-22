@@ -86,6 +86,25 @@ class TestParsing(BaseTest):
         minified_actual = Pico8FileParser.minifySourceCode(unminified)
         self.assertEqual(minified_expected, minified_actual)
 
+    def test_clarifying_sourcecode_variables(self):
+        unclarified = dedent(
+            """\
+        rnd_=rnd
+        xpos_,ypos_=cos(ang_),sin(ang_)
+        randval_g=rnd_()
+        """
+        )
+        clarified_expected = dedent(
+            """\
+        rnd=rnd
+        xpos,ypos=cos(ang),sin(ang)
+        randval=rnd()
+        """
+        )
+
+        clarified_actual = Pico8FileParser.clarifySourceCode(unclarified)
+        self.assertEqual(clarified_expected, clarified_actual)
+
     def test_minifying_sourcecode_variables(self):
         # Ok so there are 2 ways to do it
         # One is you convert the vars to their readable form
@@ -125,23 +144,76 @@ class TestParsing(BaseTest):
         )
         expected_minified = dedent(
             """\
-        c={}i=0k=128f=fillp::_::if(i%k<1)flip()cls()i=0
-        f(░)line(i,9,i,70,5)f()line(i,k,i,k-@i,15)
-        c[i]=c[i]or{x=-k,y=0,v=0,w=0,r=rnd,o=_ENV}
-        _ENV=c[i]pset(x,y,15)w+=.1g=r(8)x+=v
-        y+=w
-        if(y>128)poke(x,@x+1)x,y,v,w=60+g,g/5,0,0
-        if(y>9and y<70and g<2)v=cos(g)/2w=sin(g)/2
-        _ENV=o
-        i+=1goto _
-        """
+            c={}i=0k=128f=fillp::_::if(i%k<1)flip()cls()i=0
+            f(░)line(i,9,i,70,5)f()line(i,k,i,k-@i,15)
+            c[i]=c[i]or{x=-k,y=0,v=0,w=0,r=rnd,o=_ENV}
+            _ENV=c[i]pset(x,y,15)w+=.1g=r(8)x+=v
+            y+=w
+            if(y>128)poke(x,@x+1)x,y,v,w=60+g,g/5,0,0
+            if(y>9and y<70and g<2)v=cos(g)/2w=sin(g)/2
+            _ENV=o
+            i+=1goto _
+            """
         ).strip()
-        # raise Exception(TestMe.__module__)
-        raise Exception(
-            str(len(parsed.minifiedSourceCode)) + "\n" + parsed.minifiedSourceCode
+
+        expected_clarified = dedent(
+            """\
+            c={}
+            i=0
+            -- We use this value a lot, so this will save us some chars
+            k128=128
+            f=fillp
+            ::_::
+            if(i%k128<1)then
+                flip()
+                cls()
+            i=0
+            end
+            f(░)
+            line(i,9,i,70,5)
+            f()
+            line(i,k128,i,k128-@i,15)
+            c[i]=c[i]or{
+                xpos=-k128,
+                ypos=0,
+                vx=0,
+                vy=0,
+                r=rnd,
+                oldenv=_ENV
+            }
+            
+            _ENV=c[i]
+            pset(xpos,ypos,15)
+            vy+=.1
+            g=r(8)
+            xpos+=vx
+            ypos+=vy
+            if(ypos>128)then
+                poke(xpos,@xpos+1)
+                xpos,ypos,vx,vy=60+g,g/5,0,0
+            end
+            if(ypos>9and ypos<70and g<2)then
+                vx=cos(g)/2
+                vy=sin(g)/2
+            end
+            _ENV=oldenv
+            i+=1
+            goto _"""
         )
-        self.assertEqual(len(parsed.minifiedSourceCode), len(expected_minified))
+        # raise Exception(TestMe.__module__)
+        # raise Exception(
+        #     'expected: ' +
+        #     str(len(expected_minified)) + '\nactual\n' +
+        #     str(len(parsed.minifiedSourceCode)) + "\n" + parsed.minifiedSourceCode
+        # )
+        # self.assertEqual(len(parsed.minifiedSourceCode), len(expected_minified))
+        open('/Users/nathandunn/Projects/p8export3/p8export-fresh/result.txt', 'w').write(parsed.clarifiedSourceCode)
+        open('/Users/nathandunn/Projects/p8export3/p8export-fresh/result2.txt', 'w').write(expected_clarified)
         self.assertEqual(parsed.minifiedSourceCode, expected_minified)
+        self.assertEqual(parsed.clarifiedSourceCode, expected_clarified)
+
+        # expected_clarified =
+
 
     def test_tweet_cart_clarified_variables(self):
         parsed: ParsedContents = self.parseFile(

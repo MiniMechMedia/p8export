@@ -172,6 +172,7 @@ class ParsedContents:
     rawContents: str
     sourceCode: str
     minifiedSourceCode: str
+    clarifiedSourceCode: str
     labelImage: ParsedLabelImage
     metadata: Metadata
     config: Config
