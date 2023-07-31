@@ -1,5 +1,5 @@
 # Does the submission.html
-from src.ParsedContents import Config
+from src.ParsedContents import Config, ParsedContents
 from src.CompilationTarget import CompilationTarget
 from pathlib import Path
 import shutil
@@ -11,3 +11,10 @@ from os.path import exists
 import os
 
 class TweetCartCompilationTarget(CompilationTarget):
+    @classmethod
+    def exportToMinified(cls, parsedContents: ParsedContents):
+        pass
+
+    @classmethod
+    def exportToClarified(cls, parsedContents: ParsedContents):
+        pass

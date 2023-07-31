@@ -144,6 +144,8 @@ class TemplateEvaluator:
                 parsedContents=parsedContents
             ),
             "char_count": parsedContents.sourceCodeP8sciiCharCount,
+            "minified_code": parsedContents.minifiedSourceCode,
+            "clarified_code": parsedContents.clarifiedSourceCode,
             "source_code": parsedContents.sourceCode,
             "game_name": parsedContents.metadata.game_name,
             "itch_link": cls.constructItchLink(parsedContents=parsedContents),

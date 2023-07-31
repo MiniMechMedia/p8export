@@ -194,7 +194,7 @@ class ParsedContents:
     @property
     def sourceCodeP8sciiCharCount(self):
         # TODO fix this
-        return len(self.sourceCode)
+        return len(self.minifiedSourceCode)
 
     @property
     def sourceCodeTwitterCharCount(self):
