@@ -11,10 +11,14 @@ Play it now on [itch.io]({{itch_link}})
 
 This cart is tweetable at just {{char_count}} characters.
 
-<pre><code>{{minified_code | htmlSafeSource}}</code></pre>
+```lua
+{{minified_code | htmlSafeSource}}
+```
 
 ## Explanation
-<pre><code>{{clarified_code | htmlSafeSource}}</code></pre>
+```lua
+{{clarified_code | htmlSafeSource}}
+```
 
 {% if controls %}
 ## Controls

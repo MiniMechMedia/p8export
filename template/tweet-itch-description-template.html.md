@@ -7,7 +7,9 @@ Remix it on [pico-8-edu.com]({{pico_url}})
 
 This cart is tweetable at just {{char_count}} characters.
 
-<pre><code>{{minified_code | htmlSafeSource}}</code></pre>
+```lua
+{{minified_code | htmlSafeSource}}
+```
 
 {% if controls %}
 ## Controls
