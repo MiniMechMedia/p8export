@@ -134,7 +134,7 @@ class Pico8FileParser:
         return Config(
             gameAuthor=config("GAME_AUTHOR"),
             itchAuthor=config("ITCH_USERNAME").lower(),
-            sourceControlRootUrl="https://github.com/CaterpillarGames/pico8-games/tree/master/carts",
+            sourceControlRootUrl="https://github.com/MiniMechMedia/pico8-games/tree/master/carts",
             # pico8ExePath=r"C:\Program Files (x86)\PICO-8\pico8.exe",
             pico8ExePath=config("PICO8EXE"),
             exportDir="",

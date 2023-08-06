@@ -24,7 +24,7 @@ This cart is tweetable at just {{char_count}} characters.
 
 {{about_extra}}
 
-Source code available on [GitHub]({{source_code_link}})
+See the explainer on [GitHub]({{code_explainer_link}})
 
 {% if acknowledgements %}
 ## Acknowledgements

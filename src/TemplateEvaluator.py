@@ -143,6 +143,9 @@ class TemplateEvaluator:
             "source_code_link": cls.constructSourceCodeLink(
                 parsedContents=parsedContents
             ),
+            "code_explainer_link": cls.constructExplainerCodeLink(
+                parsedContents=parsedContents
+            ),
             "char_count": parsedContents.sourceCodeP8sciiCharCount,
             "minified_code": parsedContents.minifiedSourceCode,
             "clarified_code": parsedContents.clarifiedSourceCode,
@@ -249,6 +252,10 @@ class TemplateEvaluator:
             baseUrl += "/"
 
         return baseUrl + parsedContents.metadata.correctedGameSlug
+
+    @classmethod
+    def constructExplainerCodeLink(cls, parsedContents: ParsedContents) -> str:
+        return f'{cls.constructSourceCodeLink(parsedContents)}#explanation'
 
     @classmethod
     def constructItchLink(cls, parsedContents):
