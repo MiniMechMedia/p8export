@@ -96,7 +96,7 @@ class TestTemplating(BaseTest):
                 expectedFile=TestFileEnum.TWEET_GITHUB_README_EXPECTED,
             )
 
-        if True:
+        if False:
             self.forceUpdateFiles()
 
     def forceUpdateFiles(self):
