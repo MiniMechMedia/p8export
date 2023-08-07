@@ -157,7 +157,7 @@ class TemplateEvaluator:
             "cover_path": parsedContents.coverPath,
             "cover_path_abs": parsedContents.coverPathAbs,
             "folder_relative_path": parsedContents.folderRelativePath,
-            "pico_url": parsedContents.metadata.pico_url,
+            "pico_url": parsedContents.pico8EduUrl,
             "number_players": parsedContents.metadata.numberPlayersDesc
             # 'itch_link': cls.constructItchLink(parsedContents=parsedContents)
         }

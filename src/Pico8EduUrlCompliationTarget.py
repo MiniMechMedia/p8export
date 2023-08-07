@@ -37,8 +37,8 @@ class Pico8EduUrlCompilationTarget:
 
     @classmethod
     def createMinifiedCartContents(cls, parsedContents: ParsedContents) -> str:
-        githubLink = TemplateEvaluator.constructExplainerCodeLink(parsedContents)
-        header = f'-- see explanation on {githubLink}\n\n'
+        githubLink = TemplateEvaluator.constructExplainerCodeLink(parsedContents).lower()
+        header = f'--see explanation on github\n--{githubLink}\n\n'
         return parsedContents.rawContents.replace(
             parsedContents.sourceCode,
             header +

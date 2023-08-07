@@ -110,7 +110,7 @@ class Metadata:
     cart_type: str
     img_alt: str
     # DEPRECATED!
-    pico_url: Optional[str]
+    # pico_url: Optional[str]
     number_players: list[int]
     # TODO should this be optional?
     about_extra: str = ""
