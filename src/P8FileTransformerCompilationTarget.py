@@ -3,6 +3,12 @@ from src.ParsedContents import ParsedContents
 
 
 class P8FileTransformerCompilationTarget:
+    '''
+    here is where we do effectively
+    code.format(GAMEINFO='...', AUTHORINFO='...')
+    aka
+    code.replace('{GAMEINFO}','...').reaplce('{AUTHORINFO}','...')
+    '''
     @classmethod
     def transformP8File(cls, p8FilePath: Path, parsed: ParsedContents):
         lines = p8FilePath.read_text().split("\n")
