@@ -4,22 +4,35 @@ from src.TemplateEvaluator import TemplateEvaluator
 from pathlib import Path
 import os
 import subprocess
+import base64
 
 class Pico8EduUrlCompilationTarget:
 
     @classmethod
-    def createUrlFromTinyRom(cls, tinyRom: bytes):
-        pass
+    def compileToPico8Url(cls, parsedContents: ParsedContents):
+        fullRom: bytes = cls.writeFullRomMinified(
+            parsedContents.config,
+            parsedContents
+        )
+        code = cls.extractCodeFromRom(fullRom)
+        url = cls.createUrlFromCode(code)
+        return url
+
 
     @classmethod
-    def createUrlFromFullRom(cls, tinyRom: bytes):
-        pass
+    def createUrlFromCode(cls, code: bytes):
+        encoded = base64.b64encode(code, altchars=b'_-').decode('ascii')
+        return f'https://pico-8-edu.com/?c={encoded}'
     #
     # # TODO test if it respects pico8 version number
     # # (probs doesn't)
     # @classmethod
     # def createRomFromSourceCode(cls, raw_contents: str, source: str) -> bytes:
     #     raw_contents.replace(source)
+
+    @classmethod
+    def extractCodeFromRom(cls, fullRomContents: bytes):
+        return fullRomContents[17152:].rstrip(b'\x00')
 
     @classmethod
     def createMinifiedCartContents(cls, parsedContents: ParsedContents) -> str:
@@ -61,4 +74,4 @@ class Pico8EduUrlCompilationTarget:
         if not temporaryRomFileName.exists():
             raise Exception('rom export failed')
 
-        pass
+        return temporaryRomFileName.read_bytes()
