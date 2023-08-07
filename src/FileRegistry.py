@@ -110,12 +110,16 @@ class TempFileEnum(FileEnum):
     TWEET_ITCH_DESCRIPTION_ACTUAL = "tweet-itch-description-actual.html"
     GAME_GITHUB_README_ACTUAL = "game-github-readme-actual.md"
     TWEET_GITHUB_README_ACTUAL = "tweet-github-readme-actual.md"
+    # TWEET_TINY_ROM_ACTUAL
     # ORCHESTRATION_TEMP_DIR = 'orch/'
     # ORCHESTRATION_BASIC_FILE
 
     GAME_CART_TEST_FILE_TRANSFORMED_COPY_LOCATION = (
         "game-cart-test-file-transformed-copy-location.p8"
     )
+
+    TWEET_CART_MINIFIED = 'tweetMinified.p8'
+    TWEET_CART_MINIFIED_ROM = 'tweetMinified.p8.rom'
 
     MULTIPLE_EXPORT_README = "p8export-test/test_can_export_multiple_games/README.md"
 

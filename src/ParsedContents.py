@@ -170,6 +170,7 @@ class Config:
 class ParsedContents:
     filePath: Path
     rawContents: str
+    # templatizedRawContents: str
     sourceCode: str
     minifiedSourceCode: str
     clarifiedSourceCode: str
