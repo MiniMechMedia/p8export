@@ -11,7 +11,7 @@ from src.ParsedContents import (
 from dacite import from_dict, Config as daciteConfig
 from decouple import config
 import re
-
+from src.Pico8EduUrlCompliationTarget import Pico8EduUrlCompilationTarget
 
 class Pico8FileParser:
     @classmethod
@@ -152,7 +152,7 @@ class Pico8FileParser:
         parsedLabelImage: ParsedLabelImage = cls.parseImageLabel(rawLabelImage)
         metadata: Metadata = cls.parseMetadata(parsedYaml)
         config: Config = cls.getConfig(metadata)
-        return ParsedContents(
+        ret = ParsedContents(
             filePath=filePath,
             rawContents=rawContents,
             sourceCode=sourceCode,
@@ -161,4 +161,8 @@ class Pico8FileParser:
             labelImage=parsedLabelImage,
             metadata=metadata,
             config=config,
+            pico8EduUrl=None,
         )
+        # Yeah, it's a hack
+        ret.pico8EduUrl = Pico8EduUrlCompilationTarget.compileToPico8Url(parsedContents=ret)
+        return ret

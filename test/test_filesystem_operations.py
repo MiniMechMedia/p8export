@@ -14,11 +14,11 @@ class TestFileSystemOperations(BaseTest):
     # ORCHESTRATION_TEST_FILE
     @classmethod
     def setUpClass(cls) -> None:
-        os.makedirs(cls.orchestrationBaseDir, exist_ok=False)
+        os.makedirs(cls.orchestrationBaseDir, exist_ok=True)
 
     def setUp(self):
         self.currentTestFolder: Path = self.orchestrationBaseDir / self._testMethodName
-        os.makedirs(self.currentTestFolder, exist_ok=False)
+        os.makedirs(self.currentTestFolder, exist_ok=True)
 
     def test_is_idempotent(self):
         self.test_can_rename_both_containing_folder_and_p8_file()

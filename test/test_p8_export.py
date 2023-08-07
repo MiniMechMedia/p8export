@@ -14,7 +14,7 @@ class TestP8Export(BaseTest):
     # ORCHESTRATION_TEST_FILE
     @classmethod
     def setUpClass(cls) -> None:
-        os.makedirs(cls.p8exportBaseDir, exist_ok=False)
+        os.makedirs(cls.p8exportBaseDir, exist_ok=True)
 
     def setUp(self):
         self.currentTestFolder: Path = self.p8exportBaseDir / self._testMethodName

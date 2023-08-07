@@ -109,6 +109,7 @@ class Metadata:
     version: str  # TODO make a strongly typed object
     cart_type: str
     img_alt: str
+    # DEPRECATED!
     pico_url: Optional[str]
     number_players: list[int]
     # TODO should this be optional?
@@ -177,6 +178,7 @@ class ParsedContents:
     labelImage: ParsedLabelImage
     metadata: Metadata
     config: Config
+    pico8EduUrl: Optional[str]
 
     # TODO put these as a separate object?
     coverPath: str = ""

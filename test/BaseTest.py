@@ -32,7 +32,7 @@ class BaseTest(unittest.TestCase):
 
     def assertPathDoesNotExist(self, path: Path):
         self.assertFalse(
-            exists(path), f"File or folder {path} does exist but was expected to"
+            exists(path), f"File or folder {path} does exist but was expected not to"
         )
 
     def getTestFilePath(self, testFileName: TestFileEnum) -> pathlib.Path:
