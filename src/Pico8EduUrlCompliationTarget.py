@@ -51,7 +51,7 @@ class Pico8EduUrlCompilationTarget:
             config: Config,
             parsedContents: ParsedContents) -> bytes:
         minifiedCartContents: str = cls.createMinifiedCartContents(parsedContents)
-        root = (Path(__file__) / ".." / "..").resolve() / "tmp"
+        root = (Path(__file__) / ".." / "..").resolve() / "working_tmp"
         # os.m
         # Sure why not?
         root.mkdir(exist_ok=True)
