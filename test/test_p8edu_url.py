@@ -27,10 +27,12 @@ class TestP8EduUrl(BaseTest):
             parsedContents
         )
         code = Pico8EduUrlCompilationTarget.extractCodeFromRom(result)
-        assert len(code) == 348
+        assert len(code) == 356
         # raise Exception(str(code))
 
     def test_can_get_url(self):
         parsedContents = self.parseFile(TestFileEnum.TWEET_CART_ANNOTATED_TEST_FILE)
         url = Pico8EduUrlCompilationTarget.compileToPico8Url(parsedContents)
-        assert url == 'https://pico-8-edu.com/?c=AHB4YQGiAVzrwVscfvP5h9-vgdeYMEP1Du9w-hs8wwuULxClqR-236EOkuIp3uEdBtqir_OotEBfBWF73EnBSJp1G29w0yPkO_nF6UCRjHRt07xCtRFONGF735isyEg3sRUHzUCcZVWWpVlTZdVItVMMvUUcvkUcJAdJi2csv3Jwb6W57SWS684bGo2KbiTY2gzeoQii6rbksvjO_rqu7dqymqjmokgnYCRsHiXKytmlrLnwziIp7hxKzkzj0LIblgj2bk3DkbJc2HiF7h22TDK9vDgb9QP9bDTSPIYHdn2QVsXUeFZXmzff-gbLOy6RChodndwe3MlXBEQ2bh24YXG-2UnHJ_Mym5qoo6iOdAmig7UKwo2ltRGlgNU6nggFQ3JZgXv3qpGZ4oTdpioKpbDpEzY3D5nZXw99EjcnLCyMrS9tDpbdSLlXduMTTpIfSweboWwqzkaLleUS'
+        print('here iam', url)
+        assert url == 'https://pico-8-edu.com/?c=AHB4YQHBAWTrwd0nH188xEvMPsNL3B4kjcGfl7jkkFOKZCgPnuAB3qAom-b8FzDBA2QTqSXChwiDpNh4hpWuLjbSZ4hKC9RVELbHHRUspVn3Eo_wM5KvpBcrBwTCAYFuSJG3WXae6kC3MhDmLxEFTTWSZVWWlVlTZZUa2ZIa0UHS4lkKwhvf4jUGmrmnSAbP23iJqOgGg5254CGKIKqOS06LD63P69quLauJaieKdAJGwuZRoqycXcuaEw8tkuLQoeTONA4tu2GJYO3YNBwpy4WNZ_geYssks6OL81E-0J8QjTQXeOAEH6RVMXVCVlebN9-_Bss7LpEKGh2dHB-cyVcERDZuHbhg8YpmJx2fjMtsaqKOojrSJYgO1ioIN5bWRpQCVut4IhQMyWUF7t2rRmaKC3abqiiUwqZP2Nw8ZGZ-PfRJ3JywsDC2vrQ5WHYj5V7ZjU84SX4sHWyGsqk4Gy1Wlks='
+

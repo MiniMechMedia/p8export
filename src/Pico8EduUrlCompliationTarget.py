@@ -5,6 +5,7 @@ from pathlib import Path
 import os
 import subprocess
 import base64
+from src.P8FileTransformerCompilationTarget import  P8FileTransformerCompilationTarget
 
 class Pico8EduUrlCompilationTarget:
 
@@ -37,7 +38,7 @@ class Pico8EduUrlCompilationTarget:
     @classmethod
     def createMinifiedCartContents(cls, parsedContents: ParsedContents) -> str:
         githubLink = TemplateEvaluator.constructExplainerCodeLink(parsedContents)
-        header = f'-- see explanation on {githubLink}\n'
+        header = f'-- see explanation on {githubLink}\n\n'
         return parsedContents.rawContents.replace(
             parsedContents.sourceCode,
             header +
@@ -59,6 +60,7 @@ class Pico8EduUrlCompilationTarget:
         with open(temporaryP8FileName, "w") as file:
             file.write(minifiedCartContents)
 
+        P8FileTransformerCompilationTarget.transformP8File(temporaryP8FileName, parsedContents)
         # raise Exception(str(temporaryP8FileName))
 
         temporaryRomFileName = root / 'tweetMinified.p8.rom'
