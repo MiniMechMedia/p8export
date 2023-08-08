@@ -37,6 +37,25 @@ class TestParsing(BaseTest):
 
         self.assertEqual(parsed.sourceCodeP8sciiCharCount, 277)
 
+    def test_minify_sourcecode_indentation(self):
+        unminified = dedent('''\
+        for i=1,100do
+            if x>1then
+                print('hi')
+            end
+        end
+        '''
+        )
+        minified_expected = dedent('''\
+        for i=1,100do
+        if x>1then
+        print('hi')
+        end
+        end
+        ''')
+        minified_actual = Pico8FileParser.minifySourceCode(unminified)
+        self.assertEqual(minified_expected, minified_actual)
+
     def test_minifying_sourcecode_comments(self):
         # parsed: ParsedContents = self.parseFile(TestFileEnum.TWEET_CART_ANNOTATED_TEST_FILE)
         unminified = dedent(

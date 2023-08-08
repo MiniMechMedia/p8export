@@ -172,7 +172,7 @@ class P8Export:
             metadata=parsedContents.metadata,
         )
 
-        if uploadToItch:
+        if uploadToItch and False:
             ItchGameCompilationTarget.uploadToItch(
                 parsedContents, locations.exportsBaseDir
             )
