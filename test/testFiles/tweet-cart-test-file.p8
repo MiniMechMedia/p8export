@@ -188,6 +188,5 @@ version: 0.1.0
 img_alt: xxxx
 about_extra: ''
 cart_type: tweet
-pico_url: https://www.pico-8-edu.com/?c=Y2xzKDcp&g=w-w-w-w1HQHw-w2Xw-w3Xw-w2HQH
 number_players: [0]
 __meta:cart_info_end__

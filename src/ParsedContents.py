@@ -178,7 +178,8 @@ class ParsedContents:
     labelImage: ParsedLabelImage
     metadata: Metadata
     config: Config
-    pico8EduUrl: Optional[str]
+    pico8EduUrlMinified: Optional[str]
+    pico8EduUrlClarified: Optional[str]
 
     # TODO put these as a separate object?
     coverPath: str = ""

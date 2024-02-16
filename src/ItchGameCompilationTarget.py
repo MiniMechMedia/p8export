@@ -28,6 +28,11 @@ class ItchGameCompilationTarget(CompilationTarget):
         if result.returncode != 0:
             raise Exception("Error - unable to open file location")
 
+        with open(
+            '/Users/nathandunn/Projects/p8export3/p8export-fresh/template/template-retuls.temp'
+        , 'w') as output:
+            output.write(cls.getItchDescription(parsedContents))
+
         # selenium.
         browser: Chrome
         with Chrome(executable_path=config("CHROMEEXE")) as browser:

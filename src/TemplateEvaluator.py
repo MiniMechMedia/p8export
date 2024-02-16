@@ -104,6 +104,9 @@ class TemplateEvaluator:
         #     **cls.constructEvaluationDictionary(parsedContents=parsedContents)
         # )
 
+        # Not sure what the right way is. But let's hack it.
+        ret = ret.replace("&#9617;", "░")
+
         if renderType == RenderType.HTML:
             ret = markdown(ret)
 
@@ -157,7 +160,10 @@ class TemplateEvaluator:
             "cover_path": parsedContents.coverPath,
             "cover_path_abs": parsedContents.coverPathAbs,
             "folder_relative_path": parsedContents.folderRelativePath,
-            "pico_url": parsedContents.pico8EduUrl,
+            # TODO deprecate!
+            "pico_url": parsedContents.pico8EduUrlMinified,
+            "pico_url_minified": parsedContents.pico8EduUrlMinified,
+            "pico_url_clarified": parsedContents.pico8EduUrlClarified,
             "number_players": parsedContents.metadata.numberPlayersDesc
             # 'itch_link': cls.constructItchLink(parsedContents=parsedContents)
         }

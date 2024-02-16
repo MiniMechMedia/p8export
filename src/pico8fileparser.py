@@ -49,15 +49,16 @@ class Pico8FileParser:
         # The comment breaks can just go away
         clarified = re.sub(r"--\n", "\n", clarified)
 
-        clarified = re.sub(r"^--end$", "end", clarified, flags=re.MULTILINE)
+        # clarified = re.sub(r"^--end$", "end", clarified, flags=re.MULTILINE)
 
         # raise Exception(clarified)
-        clarified = re.sub(r"--\[\[then$", "then--[[", clarified, flags=re.MULTILINE)
+        # clarified = re.sub(r"--\[\[then$", "then--[[", clarified, flags=re.MULTILINE)
         # clarified = re.sub(r'--\[\[then$','wtf', clarified, flags=re.MULTILINE)
         # raise Exception(clarified)
 
         # no need for (empty) multiline comments
-        clarified = re.sub(r"--\[\[([\s\n]+)\]\]", r"\1", clarified)
+        # clarified = re.sub(r"--\[\[([\s\n]+)\]\]", r"\1", clarified)
+        clarified = re.sub(r'--\[\[([\s\S]*?)\]\]', r'\1', clarified)
         # raise Exception(clarified)
         # The ang_ form
         clarified = re.sub(r"([a-zA-Z]\w+)_\b", r"\1", clarified)
@@ -161,8 +162,10 @@ class Pico8FileParser:
             labelImage=parsedLabelImage,
             metadata=metadata,
             config=config,
-            pico8EduUrl=None,
+            pico8EduUrlMinified=None,
+            pico8EduUrlClarified=None,
         )
         # Yeah, it's a hack
-        ret.pico8EduUrl = Pico8EduUrlCompilationTarget.compileToPico8Url(parsedContents=ret)
+        ret.pico8EduUrlMinified = Pico8EduUrlCompilationTarget.compileToPico8Url(parsedContents=ret, useMinified=True)
+        ret.pico8EduUrlClarified = Pico8EduUrlCompilationTarget.compileToPico8Url(parsedContents=ret, useMinified=False)
         return ret

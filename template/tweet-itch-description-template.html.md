@@ -1,8 +1,8 @@
 
 {{description}}
 
-{% if pico_url %}
-Remix it on [pico-8-edu.com]({{pico_url}})
+{% if pico_url_minified %}
+Remix it on [pico-8-edu.com]({{pico_url_minified}})
 {% endif %}
 
 This cart is tweetable at just {{char_count}} characters.

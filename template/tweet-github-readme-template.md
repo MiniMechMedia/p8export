@@ -3,19 +3,18 @@
 
 [![{{alt_text}}]({{cover_path}})]({{itch_link}})
 
-{% if pico_url %}
-Play it now on [itch.io]({{itch_link}}) or remix it on [pico-8-edu.com]({{pico_url}})
-{% else %}
-Play it now on [itch.io]({{itch_link}})
-{% endif %}
+Leave a comment on [itch.io]({{itch_link}})
 
 This cart is tweetable at just {{char_count}} characters.
 
+## Source
+Remix it on [pico-8-edu.com]({{pico_url_minified}})
 ```lua
 {{minified_code | htmlSafeSource}}
 ```
 
 ## Explanation
+Remix it on [pico-8-edu.com]({{pico_url_clarified}})
 ```lua
 {{clarified_code | htmlSafeSource}}
 ```
