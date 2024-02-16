@@ -1,8 +1,8 @@
 - [ ] Export submission.html
 - [X] Export .p8
 - [X] Export .p8.png - suppose I should reuse the .p8 thing from above
-- [ ] Export to itch
-- [ ] Export to git repo (here??)
+- [X] Export to itch
+- [X] Export to git repo
 - [X] Handle renames
 - [ ] ~~Warn on renames~~
 - [ ] ~~Create a working directory~~
@@ -27,7 +27,7 @@
 - [ ] Auto-select the "Kind of project" field in itch
 - [ ] Add in-band metadata like __instructions__ and __controls__
 - [ ] Consume __instructions__ and __controls__ in pico8 template file
-- [W] Pico8EduUrlCompilationTarget for automatically doing save @url (might be blocked)
+- [X] Pico8EduUrlCompilationTarget for automatically doing save @url
 - [X] Jinja templating
 - [X] Use metadata header
 - [X] Option to process all
@@ -47,9 +47,9 @@
 - [X] Add export all option
 - [X] Add test for export all
 - [ ] Use ArgParser
-- [ ] Rebrand caterpillergames (test twitter handle)
+- [X] Rebrand caterpillargames (test twitter handle)
 - [X] Fix broken image in kaiju companions
-- [ ] Structure jam info (?)
+- [X] Structure jam info
 - [X] Add instructional image to cool cat cafe
 - [X] Make cool cat cafe 2 player
 - [X] Fix deal with shark shoot
@@ -57,9 +57,9 @@
 - [ ] Fix the controls description in minigame mania (maybe a new construct)
 - [X] Improvements for grow big
 - [X] If theme is empty don't show it
-- [~] Reupload all cover images
+- [X] Reupload all cover images
 - [ ] Add music to shuriken
-- [ ] Make music less duplicative (??)
+- [ ] Make music less duplicative
 - [X] Fix broken link in health inspectre
 - [X] Fix bug in unsigned hero
 - [X] Add music to unsigned hero
